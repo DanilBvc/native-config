@@ -6,4 +6,5 @@ export const styles = StyleSheet.create({
     width: '100%',
     gap: 30,
   },
+  lineContainer: { marginTop: 10, marginBottom: 20 }
 });

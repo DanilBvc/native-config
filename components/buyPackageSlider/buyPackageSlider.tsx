@@ -6,7 +6,7 @@ import {
   type NativeSyntheticEvent,
   Dimensions,
 } from 'react-native';
-import { type packageCard } from '../../static/types';
+import { type packageCard } from '../../static/types/productTypes/types';
 import BuyPackageCard from '../buyPackageCard/buyPackageCard';
 import AnimatedLine from '../animateLine/animateLine';
 import { styles } from './buyPackageSlider.style';
@@ -34,7 +34,7 @@ const Slider: FC<{ features: packageCard[] }> = ({ features }) => {
           ))}
         </View>
       </ScrollView>
-      <View style={{ marginTop: 10, marginBottom: 20 }}>
+      <View style={styles.lineContainer}>
         <AnimatedLine activeIndex={currentSlide} />
       </View>
     </>

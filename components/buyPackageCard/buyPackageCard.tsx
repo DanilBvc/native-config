@@ -1,7 +1,7 @@
 import React, { type FC } from 'react';
 import { Dimensions, Text, View } from 'react-native';
 import LineWithCircle from '../lineWithCircle/lineWithCircle';
-import { type packageCard } from '../../static/types';
+import { type packageCard } from '../../static/types/productTypes/types';
 import { styles } from './buyPackageCard.style';
 const width = Dimensions.get('window').width;
 

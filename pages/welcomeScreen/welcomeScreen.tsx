@@ -12,7 +12,7 @@ import {
   MobilePhoneSvg,
   TechnicalSupportSvg,
 } from '../../assets/icons/packageIcons/icons';
-import { type packageCard } from '../../static/types';
+import { type packageCard } from '../../static/types/productTypes/types';
 import Slider from '../../components/buyPackageSlider/buyPackageSlider';
 import { QrCodeSvg } from '../../assets/icons/qr-code';
 import { useTranslation } from 'react-i18next';

@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
 import TextField from '../../../components/generall/textField/textField';
 import { emailRegex, passwordRegex } from '../../../static/regex';
 import Button from '../../../components/generall/button/button';
-interface signInData {
-  email: string;
-  password: string;
-}
+import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
+import LocalizationSwitcher from '../../../components/generall/localizationSwitcher/localizationSwitcher';
+import { Image, Text, View } from 'react-native';
+import { familyLogoUrl } from '../../../static/urls';
+import { AuthUserApi } from '../../../services/authService/authService';
+import useUserStore from '../../../store/user/store';
+import { type userSignInData } from '../../../static/types/userTypes/types';
+import { styles } from './signIn.style';
+import { useTranslation } from 'react-i18next';
+
 const SignIn = () => {
-  const [signInData, setSignInData] = useState<signInData>({
+  const { t } = useTranslation();
+  const userStore = useUserStore((state) => state);
+  const [signInData, setSignInData] = useState<userSignInData>({
     email: '',
     password: '',
   });
@@ -16,26 +23,50 @@ const SignIn = () => {
     setSignInData({ ...signInData, [name]: value });
   };
 
+  const signIn = async () => {
+    const response = await AuthUserApi.login(signInData)
+    userStore.updateUserData(response)
+  }
+
   return (
-    <View>
-      <TextField
-        name={'email'}
-        value={signInData.email}
-        onChange={onChange}
-        placeholder={'Email'}
-        validation={emailRegex}
-        errorMessage={'Invalid email'}
-      />
-      <TextField
-        name={'password'}
-        value={signInData.password}
-        onChange={onChange}
-        placeholder={'Password'}
-        validation={passwordRegex}
-        errorMessage={'Invalid password'}
-      />
-      <Button onPress={() => {}} text={'Log in'} />
-    </View>
+    <EmptyLayout additionalControl={<LocalizationSwitcher />}>
+      <View
+        style={styles.imageContainer}
+      >
+        <Image
+          source={{
+            uri: familyLogoUrl,
+          }}
+          style={styles.imageSize}
+        />
+      </View>
+      <View style={styles.emailContainer}>
+        <TextField
+          name={'email'}
+          value={signInData.email}
+          onChange={onChange}
+          placeholder={t('auth.email')}
+          validation={emailRegex}
+          errorMessage={'Invalid email'}
+        />
+      </View>
+      <View style={styles.passwordContainer}>
+        <TextField
+          name={'password'}
+          value={signInData.password}
+          onChange={onChange}
+          placeholder={t('auth.password')}
+          validation={passwordRegex}
+          errorMessage={'Invalid password'}
+        />
+      </View>
+      <Button onPress={signIn} text={t('auth.logIn')} />
+      <Text
+        style={styles.text}
+      >
+        Lorem ipsum dolor sit amet consectetur. Suspendisse massa dictum nisl sapien vulputate.
+      </Text>
+    </EmptyLayout>
   );
 };
 
