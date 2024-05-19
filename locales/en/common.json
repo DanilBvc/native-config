@@ -1,0 +1,499 @@
+{
+  "Hi": "Hi",
+  "successPayloadMessageSecond": "We will contact you shortly and provide all the information about your account.",
+  "successPayloadMessage": "Your purchase was successful! Thank you for choosing our service.",
+  "count": "Count",
+  "price": "Price",
+  "qrCode": "Download QR-code",
+  "placeholderDesc": "Here you can write briefly about this person.",
+  "edit": "Edit",
+  "passError": "Password is incorrect",
+  "passTitle": "Please enter the password.",
+  "Dob": "Date of birth",
+  "Dod": "Date of death",
+  "min": "Standard",
+  "med": "Medium",
+  "max": "Max",
+  "none": "None",
+  "contacts": "Contacts",
+  "comingSoonText": "Stay tuned for the mobile application release!",
+  "validation": {
+    "addressIndex": "The index is mandatory",
+    "engravingBoxes": "Engraving text is mandatory",
+    "lat": "Please use only Latin letters.",
+    "ua": "Please enter text using only Cyrillic characters.",
+    "accountName": "Account name is required",
+    "username": "Username is required",
+    "email": "Invalid email",
+    "emailReq": "Email is required",
+    "password": "Password must be at least 6 characters",
+    "passwordReq": "Password is required",
+    "language": "Language is required",
+    "lastName": "Last name is required",
+    "firstName": "First name is required",
+    "treeType": "Tree type is required",
+    "phoneNumber": "Phone number is required",
+    "matches": "Must be only digits with a leading plus sign",
+    "phoneNumberMin": "Must be at least 10 characters",
+    "phoneNumberMax": "Must be at most 15 characters",
+    "address": "Address is required",
+    "giftName": "Gift first name is required",
+    "giftLastName": "Gift last name is required",
+    "giftAddress": "Gift address is required"
+  },
+  "comingSoon": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "payload": {
+    "hearAbout": "How did you hear about us?",
+    "userStep": "Enter data to create a new user",
+    "boxStep": "Make your order individual.",
+    "orderStep": "Enter data for the order",
+    "next": "Next",
+    "engravingBoxes": "Order engraving on the box",
+    "payloadEngravingBoxes": "Write engraving text up to 250 characters",
+    "isCasketWithImage": "Check this option if you want to order an additional service such as engraving a photo on the box",
+    "methodDelivery": "Delivery method",
+    "addressIndex": "Zip code",
+    "address": "Residential address",
+    "addressPlaceholder": "Enter city/street/building no./apt",
+    "instructionsDeliveryPlaceholder": "Delivery instructions - any special instructions for the courier, such as calling before arrival or specific features of the delivery location.",
+    "instructionsDelivery": "Delivery instructions",
+    "acceptTermsStart": "Consent to the processing of personal data",
+    "acceptTerms": "Dear Customer, To process your order, we need to collect and use your personal data, including your name, address, contact number, and email address. We are committed to protecting your privacy and will use this information exclusively for processing your order. In accordance with privacy laws, you have the right to know how we use your data and to request its deletion. As a business registered in Portland, Oregon, we adhere to both local and federal privacy regulations to ensure the utmost security and confidentiality of your personal information. Please be assured that your privacy rights are respected and upheld in every aspect of our operations.",
+    "defaultCasket": "Free Box",
+    "premiumCasket": "Exclusive Box",
+    "PIB": "Full Name",
+    "PlaceholderQR": "Enter password for QR code",
+    "PlaceholderEmail": "Enter email address",
+    "PlaceholderAllName": "First Last Name",
+    "fullName": "Full Name of Recipient",
+    "middleName": "Middle Name",
+    "PlaceholderMiddleName": "Optional field to fill in",
+    "passwordQR": "Set a password for the QR code",
+    "accountName": "Account Name",
+    "title": "Enter data to create a new user",
+    "success": "Payment was successful!",
+    "reject": "Payment failed!",
+    "return": "Return to home",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phoneNumber": "Phone Number",
+    "pay": "Pay",
+    "specialWishes": "Special Wishes",
+    "speacialWishesAlert": "Please clarify the possible price change for additional preferences with the customer support department before placing the order.",
+    "servicePackage": "Selected service package",
+    "gift": "Order for someone else",
+    "giftName": "Recipient's First Name",
+    "giftLastName": "Recipient's Last Name",
+    "giftAddress": "Recipient's Address"
+  },
+  "auth": {
+    "lockAccount": "Your account has been blocked.",
+    "secondLockAccount": "To contact technical support, please email",
+    "welcome": "Welcome back",
+    "logInto": "Log into your existing account",
+    "userName": "User Name",
+    "create": "Create your account",
+    "email": "Email",
+    "password": "Password",
+    "repeat": "Repeat Password",
+    "forgot": "Forgot password?",
+    "signUp": "Sign Up",
+    "logIn": "Log in",
+    "dontHave": "Don’t have an account?",
+    "already": "Already have an account?",
+    "loginError": "Incorrect email or password"
+  },
+  "welcome": "welcome",
+  "header": {
+    "info": "About Us",
+    "howItWorks": "How it works",
+    "prices": "Demo Version",
+    "buy": "Review and Purchase",
+    "logIn": "Log into Account",
+    "logOut": "Log Out",
+    "mobile": "Coming soon"
+  },
+  "contactUs": {
+    "contact": "Contact Us",
+    "technical": "Technical Issue",
+    "business": "Business Inquiry",
+    "mailPlaceholder": "Please enter your email",
+    "text-Placeholder": "Message",
+    "send": "Send",
+    "firstText": "In our team, we are always ready to answer all your questions and find optimal solutions for any problems related to ordering.",
+    "secondText": "Et eu tempor sagittis tortor tortor enim adipiscing blandit orci. Maecenas ac facilisi sed senectus turpis.",
+    "captcha": "Solve the following math problem",
+    "verify": "Verify"
+  },
+  "prices": {
+    "header": "Choose your service package",
+    "text": "At Remembering Time, we adjust our pricing to reflect local differences, ensuring our services are comfortable and accessible to everyone, no matter the country. Your support inspires us!",
+    "photo": "Photo",
+    "video": "Video",
+    "audio": "Audio",
+    "buy": "Buy Package",
+    "firstBenefit": "Technical support 24/7",
+    "secondBenefit": "Setting a password for a QR code",
+    "thirdBenefit": "Free delivery",
+    "fourthBenefit": "Installment payment (credit)",
+    "mobile": "Mobile app",
+    "AI": "AI description",
+    "personalization": "Personalization",
+    "unlimited content": "Unlimited content"
+  },
+  "landingPage": {
+    "general": {
+      "packageOfServices": "Choose a package of services",
+      "terms": "Terms and conditions"
+    },
+    "greetingsSection": {
+      "helloFriend": "Hello!",
+      "greetingText": "We are thrilled to welcome you to our page and introduce you to a service that opens up unique opportunities for preserving the dearest memories of your departed loved ones. Our team is committed to creating personalized albums that incorporate photographs, video recordings, and music, transforming them into invaluable memories. Our aim is not just to offer a service, but to provide an avenue for conveying the story of your family to future generations, keeping the memory of your loved ones vibrant and unforgettable.",
+      "bestWishes": "With Warmest Regards,",
+      "team": "The Team of “Remembering Time”"
+    },
+    "founderSection": {
+      "wordsFrom": "Words from the project founder",
+      "founderName": "Dmytro Antonenko",
+      "hello": "Greetings!",
+      "founderText": {
+        "first": "I sincerely thank you for taking the time to read this text. First and foremost, my gratitude extends to everyone who has contributed to the development of this project. Your hard work and support are the foundation of our success. This project was born out of a personal need and is dedicated to an extraordinary person who now watches over me from the heavens. I could detail every aspect of this project, trying to convince you of its significance, but I choose to do it differently. The reason for my approach is simple: when faced with the choice between money, power, opportunities, or the loss of a loved one, the choice inevitably becomes clear. While we cannot change the past, we can preserve the memory of those we love.",
+        "second": "As the founder of this project, I want to assure you of its significance and longevity. This project will live as long as the memory of the person who taught me to live, love, and cherish every moment remains in my heart.",
+        "third": "I invite you to join and support our project, to help it grow and evolve. Your participation is incredibly valuable to us. Thank you for your attention and for believing in our cause!"
+      }
+    },
+    "qrSection": {
+      "rememberAndShare": "Remember and Share: Upload Your Favorite Memories to Remembering Time.",
+      "years": "100 years",
+      "guarantee": "Data Preservation Guarantee",
+      "memoirs": "50+ memories",
+      "possible": "Possible to download",
+      "connect": "Contact us",
+      "imagineBox": {
+        "heading": "Imagine a box, enveloped in an aura of memories,",
+        "first": "tenderly holding the echoes of a soul that continues to live in your memory.",
+        "second": "It may appear small, but inside it contains boundless treasures. Every time you open this box, you feel the closeness and warmth of those you love and remember.",
+        "third": "This box will become a small, yet significant corner in your home and heart, where the past meets the present."
+      },
+      "insideBox": {
+        "heading": "Inside each box lies a metal plate with a QR code –",
+        "first": "a key to the light of memories that warm the soul and touch the heart. With just one touch, a gallery of photographs unfolds before you, warming your heart with bright moments from the past.",
+        "second": "To keep these memories always close, we recommend affixing this plate lovingly to a memorial stone or a wooden cross. Use transparent glue for the stone to maintain its integrity, and stainless-steel screws for the cross."
+      },
+      "greetings": {
+        "heading": "In the quiet of these moments, we express our heartfelt gratitude to you.",
+        "first": "The golden dove of peace, soaring freely above hands against the backdrop of the night sky on the postcard, symbolizes tranquility and the boundless memory that we cherish together.",
+        "second": "\"Remembering Time\" is more than just the name of our project; it is our promise to tenderly preserve every precious memory that you have entrusted to us."
+      }
+    },
+    "howItWorks": {
+      "howItWorks": "How It Works?",
+      "points": {
+        "first": {
+          "title": "Order Placement",
+          "subpoints": {
+            "a": "a) Discover the essence through a demo!",
+            "b": "b) Choosing the right service package",
+            "c": "c) Registration and payment"
+          }
+        },
+        "second": {
+          "title": "Manage Your Profile",
+          "subpoints": {
+            "a": "a) Setting up a Memorial Profile",
+            "b": "b) Uploading and deleting content"
+          }
+        },
+        "third": {
+          "title": "Contribute a Piece of Your Memories",
+          "subpoints": {
+            "a": "Last Words: Photography"
+          }
+        }
+      }
+    }
+  },
+  "customerPage": {
+    "head": {
+      "hello": "Hello",
+      "manageAdmin": "Admin Dashboard",
+      "manage": "Manage your memorial trees here. We're here to support you."
+    },
+    "buttons": {
+      "registerNewUser": "Register new user",
+      "referrals": "My referrals",
+      "ref": "User referrals",
+      "newTree": "Buy a new tree",
+      "addTree": "Add a new tree",
+      "blockUser": "Block user",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "unblockUser": "Unblock user",
+      "confirmQ": "Are you sure want to {{block}} {{username}}?"
+    },
+    "modal": {
+      "invite": "Invite your friends and make a {{amount}} from each who joins",
+      "copy": "Copy",
+      "joined": "Joined",
+      "noReferrals": "No referrals yet",
+      "useLink": "Use your referral link to invite people to Remembering Time"
+    }
+  },
+  "treePage": {
+    "buyMorePhotos": "Buy more photos",
+    "addMorePhotos": "Add more photos",
+    "buyMoreVideos": "Buy more videos",
+    "addMoreVideos": "Add more videos",
+    "buyMoreAudios": "Buy more audios",
+    "addMoreAudios": "Add more audios",
+    "buyMore": "Buy more slots",
+    "addMore": "Add more slots",
+    "add": "Add",
+    "share": "Share this tree",
+    "shareMob": "Share",
+    "visit": "Visit",
+    "public": "Public view",
+    "copied": "Copied",
+    "save": "Save"
+  },
+  "admin": {
+    "lastMounthUsers": "New users last month",
+    "totalUsers": "Total users",
+    "totalTreesCreated": "Total trees created",
+    "allUsers": "All users",
+    "search": "Search",
+    "tree": "tree",
+    "trees": "trees",
+    "memberSince": "Member since",
+    "createForm": {
+      "last_name": "Last Name",
+      "first_name": "First Name",
+      "tree_type": "Tree type",
+      "name": "User Name",
+      "email": "Email",
+      "password": "Password",
+      "language": "Language",
+      "package": "Package",
+      "title": "Create new user",
+      "titleAdd": "Add new tree",
+      "create": "Create User"
+    }
+  },
+  "termsPage": {
+    "header": "Public Offer Agreement",
+    "blockOne": {
+      "header": "Website Use Terms",
+      "pointOne": {
+        "header": "Introduction",
+        "text": "The website https://rememberingtime.org is owned by RememberingTime organization. Access to and use of the site are governed by these Terms, including any additional guidelines, terms, or rules that may be posted on the site."
+      },
+      "pointTwo": {
+        "header": "Acceptance of Terms",
+        "text": "Authorization on the site signifies your agreement with these Terms. You must be at least 18 years old to access the site. By not agreeing to the Terms, you do not have the right to use the site."
+      },
+      "pointThree": {
+        "header": "License to Use",
+        "text": "The organization grants you a non-exclusive, revocable, limited right to personal, non-commercial use of the site."
+      },
+      "pointFour": {
+        "header": "Restrictions",
+        "text": "Commercial use of the site, modifications, creating derivative works, decompilation, as well as copying or distributing site materials without permission is prohibited. You do not have the right to create competing services."
+      },
+      "pointFive": {
+        "header": "Ownership and Rights",
+        "text": "All intellectual rights to the site and its content belong to the Organization or its licensors. These Terms do not transfer to you any rights, except for the limited right to use granted in section 3."
+      }
+    },
+    "blockTwo": {
+      "header": "User Content",
+      "pointOne": {
+        "header": "Responsibility for Content",
+        "text": "Users are fully responsible for any content (text, images, videos, etc.) they post on the site. Such content must not violate the site's acceptable use policy."
+      },
+      "pointTwo": {
+        "header": "Rights and Licenses",
+        "text": "By submitting content to the site, the user grants the Organization an irrevocable, non-exclusive, royalty-free right to use it, including reproduction, distribution, public display, creation of derivative works, and integration into other works on a global level. The user also waives any claims to moral rights."
+      }
+    },
+    "blockThree": {
+      "header": "Acceptable Use Policy",
+      "pointOne": {
+        "header": "Content Restrictions",
+        "content": {
+          "subHeader": "You agree not to distribute content that:",
+          "subPointOne": "Violates third-party rights or legislation.",
+          "subPointTwo": "Is illegal, offensive, defamatory, pornographic, or incites hatred.",
+          "subPointThree": "Harms or could harm minors."
+        }
+      },
+      "pointTwo": {
+        "header": "Prohibited Actions",
+        "content": {
+          "subHeader": "It is prohibited to:",
+          "subPointOne": "Distribute harmful software.",
+          "subPointTwo": "Send spam or unsolicited advertising.",
+          "subPointThree": "Collect data about other users without their consent.",
+          "subPointFour": "Intentionally disrupt the site's operation or compromise its security.",
+          "subPointFive": "Create fake accounts or perform automated queries."
+        }
+      },
+      "pointThree": {
+        "header": "Responsibility",
+        "text": "You are responsible for any breaches of this policy that could lead to the removal of your content, account suspension, or legal consequences."
+      },
+      "pointFour": {
+        "header": "Organization's Rights",
+        "text": "We reserve the right to review and delete any content, and to take action against violators of this policy."
+      },
+      "pointFive": {
+        "header": "Feedback",
+        "text": "By providing us with any feedback or suggestions, you automatically grant us the rights to use them."
+      },
+      "pointSix": {
+        "header": "Disclaimer",
+        "text": "You agree to indemnify and hold the Organization harmless in case of your breach of this policy or applicable legislation."
+      }
+    },
+    "blockFour": {
+      "header": "Terms of Use for Third-Party Links and Advertising; Interaction with Other Users",
+      "pointOne": {
+        "header": "Third-Party Links and Advertising",
+        "content": {
+          "subPointOne": "The site may include links to third-party websites and advertising that are not controlled by the Organization.",
+          "subPointTwo": "The Organization is not responsible for the content or policies of third parties.",
+          "subPointThree": "Use of such links and advertising is at the user's own risk."
+        }
+      },
+      "pointTwo": {
+        "header": "User Responsibility",
+        "content": {
+          "subPointOne": "Users are fully responsible for the content they publish on the site.",
+          "subPointTwo": "The Organization is not liable for any losses or damages caused by user content or their interaction."
+        }
+      },
+      "pointThree": {
+        "header": "Disclaimer",
+        "content": {
+          "subPointOne": "Users release the Organization from any claims related to the use of the site.",
+          "subPointTwo": "This release covers all possible disputes, claims, or damages arising in connection with the site.",
+          "subPointThree": "Residents of California specifically waive rights under Section 1542 of the California Civil Code."
+        }
+      },
+      "text": "This section summarizes the rules for using third-party links and advertising on the site and defines the rules for interaction between users, as well as their responsibility and the Organization's disclaimer of claims."
+    },
+    "blockFive": {
+      "header": "Limitation of Liability",
+      "pointOne": {
+        "header": "Organization's Liability",
+        "text": "The organization commits to resolving any technical issues that may arise for the owner of the purchased profile on our platform, for as long as the profile owner complies with the terms of use and the rights associated with the profile."
+      },
+      "pointTwo": {
+        "header": "User's Risk",
+        "text": "The use of the website is at the user's own risk."
+      },
+      "pointThree": {
+        "header": "Data Retention Obligation",
+        "text": "The organization commits to storing all data and protecting it continuously, as long as the burial site corresponds to the person for whom the profile was registered."
+      },
+      "pointFour": {
+        "header": "Financial Obligations of the Organization",
+        "text": "The organization bears all financial costs for resolving issues with the profile throughout its entire usage by the owner."
+      },
+      "pointFive": {
+        "header": "Right to Refund",
+        "text": "If a client, after using our service, notices that the service does not match the description on the platform and does not meet the client's needs, they have the right to a refund within 30 days of purchase."
+      },
+      "pointSix": {
+        "header": "Procedure for Violation of Terms of Use",
+        "text1": "The organization does not cover problems caused by external factors or improper use of the profile by the user. An account associated with a QR code located at a burial site not visited at least once in 12 months may be deleted from the databases and will no longer be serviced. These measures ensure the timeliness and relevance of the information available through our services. Your access to the profile and use of the website confirms your agreement with these Terms.",
+        "text2": "The client has 14 days after receiving a warning via email from the company about the violation of the profile's terms of use to resolve the issue before the company blocks the profile and restricts access to it."
+      }
+    },
+    "blockSeven": {
+      "header": "Term and Termination",
+      "pointOne": {
+        "header": "Validity of Terms",
+        "text": "The terms apply as long as the user uses the website."
+      },
+      "pointTwo": {
+        "header": "Suspension or Termination",
+        "text": "The Organization may suspend the user's access to the website for violation of the Terms."
+      },
+      "pointThree": {
+        "header": "Consequences of Termination",
+        "text": "Termination leads to blocking access and possible deletion of user content."
+      },
+      "pointFour": {
+        "header": "Remaining Rights",
+        "text": "Certain sections of the Terms remain in effect after termination of access."
+      }
+    },
+    "blockEight": {
+      "header": "Copyright Policy",
+      "subHeader": "The Organization respects the intellectual property of others and asks users of our website to do the same. In connection with our website, we have adopted and implemented a copyright policy that involves the removal of any infringing materials and the suspension of users of our online platform who are repeat infringers of intellectual property rights, including copyrights. If you believe that one of our users, using our website, is unlawfully infringing the copyright to a work and you wish for the allegedly infringing material to be removed, the following information in the form of a written notification (in accordance with 17 U.S.C. § 512(c)) should be provided to our designated Copyright Agent:",
+      "subPointOne": "Your physical or electronic signature;",
+      "subPointTwo": "Identification of the copyrighted work(s) that you believe have been infringed;",
+      "subPointThree": "Identification of the material on our services that you believe infringes and that you request us to remove;",
+      "subPointFour": "Sufficient information to enable us to locate such material;",
+      "subPointFive": "Your address, telephone number, and email address;",
+      "subPointSix": "A statement that you have a good faith belief that the use of the allegedly infringing material is not authorized by the copyright owner, its agent, or the law;",
+      "subPointSeven": "And a statement that the information in the notification is accurate, and under penalty of perjury, that you are the owner of the copyright that has allegedly been infringed, or that you are authorized to act on behalf of the owner of the copyright.",
+      "subText": "Please note that under 17 U.S.C. § 512(f), any person who knowingly materially misrepresents that material or activity is infringing may be subject to liability for damages, costs, and attorneys' fees incurred by us in connection with the written notification and any alleged infringement claim.",
+      "pointOne": {
+        "header": "General Provisions",
+        "text": "These Terms are subject to review from time to time, and if we make any material changes, we may notify you by sending you an email to your last email address you provided to us, and/or prominently posting notice of the changes on our website. You are responsible for providing us with your most current email address. If the last email address you provided to us is not valid, our sending of an email containing such notice will nonetheless be deemed effective notice of the changes described in the notice. Any changes to these Terms will be effective thirty (30) calendar days after we send an email notice to you or thirty (30) calendar days after we post notice of the changes on our website. These changes will be effective immediately for new users of our website. Your continued use of our website after notice of such changes signifies your acknowledgement of such changes and agreement to be bound by the terms and conditions of such changes. Dispute Resolution. Please carefully read this Arbitration Agreement. It is part of your agreement with the Organization and affects your rights. It contains procedures for MANDATORY BINDING ARBITRATION AND WAIVER OF CLASS ACTION."
+      },
+      "pointTwo": {
+        "header": "Applicability of Arbitration Agreement",
+        "text": "All claims and disputes arising out of the Terms or the use of any product or service provided by the Organization that cannot be resolved informally or in small claims court shall be resolved through mandatory binding arbitration on an individual basis according to the terms of this Arbitration Agreement. Unless otherwise agreed, all arbitration proceedings shall be conducted in English. This Arbitration Agreement applies to you and the Organization, as well as to any subsidiaries, affiliates, agents, employees, predecessors in interest, successors, and assigns, as well as to all authorized or unauthorized users or beneficiaries of services or goods provided under the Terms."
+      },
+      "pointThree": {
+        "header": "Notice Requirement and Informal Dispute Resolution",
+        "text": "Before either party may seek arbitration, the party must first send to the other party a written Notice of Dispute describing the nature and basis of the claim or dispute and the requested relief. Notice to the Organization should be sent to: . After the Notice is received, you and the Organization may attempt to resolve the claim or dispute informally. If you and the Organization do not resolve the claim or dispute within thirty (30) days after the Notice is received, either party may commence arbitration. The amount of any settlement offer made by any party may not be disclosed to the arbitrator until after the arbitrator has determined the amount of the award to which either party is entitled."
+      },
+      "pointFour": {
+        "header": "Arbitration Rules",
+        "text": "Arbitration shall be initiated through the American Arbitration Association, an established alternative dispute resolution provider that offers arbitration as set forth in this section. If AAA is not available to conduct arbitration, the parties shall agree to select an alternative ADR provider. The rules of the ADR provider shall govern all aspects of the arbitration, except to the extent such rules are inconsistent with the Terms. The AAA Consumer Arbitration Rules governing the arbitration are available online at adr.org or by calling AAA at 1-800-778-7879. The arbitration shall be conducted by a single neutral arbitrator. Any claims or disputes where the total amount of the award sought is less than Ten Thousand U.S. Dollars (USD 10,000.00) may be resolved through binding arbitration without a hearing, at the option of the party seeking relief. For claims or disputes where the total amount of the award sought is Ten Thousand U.S. Dollars (USD 10,000.00) or more, the right to a hearing will be determined by the Arbitration Rules. Any hearing will be held in a location within 100 miles of your residence, unless you reside outside of the United States, and unless the parties agree otherwise. If you reside outside of the U.S., the arbitrator must provide the parties with reasonable notice of the date, time, and place of any oral hearings. Any judgment on the award rendered by the arbitrator may be entered in any court of competent jurisdiction. If the arbitrator grants you an award that is greater than the last settlement offer that the Organization made to you prior to the commencement of arbitration, the Organization will pay you the greater of the award or $2,500.00. Each party shall bear its own costs and expenses incurred in connection with the arbitration and shall pay an equal share of the fees and expenses of the ADR provider."
+      },
+      "pointFive": {
+        "header": "Additional Rules for Arbitration Without Participation",
+        "text": "If arbitration without participation is chosen, the arbitration will be conducted by phone, online, and/or solely based on written submissions; the specific manner is chosen by the initiating party. The arbitration will not involve personal participation of parties or witnesses unless the parties agree otherwise."
+      },
+      "pointSix": {
+        "header": "Waiver of Class or Consolidated Actions",
+        "text": "All claims and disputes within the scope of this arbitration agreement must be arbitrated or litigated on an individual basis and not on a class basis, and claims of more than one customer or user cannot be arbitrated or litigated jointly or consolidated with those of any other customer or user."
+      },
+      "pointSeven": {
+        "header": "Confidentiality",
+        "text": "All aspects of the arbitration proceeding shall be strictly confidential. The parties agree to maintain confidentiality unless otherwise required by law. This paragraph shall not prevent a party from submitting to a court any information necessary to enforce this Agreement, to enforce an arbitration award, or to seek injunctive or equitable relief."
+      },
+      "pointEight": {
+        "header": "Survival of Agreement",
+        "text": "This Arbitration Agreement will survive the termination of your relationship with the Organization."
+      },
+      "pointNine": {
+        "header": "Temporary Equitable Relief",
+        "text": "Notwithstanding the foregoing, either party may seek temporary equitable relief from a state or federal court to maintain the status quo pending arbitration. A request for temporary equitable relief shall not be deemed a waiver of any other rights or obligations under this Arbitration Agreement."
+      },
+      "pointTen": {
+        "header": "Claims Not Subject to Arbitration",
+        "text": "Notwithstanding the foregoing, claims for defamation, violation of the Computer Fraud and Abuse Act, and infringement or misappropriation of another party's intellectual property rights, including copyrights, patents, trademarks, or trade secrets, are not subject to this Arbitration Agreement."
+      },
+      "p1": "In any circumstances where this Arbitration Agreement permits the parties to seek court relief, the parties hereby agree to submit to the personal jurisdiction of the courts located in the Niderlandy County, California, for such purposes.",
+      "p2": "The Site may be subject to United States export control laws and may be subject to export or import regulations in other countries. You agree not to export, re-export, or transfer, directly or indirectly, any U.S. technical data received from the Organization or any products utilizing such data in violation of the United States export laws or regulations.",
+      "p3": "The Organization is located at the address specified in Section 10.8. If you are a California resident, you may report complaints to the Consumer Assistance Division of the California Department of Consumer Affairs, in writing at 400 R Street, Sacramento, CA 95814, or by calling (800) 952-5210."
+    },
+    "blockNine": {
+      "header": "Electronic Communications",
+      "text": "Communications between you and the Organization may use electronic means, whether you use the website or send us emails, or the Organization posts notices on the website or communicates with you via email.",
+      "subHeader": "For contractual purposes, you:",
+      "a": "a) agree to receive communications from the Organization electronically;",
+      "b": "b) agree that all terms and conditions, agreements, notices, disclosures, and other communications that the Organization provides to you electronically satisfy any legal requirement that such communications would satisfy if they were in writing."
+    }
+  }
+}

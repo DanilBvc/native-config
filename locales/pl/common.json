@@ -1,0 +1,497 @@
+{
+  "Hi": "Cześć",
+  "successPayloadMessageSecond": "Wkrótce skontaktujemy się z Tobą i udzielimy wszystkich informacji dotyczących Twojego konta.",
+  "successPayloadMessage": "Twoje zakupy zostały pomyślnie zrealizowane! Dziękujemy za wybór naszej usługi.",
+  "count": "Liczba",
+  "price": "Сena",
+  "placeholderDesc": "Tutaj możesz krótko napisać o tej osobie.",
+  "edit": "Edytuj",
+  "Dob": "Data urodzenia",
+  "Dod": "Data śmierci",
+  "passError": "Hasło jest nieprawidłowe",
+  "passTitle": "Proszę wprowadzić hasło.",
+  "min": "Standardowy",
+  "med": "Średni",
+  "max": "Maks",
+  "none": "Brak",
+  "contacts": "Kontakty",
+  "validation": {
+    "addressIndex": "Kod pocztowy jest obowiązkowy",
+    "engravingBoxes": "Tekst do grawerowania jest obowiązkowy",
+    "lat": "Proszę używać tylko liter łacińskich.",
+    "ua": "Proszę wprowadzać tekst używając tylko znaków cyrylickich.",
+    "username": "Nazwa użytkownika jest wymagana",
+    "email": "Nieprawidłowy email",
+    "emailReq": "Email jest wymagany",
+    "password": "Hasło musi mieć co najmniej 6 znaków",
+    "passwordReq": "Hasło jest wymagane",
+    "language": "Język jest wymagany",
+    "lastName": "Nazwisko jest wymagane",
+    "firstName": "Imię jest wymagane",
+    "treeType": "Typ drzewa jest wymagany",
+    "phoneNumber": "Numer telefonu jest wymagany",
+    "matches": "Musi składać się tylko z cyfr i zaczynać się od znaku plus",
+    "phoneNumberMin": "Musi mieć co najmniej 10 znaków",
+    "phoneNumberMax": "Musi mieć maksymalnie 15 znaków",
+    "address": "Adres jest wymagany",
+    "giftName": "Imię na prezent jest wymagane",
+    "giftLastName": "Nazwisko na prezent jest wymagane",
+    "giftAddress": "Adres na prezent jest wymagany"
+  },
+  "comingSoon": {
+    "days": "Dni",
+    "hours": "Godziny",
+    "minutes": "Minuty",
+    "seconds": "Sekundy"
+  },
+  "payload": {
+    "hearAbout": "Jak o nas usłyszałeś?",
+    "userStep": "Wprowadź dane, aby utworzyć nowego użytkownika",
+    "boxStep": "Spersonalizuj swoje zamówienie.",
+    "orderStep": "Wprowadź dane dla zamówienia",
+    "next": "Dalej",
+    "passwordQR": "Ustaw hasło dla kodu QR",
+    "accountName": "Nazwa konta",
+    "engravingBoxes": "Zamów grawerowanie na skrzynce",
+    "payloadEngravingBoxes": "Napisz tekst do grawerowania do 250 znaków",
+    "isCasketWithImage": "Zaznacz tę opcję, jeśli chcesz zamówić dodatkową usługę, taką jak grawerowanie zdjęcia na skrzynce",
+    "methodDelivery": "Metoda dostawy",
+    "addressIndex": "Kod pocztowy",
+    "address": "Adres zamieszkania",
+    "addressPlaceholder": "Podaj miasto/ulicę/nr budynku/nr mieszkania",
+    "instructionsDeliveryPlaceholder": "Instrukcje dotyczące dostawy - wszelkie specjalne wskazówki dla kuriera, na przykład dzwonienie przed przyjazdem lub szczególne cechy miejsca dostawy.",
+    "instructionsDelivery": "Instrukcje dotyczące dostawy",
+    "acceptTermsStart": "Zgoda na przetwarzanie danych osobowych",
+    "acceptTerms": "Szanowny Kliencie, Aby przetworzyć Twoje zamówienie, musimy zbierać i wykorzystywać Twoje dane osobowe, takie jak imię i nazwisko, adres dostawy, numer kontaktowy oraz adres e-mail. Zgodnie z Ogólnym Rozporządzeniem o Ochronie Danych (GDPR), zobowiązujemy się zapewnić bezpieczeństwo i prywatność Twoich danych. Masz prawo dostępu do swoich danych, ich poprawiania, ograniczenia przetwarzania lub usunięcia, a także prawo do przenoszenia danych.",
+    "defaultCasket": "Darmowa skrzynka",
+    "premiumCasket": "Ekskluzywna skrzynka",
+    "PIB": "Imię i Nazwisko",
+    "PlaceholderQR": "Wprowadź hasło do kodu QR",
+    "PlaceholderEmail": "Wprowadź adres e-mail",
+    "PlaceholderAllName": "Imię i Nazwisko",
+    "fullName": "Imię i Nazwisko Odbiorcy",
+    "middleName": "Drugie imię",
+    "PlaceholderMiddleName": "Opcjonalne pole do wypełnienia",
+    "success": "Płatność udana!",
+    "reject": "Płatność nieudana!",
+    "return": "Powrót do strony głównej",
+    "title": "Podaj dane do stworzenia nowego użytkownika",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "phoneNumber": "Numer telefonu",
+    "pay": "Płatność",
+    "specialWishes": "Specjalne życzenia",
+    "speacialWishesAlert": "Prosimy o wyjaśnienie możliwej zmiany ceny za dodatkowe preferencje w dziale obsługi klienta przed złożeniem zamówienia.",
+    "servicePackage": "Wybrany pakiet usług",
+    "gift": "Zamówić dla kogoś innego",
+    "giftName": "Imię obdarowanego",
+    "giftLastName": "Nazwisko obdarowanego",
+    "giftAddress": "Adres obdarowanego"
+  },
+  "auth": {
+    "lockAccount": "Twoje konto zostało zablokowane.",
+    "secondLockAccount": "Aby skontaktować się z pomocą techniczną, proszę wysłać e-mail na adres ",
+    "welcome": "Witaj ponownie",
+    "logInto": "Zaloguj się do swojego istniejącego konta",
+    "create": "Utwórz swoje konto",
+    "userName": "Nazwa użytkownika",
+    "email": "E-mail",
+    "password": "Hasło",
+    "repeat": "Powtórz hasło",
+    "forgot": "Zapomniałeś hasła?",
+    "signUp": "Zarejestruj się",
+    "logIn": "Zaloguj się",
+    "dontHave": "Nie masz konta?",
+    "already": "Masz już konto?",
+    "loginError": "Nieprawidłowy adres e-mail lub hasło",
+    "comingSoonText": "Zachowajcie czujność na premierę aplikacji mobilnej!"
+  },
+  "welcome": "witaj",
+  "header": {
+    "info": "O nas",
+    "howItWorks": "Zasady działania",
+    "prices": "Wersja demonstracyjna",
+    "buy": "Przegląd i zakup",
+    "logIn": "Zaloguj się do konta",
+    "logOut": "Wyloguj",
+    "mobile": "Wkrótce"
+  },
+  "contactUs": {
+    "contact": "Skontaktuj się z nami",
+    "technical": "Problem techniczny",
+    "business": "Zapytanie biznesowe",
+    "mailPlaceholder": "Proszę wprowadź swój email",
+    "text-Placeholder": "Wiadomość",
+    "send": "Wyślij",
+    "firstText": "W naszym zespole zawsze jesteśmy gotowi odpowiedzieć na wszystkie Państwa pytania i znaleźć optymalne rozwiązania dla wszelkich problemów związanych z zamówieniem.",
+    "secondText": "Et eu tempor sagittis tortor tortor enim adipiscing blandit orci. Maecenas ac facilisi sed senectus turpis.",
+    "captcha": "Rozwiąż poniższe zadanie matematyczne",
+    "verify": "Zweryfikuj"
+  },
+  "prices": {
+    "header": "Wybierz swój pakiet usług",
+    "text": "W Remembering Time dostosowujemy nasze ceny do lokalnych różnic, aby nasze usługi były wygodne i dostępne dla każdego, bez względu na kraj. Wasze wsparcie nas inspiruje!",
+    "photo": "Zdjęcie",
+    "video": "Wideo",
+    "audio": "Audio",
+    "buy": "Kup pakiet",
+    "firstBenefit": "Wsparcie techniczne 24/7",
+    "secondBenefit": "Ustawianie hasta do kodu QR",
+    "thirdBenefit": "Dostawa gratis",
+    "fourthBenefit": "Platnosé na raty (kredyt)",
+    "mobile": "Mobilna aplikacja",
+    "AI": "AI opisanie",
+    "personalization": "Personalizacja",
+    "unlimited content": "Nieograniczona zawartość"
+  },
+  "landingPage": {
+    "general": {
+      "packageOfServices": "Wybierz pakiet usług",
+      "terms": "Warunki użytkowania"
+    },
+    "greetingsSection": {
+      "helloFriend": "Cześć, przyjacielu!",
+      "greetingText": "Cieszymy się, że możemy powitać Cię na naszej stronie i przedstawić usługę, która otwiera unikalne możliwości do zachowania najdroższych wspomnień Twoich bliskich, którzy odeszli z tego świata. Nasz zespół pracuje nad tworzeniem spersonalizowanych albumów, które zawierają zdjęcia, nagrania wideo i muzykę, przekształcając je w bezcenne wspomnienia. Naszym celem nie jest tylko świadczenie usługi, ale umożliwienie przekazania historii Twojej rodziny kolejnym pokoleniom, zachowując pamięć o bliskich żywą i niezapomnianą.",
+      "bestWishes": "Z najlepszymi życzeniami,",
+      "team": "Zespół „Remembering Time”"
+    },
+    "founderSection": {
+      "wordsFrom": "Słowa od założyciela projektu",
+      "founderName": "Dmytro Antonenko",
+      "hello": "Witam!",
+      "founderText": {
+        "first": "Serdecznie dziękuję za poświęcony czas temu tekstu. Przede wszystkim, jestem wdzięczny każdemu, kto przyczynił się do rozwoju tego projektu. Wasza praca i wsparcie to fundament naszego sukcesu. Ten projekt został stworzony z osobistej potrzeby i jest dedykowany wyjątkowej osobie, która teraz czuwa nade mną z nieba. Mógłbym opisać wszystkie aspekty i szczegóły tego projektu, starając się przekonać was o jego znaczeniu, ale zrobię to inaczej. Pytanie, dlaczego wybrałem taki podejście, jest proste: w obliczu wyboru między pieniędzmi, władzą, możliwościami a utratą bliskiej osoby, wybór staje się nieunikniony. Choć nie możemy zmienić przeszłości, możemy zachować pamięć o tych, których kochamy.",
+        "second": "Jako założyciel tego projektu, chcę zapewnić was o jego znaczeniu i trwałości. Ten projekt będzie żył, dopóki w moim sercu żyje pamięć o osobie, która nauczyła mnie żyć, kochać i cenić każdą chwilę.",
+        "third": "Zapraszam was do dołączenia i wsparcia naszego projektu, pomóżcie mu rosnąć i rozwijać się. Wasz udział jest dla nas bardzo ważny. Dziękuję za uwagę i wiarę w naszą sprawę!"
+      }
+    },
+    "qrSection": {
+      "rememberAndShare": "Pamiętaj i Dziel się: Przesyłaj Ulubione Wspomnienia do Remembering Time.",
+      "years": "100 lat",
+      "guarantee": "Gwarancja Zachowania Danych",
+      "memoirs": "50+ wspomnień",
+      "possible": "Możliwe do pobrania",
+      "connect": "Skontaktuj się z nami",
+      "imagineBox": {
+        "heading": "Wyobraź sobie skrzynkę, otuloną aurą wspomnień,",
+        "first": "która delikatnie będzie przechowywać w sobie echa duszy, która nadal żyje w twojej pamięci.",
+        "second": "Wydaje się mała, ale w środku mieści nieskończone skarby. Za każdym razem, gdy otwierasz tę skrzynkę, czujesz bliskość i ciepło tych, których tak kochasz i pamiętasz.",
+        "third": "Ta skrzynka stanie się małym, ale ważnym kącikiem w twoim domu i sercu, gdzie przeszłość spotyka się z teraźniejszością."
+      },
+      "insideBox": {
+        "heading": "Wewnątrz każdego pudełka leży metalowa płytka z kodem QR –",
+        "first": "kluczem do świata wspomnień, które rozgrzewają duszę i wzruszają serce. Wystarczy jeden dotyk, a przed tobą otwiera się galeria fotografii, rozgrzewająca serce jasnymi chwilami przeszłości.",
+        "second": "Aby te wspomnienia zawsze były blisko, radzimy z miłością przymocować tę płytę do pamiątkowego kamienia lub drewnianego krzyża. Użyj przezroczystego kleju do kamienia, aby zachować jego integralność, a do krzyża – śrub ze stali nierdzewnej."
+      },
+      "greetings": {
+        "heading": "W ciszy tych chwil serdecznie wyrażamy naszą wdzięczność.",
+        "first": "Złoty gołąb pokoju, który swobodnie wznosi się nad dłońmi na tle nocnego nieba na kartce, jest symbolem spokoju i nieograniczonej pamięci, którą razem pielęgnujemy.",
+        "second": "\"Remembering Time\" to nie tylko nazwa projektu, to nasza obietnica troskliwego zachowania każdego cennego wspomnienia, które nam powierzyliście."
+      }
+    },
+    "howItWorks": {
+      "howItWorks": "Jak to działa?",
+      "points": {
+        "first": {
+          "title": "Złożenie zamówienia",
+          "subpoints": {
+            "a": "a) Poznaj istotę przez demo!",
+            "b": "b) Wybór odpowiedniego pakietu usług",
+            "c": "c) Rejestracja i płatność"
+          }
+        },
+        "second": {
+          "title": "Zarządzaj swoim profilem",
+          "subpoints": {
+            "a": "a) Utworzenie Profilu Pamiątkowego",
+            "b": "b) Przesyłanie i usuwanie materiałów"
+          }
+        },
+        "third": {
+          "title": "Wnieś Cząstkę Swoich Wspomnień",
+          "subpoints": {
+            "a": "Ostatnie Słowa: Fotografia"
+          }
+        }
+      }
+    }
+  },
+  "customerPage": {
+    "head": {
+      "hello": "Witaj",
+      "manage": "Zarządzaj tutaj swoimi drzewami pamięci. Jesteśmy tutaj, aby Cię wspierać.",
+      "manageAdmin": "Panel administratora"
+    },
+    "buttons": {
+      "referrals": "Moje skierowania",
+      "ref": "Referale użytkownika",
+      "newTree": "Kup nowe drzewo",
+      "addTree": "Dodać nowe drzewo",
+      "registerNewUser": "Zarejestruj nowego użytkownika",
+      "blockUser": "Zablokować użytkownika",
+      "cancel": "Anuluj",
+      "confirm": "Potwierdź",
+      "unblockUser": "Odblokuj użytkownika",
+      "confirmQ": "Czy na pewno chcesz {{block}} {{username}}?"
+    },
+    "modal": {
+      "invite": "Zaproś swoich znajomych i zarób {{amount}} od każdego, kto dołączy",
+      "copy": "Kopiuj",
+      "joined": "Dołączyli",
+      "noReferrals": "Brak skierowań na razie",
+      "useLink": "Użyj swojego linku polecającego, aby zaprosić ludzi do Remembering Time"
+    }
+  },
+  "treePage": {
+    "buyMorePhotos": "Kup więcej zdjęć",
+    "addMorePhotos": "Dodaj więcej zdjęć",
+    "buyMoreVideos": "Kup więcej filmów",
+    "addMoreVideos": "Dodaj więcej filmów",
+    "buyMoreAudios": "Kup więcej audio",
+    "addMoreAudios": "Dodaj więcej audio",
+    "buyMore": "Kup więcej slotów",
+    "addMore": "Dodaj więcej zdjęć",
+    "add": "Dodaj",
+    "share": "Udostępnij to drzewo",
+    "shareMob": "Udostępnij",
+    "visit": "Odwiedź",
+    "public": "Widok publiczny",
+    "copied": "Skopiowane",
+    "save": "Zapisz"
+  },
+  "admin": {
+    "lastMounthUsers": "Nowi użytkownicy z ostatniego miesiąca",
+    "totalUsers": "Liczba użytkowników",
+    "totalTreesCreated": "Łącznie utworzone drzewa",
+    "allUsers": "Wszyscy użytkownicy",
+    "search": "Szukaj",
+    "tree": "drzewo",
+    "trees": "drzewa",
+    "memberSince": "Użytkownik od",
+    "createForm": {
+      "last_name": "Nazwisko",
+      "first_name": "Imię",
+      "tree_type": "Typ drzewa",
+      "name": "Imię i Nazwisko",
+      "email": "Email",
+      "password": "Hasło",
+      "language": "Język",
+      "package": "Pakiet",
+      "title": "Utwórz nowego użytkownika",
+      "titleAdd": "Dodać nowe drzewo",
+      "create": "Utwórz użytkownika"
+    }
+  },
+  "termsPage": {
+    "header": "Umowa Oferty Publicznej",
+    "blockOne": {
+      "header": "Warunki Korzystania ze Strony",
+      "pointOne": {
+        "header": "Wprowadzenie",
+        "text": "Strona internetowa https://rememberingtime.org jest własnością organizacji RememberingTime. Dostęp do i korzystanie z witryny są regulowane tymi Warunkami, w tym wszelkimi dodatkowymi wytycznymi, terminami lub zasadami, które mogą być opublikowane na witrynie."
+      },
+      "pointTwo": {
+        "header": "Akceptacja Warunków",
+        "text": "Autoryzacja na stronie oznacza Twoją zgodę na te Warunki. Musisz mieć co najmniej 18 lat, aby uzyskać dostęp do witryny. Nie zgadzając się na Warunki, nie masz prawa korzystać z witryny."
+      },
+      "pointThree": {
+        "header": "Licencja na Korzystanie",
+        "text": "Organizacja udziela Ci nieekskluzywnego, odwołalnego, ograniczonego prawa do osobistego, niekomercyjnego korzystania z witryny."
+      },
+      "pointFour": {
+        "header": "Ograniczenia",
+        "text": "Zabronione jest komercyjne wykorzystanie witryny, wprowadzanie zmian, tworzenie prac pochodnych, dekompilacja, a także kopiowanie lub rozpowszechnianie materiałów witryny bez pozwolenia. Nie masz prawa tworzyć konkurencyjnych usług."
+      },
+      "pointFive": {
+        "header": "Własność i Prawa",
+        "text": "Wszystkie prawa intelektualne do strony i jej treści należą do Organizacji lub jej licencjodawców. Te Warunki nie przenoszą na Ciebie żadnych praw, poza ograniczonym prawem do korzystania udzielonym w sekcji 3."
+      }
+    },
+    "blockTwo": {
+      "header": "Treści Użytkowników",
+      "pointOne": {
+        "header": "Odpowiedzialność za Treści",
+        "text": "Użytkownicy ponoszą pełną odpowiedzialność za wszelkie treści (tekst, obrazy, wideo itp.), które publikują na stronie. Takie treści nie mogą naruszać polityki akceptowalnego użytkowania strony."
+      },
+      "pointTwo": {
+        "header": "Prawa i Licencje",
+        "text": "Przesyłając treści na stronę, użytkownik udziela Organizacji nieodwołalnego, niewyłącznego, bezpłatnego prawa do ich użytkowania, w tym do reprodukcji, dystrybucji, publicznego wyświetlania, tworzenia prac pochodnych i integracji z innymi dziełami na poziomie globalnym. Użytkownik także zrzeka się wszelkich roszczeń do praw moralnych."
+      }
+    },
+    "blockThree": {
+      "header": "Polityka Akceptowalnego Użycia",
+      "pointOne": {
+        "header": "Ograniczenia dotyczące treści",
+        "content": {
+          "subHeader": "Zobowiązujesz się nie rozpowszechniać treści, które:",
+          "subPointOne": "Naruszają prawa osób trzecich lub ustawodawstwo.",
+          "subPointTwo": "Są nielegalne, obraźliwe, zniesławiające, pornograficzne lub podżegają do nienawiści.",
+          "subPointThree": "Szkodzą lub mogą zaszkodzić nieletnim."
+        }
+      },
+      "pointTwo": {
+        "header": "Zabronione działania",
+        "content": {
+          "subHeader": "Zabrania się:",
+          "subPointOne": "Rozpowszechniania szkodliwego oprogramowania.",
+          "subPointTwo": "Wysyłania spamu lub niechcianej reklamy.",
+          "subPointThree": "Zbierania danych o innych użytkownikach bez ich zgody.",
+          "subPointFour": "Celowego zakłócania działania strony lub naruszania jej bezpieczeństwa.",
+          "subPointFive": "Tworzenia fałszywych kont lub wykonywania zautomatyzowanych zapytań."
+        }
+      },
+      "pointThree": {
+        "header": "Odpowiedzialność",
+        "text": "Odpowiadasz za wszelkie naruszenia tej polityki, które mogą prowadzić do usunięcia Twojej treści, zawieszenia konta lub konsekwencji prawnych."
+      },
+      "pointFour": {
+        "header": "Prawa Organizacji",
+        "text": "Zastrzegamy sobie prawo do przeglądania i usuwania dowolnych treści oraz do podejmowania działań przeciwko osobom naruszającym tę politykę."
+      },
+      "pointFive": {
+        "header": "Opinie",
+        "text": "Przekazując nam jakiekolwiek opinie lub sugestie, automatycznie udzielasz nam praw do ich wykorzystania."
+      },
+      "pointSix": {
+        "header": "Zrzeczenie się odpowiedzialności",
+        "text": "Zobowiązujesz się zabezpieczyć i chronić Organizację w przypadku Twojego naruszenia tej polityki lub obowiązującego ustawodawstwa."
+      }
+    },
+    "blockFour": {
+      "header": "Warunki Korzystania z Linków i Reklam Trzecich Stron; Współdziałanie z Innymi Użytkownikami",
+      "pointOne": {
+        "header": "Linki i Reklama Trzecich Stron",
+        "content": {
+          "subPointOne": "Strona może zawierać linki do stron trzecich oraz reklamy, które nie są kontrolowane przez Organizację.",
+          "subPointTwo": "Organizacja nie ponosi odpowiedzialności za treść lub polityki stron trzecich.",
+          "subPointThree": "Korzystanie z takich linków i reklam odbywa się na własne ryzyko użytkownika."
+        }
+      },
+      "pointTwo": {
+        "header": "Odpowiedzialność Użytkowników",
+        "content": {
+          "subPointOne": "Użytkownicy ponoszą pełną odpowiedzialność za treść, którą publikują na stronie.",
+          "subPointTwo": "Organizacja nie ponosi odpowiedzialności za jakiekolwiek straty lub szkody spowodowane przez treści użytkowników lub ich interakcje."
+        }
+      },
+      "pointThree": {
+        "header": "Zwolnienie z Odpowiedzialności",
+        "content": {
+          "subPointOne": "Użytkownicy zwalniają Organizację od wszelkich roszczeń związanych z korzystaniem ze strony internetowej.",
+          "subPointTwo": "To zwolnienie obejmuje wszystkie możliwe spory, żądania lub szkody wynikające ze strony internetowej.",
+          "subPointThree": "Rezydenci Kalifornii w szczególności zrzekają się praw zgodnie z działem 1542 Kodeksu Cywilnego Kalifornii."
+        }
+      },
+      "text": "Ta sekcja ogólnie opisuje zasady korzystania z linków i reklam osób trzecich na stronie internetowej oraz określa zasady interakcji między użytkownikami, a także ich odpowiedzialność i zwolnienie Organizacji od roszczeń."
+    },
+    "blockFive": {
+      "header": "Ograniczenie Odpowiedzialności",
+      "pointOne": {
+        "header": "Odpowiedzialność Organizacji",
+        "text": "Organizacja zobowiązuje się do rozwiązywania wszelkich problemów technicznych, które mogą pojawić się dla właściciela zakupionego profilu na naszej platformie, tak długo, jak właściciel profilu przestrzega warunków korzystania oraz praw związanych z profilem."
+      },
+      "pointTwo": {
+        "header": "Ryzyko Użytkownika",
+        "text": "Korzystanie z serwisu odbywa się na własne ryzyko użytkownika."
+      },
+      "pointThree": {
+        "header": "Obowiązek Zachowania Danych",
+        "text": "Organizacja zobowiązuje się do przechowywania wszystkich danych i ich ochrony na bieżąco, tak długo, jak miejsce pochówku odpowiada osobie, na którą zarejestrowano profil."
+      },
+      "pointFour": {
+        "header": "Zobowiązania Finansowe Organizacji",
+        "text": "Organizacja ponosi wszystkie koszty finansowe związane z rozwiązywaniem problemów z profilem przez cały okres jego użytkowania przez właściciela."
+      },
+      "pointFive": {
+        "header": "Prawo do Zwrotu Pieniędzy",
+        "text": "Jeśli klient, korzystając z naszej usługi, zauważy, że usługa nie odpowiada opisowi na platformie i nie spełnia jego potrzeb, ma prawo do zwrotu pieniędzy w ciągu 30 dni od zakupu."
+      },
+      "pointSix": {
+        "header": "Procedura w przypadku naruszenia warunków użytkowania",
+        "text1": "Organizacja nie obejmuje problemów spowodowanych czynnikami zewnętrznymi lub niewłaściwym wykorzystaniem profilu przez użytkownika. Konto powiązane z kodem QR, znajdujące się na miejscu pochówku, które nie jest odwiedzane przynajmniej raz na 12 miesięcy, może zostać usunięte z bazy danych i nie będzie już obsługiwane. Te środki zapewniają aktualność i trafność informacji dostępnych za pośrednictwem naszych usług. Twój dostęp do profilu i korzystanie z witryny potwierdza Twoją zgodę na te Warunki.",
+        "text2": "Klient ma 14 dni na rozwiązanie problemu po otrzymaniu ostrzeżenia drogą e-mailową od firmy o naruszeniu warunków użytkowania profilu, zanim firma zablokuje profil i ograniczy do niego dostęp."
+      }
+    },
+    "blockSeven": {
+      "header": "Czas i Zakończenie",
+      "pointOne": {
+        "header": "Obowiązywanie Warunków",
+        "text": "Warunki obowiązują, dopóki użytkownik korzysta z serwisu."
+      },
+      "pointTwo": {
+        "header": "Zawieszenie lub Zakończenie",
+        "text": "Organizacja może zawiesić dostęp użytkownika do serwisu za naruszenie Warunków."
+      },
+      "pointThree": {
+        "header": "Konsekwencje Zakończenia",
+        "text": "Zakończenie prowadzi do zablokowania dostępu i ewentualnego usunięcia treści użytkownika."
+      },
+      "pointFour": {
+        "header": "Pozostałe Prawa",
+        "text": "Pewne sekcje Warunków pozostają w mocy po zakończeniu dostępu."
+      }
+    },
+    "blockEight": {
+      "header": "Polityka praw autorskich",
+      "subHeader": "Organizacja szanuje własność intelektualną innych i prosi użytkowników naszej witryny internetowej, aby również tak postępowali. W związku z naszą witryną internetową przyjęliśmy i wdrożyliśmy politykę poszanowania praw autorskich, która obejmuje usuwanie wszelkich naruszających materiałów oraz zawieszanie użytkowników naszej platformy online, którzy są powtarzającymi się naruszcami praw własności intelektualnej, w tym praw autorskich. Jeśli uważasz, że jeden z naszych użytkowników, korzystając z naszej witryny internetowej, nielegalnie narusza prawa autorskie do utworu i chcesz, aby rzekomo naruszający materiał został usunięty, następujące informacje w formie pisemnego zgłoszenia (zgodnie z 17 U.S.C. § 512(c)) powinny być przekazane naszemu wyznaczonemu Agentowi ds. Praw Autorskich:",
+      "subPointOne": "Twój fizyczny lub elektroniczny podpis;",
+      "subPointTwo": "Identyfikacja utworu(-ów) autorskiego(-ych), które według Ciebie zostały naruszone;",
+      "subPointThree": "Identyfikacja materiału na naszych usługach, który według Ciebie narusza i który prosisz nas usunąć;",
+      "subPointFour": "Wystarczające informacje, aby umożliwić nam zlokalizowanie takiego materiału;",
+      "subPointFive": "Twój adres, numer telefonu i adres e-mail;",
+      "subPointSix": "Oświadczenie, że w dobrej wierze uważasz, iż korzystanie z materiału podważanego nie jest autoryzowane przez właściciela praw autorskich, jego agenta ani na mocy prawa;",
+      "subPointSeven": "Oświadczenie, że informacje zawarte w zgłoszeniu są dokładne, i grozi Ci karna odpowiedzialność, jeśli jesteś właścicielem praw autorskich, które rzekomo zostały naruszone, lub jesteś upoważniony do działania w imieniu właściciela praw autorskich.",
+      "subText": "Prosimy zauważyć, że zgodnie z 17 U.S.C. § 512(f), każde fałszywe przedstawienie faktów materialnych w pisemnym zgłoszeniu automatycznie naraża skarżącego na odpowiedzialność za wszelkie szkody, koszty i opłaty adwokackie poniesione przez nas w związku z pisemnym zgłoszeniem i oskarżeniem o naruszenie praw autorskich.",
+      "pointOne": {
+        "header": "Postanowienia Ogólne",
+        "text": "Te Warunki podlegają od czasu do czasu przeglądowi, a jeśli dokonamy istotnych zmian, możemy powiadomić Cię, wysyłając wiadomość e-mail na Twój ostatni adres e-mailowy, który nam podałeś, i/lub zamieszczając zauważalne ogłoszenie o zmianach na naszej stronie internetowej. Ponosisz odpowiedzialność za dostarczenie nam swojego najbardziej aktualnego adresu e-mail. Jeśli ostatni adres e-mail, który nam podałeś, nie jest prawidłowy, nasze wysłanie wiadomości e-mail zawierającej takie ogłoszenie będzie jednak uważane za skuteczne powiadomienie o opisanych w ogłoszeniu zmianach. Wszelkie zmiany w niniejszych Warunkach wchodzą w życie po upływie trzydziestu (30) kalendarzowych dni od daty wysłania przez nas wiadomości e-mail z powiadomieniem do Ciebie lub po upływie trzydziestu (30) kalendarzowych dni od daty zamieszczenia ogłoszenia o zmianach na naszej stronie internetowej. Te zmiany wchodzą w życie natychmiastowo dla nowych użytkowników naszej strony internetowej. Kontynuowanie korzystania z naszej strony internetowej po ogłoszeniu takich zmian świadczy o Twoim uznaniu tych zmian i zgody na być związany postanowieniami i warunkami takich zmian. Rozstrzyganie sporów. Prosimy o uważne przeczytanie tej Umowy o arbitrażu. Stanowi to część Twojej umowy z Organizacją i ma wpływ na Twoje prawa. Zawiera to procedury OBOWIĄZKOWEGO WIĄZĄCEGO ARBITRAŻU I ZAWIERANIA KOLEKTYWNYCH POZWÓW."
+      },
+      "pointTwo": {
+        "header": "Zastosowanie Umowy o arbitrażu",
+        "text": "Wszelkie roszczenia i spory wynikające z Warunków lub korzystania z dowolnego produktu lub usługi dostarczanej przez Organizację, które nie mogą być rozstrzygnięte nieformalnie lub w ramach sądu małych roszczeń, muszą być rozstrzygane przez obowiązkowy arbitraż na indywidualnej podstawie zgodnie z warunkami niniejszej Umowy o arbitrażu. Jeśli nie uzgodniono inaczej, wszystkie procedury arbitrażowe będą prowadzone w języku angielskim. Niniejsza Umowa o arbitrażu dotyczy Ciebie i Organizacji, a także wszystkich spółek zależnych, powiązanych osób, agentów, pracowników, poprzedników w prawach, następców i następców prawnych, a także wszystkich autoryzowanych lub nieautoryzowanych użytkowników lub beneficjentów usług lub towarów dostarczanych na mocy Warunków."
+      },
+      "pointThree": {
+        "header": "Wymóg zgłoszenia i nieformalne rozstrzyganie sporów",
+        "text": "Zanim którakolwiek ze stron może złożyć sprawę do arbitrażu, strona musi najpierw wysłać drugiej stronie pisemne Powiadomienie o sporze, opisujące naturę i podstawę roszczenia lub sporu oraz żądane rozwiązanie. Powiadomienie dla Organizacji należy wysłać pod adres: . Po otrzymaniu Powiadomienia, Ty i Organizacja możemy próbować nieformalnie rozwiązać roszczenie lub spór. Jeśli Ty i Organizacja nie rozstrzygniemy roszczenia lub sporu w ciągu trzydziestu (30) dni od otrzymania Powiadomienia, każda ze stron może rozpocząć postępowanie arbitrażowe. Kwota jakiegokolwiek wnioskowanego ugodowego rozwiązania, złożonego przez dowolną stronę, nie może być ujawniona arbitratorowi, zanim arbitrator nie określi kwoty odszkodowania, na którą ma prawo każda ze stron."
+      },
+      "pointFour": {
+        "header": "Zasady arbitrażu",
+        "text": "Arbitraż należy wszcząć za pośrednictwem Amerykańskiego Stowarzyszenia Arbitrażowego, wybranego dostawcy alternatywnego rozstrzygania sporów, który oferuje arbitraż, zgodnie z postanowieniami niniejszego rozdziału. Jeśli AAA nie jest dostępne do przeprowadzenia arbitrażu, strony zgadzają się wybrać alternatywnego dostawcę ADR. Zasady dostawcy ADR będą kierować wszystkimi aspektami arbitrażu, z wyjątkiem tych, które są sprzeczne z Warunkami. Zasady arbitrażu konsumenckiego AAA, które rządzą arbitrażem, są dostępne online na adr.org lub dzwoniąc do AAA pod numer 1-800-778-7879. Arbitraż będzie prowadzony przez jednego neutralnego arbitratora. Wszelkie roszczenia lub spory, których łączna kwota nie przekracza dziesięciu tysięcy dolarów amerykańskich (10 000,00 USD), mogą być rozpatrywane przez obowiązkowy arbitraż bez udziału, według wyboru strony ubiegającej się o rozwiązanie. Dla roszczeń lub sporów, których łączna kwota przekracza dziesięć tysięcy dolarów amerykańskich (10 000,00 USD), prawo do przesłuchania będzie ustalone zgodnie z Zasadami arbitrażu. Dowolne przesłuchanie odbędzie się w miejscu oddalonym o co najmniej 100 mil od Twojego miejsca zamieszkania, jeśli mieszkasz poza Stanami Zjednoczonymi, i jeśli strony nie uzgodnią inaczej. Jeśli mieszkasz poza USA, arbitrator musi dać obu stronom rozsądne powiadomienie o dacie, godzinie i miejscu każdego ustnego przesłuchania. Dowolne orzeczenie wydane przez arbitratora może być zaskarżone do dowolnego sądu właściwej jurysdykcji. Jeśli arbitrator przyzna Ci odszkodowanie większe niż ostatnia proponowana przez Organizację przed rozpoczęciem arbitrażu, Organizacja wypłaci Ci większą kwotę odszkodowania lub 2 500,00 USD. Każda ze stron ponosi własne koszty i wydatki związane z arbitrażem oraz płaci równą część opłat i wydatków dostawcy ADR."
+      },
+      "pointFive": {
+        "header": "Dodatkowe zasady dotyczące arbitrażu bez udziału",
+        "text": "W przypadku wyboru arbitrażu bez udziału, arbitraż będzie przeprowadzany telefonicznie, online i/lub wyłącznie na podstawie pisemnych zgłoszeń; konkretny sposób jest wybierany przez stronę inicjującą arbitraż. Arbitraż nie będzie obejmował osobistego udziału stron lub świadków, chyba że strony ustalą inaczej."
+      },
+      "pointSix": {
+        "header": "Odrzucenie zbiorowych lub skonsolidowanych działań",
+        "text": "Wszelkie roszczenia i spory w ramach niniejszej umowy o arbitrażu muszą być arbitrażowane lub sądowo rozpatrywane indywidualnie, a nie zbiorowo, i roszczenia więcej niż jednego klienta lub użytkownika nie mogą być arbitrażowane lub sądowo rozpatrywane wspólnie ani skonsolidowane z roszczeniami jakiegokolwiek innego klienta lub użytkownika."
+      },
+      "pointSeven": {
+        "header": "Poufność",
+        "text": "Wszelkie aspekty procesu arbitrażowego będą ściśle poufne. Strony zgadzają się zachować poufność, chyba że wymaga tego prawo. Niniejszy paragraf nie stanowi przeszkody dla strony w przedstawianiu sądowi informacji niezbędnych do wykonania niniejszej umowy, wykonania arbitrażowego wyroku lub uzyskania środków tymczasowych lub zadośćuczynienia."
+      },
+      "pointEight": {
+        "header": "Przetrwanie Umowy",
+        "text": "Niniejsza Umowa o arbitrażu będzie przetrwała zakończenie Twojego stosunku z Organizacją."
+      },
+      "pointNine": {
+        "header": "Tymczasowe środki ochronne",
+        "text": "Mimo powyższego, każda ze stron może zwrócić się o tymczasowe środki ochronne do sądu stanowego lub federalnego w celu zachowania status quo do arbitrażu. Wniosek o tymczasowe środki ochronne nie będzie uważany za zrzeczenie się jakichkolwiek innych praw ani obowiązków wynikających z niniejszej Umowy o arbitrażu."
+      },
+      "pointTen": {
+        "header": "Rzeki niepodlegające arbitrażowi",
+        "text": "Mimo powyższego, roszczenia dotyczące zniesławienia, naruszenia ustawy o zwalczaniu oszustw komputerowych i nadużyć, a także naruszenia lub nielegalnego przejęcia własności intelektualnej drugiej strony, w tym praw autorskich, patentów, znaków towarowych lub tajemnic handlowych, nie podlegają niniejszej Umowie o arbitrażu."
+      },
+      "p1": "W każdych okolicznościach, gdy niniejsza Umowa o arbitrażu pozwala stronom zwrócić się do sądu, strony niniejszym zgadzają się poddać się osobistej jurysdykcji sądów znajdujących się w hrabstwie Niderlandy, Kalifornia, w tych celach.",
+      "p2": "Strona może podlegać przepisom ustawy Stanów Zjednoczonych dotyczących kontroli eksportu i może podlegać regulacjom eksportowym lub importowym w innych krajach. Zgadzasz się nie eksportować, reeksportować ani przekazywać, bezpośrednio lub pośrednio, żadnych danych technicznych Stanów Zjednoczonych otrzymanych od Organizacji ani żadnych produktów, które wykorzystują takie dane, z naruszeniem ustaw dotyczących eksportu lub regulacji Stanów Zjednoczonych.",
+      "p3": "Organizacja znajduje się pod adresem podanym w punkcie 10.8. Jeśli jesteś mieszkańcem Kalifornii, możesz zgłaszać skargi do Biura Pomocy Konsumentów w Ramach Działu Towarów Konsumenckich Departamentu Spraw Konsumentów Kalifornii, pisemnie pod adresem 400 R Street, Sacramento, CA 95814, lub telefonicznie pod numerem (800) 952-5210."
+    },
+    "blockNine": {
+      "header": "Komunikacja elektroniczna",
+      "text": "Komunikacja między tobą a Organizacją odbywa się za pomocą środków elektronicznych, niezależnie od tego, czy korzystasz z witryny internetowej, czy też przesyłasz do nas wiadomości e-mail, czy też Organizacja publikuje komunikaty na swojej stronie internetowej lub komunikuje się z tobą za pośrednictwem poczty elektronicznej.",
+      "subHeader": "W celach umownych:",
+      "a": "a) Zgadzasz się otrzymywać komunikaty od Organizacji w formie elektronicznej;",
+      "b": "b) Zgadzasz się, że wszystkie warunki i postanowienia, umowy, powiadomienia, ujawnienia oraz inne komunikaty dostarczane ci elektronicznie przez Organizację spełniają wszelkie wymogi prawne, takie jak gdyby zostały dostarczone w formie papierowej."
+    }
+  }
+}
