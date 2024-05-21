@@ -21,9 +21,4 @@ export const styles = StyleSheet.create({
     paddingBottom: 15,
     borderRadius: 40,
   },
-  errorText: {
-    color: 'rgb(255, 68, 68)',
-    position: 'absolute',
-    bottom: -13,
-  },
 });

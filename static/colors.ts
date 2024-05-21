@@ -5,4 +5,5 @@ export const colors = {
   apricot_Blaze: '#D08E4F',
   amberwood_Brown: '#B3784066',
   whispering_Gray: '#D9D9D9',
+  white: '#FFF7F0',
 };

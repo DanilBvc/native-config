@@ -1,5 +1,5 @@
 import React, { type FC, useState } from 'react';
-import { TextInput, View, Text } from 'react-native';
+import { TextInput, View } from 'react-native';
 import { styles } from './textField.style';
 import { type textFieldProps } from './textField.type';
 import { colors } from '../../../static/colors';
@@ -24,7 +24,7 @@ const TextField: FC<textFieldProps> = ({
   return (
     <View style={styles.container}>
       <TextInput
-        style={styles.input}
+        style={{ ...styles.input, borderColor: error ? 'red' : colors.earthy_Brown }}
         placeholderTextColor={colors.rusty_Copper}
         placeholder={placeholder}
         value={value}
@@ -33,7 +33,7 @@ const TextField: FC<textFieldProps> = ({
         }}
       />
 
-      {error ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
+      {/* {error ? <Text style={styles.errorText}>{errorMessage}</Text> : null} */}
     </View>
   );
 };

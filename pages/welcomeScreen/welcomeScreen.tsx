@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { Link, useNavigation } from '@react-navigation/native';
 import { Image, Pressable, Text, View } from 'react-native';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import LocalizationSwitcher from '../../components/generall/localizationSwitcher/localizationSwitcher';
@@ -17,6 +17,7 @@ import Slider from '../../components/buyPackageSlider/buyPackageSlider';
 import { QrCodeSvg } from '../../assets/icons/qr-code';
 import { useTranslation } from 'react-i18next';
 import { styles } from './welcomeScreen.style';
+import { colors } from '../../static/colors';
 
 const WelcomeScreen = () => {
   const { t } = useTranslation();
@@ -59,11 +60,22 @@ const WelcomeScreen = () => {
   };
 
   const goScanQrCode = () => {
-    navigation.navigate('ScanQr' as never);
+    navigation.navigate('ScanQrCode' as never);
   };
 
   return (
-    <EmptyLayout additionalControl={<LocalizationSwitcher />}>
+    <EmptyLayout
+      additionalControl={
+        <View
+          style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
+        >
+          <LocalizationSwitcher />
+          <Link to={{ screen: 'SignIn' }} style={{ color: colors.apricot_Blaze }}>
+            LOG IN
+          </Link>
+        </View>
+      }
+    >
       <View style={styles.container}>
         <Image
           source={{

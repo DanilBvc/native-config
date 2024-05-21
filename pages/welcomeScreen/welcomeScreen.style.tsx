@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
   imageSize: {
     height: 140,
     width: 140,
+    opacity: 0.2,
   },
   container: {
     display: 'flex',

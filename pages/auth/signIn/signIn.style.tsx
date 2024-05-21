@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  imageSize: { width: 226, height: 231 },
+  imageSize: { width: 226, height: 231, opacity: 0.2 },
   emailContainer: { paddingBottom: 31 },
   passwordContainer: { paddingBottom: 134 },
   text: {
@@ -20,5 +20,5 @@ export const styles = StyleSheet.create({
     maxWidth: 279,
     alignSelf: 'center',
     paddingTop: 10,
-  }
-})
+  },
+});

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity } from 'react-native';
 import i18next, { languageResources } from '../../../services/i18nextjs';
 import { getLocalizations } from '../../../utils/utils';
 import { styles } from './localizationSwitcher.style';
@@ -33,7 +33,6 @@ const LocalizationSwitcher = () => {
   };
 
   return (
-    <View>
       <FlatList
         data={Object.keys(languageResources)}
         numColumns={Object.keys(getLocalizations()).length}
@@ -58,7 +57,6 @@ const LocalizationSwitcher = () => {
           </TouchableOpacity>
         )}
       />
-    </View>
   );
 };
 

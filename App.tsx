@@ -14,13 +14,15 @@ import {
   Inter_800ExtraBold,
   Inter_900Black,
 } from '@expo-google-fonts/inter';
-import { Text } from 'react-native';
+import { View } from 'react-native';
 import PrivateRoute from './utils/privateRoute';
 import { routes } from './static/constants';
+import { colors } from './static/colors';
+import QRCodeScanner from './pages/scanQrCode/scanQrCode';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [fontsLoaded] = useFonts({
+  useFonts({
     Inter_100Thin,
     Inter_200ExtraLight,
     Inter_300Light,
@@ -32,11 +34,9 @@ const App = () => {
     Inter_900Black,
   });
 
-  if (!fontsLoaded) {
-    return <Text>Loading...</Text>;
-  } else {
-    return (
-      <NavigationContainer>
+  return (
+    <NavigationContainer>
+      <View style={{ backgroundColor: colors.white, flex: 1 }}>
         <Stack.Navigator>
           {routes.map((route, index) => {
             const { name, component, isPrivate, options } = route;
@@ -51,10 +51,15 @@ const App = () => {
           })}
           <Stack.Screen name="NotFound" component={NotFound} options={{ headerShown: false }} />
           <Stack.Screen name="*" component={NotFound} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="ScanQrCode"
+            component={QRCodeScanner}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
+      </View>
+    </NavigationContainer>
+  );
 };
 
 export default App;
