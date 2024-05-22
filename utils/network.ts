@@ -9,7 +9,7 @@ export const userMeUrl = `${baseUserUrl}/me`;
 
 // auth
 export const baseAuthUrl = `${baseUrl}/auth`;
-export const signInUrl = `${baseAuthUrl}/login`;
+export const signInUrl = `${baseAuthUrl}/auth/login`;
 export const refreshTokenUrl = `${baseAuthUrl}/refresh-token`;
 export const logoutUrl = `${baseAuthUrl}/logout`;
 export const checkTokenUrl = `${baseAuthUrl}/check-token`;

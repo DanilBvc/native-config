@@ -3,10 +3,11 @@ import { Image, View } from 'react-native';
 import { rememberingTimeLogo } from '../../static/urls';
 import { styles } from './emptyLayout.style';
 
-const EmptyLayout: FC<{ children: ReactNode; additionalControl?: ReactNode }> = ({
-  children,
-  additionalControl,
-}) => {
+const EmptyLayout: FC<{
+  children: ReactNode;
+  additionalControl?: ReactNode;
+  footerControl?: ReactNode;
+}> = ({ children, additionalControl, footerControl }) => {
   return (
     <View style={styles.containerStyle}>
       <View style={styles.headerStyle}>
@@ -19,6 +20,7 @@ const EmptyLayout: FC<{ children: ReactNode; additionalControl?: ReactNode }> = 
         {additionalControl && <View>{additionalControl}</View>}
       </View>
       <View>{children}</View>
+      {footerControl && <View style={styles.footer}>{footerControl}</View>}
     </View>
   );
 };
