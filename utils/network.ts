@@ -1,6 +1,6 @@
-import Config from 'react-native-config';
+import { DEVELOP_BASE_URL, PROD_BASE_URL, VERCEL_ENV } from '@env'
 export const baseUrl =
-  Config.VERCEL_ENV === 'development' ? Config.DEVELOP_BASE_URL : Config.PROD_BASE_URL;
+VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
 
 // user
 export const baseUserUrl = `${baseUrl}/users`;
