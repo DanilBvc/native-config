@@ -1,5 +1,6 @@
 import SignIn from '../pages/auth/signIn/signIn';
 import SignUp from '../pages/auth/signUp/signUp';
+import HomeScreen from '../pages/homeScreen/homeScreen';
 import WelcomeScreen from '../pages/welcomeScreen/welcomeScreen';
 
 export const tokens = {
@@ -26,4 +27,10 @@ export const routes = [
     isPrivate: false,
     options: { headerShown: false },
   },
+  {
+    name: 'Home',
+    component: HomeScreen,
+    isPrivate: true,
+    options: { headerShown: false },
+  }
 ];

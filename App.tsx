@@ -19,6 +19,7 @@ import PrivateRoute from './utils/privateRoute';
 import { routes } from './static/constants';
 import { colors } from './static/colors';
 import QRCodeScanner from './pages/scanQrCode/scanQrCode';
+import { AuthProvider } from './hooks/useAuth';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
+      <AuthProvider>
       <View style={{ backgroundColor: colors.white, flex: 1 }}>
         <Stack.Navigator>
           {routes.map((route, index) => {
@@ -58,6 +60,7 @@ const App = () => {
           />
         </Stack.Navigator>
       </View>
+      </AuthProvider>
     </NavigationContainer>
   );
 };

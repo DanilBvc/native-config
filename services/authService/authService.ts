@@ -1,12 +1,12 @@
 import { tokens } from '../../static/constants';
 import { type userSignInData, type userData } from '../../static/types/userTypes/types';
 import { checkTokenUrl, logoutUrl, refreshTokenUrl, signInUrl } from '../../utils/network';
-import { authorizedRequest } from '../../utils/queries';
+import { authorizedRequest, unauthorizedRequest } from '../../utils/queries';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AuthUserApi {
   static async login (userSignInData: userSignInData): Promise<userData> {
-    return await authorizedRequest(signInUrl, 'POST', tokens.access_token, userSignInData);
+    return await unauthorizedRequest(signInUrl, 'POST', userSignInData);
   }
 
   static async refresh (): Promise<{

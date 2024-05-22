@@ -31,6 +31,7 @@ const makeRequest = async <T>(
   };
 
   const response = await fetch(url, request);
+
   return (await handleResponse<T>(response)) as T;
 };
 
@@ -56,6 +57,5 @@ export const unauthorizedRequest = async <T>(
   body?: object
 ): Promise<T> => {
   const response = await makeRequest<T>(url, method, {}, body);
-
   return response;
 };

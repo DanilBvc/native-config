@@ -11,13 +11,17 @@ import useUserStore from '../../../store/user/store';
 import { type userSignInData } from '../../../static/types/userTypes/types';
 import { styles } from './signIn.style';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../hooks/useAuth';
+import { useNavigation } from '@react-navigation/native';
 
 const SignIn = () => {
   const { t } = useTranslation();
   const userStore = useUserStore((state) => state);
+  const { setIsAuthenticated } = useAuth();
+  const navigation = useNavigation()
   const [signInData, setSignInData] = useState<userSignInData>({
-    email: '',
-    password: '',
+    email: 'denyskotyara@gmail.com',
+    password: 'Den199777@',
   });
   const onChange = (name: string, value: string) => {
     setSignInData({ ...signInData, [name]: value });
@@ -25,6 +29,8 @@ const SignIn = () => {
 
   const signIn = async () => {
     const response = await AuthUserApi.login(signInData)
+    setIsAuthenticated(true);
+    navigation.navigate('Home' as never);
     userStore.updateUserData(response)
   }
 

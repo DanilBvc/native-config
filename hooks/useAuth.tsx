@@ -1,14 +1,17 @@
 import React, { type FC, type ReactNode, createContext, useContext, useState } from 'react';
 
-const AuthContext = createContext({
-  isAuthenticated: false,
-});
+interface AuthContextType {
+  isAuthenticated: boolean;
+  setIsAuthenticated: (value: boolean) => void;
+}
+
+const AuthContext = createContext<AuthContextType>({ isAuthenticated: false, setIsAuthenticated: () => {} });
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [isAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
