@@ -1,6 +1,5 @@
-import { DEVELOP_BASE_URL, PROD_BASE_URL, VERCEL_ENV } from '@env'
-export const baseUrl =
-VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
+import { DEVELOP_BASE_URL, PROD_BASE_URL, VERCEL_ENV } from '@env';
+export const baseUrl = VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
 
 // user
 export const baseUserUrl = `${baseUrl}/users`;
