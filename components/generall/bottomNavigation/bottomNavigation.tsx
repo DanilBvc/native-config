@@ -8,11 +8,18 @@ import {
   UserSvg,
 } from '../../../assets/icons/bottomNavigationIcon/icons';
 import { styles } from './bottomNavigation.style';
+import { useRoute } from '@react-navigation/native';
 
 const BottomNavigation = () => {
+  const route = useRoute();
+
+  const getIconColor = (routeName: string) => {
+    return route.name === routeName ? '#56371A' : '#B37840';
+  };
+
   return (
     <View style={styles.container}>
-      <HomeSvg />
+      <HomeSvg stroke={getIconColor('Home')} />
       <UserSvg />
       <View style={styles.qrCode}>
         <QrCodeSvg />

@@ -4,5 +4,5 @@ export interface textFieldProps {
   onChange: (name: string, value: string) => void;
   placeholder: string;
   validation: RegExp;
-  errorMessage: string;
+  error: boolean;
 }
