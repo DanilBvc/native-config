@@ -42,28 +42,28 @@ const App = () => {
   return (
     <NavigationContainer>
       <AuthProvider>
-      <View style={{ backgroundColor: colors.white, flex: 1 }}>
-        <Stack.Navigator>
-          {routes.map((route, index) => {
-            const { name, component, isPrivate, options } = route;
-            return (
-              <Stack.Screen
-                key={index}
-                name={name}
-                component={isPrivate ? () => <PrivateRoute component={component} /> : component}
-                options={options}
-              />
-            );
-          })}
-          <Stack.Screen name="NotFound" component={NotFound} options={{ headerShown: false }} />
-          <Stack.Screen name="*" component={NotFound} options={{ headerShown: false }} />
-          <Stack.Screen
-            name="ScanQrCode"
-            component={QRCodeScanner}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </View>
+        <View style={{ backgroundColor: colors.white, flex: 1 }}>
+          <Stack.Navigator>
+            {routes.map((route, index) => {
+              const { name, component, isPrivate, options } = route;
+              return (
+                <Stack.Screen
+                  key={index}
+                  name={name}
+                  component={isPrivate ? () => <PrivateRoute component={component} /> : component}
+                  options={options}
+                />
+              );
+            })}
+            <Stack.Screen name="NotFound" component={NotFound} options={{ headerShown: false }} />
+            <Stack.Screen name="*" component={NotFound} options={{ headerShown: false }} />
+            <Stack.Screen
+              name="ScanQrCode"
+              component={QRCodeScanner}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </View>
       </AuthProvider>
     </NavigationContainer>
   );
