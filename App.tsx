@@ -18,7 +18,7 @@ import { View } from 'react-native';
 import PrivateRoute from './utils/privateRoute';
 import { routes } from './static/constants';
 import { colors } from './static/colors';
-import QRCodeScanner from './pages/scanQrCode/scanQrCode';
+import ScanQrCode from './pages/scanQrCode/scanQrCode';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -57,7 +57,7 @@ const App = () => {
           <Stack.Screen name="*" component={NotFound} options={{ headerShown: false }} />
           <Stack.Screen
             name="ScanQrCode"
-            component={QRCodeScanner}
+            component={ScanQrCode}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
