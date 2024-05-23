@@ -1,24 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { HomeSvg } from '../../assets/icons/qr-code';
+import React from 'react';
+import { HomeSvg, QrCodeFrame } from '../../assets/icons/qr-code';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import { Link } from '@react-navigation/native';
-import { Camera, useCameraPermission, useCodeScanner, type CameraDevice } from 'react-native-vision-camera';
+import {
+  Button,
+  Text,
+  View,
+  useWindowDimensions,
+} from 'react-native';
+import { type BarcodeScanningResult, CameraView, useCameraPermissions } from 'expo-camera';
+import { styles } from './scanQrCode.style';
+
 const ScanQrCode: React.FC = () => {
-  const [device, setDevice] = useState(undefined as CameraDevice | undefined);
-  const { hasPermission, requestPermission } = useCameraPermission()
-  const codeScanner = useCodeScanner({
-    codeTypes: ['qr', 'ean-13'],
-    onCodeScanned: (codes) => {
-    }
-  })
-  useEffect(() => {
-    if (!hasPermission) {
-      requestPermission()
-      const devices = Camera.getAvailableCameraDevices();
-      setDevice(devices.find((d) => d.position === 'back'));
-    }
-  }, []);
-  if (!device) return null
+  const [permission, requestPermission] = useCameraPermissions();
+  const { width } = useWindowDimensions();
+  const height = Math.round((width * 4) / 3);
+
+  const handleScanQrCode = (data: BarcodeScanningResult) => {
+    return null
+  }
+  if (!permission) {
+    return <View />;
+  }
+
+  if (!permission.granted) {
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
+
   return (
     <EmptyLayout
       additionalControl={
@@ -27,12 +40,27 @@ const ScanQrCode: React.FC = () => {
         </Link>
       }
     >
-      {hasPermission && device && <Camera
-      device={device}
-      isActive={true}
-      codeScanner={codeScanner}
-    />}
+      <View style={styles.container}>
+        <CameraView
+          style={{ height, width: '100%' }}
 
+          barcodeScannerSettings={{
+            barcodeTypes: ['qr'],
+          }}
+          onBarcodeScanned={handleScanQrCode}
+        >
+          <View style={styles.frameContainer}>
+            <QrCodeFrame />
+          </View>
+        </CameraView>
+
+         <View style={styles.textContainer}>
+         <Text style={styles.title}>Scan QR code</Text>
+          <Text style={styles.subTitle}>
+            Lorem ipsum dolor sit amet consectetur. Nec tristique feugiat leo lorem ipsum nibh.
+          </Text>
+         </View>
+      </View>
     </EmptyLayout>
   );
 };

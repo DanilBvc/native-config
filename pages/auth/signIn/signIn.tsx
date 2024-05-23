@@ -11,28 +11,40 @@ import useUserStore from '../../../store/user/store';
 import { type userSignInData } from '../../../static/types/userTypes/types';
 import { styles } from './signIn.style';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../hooks/useAuth';
+import { useNavigation } from '@react-navigation/native';
 
 const SignIn = () => {
   const { t } = useTranslation();
   const userStore = useUserStore((state) => state);
+  const { setIsAuthenticated } = useAuth();
+  const navigation = useNavigation();
   const [signInData, setSignInData] = useState<userSignInData>({
-    email: '',
-    password: '',
+    email: 'denyskotyara@gmail.com',
+    password: 'Den199777@',
   });
+
+  const [error, setError] = useState(false);
+
   const onChange = (name: string, value: string) => {
+    setError(false);
     setSignInData({ ...signInData, [name]: value });
   };
 
   const signIn = async () => {
-    const response = await AuthUserApi.login(signInData)
-    userStore.updateUserData(response)
-  }
+    try {
+      const response = await AuthUserApi.login(signInData);
+      setIsAuthenticated(true);
+      navigation.navigate('Home' as never);
+      userStore.updateUserData(response);
+    } catch (error) {
+      setError(true);
+    }
+  };
 
   return (
     <EmptyLayout additionalControl={<LocalizationSwitcher />}>
-      <View
-        style={styles.imageContainer}
-      >
+      <View style={styles.imageContainer}>
         <Image
           source={{
             uri: familyLogoUrl,
@@ -47,7 +59,7 @@ const SignIn = () => {
           onChange={onChange}
           placeholder={t('auth.email')}
           validation={emailRegex}
-          errorMessage={'Invalid email'}
+          error={error}
         />
       </View>
       <View style={styles.passwordContainer}>
@@ -57,13 +69,11 @@ const SignIn = () => {
           onChange={onChange}
           placeholder={t('auth.password')}
           validation={passwordRegex}
-          errorMessage={'Invalid password'}
+          error={error}
         />
       </View>
       <Button onPress={signIn} text={t('auth.logIn')} />
-      <Text
-        style={styles.text}
-      >
+      <Text style={styles.text}>
         Lorem ipsum dolor sit amet consectetur. Suspendisse massa dictum nisl sapien vulputate.
       </Text>
     </EmptyLayout>

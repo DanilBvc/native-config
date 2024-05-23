@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
     paddingTop: 60,
     paddingLeft: 20,
     paddingRight: 20,
+    height: '100%',
   },
 
   headerStyle: {
@@ -14,4 +15,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   imageSize: { height: 23, width: 125 },
+  footer: {
+    position: 'absolute',
+    bottom: 40,
+    right: 20,
+    left: 20,
+  },
 });
