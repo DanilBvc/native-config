@@ -23,7 +23,7 @@ import { AuthProvider } from './hooks/useAuth';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  useFonts({
+  const [loaded] = useFonts({
     Inter_100Thin,
     Inter_200ExtraLight,
     Inter_300Light,
@@ -34,6 +34,10 @@ const App = () => {
     Inter_800ExtraBold,
     Inter_900Black,
   });
+
+  if (!loaded) {
+    return null;
+  }
 
   return (
     <NavigationContainer>

@@ -1,5 +1,5 @@
-export const baseUrl = 'http://192.168.88.31:4000';
-// Config.VERCEL_ENV === 'development' ? Config.DEVELOP_BASE_URL : Config.PROD_BASE_URL;
+import { DEVELOP_BASE_URL, PROD_BASE_URL, VERCEL_ENV } from '@env';
+export const baseUrl = VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
 
 // user
 export const baseUserUrl = `${baseUrl}/users`;
