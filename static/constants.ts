@@ -1,3 +1,4 @@
+import FAQ from '../pages/FAQ/FAQ';
 import SignIn from '../pages/auth/signIn/signIn';
 import SignUp from '../pages/auth/signUp/signUp';
 import HomeScreen from '../pages/homeScreen/homeScreen';
@@ -30,6 +31,12 @@ export const routes = [
   {
     name: 'Home',
     component: HomeScreen,
+    isPrivate: true,
+    options: { headerShown: false },
+  },
+  {
+    name: 'Faq',
+    component: FAQ,
     isPrivate: true,
     options: { headerShown: false },
   }

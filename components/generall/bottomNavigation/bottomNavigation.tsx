@@ -29,7 +29,9 @@ const BottomNavigation = () => {
       <Link to="/Welcome">
         <CaseSvg stroke={getIconColor('Welcome')} />
       </Link>
-      <QuestionSvg />
+      <Link to="/Faq">
+        <QuestionSvg fill={getIconColor('Faq')} />
+      </Link>
     </View>
   );
 };

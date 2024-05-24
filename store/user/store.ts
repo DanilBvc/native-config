@@ -15,6 +15,10 @@ const useUserStore = create<userStore>((set) => ({
     createdAt: '',
     updatedAt: '',
     langue: '',
+    tokens: {
+      accessToken: '',
+      refreshToken: '',
+    },
   },
   updateUserData: (userData: userData) => {
     set({

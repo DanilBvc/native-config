@@ -3,6 +3,12 @@ export interface userSignInData {
   password: string;
 }
 
+interface tokens {
+  accessToken: string;
+  refreshToken: string;
+
+}
+
 export interface userData {
   id: string;
   username: string;
@@ -12,8 +18,5 @@ export interface userData {
   createdAt: string;
   updatedAt: string;
   langue: string;
-  tokens: {
-    accessToken: string;
-    refreshToken: string;
-  };
+  tokens: tokens;
 }

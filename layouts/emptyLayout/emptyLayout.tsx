@@ -21,7 +21,7 @@ const EmptyLayout: FC<{
         /></Link>
         {additionalControl && <View>{additionalControl}</View>}
       </View>
-      <View>{children}</View>
+      <View >{children}</View>
       {footerControl && <View style={styles.footer}>{footerControl}</View>}
     </View>
   );

@@ -20,8 +20,8 @@ import { styles } from './welcomeScreen.style';
 import { colors } from '../../static/colors';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import { useAuth } from '../../hooks/useAuth';
-import BurgerList from '../../components/burgerList/burgerList';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
+import BurgerList from '../../components/burgerList/burgerList';
 
 const WelcomeScreen = () => {
   const { isAuthenticated } = useAuth();
@@ -71,48 +71,52 @@ const WelcomeScreen = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
 
   return (
-    <EmptyLayout
-      additionalControl={
-        <View
-          style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
-        >
-          <LocalizationSwitcher />
-          {isAuthenticated
-            ? <View style={{ marginLeft: 20 }}>
-              <BurgerMenu
-                isBurgerMenuVisible={isBurgerMenuVisible}
-                setBurgerMenuVisible={setBurgerMenuVisible}
-              />
+    <>
+      <EmptyLayout
+        additionalControl={
+          <View
+            style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
+          >
+            <LocalizationSwitcher />
+            {isAuthenticated
+              ? (
+              <View style={{ marginLeft: 20 }}>
+                <BurgerMenu
+                  isBurgerMenuVisible={isBurgerMenuVisible}
+                  setBurgerMenuVisible={setBurgerMenuVisible}
+                />
+              </View>
+                )
+              : (
+              <Link to={{ screen: 'SignIn' }} style={{ color: colors.apricot_Blaze }}>
+                LOG IN
+              </Link>
+                )}
+          </View>
+        }
+        footerControl={isAuthenticated && <BottomNavigation />}
+      >
+        <View style={styles.container}>
+          <Image
+            source={{
+              uri: familyLogoUrl,
+            }}
+            style={styles.imageSize}
+          />
+        </View>
+        <Slider features={cards} />
+        <Button text={t('prices.buy')} onPress={goBuyPackage} />
+        {!isAuthenticated && (
+          <Pressable onPress={goScanQrCode}>
+            <View style={styles.qrCodeContainer}>
+              <QrCodeSvg />
+              <Text style={styles.qrCodeText}>Scan it QR code</Text>
             </View>
-            : <Link to={{ screen: 'SignIn' }} style={{ color: colors.apricot_Blaze }}>
-            LOG IN
-          </Link>}
-
-        </View>
-      }
-      footerControl={isAuthenticated && <BottomNavigation />}
-    >
-      <View style={styles.container}>
-        <Image
-          source={{
-            uri: familyLogoUrl,
-          }}
-          style={styles.imageSize}
-        />
-      </View>
-      <Slider features={cards} />
-      <Button text={t('prices.buy')} onPress={goBuyPackage} />
-      {!isAuthenticated && <Pressable onPress={goScanQrCode}>
-        <View style={styles.qrCodeContainer}>
-          <QrCodeSvg />
-          <Text style={styles.qrCodeText}>Scan it QR code</Text>
-        </View>
-      </Pressable>}
-      <BurgerList
-        isVisible={isBurgerMenuVisible}
-      />
-
-    </EmptyLayout>
+          </Pressable>
+        )}
+      </EmptyLayout>
+      <BurgerList isVisible={isBurgerMenuVisible} />
+    </>
   );
 };
 

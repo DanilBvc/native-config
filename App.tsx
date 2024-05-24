@@ -19,12 +19,11 @@ import PrivateRoute from './utils/privateRoute';
 import { routes } from './static/constants';
 import { colors } from './static/colors';
 import ScanQrCode from './pages/scanQrCode/scanQrCode';
-import { AuthProvider, useAuth } from './hooks/useAuth';
-import { AuthUserApi } from './services/authService/authService';
+import { AuthProvider } from './hooks/useAuth';
+import { checkAuth } from './utils/chechkAuth';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const { setIsAuthenticated } = useAuth()
   const [loaded] = useFonts({
     Inter_100Thin,
     Inter_200ExtraLight,
@@ -38,9 +37,7 @@ const App = () => {
   });
 
   useEffect(() => {
-    AuthUserApi.checkIsCurrentAccessToken().then(() => {
-      setIsAuthenticated(true)
-    }).catch(() => { setIsAuthenticated(false) });
+    checkAuth();
   }, []);
 
   if (!loaded) {
