@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import TextField from '../../../components/generall/textField/textField';
-import { emailRegex, passwordRegex } from '../../../static/regex';
-import Button from '../../../components/generall/button/button';
-import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
-import LocalizationSwitcher from '../../../components/generall/localizationSwitcher/localizationSwitcher';
-import { Image, Text, View } from 'react-native';
-import { familyLogoUrl } from '../../../static/urls';
-import { AuthUserApi } from '../../../services/authService/authService';
-import useUserStore from '../../../store/user/store';
-import { type userSignInData } from '../../../static/types/userTypes/types';
-import { styles } from './signIn.style';
-import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../../hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Image, Text, View } from 'react-native';
+import Button from '../../../components/generall/button/button';
+import LocalizationSwitcher from '../../../components/generall/localizationSwitcher/localizationSwitcher';
+import TextField from '../../../components/generall/textField/textField';
+import { useAuth } from '../../../hooks/useAuth';
+import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
+import { AuthUserApi } from '../../../services/authService/authService';
+import { emailRegex, passwordRegex } from '../../../static/regex';
+import { type userSignInData } from '../../../static/types/userTypes/types';
+import { familyLogoUrl } from '../../../static/urls';
+import useUserStore from '../../../store/user/store';
+import { styles } from './signIn.style';
 
 const SignIn = () => {
   const { t } = useTranslation();

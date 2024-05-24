@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 50,
+    paddingBottom: 70,
   },
   orderTitle: {
     fontWeight: '500',
@@ -45,5 +46,17 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     color: colors.earthy_Brown,
     marginBottom: 10,
+  },
+  optionList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 20,
+  },
+  option: {
+    marginTop: 15,
+  },
+  footerBtnWrapper: {
+    backgroundColor: colors.white,
+    height: '100%',
   },
 });

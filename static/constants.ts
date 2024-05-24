@@ -1,7 +1,8 @@
 import SignIn from '../pages/auth/signIn/signIn';
 import SignUp from '../pages/auth/signUp/signUp';
-import HomeScreen from '../pages/homeScreen/homeScreen';
 import BuyPackage from '../pages/buyPackage/step1/buyPackage';
+import BuyPackageStep2 from '../pages/buyPackage/step2/buyPackageStep2';
+import HomeScreen from '../pages/homeScreen/homeScreen';
 import WelcomeScreen from '../pages/welcomeScreen/welcomeScreen';
 
 export const tokens = {
@@ -37,6 +38,12 @@ export const routes = [
   {
     name: 'BuyPackage',
     component: BuyPackage,
+    isPrivate: false,
+    options: { headerShown: false },
+  },
+  {
+    name: 'BuyPackage2',
+    component: BuyPackageStep2,
     isPrivate: false,
     options: { headerShown: false },
   },

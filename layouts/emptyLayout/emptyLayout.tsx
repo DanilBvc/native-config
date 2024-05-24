@@ -1,27 +1,37 @@
-import React, { type ReactNode, type FC } from 'react';
+import { Link } from '@react-navigation/native';
+import React, { type FC, type ReactNode } from 'react';
 import { Image, View } from 'react-native';
+import { colors } from '../../static/colors';
 import { rememberingTimeLogo } from '../../static/urls';
 import { styles } from './emptyLayout.style';
-import { Link } from '@react-navigation/native';
 
 const EmptyLayout: FC<{
   children: ReactNode;
   additionalControl?: ReactNode;
   footerControl?: ReactNode;
-}> = ({ children, additionalControl, footerControl }) => {
+  backgroundColor?: string;
+  contentMarginBottom?: number;
+}> = ({
+  children,
+  additionalControl,
+  footerControl,
+  backgroundColor = colors.white,
+  contentMarginBottom = 0,
+}) => {
   return (
-    <View style={styles.containerStyle}>
+    <View style={{ ...styles.containerStyle, backgroundColor }}>
       <View style={styles.headerStyle}>
         <Link to={{ screen: 'Welcome' }}>
-        <Image
-          source={{
-            uri: rememberingTimeLogo,
-          }}
-          style={styles.imageSize}
-        /></Link>
+          <Image
+            source={{
+              uri: rememberingTimeLogo,
+            }}
+            style={styles.imageSize}
+          />
+        </Link>
         {additionalControl && <View>{additionalControl}</View>}
       </View>
-      <View>{children}</View>
+      <View style={{ marginBottom: contentMarginBottom }}>{children}</View>
       {footerControl && <View style={styles.footer}>{footerControl}</View>}
     </View>
   );

@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect, type FC } from 'react';
-import { TextInput, View, Animated } from 'react-native';
+import React, { useEffect, useRef, useState, type FC } from 'react';
+import { Animated, TextInput, View } from 'react-native';
+import { colors } from '../../../static/colors';
 import { styles } from './textField.style';
 import { type textFieldProps } from './textField.type';
-import { colors } from '../../../static/colors';
 
 const TextField: FC<textFieldProps> = ({
   placeholder,
@@ -10,7 +10,7 @@ const TextField: FC<textFieldProps> = ({
   name,
   onChange,
   validation,
-  error,
+  error = false,
   additionalStyles,
   errorMessage,
   placeholderColor = colors.rusty_Copper,
@@ -62,8 +62,9 @@ const TextField: FC<textFieldProps> = ({
             ...styles.input,
             borderColor: error || errorValidation ? 'red' : colors.earthy_Brown,
             color: error || errorValidation ? 'red' : '#000',
+            ...additionalStyles,
           }}
-          placeholderTextColor={colors.rusty_Copper}
+          placeholderTextColor={placeholderColor}
           placeholder={placeholder}
           value={value}
           onChangeText={(text) => {
@@ -71,16 +72,6 @@ const TextField: FC<textFieldProps> = ({
           }}
         />
       </Animated.View>
-      <TextInput
-        style={{ ...styles.input, borderColor: error ? 'red' : colors.earthy_Brown, ...additionalStyles }}
-        placeholderTextColor={placeholderColor}
-        placeholder={placeholder}
-        value={value}
-        onChangeText={(text) => {
-          handleInput(name, text);
-        }}
-      />
-
       {/* {error ? <Text style={styles.errorText}>{errorMessage}</Text> : null} */}
     </View>
   );
