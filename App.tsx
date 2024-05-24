@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import NotFound from './pages/notFound/notFound';
 import {
@@ -19,10 +19,12 @@ import PrivateRoute from './utils/privateRoute';
 import { routes } from './static/constants';
 import { colors } from './static/colors';
 import ScanQrCode from './pages/scanQrCode/scanQrCode';
-import { AuthProvider } from './hooks/useAuth';
+import { AuthProvider, useAuth } from './hooks/useAuth';
+import { AuthUserApi } from './services/authService/authService';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const { setIsAuthenticated } = useAuth()
   const [loaded] = useFonts({
     Inter_100Thin,
     Inter_200ExtraLight,
@@ -35,6 +37,12 @@ const App = () => {
     Inter_900Black,
   });
 
+  useEffect(() => {
+    AuthUserApi.checkIsCurrentAccessToken().then(() => {
+      setIsAuthenticated(true)
+    }).catch(() => { setIsAuthenticated(false) });
+  }, []);
+
   if (!loaded) {
     return null;
   }
@@ -42,28 +50,28 @@ const App = () => {
   return (
     <NavigationContainer>
       <AuthProvider>
-      <View style={{ backgroundColor: colors.white, flex: 1 }}>
-        <Stack.Navigator>
-          {routes.map((route, index) => {
-            const { name, component, isPrivate, options } = route;
-            return (
-              <Stack.Screen
-                key={index}
-                name={name}
-                component={isPrivate ? () => <PrivateRoute component={component} /> : component}
-                options={options}
-              />
-            );
-          })}
-          <Stack.Screen name="NotFound" component={NotFound} options={{ headerShown: false }} />
-          <Stack.Screen name="*" component={NotFound} options={{ headerShown: false }} />
-          <Stack.Screen
-            name="ScanQrCode"
-            component={ScanQrCode}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </View>
+        <View style={{ backgroundColor: colors.white, flex: 1 }}>
+          <Stack.Navigator>
+            {routes.map((route, index) => {
+              const { name, component, isPrivate, options } = route;
+              return (
+                <Stack.Screen
+                  key={index}
+                  name={name}
+                  component={isPrivate ? () => <PrivateRoute component={component} /> : component}
+                  options={options}
+                />
+              );
+            })}
+            <Stack.Screen name="NotFound" component={NotFound} options={{ headerShown: false }} />
+            <Stack.Screen name="*" component={NotFound} options={{ headerShown: false }} />
+            <Stack.Screen
+              name="ScanQrCode"
+              component={ScanQrCode}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </View>
       </AuthProvider>
     </NavigationContainer>
   );

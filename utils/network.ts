@@ -1,5 +1,5 @@
-import { DEVELOP_BASE_URL, PROD_BASE_URL, VERCEL_ENV } from '@env';
-export const baseUrl = VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
+// export const baseUrl = VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
+export const baseUrl = 'http://192.168.88.39:4000';
 
 // user
 export const baseUserUrl = `${baseUrl}/users`;
@@ -11,7 +11,7 @@ export const baseAuthUrl = `${baseUrl}/auth`;
 export const signInUrl = `${baseAuthUrl}/login`;
 export const refreshTokenUrl = `${baseAuthUrl}/refresh-token`;
 export const logoutUrl = `${baseAuthUrl}/logout`;
-export const checkTokenUrl = `${baseAuthUrl}/check-token`;
+export const checkTokenUrl = `${baseUrl}/users/me`;
 // tree
 export const baseTreeUrl = `${baseUrl}/tree`;
 export const allTreeUrl = `${baseTreeUrl}/all`;

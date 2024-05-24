@@ -12,4 +12,8 @@ export interface userData {
   createdAt: string;
   updatedAt: string;
   langue: string;
+  tokens: {
+    accessToken: string;
+    refreshToken: string;
+  };
 }

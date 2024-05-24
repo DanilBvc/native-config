@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { View, FlatList, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, FlatList, Text, TouchableOpacity, Animated } from 'react-native';
 import i18next, { languageResources } from '../../../services/i18nextjs';
 import { getLocalizations } from '../../../utils/utils';
 import { colors } from '../../../static/colors';
 import { styles } from './localizationSwitcher.style';
 
-interface LocalizationSwitcherProps {
-  dropDown?: boolean;
-}
-
-const LocalizationSwitcher: React.FC<LocalizationSwitcherProps> = ({ dropDown }) => {
+const LocalizationSwitcher: React.FC = () => {
   const [currentLng, setCurrentLng] = useState<string>(i18next.language);
-  const [showAll, setShowAll] = useState<boolean>(!dropDown);
+  const [showAll, setShowAll] = useState<boolean>(false);
+  const animation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const handleLanguageChange = (lng: string) => {
@@ -27,9 +24,10 @@ const LocalizationSwitcher: React.FC<LocalizationSwitcherProps> = ({ dropDown })
 
   const changeLng = (lng: string) => {
     i18next.changeLanguage(lng);
-    if (dropDown) {
+    toggleAnimation(false);
+    setTimeout(() => {
       setShowAll(false);
-    }
+    }, 300);
   };
 
   const getLocalizationItem = (item: string): string => {
@@ -63,25 +61,45 @@ const LocalizationSwitcher: React.FC<LocalizationSwitcherProps> = ({ dropDown })
   const languageKeys = Object.keys(languageResources);
   const displayLanguages = showAll ? languageKeys : [currentLng];
 
+  const toggleAnimation = (show: boolean) => {
+    Animated.timing(animation, {
+      toValue: show ? 1 : 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  useEffect(() => {
+    toggleAnimation(showAll);
+  }, [showAll]);
+
+  const slideInterpolation = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 5],
+  });
+
   return (
     <View>
-      {dropDown && !showAll && (
+      {!showAll && (
         <TouchableOpacity
           style={styles.languageButton}
           onPress={() => {
             setShowAll(true);
+            toggleAnimation(true);
           }}
         >
           <Text style={styles.lngName}>{getLocalizationItem(currentLng)}</Text>
         </TouchableOpacity>
       )}
       {showAll && (
-        <FlatList
-          data={displayLanguages}
-          numColumns={Object.keys(getLocalizations()).length}
-          keyExtractor={(item) => item}
-          renderItem={({ item }) => renderLanguageButton(item)}
-        />
+        <Animated.View style={{ transform: [{ translateX: slideInterpolation }] }}>
+          <FlatList
+            data={displayLanguages}
+            numColumns={Object.keys(getLocalizations()).length}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => renderLanguageButton(item)}
+          />
+        </Animated.View>
       )}
     </View>
   );

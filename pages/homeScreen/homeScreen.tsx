@@ -13,8 +13,6 @@ import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 const HomeScreen = () => {
   const width = Dimensions.get('window').width;
 
-  const [dropDown] = useState<boolean>(true);
-
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
   return (
     <>
@@ -23,9 +21,12 @@ const HomeScreen = () => {
           <View
             style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
           >
-            <LocalizationSwitcher dropDown={dropDown} />
+            <LocalizationSwitcher />
             <View style={styles.dropDown}>
-              <BurgerMenu isBurgerMenuVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+              <BurgerMenu
+                isBurgerMenuVisible={isBurgerMenuVisible}
+                setBurgerMenuVisible={setBurgerMenuVisible}
+              />
             </View>
           </View>
         }
@@ -71,9 +72,6 @@ const HomeScreen = () => {
       </View>
       <BurgerList
         isVisible={isBurgerMenuVisible}
-        onClose={() => {
-          setBurgerMenuVisible(false);
-        }}
       />
     </>
   );

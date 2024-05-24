@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigation } from '@react-navigation/native';
 import { Image, Pressable, Text, View } from 'react-native';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
@@ -18,8 +18,13 @@ import { QrCodeSvg } from '../../assets/icons/qr-code';
 import { useTranslation } from 'react-i18next';
 import { styles } from './welcomeScreen.style';
 import { colors } from '../../static/colors';
+import BurgerMenu from '../../components/burgerMenu/burgerMenu';
+import { useAuth } from '../../hooks/useAuth';
+import BurgerList from '../../components/burgerList/burgerList';
+import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 
 const WelcomeScreen = () => {
+  const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
   const cards: packageCard[] = [
     {
@@ -63,6 +68,8 @@ const WelcomeScreen = () => {
     navigation.navigate('ScanQrCode' as never);
   };
 
+  const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
+
   return (
     <EmptyLayout
       additionalControl={
@@ -70,11 +77,20 @@ const WelcomeScreen = () => {
           style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
         >
           <LocalizationSwitcher />
-          <Link to={{ screen: 'SignIn' }} style={{ color: colors.apricot_Blaze }}>
+          {isAuthenticated
+            ? <View style={{ marginLeft: 20 }}>
+              <BurgerMenu
+                isBurgerMenuVisible={isBurgerMenuVisible}
+                setBurgerMenuVisible={setBurgerMenuVisible}
+              />
+            </View>
+            : <Link to={{ screen: 'SignIn' }} style={{ color: colors.apricot_Blaze }}>
             LOG IN
-          </Link>
+          </Link>}
+
         </View>
       }
+      footerControl={isAuthenticated && <BottomNavigation />}
     >
       <View style={styles.container}>
         <Image
@@ -86,12 +102,16 @@ const WelcomeScreen = () => {
       </View>
       <Slider features={cards} />
       <Button text={t('prices.buy')} onPress={goBuyPackage} />
-      <Pressable onPress={goScanQrCode}>
+      {!isAuthenticated && <Pressable onPress={goScanQrCode}>
         <View style={styles.qrCodeContainer}>
           <QrCodeSvg />
           <Text style={styles.qrCodeText}>Scan it QR code</Text>
         </View>
-      </Pressable>
+      </Pressable>}
+      <BurgerList
+        isVisible={isBurgerMenuVisible}
+      />
+
     </EmptyLayout>
   );
 };
