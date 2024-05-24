@@ -1,20 +1,24 @@
-import React, { useState, type FC } from 'react';
+import React, { type FC } from 'react';
 import {
+  Dimensions,
   ScrollView,
   View,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
-  Dimensions,
 } from 'react-native';
 import { type packageCard } from '../../static/types/productTypes/types';
-import BuyPackageCard from '../buyPackageCard/buyPackageCard';
 import AnimatedLine from '../animateLine/animateLine';
+import BuyPackageCard from '../buyPackageCard/buyPackageCard';
 import { styles } from './buyPackageSlider.style';
 const width = Dimensions.get('window').width;
-const Slider: FC<{ features: packageCard[] }> = ({ features }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+
+const Slider: FC<{
+  features: packageCard[];
+  currentSlide: number;
+  setCurrentSlide: (index: number) => void;
+}> = ({ features, currentSlide, setCurrentSlide }) => {
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const slideWidth = width * 0.85;
+    const slideWidth = width * 0.89;
     const scrollPosition = event.nativeEvent.contentOffset.x;
     const index = Math.floor(scrollPosition / slideWidth);
     setCurrentSlide(index);

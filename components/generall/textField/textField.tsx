@@ -11,6 +11,9 @@ const TextField: FC<textFieldProps> = ({
   onChange,
   validation,
   error,
+  additionalStyles,
+  errorMessage,
+  placeholderColor = colors.rusty_Copper,
 }) => {
   const [errorValidation, setErrorValidation] = useState(false);
   const shakeAnimation = useRef(new Animated.Value(0)).current;
@@ -68,6 +71,17 @@ const TextField: FC<textFieldProps> = ({
           }}
         />
       </Animated.View>
+      <TextInput
+        style={{ ...styles.input, borderColor: error ? 'red' : colors.earthy_Brown, ...additionalStyles }}
+        placeholderTextColor={placeholderColor}
+        placeholder={placeholder}
+        value={value}
+        onChangeText={(text) => {
+          handleInput(name, text);
+        }}
+      />
+
+      {/* {error ? <Text style={styles.errorText}>{errorMessage}</Text> : null} */}
     </View>
   );
 };
