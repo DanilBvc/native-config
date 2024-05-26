@@ -13,6 +13,7 @@ import { styles } from './signIn.style';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
+import { storeData } from '../../../utils/localStorage';
 
 const SignIn = () => {
   const { t } = useTranslation();
@@ -34,6 +35,7 @@ const SignIn = () => {
   const signIn = async () => {
     try {
       const response = await AuthUserApi.login(signInData);
+      await storeData('tokens', { accessToken: response.tokens.accessToken, refreshToken: response.tokens.refreshToken });
       setIsAuthenticated(true);
       navigation.navigate('Home' as never);
       userStore.updateUserData(response);

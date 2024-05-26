@@ -1,5 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { tokens } from '../static/constants';
+import { getData } from './localStorage';
 
 interface ErrorResponse {
   status: number;
@@ -41,10 +41,12 @@ export const authorizedRequest = async <T>(
   tokenType = tokens.access_token,
   body?: object
 ): Promise<T> => {
-  const token = await AsyncStorage.getItem(tokenType);
+  const token = await getData(tokenType);
+
   if (!token) {
     throw new Error('Token is expired');
   }
+
   const headers = { Authorization: `Bearer ${token}` };
   const response = await makeRequest<T>(url, method, headers, body);
 
