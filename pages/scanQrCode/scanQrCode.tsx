@@ -1,7 +1,7 @@
 import React from 'react';
 import { HomeSvg, QrCodeFrame } from '../../assets/icons/qr-code';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
-import { Link } from '@react-navigation/native';
+import { Link, useNavigation } from '@react-navigation/native';
 import {
   Button,
   Text,
@@ -12,12 +12,19 @@ import { type BarcodeScanningResult, CameraView, useCameraPermissions } from 'ex
 import { styles } from './scanQrCode.style';
 
 const ScanQrCode: React.FC = () => {
+  const navigation = useNavigation()
   const [permission, requestPermission] = useCameraPermissions();
   const { width } = useWindowDimensions();
   const height = Math.round((width * 4) / 3);
 
   const handleScanQrCode = (data: BarcodeScanningResult) => {
-    return null
+    if (!data.data || !data) {
+      return;
+    }
+    const id = data.data?.match(/[^/]+$/)?.[0];
+    if (!id) return;
+    const route: { name: string, params: { id: string } } = { name: 'Tree', params: { id } };
+    navigation.navigate(route as never);
   }
   if (!permission) {
     return <View />;

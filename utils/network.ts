@@ -15,4 +15,11 @@ export const logoutUrl = `${baseAuthUrl}/logout`;
 export const checkTokenUrl = `${baseUrl}/users/me`;
 // tree
 export const baseTreeUrl = `${baseUrl}/tree`;
+export const treeTypesUrl = `${baseTreeUrl}/types`;
+export const userTreeUrl = `${baseTreeUrl}/me`;
+export const oneTreeUrl = `${baseTreeUrl}/one`;
+export const slotUrl = (id: string) => `${baseTreeUrl}/slot/${id}`;
+export const oneTree = (treeId: string) => `${baseTreeUrl}/one/${treeId}`;
+export const allUserTreeUrl = (userId: string) => `${baseTreeUrl}/all/${userId}`;
+
 export const allTreeUrl = `${baseTreeUrl}/all`;

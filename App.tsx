@@ -21,6 +21,7 @@ import { colors } from './static/colors';
 import ScanQrCode from './pages/scanQrCode/scanQrCode';
 import { AuthProvider } from './hooks/useAuth';
 import { checkAuth } from './utils/chechkAuth';
+import Tree from './pages/tree/tree';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -67,6 +68,7 @@ const App = () => {
               component={ScanQrCode}
               options={{ headerShown: false }}
             />
+            <Stack.Screen name='Tree' component={Tree} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </View>
       </AuthProvider>
