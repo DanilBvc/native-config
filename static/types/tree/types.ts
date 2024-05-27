@@ -71,6 +71,8 @@ interface UserType {
 }
 
 export interface SlotType {
+  comment_text: null | string;
+  comment_title: null | string;
   created_at: string;
   id: string;
   index: number;
