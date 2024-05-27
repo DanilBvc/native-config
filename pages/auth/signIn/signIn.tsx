@@ -14,11 +14,7 @@ import { familyLogoUrl } from '../../../static/urls';
 import useUserStore from '../../../store/user/store';
 import { styles } from './signIn.style';
 
-import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../../hooks/useAuth';
-import { useNavigation } from '@react-navigation/native';
 import { storeData } from '../../../utils/localStorage';
-
 
 const SignIn = () => {
   const { t } = useTranslation();

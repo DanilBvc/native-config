@@ -5,7 +5,7 @@ export interface textFieldProps {
   placeholder: string;
   validation: RegExp;
   error?: boolean;
-  errorMessage: string;
+  errorMessage?: string;
   additionalStyles?: Record<string, number>;
   placeholderColor?: string;
 }

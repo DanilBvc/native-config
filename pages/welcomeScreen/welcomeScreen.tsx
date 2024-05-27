@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Image, Pressable, Text, View } from 'react-native';
 import {
@@ -25,7 +24,6 @@ import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import { useAuth } from '../../hooks/useAuth';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 import BurgerList from '../../components/burgerList/burgerList';
-
 
 const WelcomeScreen = () => {
   const { isAuthenticated } = useAuth();
@@ -112,7 +110,7 @@ const WelcomeScreen = () => {
             style={styles.imageSize}
           />
         </View>
-        <Slider features={cards} />
+        <Slider features={cards} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide}/>
         <Button text={t('prices.buy')} onPress={goBuyPackage} />
         {!isAuthenticated && (
           <Pressable onPress={goScanQrCode}>

@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
   },
   line: {
     height: 1,
-    backgroundColor: colors.earthy_Brown,
   },
   circle: {
     width: 6,
