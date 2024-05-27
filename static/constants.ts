@@ -3,6 +3,7 @@ import SignIn from '../pages/auth/signIn/signIn';
 import SignUp from '../pages/auth/signUp/signUp';
 import BuyPackage from '../pages/buyPackage/step1/buyPackage';
 import BuyPackageStep2 from '../pages/buyPackage/step2/buyPackageStep2';
+import ContactUs from '../pages/contactUs/contactUs';
 import HomeScreen from '../pages/homeScreen/homeScreen';
 import WelcomeScreen from '../pages/welcomeScreen/welcomeScreen';
 
@@ -53,6 +54,11 @@ export const routes = [
     component: FAQ,
     isPrivate: true,
     options: { headerShown: false },
-  }
-
+  },
+  {
+    name: 'ContactUs',
+    component: ContactUs,
+    isPrivate: true,
+    options: { headerShown: false },
+  },
 ];

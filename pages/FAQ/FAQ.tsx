@@ -27,7 +27,10 @@ const Agreement = [
         subTitle: '2. Rights and Licenses',
         text: 'By submitting content to the site, the user grants the Organization an irrevocable, non-exclusive, royalty-free right to use it, including reproduction, distribution, public display, creation of derivative works, and integration into other works on a global level. The user also waives any claims to moral rights.',
       },
-
+      {
+        subTitle: '3. Rights and Licenses',
+        text: 'By submitting content to the site, the user grants the Organization an irrevocable, non-exclusive, royalty-free right to use it, including reproduction, distribution, public display, creation of derivative works, and integration into other works on a global level. The user also waives any claims to moral rights.',
+      },
     ],
   },
   {
@@ -63,6 +66,7 @@ const FAQ = () => {
           </View>
         }
         footerControl={<BottomNavigation />}
+        contentMarginBottom={170}
       >
         <ScrollView>
           <View>
@@ -89,10 +93,9 @@ const FAQ = () => {
                     <LineWithCircle lineWidth={width - 100} />
                     {expanded === index
                       ? (
-                        <View style={{ transform: [{ rotate: '180deg' }] }}>
-                           <ArrowDownIcon />
-                        </View>
-
+                      <View style={{ transform: [{ rotate: '180deg' }] }}>
+                        <ArrowDownIcon />
+                      </View>
                         )
                       : (
                       <ArrowDownIcon />
@@ -100,7 +103,7 @@ const FAQ = () => {
                   </View>
                 </TouchableOpacity>
                 {expanded === index && (
-                  <View >
+                  <View>
                     {item.subtitle && <Text style={styles.sectionText}>{item.subtitle}</Text>}
                     {item.sections?.map((section, secIndex) => (
                       <View key={secIndex}>
@@ -108,7 +111,6 @@ const FAQ = () => {
                           <Text style={styles.subTitle}>{section.subTitle}</Text>
                         )}
                         {section.text && <Text style={styles.sectionText}>{section.text}</Text>}
-
                       </View>
                     ))}
                   </View>
