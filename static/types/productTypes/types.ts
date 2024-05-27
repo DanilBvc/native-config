@@ -4,4 +4,4 @@ export interface feature {
   icon: React.JSX.Element
 }
 
-export interface packageCard { price: string; features: feature[], }
+export interface packageCard { name: string, price: string; features: feature[], }

@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   slider: {
     flexDirection: 'row',
     width: '100%',
-    gap: 30,
+    gap: 5,
   },
-  lineContainer: { marginTop: 10, marginBottom: 20 }
+  lineContainer: { marginTop: 10, marginBottom: 20 },
 });

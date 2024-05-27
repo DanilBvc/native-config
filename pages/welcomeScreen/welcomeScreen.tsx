@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Image, Pressable, Text, View } from 'react-native';
-import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
-import LocalizationSwitcher from '../../components/generall/localizationSwitcher/localizationSwitcher';
-import { familyLogoUrl } from '../../static/urls';
-import Button from '../../components/generall/button/button';
 import {
   AiSvg,
   DeliverySvg,
@@ -12,22 +10,29 @@ import {
   MobilePhoneSvg,
   TechnicalSupportSvg,
 } from '../../assets/icons/packageIcons/icons';
-import { type packageCard } from '../../static/types/productTypes/types';
-import Slider from '../../components/buyPackageSlider/buyPackageSlider';
 import { QrCodeSvg } from '../../assets/icons/qr-code';
-import { useTranslation } from 'react-i18next';
-import { styles } from './welcomeScreen.style';
+import Slider from '../../components/buyPackageSlider/buyPackageSlider';
+import Button from '../../components/generall/button/button';
+import LocalizationSwitcher from '../../components/generall/localizationSwitcher/localizationSwitcher';
+import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import { colors } from '../../static/colors';
+
+import { type packageCard } from '../../static/types/productTypes/types';
+import { familyLogoUrl } from '../../static/urls';
+import { styles } from './welcomeScreen.style';
+
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import { useAuth } from '../../hooks/useAuth';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 import BurgerList from '../../components/burgerList/burgerList';
+
 
 const WelcomeScreen = () => {
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
   const cards: packageCard[] = [
     {
+      name: 'STANDARD',
       price: '300 $',
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
@@ -38,6 +43,7 @@ const WelcomeScreen = () => {
       ],
     },
     {
+      name: 'MEDIUM',
       price: '300 $',
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
@@ -48,6 +54,7 @@ const WelcomeScreen = () => {
       ],
     },
     {
+      name: 'MAX',
       price: '300 $',
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
@@ -59,9 +66,10 @@ const WelcomeScreen = () => {
     },
   ];
   const navigation = useNavigation();
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const goBuyPackage = () => {
-    navigation.navigate('Welcome' as never);
+    navigation.navigate('BuyPackage' as never, { card: cards[currentSlide].name });
   };
 
   const goScanQrCode = () => {
@@ -71,7 +79,7 @@ const WelcomeScreen = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
 
   return (
-    <>
+ <>
       <EmptyLayout
         additionalControl={
           <View
