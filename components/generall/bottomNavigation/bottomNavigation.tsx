@@ -2,13 +2,13 @@ import React from 'react';
 import { View } from 'react-native';
 import {
   HomeSvg,
-  MobilePhoneSvg,
+  CaseSvg,
   QuestionSvg,
   QrCodeSvg,
   UserSvg,
 } from '../../../assets/icons/bottomNavigationIcon/icons';
 import { styles } from './bottomNavigation.style';
-import { useRoute } from '@react-navigation/native';
+import { Link, useRoute } from '@react-navigation/native';
 
 const BottomNavigation = () => {
   const route = useRoute();
@@ -19,13 +19,19 @@ const BottomNavigation = () => {
 
   return (
     <View style={styles.container}>
-      <HomeSvg stroke={getIconColor('Home')} />
+      <Link to="/Home">
+        <HomeSvg stroke={getIconColor('Home')} />
+      </Link>
       <UserSvg />
-      <View style={styles.qrCode}>
+      <Link to="/ScanQrCode" style={styles.qrCode}>
         <QrCodeSvg />
-      </View>
-      <MobilePhoneSvg />
-      <QuestionSvg />
+      </Link>
+      <Link to="/Welcome">
+        <CaseSvg stroke={getIconColor('Welcome')} />
+      </Link>
+      <Link to="/Faq">
+        <QuestionSvg fill={getIconColor('Faq')} />
+      </Link>
     </View>
   );
 };

@@ -31,7 +31,7 @@ const EmptyLayout: FC<{
         </Link>
         {additionalControl && <View>{additionalControl}</View>}
       </View>
-      <View style={{ marginBottom: contentMarginBottom }}>{children}</View>
+ <View style={{ marginBottom: contentMarginBottom }}>{children}</View>
       {footerControl && <View style={styles.footer}>{footerControl}</View>}
     </View>
   );

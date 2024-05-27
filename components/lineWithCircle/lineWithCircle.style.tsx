@@ -6,11 +6,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   line: {
-    height: 2,
+    height: 1,
+    backgroundColor: colors.earthy_Brown,
   },
   circle: {
-    width: 10,
-    height: 10,
-    borderRadius: 10,
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+
   },
 });

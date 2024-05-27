@@ -6,4 +6,6 @@ export const colors = {
   amberwood_Brown: '#B3784066',
   whispering_Gray: '#D9D9D9',
   white: '#FFF7F0',
+  bg_white: '#F2F2F2',
+  black25: '#00000040',
 };

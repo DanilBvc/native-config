@@ -1,3 +1,4 @@
+import FAQ from '../pages/FAQ/FAQ';
 import SignIn from '../pages/auth/signIn/signIn';
 import SignUp from '../pages/auth/signUp/signUp';
 import BuyPackage from '../pages/buyPackage/step1/buyPackage';
@@ -47,4 +48,11 @@ export const routes = [
     isPrivate: false,
     options: { headerShown: false },
   },
+  {
+    name: 'Faq',
+    component: FAQ,
+    isPrivate: true,
+    options: { headerShown: false },
+  }
+
 ];
