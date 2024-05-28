@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Image } from 'react-native';
 import { type RouteProp, useRoute } from '@react-navigation/native';
+import { ImageBackground } from 'react-native';
+
 import { TreeService } from '../../services/treeService/treeService';
 import PreviewTree from '../../components/tree/previewTree/previewTree';
 import { type TreeData } from '../../static/types/tree/types';
@@ -17,8 +18,9 @@ const Tree = () => {
   }, [id]);
   return (
     <>
-      <Image source={require('../../assets/tree-bg.png')} style={styles.image} />
-      {treeData && <PreviewTree treeData={treeData} />}
+      <ImageBackground source={require('../../assets/tree-bg.png')} style={styles.image}>
+        {treeData && <PreviewTree treeData={treeData} />}
+      </ImageBackground>
     </>
   );
 };

@@ -1,7 +1,6 @@
 import { Link } from '@react-navigation/native';
 import React, { type FC, type ReactNode } from 'react';
 import { Image, View } from 'react-native';
-import { colors } from '../../static/colors';
 import { rememberingTimeLogo } from '../../static/urls';
 import { styles } from './emptyLayout.style';
 
@@ -15,7 +14,7 @@ const EmptyLayout: FC<{
   children,
   additionalControl,
   footerControl,
-  backgroundColor = colors.white,
+  backgroundColor = 'transparent',
   contentMarginBottom = 0,
 }) => {
   return (
@@ -31,7 +30,7 @@ const EmptyLayout: FC<{
         </Link>
         {additionalControl && <View>{additionalControl}</View>}
       </View>
- <View style={{ marginBottom: contentMarginBottom }}>{children}</View>
+      <View style={{ marginBottom: contentMarginBottom }}>{children}</View>
       {footerControl && <View style={styles.footer}>{footerControl}</View>}
     </View>
   );
