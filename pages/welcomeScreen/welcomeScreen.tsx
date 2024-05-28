@@ -121,7 +121,7 @@ const WelcomeScreen = () => {
           </Pressable>
         )}
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} />
+      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible}/>
     </>
   );
 };

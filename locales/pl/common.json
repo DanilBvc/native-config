@@ -195,16 +195,16 @@
         "first": {
           "title": "Złożenie zamówienia",
           "subpoints": {
-            "a": "a) Poznaj istotę przez demo!",
-            "b": "b) Wybór odpowiedniego pakietu usług",
-            "c": "c) Rejestracja i płatność"
+            "a": "Poznaj istotę przez demo!",
+            "b": "Wybór odpowiedniego pakietu usług",
+            "c": "Rejestracja i płatność"
           }
         },
         "second": {
           "title": "Zarządzaj swoim profilem",
           "subpoints": {
-            "a": "a) Utworzenie Profilu Pamiątkowego",
-            "b": "b) Przesyłanie i usuwanie materiałów"
+            "a": "Utworzenie Profilu Pamiątkowego",
+            "b": "Przesyłanie i usuwanie materiałów"
           }
         },
         "third": {

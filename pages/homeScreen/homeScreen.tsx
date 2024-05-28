@@ -70,9 +70,7 @@ const HomeScreen = () => {
           width={550}
         />
       </View>
-      <BurgerList
-        isVisible={isBurgerMenuVisible}
-      />
+      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
     </>
   );
 };

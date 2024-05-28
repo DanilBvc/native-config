@@ -63,7 +63,7 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
       >
         {slots.map((slot, i) => renderItem({ item: slot }))}
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} />
+      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible}/>
     </>
   );
 };

@@ -9,10 +9,10 @@ import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   isVisible: boolean;
-  onClose?: () => void;
+  setBurgerMenuVisible: (item: boolean) => void;
 }
 
-const BurgerList: FC<Props> = ({ isVisible, onClose }) => {
+const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
 
@@ -27,7 +27,7 @@ const BurgerList: FC<Props> = ({ isVisible, onClose }) => {
     {
       text: t('header.howItWorks'),
       width: 180,
-      link: 'Test',
+      link: 'HowItWorks',
     },
     {
       text: t('header.prices'),
@@ -68,6 +68,7 @@ const BurgerList: FC<Props> = ({ isVisible, onClose }) => {
               key={index}
               onPress={() => {
                 navigation.navigate(item.link as never);
+                setBurgerMenuVisible(false);
               }}
             >
               <Text style={styles.menuItemText}>{item.text}</Text>

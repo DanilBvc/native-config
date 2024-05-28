@@ -197,16 +197,16 @@
         "first": {
           "title": "Order Placement",
           "subpoints": {
-            "a": "a) Discover the essence through a demo!",
-            "b": "b) Choosing the right service package",
-            "c": "c) Registration and payment"
+            "a": "Discover the essence through a demo!",
+            "b": "Choosing the right service package",
+            "c": "Registration and payment"
           }
         },
         "second": {
           "title": "Manage Your Profile",
           "subpoints": {
-            "a": "a) Setting up a Memorial Profile",
-            "b": "b) Uploading and deleting content"
+            "a": "Setting up a Memorial Profile",
+            "b": "Uploading and deleting content"
           }
         },
         "third": {

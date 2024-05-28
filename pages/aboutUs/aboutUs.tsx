@@ -36,6 +36,7 @@ const AboutUs = () => {
             />
           </View>
           <Text style={styles.title}>{t('landingPage.greetingsSection.helloFriend')}</Text>
+
           <Image
             source={require('../../assets/icons/landing-photo.png')}
             style={{

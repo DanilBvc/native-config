@@ -120,7 +120,7 @@ const FAQ = () => {
           </View>
         </ScrollView>
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} />
+      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
     </>
   );
 };

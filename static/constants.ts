@@ -6,6 +6,7 @@ import BuyPackage from '../pages/buyPackage/step1/buyPackage';
 import BuyPackageStep2 from '../pages/buyPackage/step2/buyPackageStep2';
 import ContactUs from '../pages/contactUs/contactUs';
 import HomeScreen from '../pages/homeScreen/homeScreen';
+import HowItWorks from '../pages/howItWorks/howItWorks';
 import WelcomeScreen from '../pages/welcomeScreen/welcomeScreen';
 
 export const tokens = {
@@ -65,6 +66,12 @@ export const routes = [
   {
     name: 'AboutUs',
     component: AboutUs,
+    isPrivate: true,
+    options: { headerShown: false },
+  },
+  {
+    name: 'HowItWorks',
+    component: HowItWorks,
     isPrivate: true,
     options: { headerShown: false },
   },
