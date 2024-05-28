@@ -1,4 +1,5 @@
 import FAQ from '../pages/FAQ/FAQ';
+import AboutUs from '../pages/aboutUs/aboutUs';
 import SignIn from '../pages/auth/signIn/signIn';
 import SignUp from '../pages/auth/signUp/signUp';
 import BuyPackage from '../pages/buyPackage/step1/buyPackage';
@@ -58,6 +59,12 @@ export const routes = [
   {
     name: 'ContactUs',
     component: ContactUs,
+    isPrivate: true,
+    options: { headerShown: false },
+  },
+  {
+    name: 'AboutUs',
+    component: AboutUs,
     isPrivate: true,
     options: { headerShown: false },
   },

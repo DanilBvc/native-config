@@ -22,7 +22,7 @@ const BurgerList: FC<Props> = ({ isVisible, onClose }) => {
     {
       text: t('header.info'),
       width: 140,
-      link: 'Test',
+      link: 'AboutUs',
     },
     {
       text: t('header.howItWorks'),

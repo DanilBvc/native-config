@@ -14,6 +14,7 @@ import {
   Inter_800ExtraBold,
   Inter_900Black,
 } from '@expo-google-fonts/inter';
+import { GreatVibes_400Regular } from '@expo-google-fonts/great-vibes';
 import { View } from 'react-native';
 import PrivateRoute from './utils/privateRoute';
 import { routes } from './static/constants';
@@ -35,6 +36,7 @@ const App = () => {
     Inter_700Bold,
     Inter_800ExtraBold,
     Inter_900Black,
+    GreatVibes_400Regular,
   });
 
   useEffect(() => {
@@ -68,7 +70,7 @@ const App = () => {
               component={ScanQrCode}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name='Tree' component={Tree} options={{ headerShown: false }}/>
+            <Stack.Screen name="Tree" component={Tree} options={{ headerShown: false }} />
           </Stack.Navigator>
         </View>
       </AuthProvider>
