@@ -22,12 +22,11 @@ const HomeScreen = () => {
             style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
           >
             <LocalizationSwitcher />
-            <View style={styles.dropDown}>
-              <BurgerMenu
-                isBurgerMenuVisible={isBurgerMenuVisible}
-                setBurgerMenuVisible={setBurgerMenuVisible}
-              />
-            </View>
+            <BurgerMenu
+              isBurgerMenuVisible={isBurgerMenuVisible}
+              setBurgerMenuVisible={setBurgerMenuVisible}
+              style={{ marginLeft: 20 }}
+            />
           </View>
         }
         footerControl={<BottomNavigation />}

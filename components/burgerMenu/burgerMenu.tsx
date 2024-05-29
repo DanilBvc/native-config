@@ -1,35 +1,22 @@
 import React, { type FC } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, type TouchableOpacityProps, type ViewStyle } from 'react-native';
 import { CloseIcon, DropDownIcon } from '../../assets/icons/drop-down';
 
 interface Props {
   isBurgerMenuVisible: boolean;
   setBurgerMenuVisible: (value: boolean) => void;
+  style?: ViewStyle;
 }
 
-const BurgerMenu: FC<Props> = ({ isBurgerMenuVisible, setBurgerMenuVisible }) => {
+const BurgerMenu: FC<Props> = ({ isBurgerMenuVisible, setBurgerMenuVisible, style }) => {
+  const handlePress = () => {
+    setBurgerMenuVisible(!isBurgerMenuVisible);
+  };
+
   return (
-    <>
-      {isBurgerMenuVisible
-        ? (
-        <TouchableOpacity
-          onPress={() => {
-            setBurgerMenuVisible(false);
-          }}
-        >
-          <CloseIcon />
-        </TouchableOpacity>
-          )
-        : (
-        <TouchableOpacity
-          onPress={() => {
-            setBurgerMenuVisible(true);
-          }}
-        >
-          <DropDownIcon />
-        </TouchableOpacity>
-          )}
-    </>
+    <TouchableOpacity onPress={handlePress} style={style as TouchableOpacityProps['style']}>
+      {isBurgerMenuVisible ? <CloseIcon /> : <DropDownIcon />}
+    </TouchableOpacity>
   );
 };
 
