@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   imageSize: {
     height: 140,
     width: 140,
-    opacity: 0.2,
+    opacity: 0.1,
   },
   faqText: {
     fontSize: 20,
@@ -36,6 +36,19 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Inter_500Medium',
     marginTop: 16,
+    color: colors.earthy_Brown,
+    marginLeft: 15.4,
+  },
+  text: {
     color: colors.rusty_Copper,
+    marginLeft: 10,
+  },
+  dText: {
+    color: colors.rusty_Copper,
+    marginTop: 10,
+  },
+  tText: {
+    color: colors.rusty_Copper,
+    marginBottom: 10,
   },
 });

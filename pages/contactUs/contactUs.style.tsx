@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   imageSize: {
     height: 140,
     width: 140,
-    opacity: 0.2,
+    opacity: 0.1,
   },
   container: {
     display: 'flex',

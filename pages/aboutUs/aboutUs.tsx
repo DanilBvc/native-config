@@ -18,7 +18,7 @@ const AboutUs = () => {
       additionalControl={
         <View style={styles.header}>
           <LocalizationSwitcher />
-          <TouchableOpacity style={{ marginLeft: 5 }} onPress={navigate.goBack}>
+          <TouchableOpacity style={{ marginLeft: 20 }} onPress={navigate.goBack}>
             <ArrowBack />
           </TouchableOpacity>
         </View>

@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   logo: {
     height: 231,
     width: 226,
-    opacity: 0.2,
+    opacity: 0.1,
 
   },
   title: {

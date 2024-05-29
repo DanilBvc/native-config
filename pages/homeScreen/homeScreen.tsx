@@ -65,7 +65,7 @@ const HomeScreen = () => {
           source={{
             uri: familyLogoUrl,
           }}
-          style={{ zIndex: -1, position: 'absolute', opacity: 0.2 }}
+          style={{ zIndex: -1, position: 'absolute', opacity: 0.1 }}
           height={550}
           width={550}
         />

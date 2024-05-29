@@ -28,10 +28,10 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
   }, [id]);
 
   useEffect(() => {
-    const baseRadius = 220; // Base radius of the circle
+    const baseRadius = 250; // Base radius of the circle
     const radiusVariation = 50; // Variation in radius
     const centerX = 0; // X coordinate of the circle's center
-    const centerY = windowHeight / 3.2; // Y coordinate of the circle's center
+    const centerY = windowHeight / 2.5; // Y coordinate of the circle's center
     const circlesData = generateCircularCoords(
       angles,
       baseRadius,
