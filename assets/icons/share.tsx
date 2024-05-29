@@ -1,6 +1,6 @@
 import Svg, { Path } from 'react-native-svg';
 
-export function ShareSvg({ fill = '#FFF7F0' }: { fill?: string }) {
+export function ShareSvg ({ fill = '#FFF7F0' }: { fill?: string }) {
   return (
     <Svg width="20" height="22" viewBox="0 0 20 22" fill="none">
       <Path
