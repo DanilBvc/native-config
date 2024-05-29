@@ -1,29 +1,19 @@
-import React, { type FC, useState, useEffect } from 'react';
+import React, { type FC, useState } from 'react';
 import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
 import BurgerList from '../../burgerList/burgerList';
 import { View, PanResponder, Dimensions, Text } from 'react-native';
 import BurgerMenu from '../../burgerMenu/burgerMenu';
 import ShareButton from '../../generall/shareButton/shareButton';
 import { type Cords, type SlotType, type TreeData } from '../../../static/types/tree/types';
-import { generateAngles } from '../../../utils/treeUtils';
 import { colors } from '../../../static/colors';
 import PressableSlot from '../pressableSlot/pressableSlot';
 import ActiveSlot from '../activeSlot/activeSlot';
 import useAnimatedSlot from '../../../hooks/useAnimatedSlot';
 import useSlots from '../../../hooks/useSlots';
+import useAngles from '../../../hooks/useAngles';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
-
-const useAngles = (treeId: string) => {
-  const [angles, setAngles] = useState<number[]>([]);
-
-  useEffect(() => {
-    setAngles(generateAngles(20, 20));
-  }, [treeId]);
-
-  return { angles, setAngles };
-};
 
 const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
   const { id } = treeData;
