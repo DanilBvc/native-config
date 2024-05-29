@@ -1,0 +1,44 @@
+import { Dimensions, StyleSheet } from 'react-native';
+import { colors } from '../../static/colors';
+
+const widthCard = Dimensions.get('window').width / 2 - 40;
+
+export const styles = StyleSheet.create({
+  cardContainer: {
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: widthCard,
+    height: 271,
+    margin: 10,
+    marginTop: 30,
+  },
+  cardContent: {
+    alignItems: 'center',
+  },
+  image: {
+    width: widthCard - 16,
+    height: 214,
+    borderRadius: 12,
+    marginTop: 8
+  },
+  name: {
+    marginTop: 2,
+    fontFamily: 'Inter_500Medium',
+    fontSize: 15,
+    color: colors.earthy_Brown,
+  },
+  date: {
+    marginTop: 5,
+    fontSize: 10,
+    color: colors.rusty_Copper,
+  },
+  placeholder: {
+    width: '100%',
+    height: '90%',
+    borderRadius: 12,
+    backgroundColor: colors.whispering_Gray,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

@@ -197,16 +197,16 @@
         "first": {
           "title": "Order Placement",
           "subpoints": {
-            "a": "a) Discover the essence through a demo!",
-            "b": "b) Choosing the right service package",
-            "c": "c) Registration and payment"
+            "a": "Discover the essence through a demo!",
+            "b": "Choosing the right service package",
+            "c": "Registration and payment"
           }
         },
         "second": {
           "title": "Manage Your Profile",
           "subpoints": {
-            "a": "a) Setting up a Memorial Profile",
-            "b": "b) Uploading and deleting content"
+            "a": "Setting up a Memorial Profile",
+            "b": "Uploading and deleting content"
           }
         },
         "third": {
@@ -410,8 +410,8 @@
       },
       "pointSix": {
         "header": "Procedure for Violation of Terms of Use",
-        "text1": "The organization does not cover problems caused by external factors or improper use of the profile by the user. An account associated with a QR code located at a burial site not visited at least once in 12 months may be deleted from the databases and will no longer be serviced. These measures ensure the timeliness and relevance of the information available through our services. Your access to the profile and use of the website confirms your agreement with these Terms.",
-        "text2": "The client has 14 days after receiving a warning via email from the company about the violation of the profile's terms of use to resolve the issue before the company blocks the profile and restricts access to it."
+        "text1": "The organization does not cover problems caused by external factors or improper use of the profile by the user. An account associated with a QR code located at a burial site not visited at least once in 12 months may be deleted from the databases and will no longer be serviced. These measures ensure the timeliness and relevance of the information available through our services. Your access to the profile and use of the website confirms your agreement with these Terms. The client has 14 days after receiving a warning via email from the company about the violation of the profile's terms of use to resolve the issue before the company blocks the profile and restricts access to it.",
+        "text2": ""
       }
     },
     "blockSeven": {

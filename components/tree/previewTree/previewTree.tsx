@@ -42,6 +42,7 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
     animateOut(() => { setActiveSlot(null); });
   };
 
+
   const findNextSlotWithLink = (currentSlot: Partial<SlotType> & Cords, direction: number) => {
     if (!currentSlot) return null;
     const currentIndex = slots.findIndex((slot) => slot.id === currentSlot.id);
@@ -63,6 +64,7 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
     }
   };
 
+
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (evt, gestureState) => {
@@ -79,9 +81,11 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
         additionalControl={
           <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}>
             <ShareButton id={id} />
+
             <View style={{ marginLeft: 20 }}>
               <BurgerMenu isBurgerMenuVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
             </View>
+
           </View>
         }
       >
@@ -110,7 +114,7 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
           press the cross to collapse
         </Text>
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} />
+      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
     </View>
   );
 };

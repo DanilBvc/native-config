@@ -195,16 +195,16 @@
         "first": {
           "title": "Złożenie zamówienia",
           "subpoints": {
-            "a": "a) Poznaj istotę przez demo!",
-            "b": "b) Wybór odpowiedniego pakietu usług",
-            "c": "c) Rejestracja i płatność"
+            "a": "Poznaj istotę przez demo!",
+            "b": "Wybór odpowiedniego pakietu usług",
+            "c": "Rejestracja i płatność"
           }
         },
         "second": {
           "title": "Zarządzaj swoim profilem",
           "subpoints": {
-            "a": "a) Utworzenie Profilu Pamiątkowego",
-            "b": "b) Przesyłanie i usuwanie materiałów"
+            "a": "Utworzenie Profilu Pamiątkowego",
+            "b": "Przesyłanie i usuwanie materiałów"
           }
         },
         "third": {
@@ -408,8 +408,7 @@
       },
       "pointSix": {
         "header": "Procedura w przypadku naruszenia warunków użytkowania",
-        "text1": "Organizacja nie obejmuje problemów spowodowanych czynnikami zewnętrznymi lub niewłaściwym wykorzystaniem profilu przez użytkownika. Konto powiązane z kodem QR, znajdujące się na miejscu pochówku, które nie jest odwiedzane przynajmniej raz na 12 miesięcy, może zostać usunięte z bazy danych i nie będzie już obsługiwane. Te środki zapewniają aktualność i trafność informacji dostępnych za pośrednictwem naszych usług. Twój dostęp do profilu i korzystanie z witryny potwierdza Twoją zgodę na te Warunki.",
-        "text2": "Klient ma 14 dni na rozwiązanie problemu po otrzymaniu ostrzeżenia drogą e-mailową od firmy o naruszeniu warunków użytkowania profilu, zanim firma zablokuje profil i ograniczy do niego dostęp."
+        "text1": "Organizacja nie obejmuje problemów spowodowanych czynnikami zewnętrznymi lub niewłaściwym wykorzystaniem profilu przez użytkownika. Konto powiązane z kodem QR, znajdujące się na miejscu pochówku, które nie jest odwiedzane przynajmniej raz na 12 miesięcy, może zostać usunięte z bazy danych i nie będzie już obsługiwane. Te środki zapewniają aktualność i trafność informacji dostępnych za pośrednictwem naszych usług. Twój dostęp do profilu i korzystanie z witryny potwierdza Twoją zgodę na te Warunki. Klient ma 14 dni na rozwiązanie problemu po otrzymaniu ostrzeżenia drogą e-mailową od firmy o naruszeniu warunków użytkowania profilu, zanim firma zablokuje profil i ograniczy do niego dostęp."
       }
     },
     "blockSeven": {

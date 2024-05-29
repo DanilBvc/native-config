@@ -5,7 +5,7 @@ export const colors = {
   apricot_Blaze: '#D08E4F',
   amberwood_Brown: '#B3784066',
   whispering_Gray: '#D9D9D9',
-  white: '#FFF7F0',
+  white: '#F2F2F2',
   bg_white: '#F2F2F2',
   black25: '#00000040',
   fullWite: '#FFFFFF',

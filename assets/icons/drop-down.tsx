@@ -21,7 +21,7 @@ export function DropDownIcon () {
 
 export function CloseIcon () {
   return (
-    <Svg width="18" height="19" viewBox="0 0 18 19" fill="none">
+    <Svg width="23" height="19" viewBox="0 0 18 19" fill="none">
       <Path
         d="M16.5494 2L2 17M2 2L16.5494 17"
         stroke="#B37840"

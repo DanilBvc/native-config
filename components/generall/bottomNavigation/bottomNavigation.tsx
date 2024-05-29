@@ -22,7 +22,9 @@ const BottomNavigation = () => {
       <Link to="/Home">
         <HomeSvg stroke={getIconColor('Home')} />
       </Link>
-      <UserSvg />
+      <Link to="/CustomerSection">
+        <UserSvg fill={getIconColor('CustomerSection')} />
+      </Link>
       <Link to="/ScanQrCode" style={styles.qrCode}>
         <QrCodeSvg />
       </Link>

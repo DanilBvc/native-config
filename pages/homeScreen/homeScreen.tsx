@@ -22,12 +22,11 @@ const HomeScreen = () => {
             style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
           >
             <LocalizationSwitcher />
-            <View style={styles.dropDown}>
-              <BurgerMenu
-                isBurgerMenuVisible={isBurgerMenuVisible}
-                setBurgerMenuVisible={setBurgerMenuVisible}
-              />
-            </View>
+            <BurgerMenu
+              isBurgerMenuVisible={isBurgerMenuVisible}
+              setBurgerMenuVisible={setBurgerMenuVisible}
+              style={{ marginLeft: 20 }}
+            />
           </View>
         }
         footerControl={<BottomNavigation />}
@@ -65,14 +64,12 @@ const HomeScreen = () => {
           source={{
             uri: familyLogoUrl,
           }}
-          style={{ zIndex: -1, position: 'absolute', opacity: 0.2 }}
+          style={{ zIndex: -1, position: 'absolute', opacity: 0.1 }}
           height={550}
           width={550}
         />
       </View>
-      <BurgerList
-        isVisible={isBurgerMenuVisible}
-      />
+      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
     </>
   );
 };

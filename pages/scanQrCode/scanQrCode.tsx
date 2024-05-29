@@ -25,7 +25,7 @@ const ScanQrCode: React.FC = () => {
   useEffect(() => {
     const route: { name: string; params: { id: string } } = {
       name: 'Tree',
-      params: { id: '2de91b31-34c3-42fe-8045-95cd3e259e1a' },
+      params: { id: '257c7e7c-e7bb-4bc9-8153-c81901322adb' },
     };
     navigation.navigate(route as never);
   }, []);

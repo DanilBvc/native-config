@@ -77,7 +77,7 @@ const WelcomeScreen = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
 
   return (
- <>
+    <>
       <EmptyLayout
         additionalControl={
           <View
@@ -86,12 +86,11 @@ const WelcomeScreen = () => {
             <LocalizationSwitcher />
             {isAuthenticated
               ? (
-              <View style={{ marginLeft: 20 }}>
-                <BurgerMenu
-                  isBurgerMenuVisible={isBurgerMenuVisible}
-                  setBurgerMenuVisible={setBurgerMenuVisible}
-                />
-              </View>
+              <BurgerMenu
+                isBurgerMenuVisible={isBurgerMenuVisible}
+                setBurgerMenuVisible={setBurgerMenuVisible}
+                style={{ marginLeft: 20 }}
+              />
                 )
               : (
               <Link to={{ screen: 'SignIn' }} style={{ color: colors.apricot_Blaze }}>
@@ -110,7 +109,7 @@ const WelcomeScreen = () => {
             style={styles.imageSize}
           />
         </View>
-        <Slider features={cards} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide}/>
+        <Slider features={cards} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
         <Button text={t('prices.buy')} onPress={goBuyPackage} />
         {!isAuthenticated && (
           <Pressable onPress={goScanQrCode}>
@@ -121,7 +120,7 @@ const WelcomeScreen = () => {
           </Pressable>
         )}
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} />
+      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
     </>
   );
 };

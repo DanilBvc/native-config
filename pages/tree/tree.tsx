@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { type RouteProp, useRoute } from '@react-navigation/native';
 import { ImageBackground } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+
 import { TreeService } from '../../services/treeService/treeService';
 import PreviewTree from '../../components/tree/previewTree/previewTree';
 import { type TreeData } from '../../static/types/tree/types';
@@ -8,7 +9,7 @@ import { styles } from './tree.style';
 
 const Tree = () => {
   const [treeData, setTreeData] = useState<null | TreeData>(null);
-  const route = useRoute();
+  const route: RouteProp<{ params: { id: string } }, 'params'> = useRoute();
   const { id } = route.params;
   useEffect(() => {
     TreeService.getUserTree(id).then((data) => {
