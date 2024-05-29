@@ -24,3 +24,22 @@ export const generateCircularCoords = (
 
   return circlesData;
 };
+
+export const generateAngles = (uniqueCount: number, count: number) => {
+  const initialAngles = Array.from(
+    { length: uniqueCount },
+    (_, i) => (i * 2 * Math.PI) / uniqueCount
+  );
+  return Array.from({ length: count }, (_, i) => initialAngles[i % uniqueCount]);
+};
+
+export const generateSlots = (
+  angles: number[],
+  baseRadius: number,
+  radiusVariation: number,
+  centerX: number,
+  centerY: number,
+  slotsData: SlotType[]
+) => {
+  return generateCircularCoords(angles, baseRadius, radiusVariation, centerX, centerY, slotsData);
+};
