@@ -1,5 +1,5 @@
 import { tokens } from '../../static/constants';
-import { type userSignInData, type userData } from '../../static/types/userTypes/types';
+import { type userSignInData, type userData, type LoginResponse } from '../../static/types/userTypes/types';
 import { checkTokenUrl, logoutUrl, refreshTokenUrl, signInUrl } from '../../utils/network';
 import { authorizedRequest, unauthorizedRequest } from '../../utils/queries';
 
@@ -20,7 +20,7 @@ export class AuthUserApi {
     return await authorizedRequest(logoutUrl, 'GET', tokens.access_token);
   }
 
-  static async checkIsCurrentAccessToken (): Promise<{ isValid: boolean }> {
+  static async checkIsCurrentAccessToken (): Promise< LoginResponse > {
     return await authorizedRequest(checkTokenUrl, 'GET', tokens.access_token);
   }
 }

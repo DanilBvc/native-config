@@ -63,13 +63,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
-  buttonStyle: {
-    paddingTop: 2,
-    paddingBottom: 2,
-    height: 36,
-    width: '100%',
-    marginTop: 22,
-  },
+
   imageContainer: {
     position: 'relative',
   },
@@ -103,5 +97,17 @@ export const styles = StyleSheet.create({
     lineHeight: 22,
     color: colors.rusty_Copper,
     marginTop: 10,
+  },
+
+  buttons: {
+    marginTop: 10,
+
+    width: '100%',
+  },
+  buttonStyle: {
+    paddingTop: 2,
+    paddingBottom: 2,
+    height: 36,
+    marginTop: 22,
   },
 });

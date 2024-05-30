@@ -26,12 +26,12 @@ const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
   const handleLogOut = async () => {
     try {
       await AuthUserApi.logout();
-
+    } catch (error) {} finally {
       setIsAuthenticated(false);
       await removeData('accessToken');
       await removeData('refreshToken');
       setBurgerMenuVisible(false);
-    } catch (error) {}
+    }
   };
 
   const listObj = [

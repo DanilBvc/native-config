@@ -9,21 +9,12 @@ import { styles } from './customerSection.style';
 import BurgerList from '../../components/burgerList/burgerList';
 import { familyLogoUrl } from '../../static/urls';
 import CustomerCard from '../../components/customerCard/customerCard';
+import useUserStore from '../../store/user/store';
 
 const CustomerSection = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
+  const treeData = useUserStore((state) => state.user.trees);
 
-  const cardData = [
-    {
-      imageUrl:
-        'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      name: 'Lorem Ipsum',
-      date: '05/05/1994 - 05/05/2024',
-    },
-    null,
-    null,
-    null,
-  ];
   return (
     <>
       <EmptyLayout
@@ -42,7 +33,7 @@ const CustomerSection = () => {
         <SafeAreaView>
           <ScrollView>
             <View style={styles.cardContainer}>
-              {cardData.map((data, index) => (
+              {treeData.map((data, index) => (
                 <CustomerCard key={index} data={data} />
               ))}
             </View>

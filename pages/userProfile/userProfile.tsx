@@ -9,27 +9,17 @@ import { styles } from './userProfile.style';
 import BurgerList from '../../components/burgerList/burgerList';
 import { familyLogoUrl } from '../../static/urls';
 import LineWithCircle from '../../components/lineWithCircle/lineWithCircle';
+import { useTypedNavigation, useTypedRoute } from '../../hooks/useTypedNavigation';
 import Button from '../../components/generall/button/button';
 
-interface userData {
-  name: string;
-  birthDate: string;
-  deathDate: string;
-  imageUrl: string;
-  text: string;
-}
-
 const UserProfile = () => {
+  const route = useTypedRoute();
+  const navigation = useTypedNavigation();
+
+  const { user } = route.params;
+
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
   const width = Dimensions.get('window').width / 2 - 40;
-
-  const [data, setUserData] = useState<userData>({
-    name: 'Some One',
-    birthDate: '05/05/1940',
-    deathDate: '05/05/1940',
-    imageUrl: '',
-    text: 'Lorem ipsum dolor sit amet consectetur. Eget turpis eget habitant ullamcorper tristique nec. Ac diam orci placerat aenean lectus mattis etiam proin. Id fringilla purus diam sed scelerisque turpis pharetra habitasse viverra. Orci adipiscing gravida amet duis quis diam fringilla amet eu .',
-  });
 
   return (
     <>
@@ -49,25 +39,34 @@ const UserProfile = () => {
         <SafeAreaView>
           <ScrollView>
             <View style={styles.cardContainer}>
-              <Image source={{ uri: data.imageUrl }} style={styles.placeholder} />
-              <Text style={styles.username}>{data.name}</Text>
+              <Image source={{ uri: user.avatar ? user.avatar : '' }} style={styles.placeholder} />
+              <Text style={styles.username}>{user.full_name}</Text>
               <View style={styles.dateContainer}>
                 <View style={styles.dateWidth}>
-                  <Text style={styles.date}>05/05/1940</Text>
+                  <Text style={styles.date}>{user.date_of_birth}</Text>
                   <Text style={{ color: colors.rusty_Copper }}>-</Text>
-                  <Text style={styles.date}>05/05/2000</Text>
+                  <Text style={styles.date}>{user.date_of_dead}</Text>
                 </View>
               </View>
               <View style={styles.lines}>
                 <LineWithCircle lineWidth={width} rotate="180deg" />
                 <LineWithCircle lineWidth={width} />
               </View>
-              <Text style={styles.text}>{data.text}</Text>
-              <Button
-                text="Look at the photo"
-                additionalStyles={styles.buttonStyle}
-                onPress={() => {}}
-              />
+              <Text style={styles.text}>{user.description}</Text>
+              <View style={styles.buttons}>
+                <Button
+                  text="Look at the tree"
+                  additionalStyles={styles.buttonStyle}
+                  onPress={() => {}}
+                />
+                <Button
+                  text="Edit profile"
+                  additionalStyles={styles.buttonStyle}
+                  onPress={() => {
+                    navigation.navigate('CreateUser', { user });
+                  }}
+                />
+              </View>
             </View>
           </ScrollView>
         </SafeAreaView>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigation } from '@react-navigation/native';
+import { Link } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { Image, Pressable, Text, View } from 'react-native';
 import {
@@ -24,6 +24,7 @@ import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import { useAuth } from '../../hooks/useAuth';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 import BurgerList from '../../components/burgerList/burgerList';
+import { useTypedNavigation } from '../../hooks/useTypedNavigation';
 
 const WelcomeScreen = () => {
   const { isAuthenticated } = useAuth();
@@ -63,15 +64,15 @@ const WelcomeScreen = () => {
       ],
     },
   ];
-  const navigation = useNavigation();
+  const navigation = useTypedNavigation();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const goBuyPackage = () => {
-    navigation.navigate('BuyPackage' as never, { card: cards[currentSlide].name });
+    navigation.navigate('BuyPackage', { card: cards[currentSlide].name });
   };
 
   const goScanQrCode = () => {
-    navigation.navigate('ScanQrCode' as never);
+    navigation.navigate('ScanQrCode');
   };
 
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);

@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { type userData } from '../../static/types/userTypes/types';
+import { type User } from '../../static/types/userTypes/types';
 
 interface userStore {
-  user: userData;
-  updateUserData: (userData: userData) => void;
+  user: User;
+  updateUserData: (userData: User) => void;
 }
 const useUserStore = create<userStore>((set) => ({
   user: {
@@ -15,12 +15,11 @@ const useUserStore = create<userStore>((set) => ({
     createdAt: '',
     updatedAt: '',
     langue: '',
-    tokens: {
-      accessToken: '',
-      refreshToken: '',
-    },
+    password: '',
+    trees: [],
+
   },
-  updateUserData: (userData: userData) => {
+  updateUserData: (userData: User) => {
     set({
       user: userData,
     });
