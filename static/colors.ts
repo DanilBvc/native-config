@@ -8,4 +8,5 @@ export const colors = {
   white: '#F2F2F2',
   bg_white: '#F2F2F2',
   black25: '#00000040',
+  fullWite: '#FFFFFF',
 };
