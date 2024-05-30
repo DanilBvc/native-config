@@ -57,7 +57,9 @@ const UserProfile = () => {
                 <Button
                   text="Look at the tree"
                   additionalStyles={styles.buttonStyle}
-                  onPress={() => {}}
+                  onPress={() => {
+                    navigation.navigate('Tree', { id: user.id });
+                  }}
                 />
                 <Button
                   text="Edit profile"

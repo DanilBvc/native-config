@@ -26,7 +26,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { CloseIcon } from '../../assets/icons/drop-down';
 import { useTypedNavigation, useTypedRoute } from '../../hooks/useTypedNavigation';
 import { type Tree } from '../../static/types/userTypes/types';
-import { TreeService } from '../../services/contactUsService/contactUsService';
+import { TreeService } from '../../services/treeService/treeService';
 
 const CreateUser = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
