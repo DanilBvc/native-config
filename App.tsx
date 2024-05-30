@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import NotFound from './pages/notFound/notFound';
 import {
@@ -21,7 +21,6 @@ import { routes } from './static/constants';
 import { colors } from './static/colors';
 import ScanQrCode from './pages/scanQrCode/scanQrCode';
 import { AuthProvider } from './hooks/useAuth';
-import { checkAuth } from './utils/chechkAuth';
 import Tree from './pages/tree/tree';
 const Stack = createNativeStackNavigator();
 
@@ -38,10 +37,6 @@ const App = () => {
     Inter_900Black,
     GreatVibes_400Regular,
   });
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
 
   if (!loaded) {
     return null;

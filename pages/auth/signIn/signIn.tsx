@@ -36,7 +36,10 @@ const SignIn = () => {
   const signIn = async () => {
     try {
       const response = await AuthUserApi.login(signInData);
-      await storeData('tokens', { accessToken: response.tokens.accessToken, refreshToken: response.tokens.refreshToken });
+
+      await storeData('accessToken', response.tokens.accessToken);
+      await storeData('refreshToken', response.tokens.refreshToken);
+
       setIsAuthenticated(true);
       navigation.navigate('Home' as never);
       userStore.updateUserData(response);

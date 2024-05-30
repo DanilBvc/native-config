@@ -21,7 +21,7 @@ const CustomerCard: FC<Props> = ({ data }) => {
     <View style={[styles.cardContainer, data && { backgroundColor: colors.rusty_Copper_25_Opacity }]}>
       {data
         ? (
-        <TouchableOpacity style={styles.cardContent}>
+        <TouchableOpacity style={styles.cardContent} onPress={() => { navigation.navigate('UserProfile' as never); }}>
           <Image source={{ uri: data.imageUrl }} style={styles.image} />
           <Text style={styles.name}>{data.name}</Text>
           <Text style={styles.date}>{data.date}</Text>

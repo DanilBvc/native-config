@@ -6,6 +6,9 @@ import { familyLogoUrl } from '../../static/urls';
 import { useTranslation } from 'react-i18next';
 import { styles } from './burgerList.style';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../hooks/useAuth';
+import { removeData } from '../../utils/localStorage';
+import { AuthUserApi } from '../../services/authService/authService';
 
 interface Props {
   isVisible: boolean;
@@ -13,10 +16,23 @@ interface Props {
 }
 
 const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
+  const { setIsAuthenticated } = useAuth();
+
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
 
   const { t } = useTranslation();
+
+  const handleLogOut = async () => {
+    try {
+      await AuthUserApi.logout();
+
+      setIsAuthenticated(false);
+      await removeData('accessToken');
+      await removeData('refreshToken');
+      setBurgerMenuVisible(false);
+    } catch (error) {}
+  };
 
   const listObj = [
     {
@@ -75,8 +91,8 @@ const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
               <LineWithCircle lineWidth={item.width} />
             </TouchableOpacity>
           ))}
-          <TouchableOpacity style={styles.menuLogOut}>
-            <Text style={styles.menuLogOutText}>Log out</Text>
+          <TouchableOpacity style={styles.menuLogOut} onPress={handleLogOut}>
+            <Text style={styles.menuLogOutText}>{t('header.logOut')}</Text>
             <LogOutIcon />
           </TouchableOpacity>
         </View>

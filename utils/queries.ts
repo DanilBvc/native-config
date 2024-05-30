@@ -48,6 +48,7 @@ export const authorizedRequest = async <T>(
   }
 
   const headers = { Authorization: `Bearer ${token}` };
+
   const response = await makeRequest<T>(url, method, headers, body);
 
   return response;

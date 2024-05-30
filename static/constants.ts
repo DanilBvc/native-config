@@ -9,6 +9,7 @@ import CreateUser from '../pages/createUser/createUser';
 import CustomerSection from '../pages/customerSection/customerSection';
 import HomeScreen from '../pages/homeScreen/homeScreen';
 import HowItWorks from '../pages/howItWorks/howItWorks';
+import UserProfile from '../pages/userProfile/userProfile';
 import WelcomeScreen from '../pages/welcomeScreen/welcomeScreen';
 
 export const tokens = {
@@ -86,6 +87,12 @@ export const routes = [
   {
     name: 'CreateUser',
     component: CreateUser,
+    isPrivate: true,
+    options: { headerShown: false },
+  },
+  {
+    name: 'UserProfile',
+    component: UserProfile,
     isPrivate: true,
     options: { headerShown: false },
   },
