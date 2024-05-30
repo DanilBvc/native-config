@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
   },
   photo: {
-    borderRadius: 75,
+    borderRadius: 150,
     position: 'absolute',
     zIndex: 1,
     shadowColor: colors.black25,

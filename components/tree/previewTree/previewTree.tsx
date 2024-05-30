@@ -11,6 +11,7 @@ import ActiveSlot from '../activeSlot/activeSlot';
 import useAnimatedSlot from '../../../hooks/useAnimatedSlot';
 import useSlots from '../../../hooks/useSlots';
 import useAngles from '../../../hooks/useAngles';
+import { CommentSvg } from '../../../assets/icons/comment';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
@@ -42,7 +43,6 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
     animateOut(() => { setActiveSlot(null); });
   };
 
-
   const findNextSlotWithLink = (currentSlot: Partial<SlotType> & Cords, direction: number) => {
     if (!currentSlot) return null;
     const currentIndex = slots.findIndex((slot) => slot.id === currentSlot.id);
@@ -63,7 +63,6 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
       animateOut(() => { selectSlot(nextSlot); });
     }
   };
-
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
@@ -100,6 +99,10 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
             deselectSlot={deselectSlot}
             handleSlotChange={handleSlotChange}
           />
+        )}
+        {activeSlot && (
+          <PressableSlot item={{ x: 300, y: 500, height: 23, width: 23 }} component={CommentSvg()}/>
+
         )}
         <Text
           style={{
