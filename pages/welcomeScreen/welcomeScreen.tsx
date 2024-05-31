@@ -47,9 +47,9 @@ const WelcomeScreen = () => {
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
         { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
-        { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1}/> },
-        { label: t('prices.AI'), enabled: true, icon: <AiSvg opacity={1}/> },
-        { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1}/> },
+        { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1} /> },
+        { label: t('prices.AI'), enabled: true, icon: <AiSvg opacity={1} /> },
+        { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1} /> },
       ],
     },
     {
@@ -58,9 +58,13 @@ const WelcomeScreen = () => {
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
         { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
-        { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1}/> },
-        { label: t('prices.AI') + ' + ' + t('prices.personalization'), enabled: true, icon: <AiSvg opacity={1}/> },
-        { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1}/> },
+        { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1} /> },
+        {
+          label: t('prices.AI') + ' + ' + t('prices.personalization'),
+          enabled: true,
+          icon: <AiSvg opacity={1} />,
+        },
+        { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1} /> },
       ],
     },
   ];
@@ -101,7 +105,9 @@ const WelcomeScreen = () => {
           </View>
         }
         footerControl={isAuthenticated && <BottomNavigation />}
-        burgerList={ <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
+        burgerList={
+          <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+        }
       >
         <View style={styles.container}>
           <Image
