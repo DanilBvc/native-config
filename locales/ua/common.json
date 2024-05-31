@@ -142,7 +142,10 @@
     "mobile": "Мобільний додаток",
     "AI": "AI опис",
     "personalization": "Персоналізація",
-    "unlimited content": "Необмежене зберігання контенту"
+    "unlimited content": "Необмежене зберігання контенту",
+    "priceStandard": "1500грн",
+    "priceMedium": "2500грн",
+    "priceMax": "3500грн"
   },
   "landingPage": {
     "general": {

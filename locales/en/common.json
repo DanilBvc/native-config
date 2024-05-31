@@ -144,7 +144,10 @@
     "mobile": "Mobile app",
     "AI": "AI description",
     "personalization": "Personalization",
-    "unlimited content": "Unlimited content"
+    "unlimited content": "Unlimited content",
+    "priceStandard": "300$",
+    "priceMedium": "500$",
+    "priceMax": "650$"
   },
   "landingPage": {
     "general": {

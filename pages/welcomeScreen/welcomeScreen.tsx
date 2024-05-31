@@ -32,7 +32,7 @@ const WelcomeScreen = () => {
   const cards: packageCard[] = [
     {
       name: 'STANDARD',
-      price: '300 $',
+      price: t('prices.priceStandard'),
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
         { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
@@ -43,24 +43,24 @@ const WelcomeScreen = () => {
     },
     {
       name: 'MEDIUM',
-      price: '300 $',
+      price: t('prices.priceMedium'),
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
         { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
-        { label: t('prices.thirdBenefit'), enabled: false, icon: <DeliverySvg /> },
-        { label: t('prices.AI'), enabled: false, icon: <AiSvg /> },
-        { label: t('prices.secondBenefit'), enabled: false, icon: <LockSvg /> },
+        { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1}/> },
+        { label: t('prices.AI'), enabled: true, icon: <AiSvg opacity={1}/> },
+        { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1}/> },
       ],
     },
     {
       name: 'MAX',
-      price: '300 $',
+      price: t('prices.priceMax'),
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
         { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
-        { label: t('prices.thirdBenefit'), enabled: false, icon: <DeliverySvg /> },
-        { label: t('prices.AI'), enabled: false, icon: <AiSvg /> },
-        { label: t('prices.secondBenefit'), enabled: false, icon: <LockSvg /> },
+        { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1}/> },
+        { label: t('prices.AI') + ' + ' + t('prices.personalization'), enabled: true, icon: <AiSvg opacity={1}/> },
+        { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1}/> },
       ],
     },
   ];
