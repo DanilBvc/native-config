@@ -10,12 +10,14 @@ const EmptyLayout: FC<{
   footerControl?: ReactNode;
   backgroundColor?: string;
   contentMarginBottom?: number;
+  burgerList?: ReactNode;
 }> = ({
   children,
   additionalControl,
   footerControl,
   backgroundColor = 'transparent',
   contentMarginBottom = 0,
+  burgerList
 }) => {
   return (
     <View style={{ ...styles.containerStyle, backgroundColor }}>
@@ -32,6 +34,7 @@ const EmptyLayout: FC<{
       </View>
       <View style={{ marginBottom: contentMarginBottom }}>{children}</View>
       {footerControl && <View style={styles.footer}>{footerControl}</View>}
+      {burgerList}
     </View>
   );
 };

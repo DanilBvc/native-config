@@ -29,6 +29,7 @@ const CustomerSection = () => {
             />
           </View>
         }
+        burgerList={<BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
       >
         <SafeAreaView>
           <ScrollView>
@@ -40,7 +41,7 @@ const CustomerSection = () => {
           </ScrollView>
         </SafeAreaView>
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+
       <View style={styles.container}>
         <Image
           source={{

@@ -3,7 +3,6 @@ import { Image, Text, View, ScrollView, TouchableOpacity, useWindowDimensions } 
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import LocalizationSwitcher from '../../components/generall/localizationSwitcher/localizationSwitcher';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
-import BurgerList from '../../components/burgerList/burgerList';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 import { styles } from './FAQ.style';
 import { familyLogoUrl } from '../../static/urls';
@@ -12,6 +11,7 @@ import { ArrowDownIcon } from '../../assets/icons/faq';
 import { useTranslation } from 'react-i18next';
 import { colors } from '../../static/colors';
 import { type AgreementItem } from './FAQ.type';
+import BurgerList from '../../components/burgerList/burgerList';
 
 const FAQ: React.FC = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
@@ -273,6 +273,7 @@ const FAQ: React.FC = () => {
         }
         footerControl={<BottomNavigation />}
         contentMarginBottom={170}
+        burgerList={ <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
       >
         <ScrollView>
           <View>
@@ -354,7 +355,7 @@ const FAQ: React.FC = () => {
           </View>
         </ScrollView>
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+
     </>
   );
 };

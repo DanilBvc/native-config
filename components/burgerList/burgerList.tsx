@@ -103,7 +103,7 @@ const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
           source={{
             uri: familyLogoUrl,
           }}
-          style={{ zIndex: 11, position: 'absolute', opacity: 0.2, top: '50%' }}
+          style={{ opacity: 0.2 }}
           height={231}
           width={226}
         />

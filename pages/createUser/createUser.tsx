@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { ShareSvg } from '../../assets/icons/share';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
-import BurgerList from '../../components/burgerList/burgerList';
 import { familyLogoUrl } from '../../static/urls';
 import { styles } from './createUser.style';
 import { colors } from '../../static/colors';
@@ -27,6 +26,7 @@ import { CloseIcon } from '../../assets/icons/drop-down';
 import { useTypedNavigation, useTypedRoute } from '../../hooks/useTypedNavigation';
 import { type Tree } from '../../static/types/userTypes/types';
 import { TreeService } from '../../services/treeService/treeService';
+import BurgerList from '../../components/burgerList/burgerList';
 
 const CreateUser = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
@@ -103,6 +103,7 @@ const CreateUser = () => {
             />
           </View>
         }
+        burgerList={<BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
       >
         <SafeAreaView>
           <ScrollView>
@@ -177,7 +178,7 @@ const CreateUser = () => {
           </ScrollView>
         </SafeAreaView>
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+
       <View style={styles.container}>
         <Image
           source={{

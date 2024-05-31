@@ -23,8 +23,8 @@ import { styles } from './welcomeScreen.style';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import { useAuth } from '../../hooks/useAuth';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
-import BurgerList from '../../components/burgerList/burgerList';
 import { useTypedNavigation } from '../../hooks/useTypedNavigation';
+import BurgerList from '../../components/burgerList/burgerList';
 
 const WelcomeScreen = () => {
   const { isAuthenticated } = useAuth();
@@ -101,6 +101,7 @@ const WelcomeScreen = () => {
           </View>
         }
         footerControl={isAuthenticated && <BottomNavigation />}
+        burgerList={ <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
       >
         <View style={styles.container}>
           <Image
@@ -121,7 +122,6 @@ const WelcomeScreen = () => {
           </Pressable>
         )}
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
     </>
   );
 };

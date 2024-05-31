@@ -4,19 +4,25 @@ import { colors } from '../../static/colors';
 export const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 100,
+    top: 0,
     left: 0,
     right: 0,
     bottom: 0,
     backgroundColor: colors.white,
     zIndex: 10,
+    paddingTop: 100
+
   },
   imageWrapper: {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: [{ translateX: -113 }, { translateY: -115.5 }],
-    zIndex: 11,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 10,
+    pointerEvents: 'none',
   },
   menuContent: {
     marginTop: 50,
