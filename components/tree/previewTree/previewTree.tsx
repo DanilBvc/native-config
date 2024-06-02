@@ -1,6 +1,5 @@
 import React, { type FC, useState } from 'react';
 import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
-import BurgerList from '../../burgerList/burgerList';
 import { View, PanResponder, Dimensions, Text } from 'react-native';
 import BurgerMenu from '../../burgerMenu/burgerMenu';
 import ShareButton from '../../generall/shareButton/shareButton';
@@ -12,6 +11,7 @@ import useAnimatedSlot from '../../../hooks/useAnimatedSlot';
 import useSlots from '../../../hooks/useSlots';
 import useAngles from '../../../hooks/useAngles';
 import { CommentSvg } from '../../../assets/icons/comment';
+import BurgerList from '../../burgerList/burgerList';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
@@ -80,13 +80,10 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
         additionalControl={
           <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}>
             <ShareButton id={id} />
-
-            <View style={{ marginLeft: 20 }}>
-              <BurgerMenu isBurgerMenuVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
-            </View>
-
+            <BurgerMenu isBurgerMenuVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} style={{ marginLeft: 20 }}/>
           </View>
         }
+        burgerList={<BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
       >
         {slots.map((slot, i) => (
           <PressableSlot onClick={selectSlot} key={i} item={slot} />
@@ -116,8 +113,9 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
         >
           press the cross to collapse
         </Text>
+
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+
     </View>
   );
 };

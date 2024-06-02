@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 import {
@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { ShareSvg } from '../../assets/icons/share';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
-import BurgerList from '../../components/burgerList/burgerList';
 import { familyLogoUrl } from '../../static/urls';
 import { styles } from './createUser.style';
 import { colors } from '../../static/colors';
@@ -24,24 +23,36 @@ import Button from '../../components/generall/button/button';
 
 import * as ImagePicker from 'expo-image-picker';
 import { CloseIcon } from '../../assets/icons/drop-down';
-
-interface userData {
-  name: string;
-  birthDate: string;
-  deathDate: string;
-  imageUrl: string;
-  text: string;
-}
+import { useTypedNavigation, useTypedRoute } from '../../hooks/useTypedNavigation';
+import { type Tree } from '../../static/types/userTypes/types';
+import { TreeService } from '../../services/treeService/treeService';
+import BurgerList from '../../components/burgerList/burgerList';
 
 const CreateUser = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
-  const [userData, setUserData] = useState<userData>({
-    name: '',
-    birthDate: '',
-    deathDate: '',
-    imageUrl: '',
-    text: '',
+  const route = useTypedRoute();
+  const navigation = useTypedNavigation();
+
+  const { user } = route.params;
+
+  const [userData, setUserData] = useState<Tree>({
+    available_slot: 0,
+    avatar: '',
+    created_at: '',
+    date_of_birth: '',
+    date_of_dead: '',
+    description: '',
+    first_name: '',
+    full_name: '',
+    id: '',
+    last_name: '',
+    password: '',
+    updated_at: '',
   });
+
+  useEffect(() => {
+    setUserData(user);
+  }, []);
 
   const onChange = (name: string, value: string) => {
     setUserData({ ...userData, [name]: value });
@@ -62,12 +73,20 @@ const CreateUser = () => {
     });
 
     if (!pickerResult.canceled) {
-      setUserData({ ...userData, imageUrl: pickerResult.assets[0].uri });
+      setUserData({ ...userData, avatar: pickerResult.assets[0].uri });
     }
   };
 
   const removeImage = () => {
-    setUserData({ ...userData, imageUrl: '' });
+    setUserData({ ...userData, avatar: '' });
+  };
+
+  const handleUpdate = () => {
+    try {
+      TreeService.updateUserTree(userData.id, userData);
+      navigation.navigate('UserProfile', { user: userData });
+    } catch (error) {
+    }
   };
 
   return (
@@ -84,14 +103,15 @@ const CreateUser = () => {
             />
           </View>
         }
+        burgerList={<BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
       >
         <SafeAreaView>
           <ScrollView>
             <View style={styles.cardContainer}>
-              {userData.imageUrl
+              {userData.avatar
                 ? (
                 <TouchableOpacity style={styles.imgContainer} onPress={removeImage}>
-                  <Image source={{ uri: userData.imageUrl }} style={styles.placeholder} />
+                  <Image source={{ uri: userData.avatar }} style={styles.placeholder} />
 
                   <View style={{ position: 'absolute', right: 10, top: 60 }}>
                     <CloseIcon />
@@ -118,15 +138,15 @@ const CreateUser = () => {
                 }}
                 placeholder="First name Last name"
                 placeholderColor={colors.rusty_Copper_25_Opacity}
-                value={userData.name}
-                name="name"
+                value={userData.full_name}
+                name="full_name"
                 onChange={onChange}
                 validation={nameRegex}
               />
               <View style={styles.dateContainer}>
                 <View style={styles.dateWidth}>
-                  <Text style={styles.date}>05/05/1940</Text>
-                  <Text style={styles.date}>05/05/2000</Text>
+                  <Text style={styles.date}>{userData.date_of_birth}</Text>
+                  <Text style={styles.date}>{userData.date_of_dead}</Text>
                 </View>
               </View>
               <View style={styles.lines}>
@@ -148,17 +168,17 @@ const CreateUser = () => {
                 }}
                 placeholder="Leave a few words about the person"
                 placeholderColor={colors.rusty_Copper_25_Opacity}
-                value={userData.text}
-                name="text"
+                value={userData.description ?? ''}
+                name="description"
                 onChange={onChange}
                 validation={nameRegex}
               />
-              <Button text="Saved" additionalStyles={styles.buttonStyle} onPress={() => {}} />
+              <Button text="Saved" additionalStyles={styles.buttonStyle} onPress={handleUpdate} />
             </View>
           </ScrollView>
         </SafeAreaView>
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+
       <View style={styles.container}>
         <Image
           source={{

@@ -6,13 +6,17 @@ export const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     height: '100%',
+    position: 'relative',
   },
 
   headerStyle: {
-    display: 'flex',
+
+    position: 'relative',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    zIndex: 1000,
+
   },
   imageSize: { height: 23, width: 125 },
   footer: {

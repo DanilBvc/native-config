@@ -82,7 +82,7 @@ const BuyPackageCard = ({ route }: { route: any }) => {
     return standardOptions;
   }, [formData]);
 
-  const [selectedOption, setSelectedOption] = useState(-1);
+  const [openOptions, setOpenOptions] = useState<Record<number, boolean>>({});
 
   function onChange (name: string, value: string) {
     setFormData({ ...formData, [name]: value });
@@ -90,6 +90,13 @@ const BuyPackageCard = ({ route }: { route: any }) => {
 
   const handleNext = () => {
     navigation.navigate('BuyPackage2' as never);
+  };
+
+  const toggleOption = (index: number) => {
+    setOpenOptions((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
   };
 
   return (
@@ -164,16 +171,10 @@ const BuyPackageCard = ({ route }: { route: any }) => {
                   <View key={index}>
                     <Checkbox
                       label={item.label}
-                      checked={selectedOption === index}
-                      setChecked={() => {
-                        if (selectedOption === index) {
-                          setSelectedOption(-1);
-                          return;
-                        }
-                        setSelectedOption(index);
-                      }}
+                      checked={!!openOptions[index]}
+                      setChecked={() => { toggleOption(index); }}
                     />
-                    {selectedOption === index && (
+                    {openOptions[index] && (
                       <View style={styles.option}>
                         <Component {...item.props} />
                       </View>

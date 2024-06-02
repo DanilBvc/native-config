@@ -7,8 +7,8 @@ import { styles } from './homeScreen.style';
 import VideoPlayer from 'expo-video-player';
 import { ResizeMode } from 'expo-av';
 import { familyLogoUrl } from '../../static/urls';
-import BurgerList from '../../components/burgerList/burgerList';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
+import BurgerList from '../../components/burgerList/burgerList';
 
 const HomeScreen = () => {
   const width = Dimensions.get('window').width;
@@ -30,6 +30,7 @@ const HomeScreen = () => {
           </View>
         }
         footerControl={<BottomNavigation />}
+        burgerList={ <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
       >
         <></>
       </EmptyLayout>
@@ -69,7 +70,7 @@ const HomeScreen = () => {
           width={550}
         />
       </View>
-      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+
     </>
   );
 };

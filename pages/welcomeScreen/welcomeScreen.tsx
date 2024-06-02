@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigation } from '@react-navigation/native';
+import { Link } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { Image, Pressable, Text, View } from 'react-native';
 import {
@@ -23,6 +23,7 @@ import { styles } from './welcomeScreen.style';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import { useAuth } from '../../hooks/useAuth';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
+import { useTypedNavigation } from '../../hooks/useTypedNavigation';
 import BurgerList from '../../components/burgerList/burgerList';
 
 const WelcomeScreen = () => {
@@ -31,7 +32,7 @@ const WelcomeScreen = () => {
   const cards: packageCard[] = [
     {
       name: 'STANDARD',
-      price: '300 $',
+      price: t('prices.priceStandard'),
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
         { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
@@ -42,36 +43,40 @@ const WelcomeScreen = () => {
     },
     {
       name: 'MEDIUM',
-      price: '300 $',
+      price: t('prices.priceMedium'),
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
         { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
-        { label: t('prices.thirdBenefit'), enabled: false, icon: <DeliverySvg /> },
-        { label: t('prices.AI'), enabled: false, icon: <AiSvg /> },
-        { label: t('prices.secondBenefit'), enabled: false, icon: <LockSvg /> },
+        { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1} /> },
+        { label: t('prices.AI'), enabled: true, icon: <AiSvg opacity={1} /> },
+        { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1} /> },
       ],
     },
     {
       name: 'MAX',
-      price: '300 $',
+      price: t('prices.priceMax'),
       features: [
         { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
         { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
-        { label: t('prices.thirdBenefit'), enabled: false, icon: <DeliverySvg /> },
-        { label: t('prices.AI'), enabled: false, icon: <AiSvg /> },
-        { label: t('prices.secondBenefit'), enabled: false, icon: <LockSvg /> },
+        { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1} /> },
+        {
+          label: t('prices.AI') + ' + ' + t('prices.personalization'),
+          enabled: true,
+          icon: <AiSvg opacity={1} />,
+        },
+        { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1} /> },
       ],
     },
   ];
-  const navigation = useNavigation();
+  const navigation = useTypedNavigation();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const goBuyPackage = () => {
-    navigation.navigate('BuyPackage' as never, { card: cards[currentSlide].name });
+    navigation.navigate('BuyPackage', { card: cards[currentSlide].name });
   };
 
   const goScanQrCode = () => {
-    navigation.navigate('ScanQrCode' as never);
+    navigation.navigate('ScanQrCode');
   };
 
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
@@ -100,6 +105,9 @@ const WelcomeScreen = () => {
           </View>
         }
         footerControl={isAuthenticated && <BottomNavigation />}
+        burgerList={
+          <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+        }
       >
         <View style={styles.container}>
           <Image
@@ -120,7 +128,6 @@ const WelcomeScreen = () => {
           </Pressable>
         )}
       </EmptyLayout>
-      <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
     </>
   );
 };
