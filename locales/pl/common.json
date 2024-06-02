@@ -142,7 +142,10 @@
     "mobile": "Mobilna aplikacja",
     "AI": "AI opisanie",
     "personalization": "Personalizacja",
-    "unlimited content": "Nieograniczona zawartość"
+    "unlimited content": "Nieograniczona zawartość",
+    "priceStandard": "450zl",
+    "priceMedium": "650zl",
+    "priceMax": "750zl"
   },
   "landingPage": {
     "general": {

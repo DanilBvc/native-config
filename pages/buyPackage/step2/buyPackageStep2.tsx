@@ -77,6 +77,8 @@ const BuyPackageStep2 = () => {
             />
           </Pressable>
         </View>
+        {/* <Image source={selectedOption === 'Exclusive box' ? require('../../../assets/icons/premiumBox.png') : require('../../../assets/icons/premiumBox.png')} /> */}
+
       </View>
     </EmptyLayout>
   );

@@ -7,7 +7,7 @@ const Checkbox = ({ checked, setChecked, label }: CheckBoxProps) => {
   return (
     <Pressable onPress={setChecked} style={style.checkboxWrapper}>
       {label && <Text>{label}</Text>}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={setChecked}>
         <View style={{ ...style.checkbox, ...(checked ? style.checkboxActive : {}) }} />
       </TouchableOpacity>
     </Pressable>

@@ -22,8 +22,8 @@ const SignIn = () => {
   const { setIsAuthenticated } = useAuth();
   const navigation = useNavigation();
   const [signInData, setSignInData] = useState<userSignInData>({
-    email: 'denyskotyara@gmail.com',
-    password: 'Den199777@',
+    email: 'dneys@gmail.com',
+    password: '1012002',
   });
 
   const [error, setError] = useState(false);
@@ -36,10 +36,15 @@ const SignIn = () => {
   const signIn = async () => {
     try {
       const response = await AuthUserApi.login(signInData);
-      await storeData('tokens', { accessToken: response.tokens.accessToken, refreshToken: response.tokens.refreshToken });
+
+      await storeData('accessToken', response.tokens.accessToken);
+      await storeData('refreshToken', response.tokens.refreshToken);
+
       setIsAuthenticated(true);
       navigation.navigate('Home' as never);
-      userStore.updateUserData(response);
+      const user = await AuthUserApi.checkIsCurrentAccessToken();
+
+      userStore.updateUserData(user.data);
     } catch (error) {
       setError(true);
     }
