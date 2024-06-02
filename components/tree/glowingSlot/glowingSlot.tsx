@@ -15,7 +15,7 @@ const GlowingSlot: FC<{
   return (
     <View style={[styles.container, { width, height, top: y, left: x }]}>
       <Image source={glowImage} style={styles.glow} height={height} width={width} />
-      {component && <View style={{ ...styles.photo, width: width * 0.9, height: height * 0.9 }}>{component}</View>}
+      {component && <View style={{ ...styles.photo, width, height }}>{component}</View>}
       {url && (
         <Image
           source={imageSource}
