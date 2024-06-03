@@ -4,6 +4,7 @@ import SignIn from '../pages/auth/signIn/signIn';
 import SignUp from '../pages/auth/signUp/signUp';
 import BuyPackage from '../pages/buyPackage/step1/buyPackage';
 import BuyPackageStep2 from '../pages/buyPackage/step2/buyPackageStep2';
+import BuyPackageStep3 from '../pages/buyPackage/step3/buyPackageStep3';
 import ContactUs from '../pages/contactUs/contactUs';
 import CreateUser from '../pages/createUser/createUser';
 import CustomerSection from '../pages/customerSection/customerSection';
@@ -51,6 +52,12 @@ export const routes = [
   {
     name: 'BuyPackage2',
     component: BuyPackageStep2,
+    isPrivate: false,
+    options: { headerShown: false },
+  },
+  {
+    name: 'BuyPackage3',
+    component: BuyPackageStep3,
     isPrivate: false,
     options: { headerShown: false },
   },

@@ -17,7 +17,7 @@ const EmptyLayout: FC<{
   footerControl,
   backgroundColor = 'transparent',
   contentMarginBottom = 0,
-  burgerList
+  burgerList,
 }) => {
   return (
     <View style={{ ...styles.containerStyle, backgroundColor }}>

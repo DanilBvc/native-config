@@ -15,6 +15,7 @@ i18next.use(initReactI18next).init({
   resources: languageResources,
   lng: 'en',
   fallbackLng: 'en',
+
 });
 
 export default i18next;

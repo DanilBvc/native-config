@@ -4,7 +4,7 @@ import { colors } from '../../../static/colors';
 export const style = StyleSheet.create({
   layout: {
     display: 'flex',
-    gap: 50,
+    gap: 20,
     flexDirection: 'column',
   },
   orderTitle: {
@@ -13,7 +13,7 @@ export const style = StyleSheet.create({
     lineHeight: 22,
     color: colors.earthy_Brown,
     marginBottom: 10,
-    marginTop: 60,
+    marginTop: 38,
   },
   imageSize: {
     alignSelf: 'center',
@@ -39,5 +39,26 @@ export const style = StyleSheet.create({
     lineHeight: 22,
     letterSpacing: -0.41,
     marginBottom: 10,
+  },
+  boxImage: {
+    width: '100%',
+    height: 230,
+    objectFit: 'contain',
+  },
+  inputTitle: {
+    marginBottom: 15,
+    fontSize: 15,
+    lineHeight: 22,
+    fontWeight: '500',
+    fontFamily: 'Inter_500Medium',
+    color: colors.earthy_Brown,
+    borderRadius: 12,
+  },
+  option: {
+    marginTop: 15,
+  },
+  footerBtnWrapper: {
+    backgroundColor: colors.white,
+    height: '100%',
   },
 });

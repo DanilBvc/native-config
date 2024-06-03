@@ -2,11 +2,10 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../static/colors';
 
 export const styles = StyleSheet.create({
-  form: {
+  layout: {
     display: 'flex',
-    flexDirection: 'column',
     gap: 20,
-    paddingBottom: 70,
+    flexDirection: 'column',
   },
   orderTitle: {
     fontWeight: '500',
@@ -16,12 +15,35 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 60,
   },
-  cardName: {
-    fontWeight: '500',
-    fontSize: 20,
+  imageSize: {
+    alignSelf: 'center',
+    position: 'absolute',
+    top: '100%',
+    height: 130,
+    width: 130,
+    opacity: 0.1,
+  },
+  spaceBetween: {
+    maxWidth: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  spaceBetweenItem: {
+    width: '48%',
+  },
+  title: {
+    fontFamily: 'Inter_500Medium',
+    fontSize: 16,
     lineHeight: 22,
-    color: colors.rusty_Copper,
-    marginTop: 10,
+    letterSpacing: -0.41,
+    marginBottom: 10,
+  },
+  boxImage: {
+    width: '100%',
+    height: 230,
+    objectFit: 'contain',
   },
   inputTitle: {
     marginBottom: 15,
@@ -30,27 +52,7 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'Inter_500Medium',
     color: colors.earthy_Brown,
-  },
-  dateInputs: {
-    maxWidth: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  dateInput: {
-    width: '48%',
-  },
-  dateTitle: {
-    fontFamily: 'Inter_500Medium',
-    fontSize: 15,
-    lineHeight: 22,
-    fontWeight: '500',
-    color: colors.earthy_Brown,
-    marginBottom: 10,
-  },
-  optionList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 20,
+    borderRadius: 12,
   },
   option: {
     marginTop: 15,
