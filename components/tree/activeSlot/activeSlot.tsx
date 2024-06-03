@@ -28,6 +28,7 @@ const ActiveSlot: FC<{
           position: 'absolute',
           left: windowWidth / 2.3,
           top: windowHeight / 6,
+          zIndex: 1
         }}
         onPress={() => { handleSlotChange(-1); }}
       >
