@@ -13,6 +13,7 @@ import { emailRegex, nameRegex } from '../../../static/regex';
 import { colors } from '../../../static/colors';
 import PhoneInput from 'react-native-phone-number-input';
 import Checkbox from '../../../components/generall/checkbox/checkbox';
+import { useTypedNavigation } from '../../../hooks/useTypedNavigation';
 
 interface FormData {
   fullName: string;
@@ -20,10 +21,13 @@ interface FormData {
   phoneNumber: string;
   email: string;
   someoneElse: boolean;
+  secondFullName: string;
+  secondMiddleName: string;
 }
 
 const BuyPackageStep3 = () => {
   const phoneInput = useRef<PhoneInput>(null);
+  const navigation = useTypedNavigation();
   const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
@@ -31,6 +35,8 @@ const BuyPackageStep3 = () => {
     phoneNumber: '',
     email: '',
     someoneElse: false,
+    secondFullName: '',
+    secondMiddleName: '',
   });
 
   const onChange = (name: string, value: string) => {
@@ -46,7 +52,7 @@ const BuyPackageStep3 = () => {
   };
 
   const handleNext = () => {
-    // Handle the next step logic
+    navigation.navigate('BuyPackage4');
   };
 
   return (
@@ -119,7 +125,6 @@ const BuyPackageStep3 = () => {
                 onChangeFormattedText={(text) => {
                   setFormattedValue(text);
                 }}
-                autoFocus
                 containerStyle={{
                   width: '100%',
                   height: 60,
@@ -177,8 +182,8 @@ const BuyPackageStep3 = () => {
                   <View style={{ marginTop: 20 }}>
                     <Text style={styles.inputTitle}>{t('payload.fullName')}</Text>
                     <TextField
-                      name={'fullName'}
-                      value={formData.fullName}
+                      name={'secondFullName'}
+                      value={formData.secondFullName}
                       onChange={onChange}
                       placeholder={t('payload.PlaceholderAllName')}
                       errorMessage={'Invalid email'}
@@ -190,8 +195,8 @@ const BuyPackageStep3 = () => {
                   <View style={{ marginTop: 20 }}>
                     <Text style={styles.inputTitle}>{t('payload.middleName')}</Text>
                     <TextField
-                      name={'middleName'}
-                      value={formData.middleName}
+                      name={'secondMiddleName'}
+                      value={formData.secondMiddleName}
                       onChange={onChange}
                       placeholder={t('payload.PlaceholderMiddleName')}
                       errorMessage={'Invalid email'}

@@ -4,9 +4,9 @@ import { style } from './checkbox.style';
 import { type CheckBoxProps } from './chrckbox.type';
 import { colors } from '../../../static/colors';
 
-const Checkbox = ({ checked, setChecked, label }: CheckBoxProps) => {
+const Checkbox = ({ checked, setChecked, label, additionalStyles }: CheckBoxProps) => {
   return (
-    <Pressable onPress={setChecked} style={style.checkboxWrapper}>
+    <Pressable onPress={setChecked} style={[style.checkboxWrapper, additionalStyles]}>
       {label && (
         <Text
           style={{
@@ -21,7 +21,12 @@ const Checkbox = ({ checked, setChecked, label }: CheckBoxProps) => {
         </Text>
       )}
       <TouchableOpacity onPress={setChecked}>
-        <View style={{ ...style.checkbox, ...(checked ? style.checkboxActive : {}) }} />
+        <View
+          style={{
+            ...style.checkbox,
+            ...(checked ? style.checkboxActive : {}),
+          }}
+        />
       </TouchableOpacity>
     </Pressable>
   );
