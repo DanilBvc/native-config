@@ -123,7 +123,7 @@ const BuyPackageStep2: React.FC = () => {
       contentMarginBottom={170}
     >
       <SafeAreaView>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={style.layout}>
             <View style={{ marginBottom: 52 }}>
               <Text style={style.orderTitle}>{t('payload.boxStep')}</Text>

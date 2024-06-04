@@ -277,7 +277,7 @@ const FAQ: React.FC = () => {
           <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
         }
       >
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View>
             <View style={styles.container}>
               <FamilyEmblem height={140} width={140} />

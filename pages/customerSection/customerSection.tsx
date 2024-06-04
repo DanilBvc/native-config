@@ -34,7 +34,7 @@ const CustomerSection = () => {
         }
       >
         <SafeAreaView>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.cardContainer}>
               {treeData.map((data, index) => (
                 <CustomerCard key={index} data={data} />

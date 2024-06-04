@@ -40,7 +40,7 @@ const UserProfile = () => {
         }
       >
         <SafeAreaView>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.cardContainer}>
               <Image source={{ uri: user.avatar ? user.avatar : '' }} style={styles.placeholder} />
               <Text style={styles.username}>{user.full_name}</Text>

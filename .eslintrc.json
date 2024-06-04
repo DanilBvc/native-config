@@ -24,6 +24,7 @@
     "comma-dangle": "off",
     "@typescript-eslint/comma-dangle": "off",
     "@typescript-eslint/member-delimiter-style": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "multiline-ternary": "off"
   }
 }

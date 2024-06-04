@@ -70,7 +70,7 @@ const HowItWorks = () => {
       >
         <View style={styles.container}>
           <SafeAreaView>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
               <Text style={styles.title}>{t('landingPage.howItWorks.howItWorks')}</Text>
               {Agreement.map((item) => {
                 return (

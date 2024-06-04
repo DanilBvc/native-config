@@ -26,7 +26,7 @@ const AboutUs = () => {
       footerControl={<BottomNavigation />}
     >
       <SafeAreaView>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
             <FamilyEmblem height={140} width={140} />
           </View>

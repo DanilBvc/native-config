@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
-import {
-  Dimensions,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Dimensions, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ShareSvg } from '../../assets/icons/share';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import FamilyEmblem from '../../static/familyEmblem';
@@ -22,12 +14,12 @@ import LineWithCircle from '../../components/lineWithCircle/lineWithCircle';
 import Button from '../../components/generall/button/button';
 
 import * as ImagePicker from 'expo-image-picker';
-import { CloseIcon } from '../../assets/icons/drop-down';
 import { useTypedNavigation, useTypedRoute } from '../../hooks/useTypedNavigation';
 import { type Tree } from '../../static/types/userTypes/types';
 import { TreeService } from '../../services/treeService/treeService';
 import BurgerList from '../../components/burgerList/burgerList';
 import TextArea from '../../components/generall/textArea/textArea';
+import AvatarImage from './AvatarImage';
 
 const CreateUser = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
@@ -106,23 +98,19 @@ const CreateUser = () => {
         burgerList={
           <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
         }
+        contentMarginBottom={170}
       >
         <SafeAreaView>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.cardContainer}>
-              {userData.avatar ? (
-                <TouchableOpacity style={styles.imgContainer} onPress={removeImage}>
-                  <Image source={{ uri: userData.avatar }} style={styles.placeholder} />
-
-                  <View style={{ position: 'absolute', right: 10, top: 60 }}>
-                    <CloseIcon />
-                  </View>
-                </TouchableOpacity>
-              ) : (
+              {userData.avatar
+                ? (
+                <AvatarImage avatar={userData.avatar} removeImage={removeImage} />
+                  ) : (
                 <TouchableOpacity style={styles.placeholder} onPress={selectImage}>
                   <PlusSvg />
                 </TouchableOpacity>
-              )}
+                  )}
 
               <TextField
                 additionalStyles={{

@@ -3,8 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 import WelcomeScreen from '../pages/welcomeScreen/welcomeScreen';
 
 interface PrivateRouteProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  component: React.ComponentType<any>;
+  component: React.ComponentType;
 }
 
 const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component }) => {

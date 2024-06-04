@@ -75,7 +75,7 @@ const BuyPackageStep3 = () => {
         contentMarginBottom={170}
       >
         <SafeAreaView>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.layout}>
               <View style={{ marginBottom: 52 }}>
                 <Text style={styles.orderTitle}>{t('payload.orderStep')}</Text>
