@@ -10,7 +10,7 @@ import TextField from '../../../components/generall/textField/textField';
 import LineWithCircle from '../../../components/lineWithCircle/lineWithCircle';
 import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
 import { colors } from '../../../static/colors';
-import { nameRegex, passwordRegex } from '../../../static/regex';
+import { passwordRegex } from '../../../static/regex';
 import { styles } from './buyPackage.style';
 import TextArea from '../../../components/generall/textArea/textArea';
 import BackgroundEmblem from '../../../static/backgroundEmblem';
@@ -115,6 +115,7 @@ const BuyPackageCard = ({ route }: { route: any }) => {
               additionalStyles={{ borderRadius: 12, marginTop: 20, width: '50%' }}
               onPress={handleNext}
               text={t('payload.next')}
+              disabled={!formData.full_name}
             />
           </View>
         }
@@ -135,8 +136,6 @@ const BuyPackageCard = ({ route }: { route: any }) => {
                   value={formData.full_name}
                   onChange={onChange}
                   placeholder={t('payload.PIB')}
-                  errorMessage={'Invalid email'}
-                  validation={nameRegex}
                   additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
                   placeholderColor={colors.amberwood_Brown}
                 />
@@ -196,7 +195,6 @@ const BuyPackageCard = ({ route }: { route: any }) => {
                   onChange={onChange}
                   placeholder={t('payload.hearAbout')}
                   errorMessage={'Not valid input'}
-                  validation={/.{1,}/}
                   additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
                   placeholderColor={colors.amberwood_Brown}
                 />

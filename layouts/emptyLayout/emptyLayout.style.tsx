@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     zIndex: 1000,
 
   },
-  imageSize: { height: 23, width: 125 },
+  imageSize: { height: '100%', width: '100%' },
   footer: {
     position: 'absolute',
     bottom: 40,

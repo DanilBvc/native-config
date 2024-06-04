@@ -283,7 +283,7 @@ const FAQ: React.FC = () => {
               <FamilyEmblem height={140} width={140} />
             </View>
           </View>
-          <Text style={styles.faqText}>Public Offer Agreement</Text>
+          <Text style={styles.faqText}>{t('termsPage.header')}</Text>
           <View>
             {Agreement.map((item, index) => (
               <View key={index}>

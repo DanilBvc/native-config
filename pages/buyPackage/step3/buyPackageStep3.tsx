@@ -69,6 +69,7 @@ const BuyPackageStep3 = () => {
               additionalStyles={{ borderRadius: 12, marginTop: 20, width: '50%' }}
               onPress={handleNext}
               text={t('payload.next')}
+              disabled={!formData.fullName || !formData.phoneNumber || !formData.email || !formData.middleName}
             />
           </View>
         }
@@ -88,8 +89,6 @@ const BuyPackageStep3 = () => {
                   value={formData.fullName}
                   onChange={onChange}
                   placeholder={t('payload.PlaceholderAllName')}
-                  errorMessage={'Invalid email'}
-                  validation={nameRegex}
                   additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
                   placeholderColor={colors.amberwood_Brown}
                 />
@@ -101,8 +100,6 @@ const BuyPackageStep3 = () => {
                   value={formData.middleName}
                   onChange={onChange}
                   placeholder={t('payload.PlaceholderMiddleName')}
-                  errorMessage={'Invalid email'}
-                  validation={nameRegex}
                   additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
                   placeholderColor={colors.amberwood_Brown}
                 />
@@ -152,8 +149,8 @@ const BuyPackageStep3 = () => {
               <View>
                 <Text style={styles.inputTitle}>{t('auth.email')}</Text>
                 <TextField
-                  name={'middleName'}
-                  value={formData.middleName}
+                  name={'email'}
+                  value={formData.email}
                   onChange={onChange}
                   placeholder={t('payload.PlaceholderEmail')}
                   errorMessage={'Invalid email'}

@@ -1,5 +1,5 @@
 import React, { type FC } from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { CloseIcon } from '../../assets/icons/drop-down';
 import { styles } from './createUser.style';
 
@@ -10,12 +10,12 @@ interface AvatarImageProps {
 
 const AvatarImage: FC<AvatarImageProps> = ({ avatar, removeImage }) => {
   return (
-    <TouchableOpacity style={styles.imgContainer} onPress={removeImage}>
+    <View style={styles.imgContainer} >
       <Image source={{ uri: avatar }} style={styles.placeholder} />
-      <View style={{ position: 'absolute', right: 10, top: 60 }}>
+      <TouchableOpacity style={{ position: 'absolute', right: 10, top: 60 }} onPress={removeImage}>
         <CloseIcon />
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 

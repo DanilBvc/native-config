@@ -44,6 +44,7 @@ const BuyPackageStep4 = () => {
               additionalStyles={{ borderRadius: 12, marginTop: 20, width: '50%' }}
               onPress={handleNext}
               text={t('payload.buy')}
+              disabled={!formData.address || !formData.zip || !formData.acceptTermsStart}
             />
           </View>
         }
@@ -97,7 +98,7 @@ const BuyPackageStep4 = () => {
                 <View style={{ width: '46%' }}>
                   <Text style={styles.inputTitle}>{t('payload.addressIndex')}</Text>
                   <TextField
-                    name={'addressIndex'}
+                    name={'zip'}
                     value={formData.zip}
                     onChange={onChange}
                     placeholder={t('payload.addressIndex')}

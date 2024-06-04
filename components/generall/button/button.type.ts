@@ -4,4 +4,5 @@ export interface buttonType {
   onPress: () => void;
   text: string;
   additionalStyles?: StyleProp<ViewStyle>;
+  disabled?: boolean;
 }
