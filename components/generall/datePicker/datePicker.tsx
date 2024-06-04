@@ -11,7 +11,7 @@ const DatePicker = ({ date, setDate, additionalStyles }: DataPickerProps) => {
   return (
     <TouchableOpacity
       activeOpacity={0.6}
-      style={{ ...styles.dataPicker, ...additionalStyles }}
+      style={[styles.dataPicker, additionalStyles]}
       onPress={() => {
         setOpen(true);
       }}

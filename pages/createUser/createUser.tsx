@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
-import { Dimensions, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
 import { ShareSvg } from '../../assets/icons/share';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import FamilyEmblem from '../../static/familyEmblem';
@@ -20,6 +20,7 @@ import { TreeService } from '../../services/treeService/treeService';
 import BurgerList from '../../components/burgerList/burgerList';
 import TextArea from '../../components/generall/textArea/textArea';
 import AvatarImage from './AvatarImage';
+import DatePicker from '../../components/generall/datePicker/datePicker';
 
 const CreateUser = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
@@ -32,8 +33,8 @@ const CreateUser = () => {
     available_slot: 0,
     avatar: '',
     created_at: '',
-    date_of_birth: '',
-    date_of_dead: '',
+    date_of_birth: null,
+    date_of_dead: null,
     description: '',
     first_name: '',
     full_name: '',
@@ -133,8 +134,20 @@ const CreateUser = () => {
               />
               <View style={styles.dateContainer}>
                 <View style={styles.dateWidth}>
-                  <Text style={styles.date}>{userData.date_of_birth}</Text>
-                  <Text style={styles.date}>{userData.date_of_dead}</Text>
+                  <DatePicker
+                    additionalStyles={{ width: 124, alignItems: 'center', paddingRight: 10 }}
+                    date={userData.date_of_birth ? new Date(userData.date_of_birth) : new Date()}
+                    setDate={(date: Date | null) => {
+                      setUserData({ ...userData, date_of_birth: date });
+                    }}
+                  />
+                  <DatePicker
+                    additionalStyles={{ width: 124, alignItems: 'center', paddingRight: 10 }}
+                    date={userData.date_of_dead ? new Date(userData.date_of_dead) : new Date()}
+                    setDate={(date: Date | null) => {
+                      setUserData({ ...userData, date_of_dead: date });
+                    }}
+                  />
                 </View>
               </View>
               <View style={styles.lines}>
@@ -150,7 +163,7 @@ const CreateUser = () => {
                 placeholderTextColor={colors.rusty_Copper_25_Opacity}
                 additionalStyles={{ marginTop: 22, width: '100%' }}
               />
-              <Button text="Saved" additionalStyles={styles.buttonStyle} onPress={handleUpdate} />
+              <Button text="Save" additionalStyles={styles.buttonStyle} onPress={handleUpdate} />
             </View>
           </ScrollView>
         </SafeAreaView>
