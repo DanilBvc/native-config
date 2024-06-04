@@ -19,7 +19,7 @@ const TextField: FC<textFieldProps> = ({
   const shakeAnimation = useRef(new Animated.Value(0)).current;
 
   const handleInput = (name: string, value: string) => {
-    if (validation.test(value)) {
+    if (validation?.test(value)) {
       setErrorValidation(false);
     } else {
       setErrorValidation(true);

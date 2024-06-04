@@ -114,9 +114,9 @@ const BuyPackageStep2: React.FC = () => {
       footerControl={
         <View style={style.footerBtnWrapper}>
           <Button
-            additionalStyles={{ borderRadius: 12, marginTop: 20 }}
+            additionalStyles={{ borderRadius: 12, marginTop: 20, width: '50%' }}
             onPress={handleNext}
-            text={'Next'}
+            text={t('payload.next')}
           />
         </View>
       }

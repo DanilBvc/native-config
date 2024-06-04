@@ -12,6 +12,7 @@ import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
 import { colors } from '../../../static/colors';
 import { nameRegex, passwordRegex } from '../../../static/regex';
 import { styles } from './buyPackage.style';
+import TextArea from '../../../components/generall/textArea/textArea';
 
 interface FormData {
   full_name: string;
@@ -53,7 +54,7 @@ const BuyPackageCard = ({ route }: { route: any }) => {
           formData,
           setFormData,
         },
-        label: 'Order for someone else',
+        label: t('payload.gift'),
       },
     ];
 
@@ -64,7 +65,7 @@ const BuyPackageCard = ({ route }: { route: any }) => {
           formData,
           onChange,
         },
-        label: 'Set a password for the QR code',
+        label: t('payload.passwordQR'),
       });
     }
 
@@ -75,7 +76,7 @@ const BuyPackageCard = ({ route }: { route: any }) => {
           formData,
           onChange,
         },
-        label: 'Special Wishes',
+        label: t('payload.specialWishes'),
       });
     }
 
@@ -84,9 +85,9 @@ const BuyPackageCard = ({ route }: { route: any }) => {
 
   const [openOptions, setOpenOptions] = useState<Record<number, boolean>>({});
 
-  function onChange (name: string, value: string) {
+  const onChange = (name: string, value: string) => {
     setFormData({ ...formData, [name]: value });
-  }
+  };
 
   const handleNext = () => {
     navigation.navigate('BuyPackage2' as never);
@@ -109,9 +110,9 @@ const BuyPackageCard = ({ route }: { route: any }) => {
       footerControl={
         <View style={styles.footerBtnWrapper}>
           <Button
-            additionalStyles={{ borderRadius: 12, marginTop: 20 }}
+            additionalStyles={{ borderRadius: 12, marginTop: 20, width: '50%' }}
             onPress={handleNext}
-            text={'Next'}
+            text={t('payload.next')}
           />
         </View>
       }
@@ -121,17 +122,17 @@ const BuyPackageCard = ({ route }: { route: any }) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.form}>
             <View>
-              <Text style={styles.orderTitle}>Enter data to create a new user</Text>
+              <Text style={styles.orderTitle}>{t('payload.userStep')}</Text>
               <LineWithCircle lineWidth={'80%'} />
               <Text style={styles.cardName}>{card}</Text>
             </View>
             <View>
-              <Text style={styles.inputTitle}>Account Name</Text>
+              <Text style={styles.inputTitle}>{t('payload.accountName')}</Text>
               <TextField
                 name={'full_name'}
                 value={formData.full_name}
                 onChange={onChange}
-                placeholder={t('auth.email')}
+                placeholder={t('payload.PIB')}
                 errorMessage={'Invalid email'}
                 validation={nameRegex}
                 additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
@@ -140,7 +141,7 @@ const BuyPackageCard = ({ route }: { route: any }) => {
             </View>
             <View style={styles.dateInputs}>
               <View style={styles.dateInput}>
-                <Text style={{ ...styles.inputTitle, marginBottom: 10 }}>Date of birth</Text>
+                <Text style={{ ...styles.inputTitle, marginBottom: 10 }}>{t('Dob')}</Text>
                 <LineWithCircle lineWidth={'80%'} />
                 <DatePicker
                   additionalStyles={{ marginTop: 30 }}
@@ -152,7 +153,7 @@ const BuyPackageCard = ({ route }: { route: any }) => {
               </View>
               <View style={styles.dateInput}>
                 <Text style={{ ...styles.inputTitle, textAlign: 'right', marginBottom: 10 }}>
-                  Date of death
+                  {t('Dod')}
                 </Text>
                 <LineWithCircle rotate="180deg" lineWidth={'80%'} />
                 <DatePicker
@@ -172,7 +173,9 @@ const BuyPackageCard = ({ route }: { route: any }) => {
                     <Checkbox
                       label={item.label}
                       checked={!!openOptions[index]}
-                      setChecked={() => { toggleOption(index); }}
+                      setChecked={() => {
+                        toggleOption(index);
+                      }}
                     />
                     {openOptions[index] && (
                       <View style={styles.option}>
@@ -184,12 +187,12 @@ const BuyPackageCard = ({ route }: { route: any }) => {
               })}
             </View>
             <View>
-              <Text style={styles.inputTitle}>How did you hear about us ?</Text>
+              <Text style={styles.inputTitle}>{t('payload.hearAbout')}</Text>
               <TextField
                 name={'how_did_you_hear_about_us'}
                 value={formData.how_did_you_hear_about_us}
                 onChange={onChange}
-                placeholder={'Write here...'}
+                placeholder={t('payload.hearAbout')}
                 errorMessage={'Not valid input'}
                 validation={/.{1,}/}
                 additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
@@ -212,12 +215,13 @@ const SetQrCodePassword = ({
   formData: FormData;
   onChange: (name: string, value: string) => void;
 }) => {
+  const { t } = useTranslation();
   return (
     <TextField
       name={'qr_code_password'}
       value={formData.qr_code_password}
       onChange={onChange}
-      placeholder={'Enter password for QR code'}
+      placeholder={t('payload.PlaceholderQR')}
       errorMessage={'Not valid input'}
       validation={passwordRegex}
       additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
@@ -233,11 +237,12 @@ const OrderForSomeoneElse = ({
   formData: FormData;
   setFormData: Dispatch<SetStateAction<FormData>>;
 }) => {
+  const { t } = useTranslation();
   return (
     <View style={{ ...styles.form, paddingBottom: 0 }}>
       <View style={styles.dateInputs}>
         <View style={styles.dateInput}>
-          <Text style={{ ...styles.inputTitle, marginBottom: 10 }}>Date of birth</Text>
+          <Text style={{ ...styles.inputTitle, marginBottom: 10 }}>{t('Dob')}</Text>
           <LineWithCircle lineWidth={'80%'} />
           <DatePicker
             additionalStyles={{ marginTop: 30 }}
@@ -254,7 +259,7 @@ const OrderForSomeoneElse = ({
         </View>
         <View style={styles.dateInput}>
           <Text style={{ ...styles.inputTitle, textAlign: 'right', marginBottom: 10 }}>
-            Date of death
+            {t('Dod')}
           </Text>
           <LineWithCircle rotate="180deg" lineWidth={'80%'} />
           <DatePicker
@@ -282,16 +287,13 @@ const SpecialWishes = ({
   formData: FormData;
   onChange: (name: string, value: string) => void;
 }) => {
+  const { t } = useTranslation();
   return (
-    <TextField
+    <TextArea
       name={'special_wishes'}
       value={formData.special_wishes}
       onChange={onChange}
-      placeholder={'Enter password for QR code'}
-      errorMessage={'Not valid input'}
-      validation={passwordRegex}
-      additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
-      placeholderColor={colors.amberwood_Brown}
-    />
+      placeholder={t('payload.specialWishes')}
+    ></TextArea>
   );
 };

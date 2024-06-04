@@ -3,7 +3,7 @@ export interface textFieldProps {
   name: string;
   onChange: (name: string, value: string) => void;
   placeholder: string;
-  validation: RegExp;
+  validation?: RegExp;
   error?: boolean;
   errorMessage?: string;
   additionalStyles?: object;

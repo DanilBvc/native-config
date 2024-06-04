@@ -61,4 +61,10 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.white,
     height: '100%',
   },
+  textTerms: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 13,
+    lineHeight: 22,
+    color: colors.rusty_Copper,
+  },
 });
