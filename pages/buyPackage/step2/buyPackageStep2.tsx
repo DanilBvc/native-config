@@ -5,7 +5,7 @@ import { HomeSvg } from '../../../assets/icons/qr-code';
 import LineWithCircle from '../../../components/lineWithCircle/lineWithCircle';
 import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
 import { colors } from '../../../static/colors';
-import { familyLogoUrl } from '../../../static/urls';
+import FamilyEmblem from '../../../static/familyEmblem';
 import { style } from './buyPackageStep2.style';
 import { useTranslation } from 'react-i18next';
 import Checkbox from '../../../components/generall/checkbox/checkbox';
@@ -128,12 +128,7 @@ const BuyPackageStep2: React.FC = () => {
             <View style={{ marginBottom: 52 }}>
               <Text style={style.orderTitle}>{t('payload.boxStep')}</Text>
               <LineWithCircle lineWidth={'80%'} />
-              <Image
-                source={{
-                  uri: familyLogoUrl,
-                }}
-                style={style.imageSize}
-              />
+              <FamilyEmblem width={140} height={140} additionalStyle={style.imageSize} />
             </View>
             <View style={style.spaceBetween}>
               <Pressable

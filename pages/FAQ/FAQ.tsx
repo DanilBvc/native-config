@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Image, Text, View, ScrollView, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity, useWindowDimensions } from 'react-native';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import LocalizationSwitcher from '../../components/generall/localizationSwitcher/localizationSwitcher';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 import { styles } from './FAQ.style';
-import { familyLogoUrl } from '../../static/urls';
+import FamilyEmblem from '../../static/familyEmblem';
 import LineWithCircle from '../../components/lineWithCircle/lineWithCircle';
 import { ArrowDownIcon } from '../../assets/icons/faq';
 import { useTranslation } from 'react-i18next';
@@ -273,17 +273,14 @@ const FAQ: React.FC = () => {
         }
         footerControl={<BottomNavigation />}
         contentMarginBottom={170}
-        burgerList={ <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
+        burgerList={
+          <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+        }
       >
         <ScrollView>
           <View>
             <View style={styles.container}>
-              <Image
-                source={{
-                  uri: familyLogoUrl,
-                }}
-                style={styles.imageSize}
-              />
+              <FamilyEmblem height={140} width={140} />
             </View>
           </View>
           <Text style={styles.faqText}>Public Offer Agreement</Text>
@@ -305,15 +302,13 @@ const FAQ: React.FC = () => {
                   </Text>
                   <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <LineWithCircle lineWidth={width - 100} />
-                    {expanded === index
-                      ? (
+                    {expanded === index ? (
                       <View style={{ transform: [{ rotate: '180deg' }] }}>
                         <ArrowDownIcon />
                       </View>
-                        )
-                      : (
+                    ) : (
                       <ArrowDownIcon />
-                        )}
+                    )}
                   </View>
                 </TouchableOpacity>
                 {expanded === index && (
@@ -355,7 +350,6 @@ const FAQ: React.FC = () => {
           </View>
         </ScrollView>
       </EmptyLayout>
-
     </>
   );
 };

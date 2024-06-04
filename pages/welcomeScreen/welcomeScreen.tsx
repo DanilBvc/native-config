@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-import { Image, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import {
   AiSvg,
   DeliverySvg,
@@ -17,7 +17,6 @@ import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import { colors } from '../../static/colors';
 
 import { type packageCard } from '../../static/types/productTypes/types';
-import { familyLogoUrl } from '../../static/urls';
 import { styles } from './welcomeScreen.style';
 
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
@@ -25,6 +24,7 @@ import { useAuth } from '../../hooks/useAuth';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 import { useTypedNavigation } from '../../hooks/useTypedNavigation';
 import BurgerList from '../../components/burgerList/burgerList';
+import FamilyEmblem from '../../static/familyEmblem';
 
 const WelcomeScreen = () => {
   const { isAuthenticated } = useAuth();
@@ -89,19 +89,17 @@ const WelcomeScreen = () => {
             style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
           >
             <LocalizationSwitcher />
-            {isAuthenticated
-              ? (
+            {isAuthenticated ? (
               <BurgerMenu
                 isBurgerMenuVisible={isBurgerMenuVisible}
                 setBurgerMenuVisible={setBurgerMenuVisible}
                 style={{ marginLeft: 20 }}
               />
-                )
-              : (
+            ) : (
               <Link to={{ screen: 'SignIn' }} style={{ color: colors.apricot_Blaze }}>
                 LOG IN
               </Link>
-                )}
+            )}
           </View>
         }
         footerControl={isAuthenticated && <BottomNavigation />}
@@ -110,12 +108,7 @@ const WelcomeScreen = () => {
         }
       >
         <View style={styles.container}>
-          <Image
-            source={{
-              uri: familyLogoUrl,
-            }}
-            style={styles.imageSize}
-          />
+          <FamilyEmblem width={140} height={140} />
         </View>
         <Slider features={cards} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
         <Button text={t('prices.buy')} onPress={goBuyPackage} />

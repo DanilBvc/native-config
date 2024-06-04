@@ -21,7 +21,6 @@ export const style = StyleSheet.create({
     top: '100%',
     height: 130,
     width: 130,
-    opacity: 0.1,
   },
   spaceBetween: {
     maxWidth: '100%',

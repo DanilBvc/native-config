@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Image, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import Button from '../../../components/generall/button/button';
 import LocalizationSwitcher from '../../../components/generall/localizationSwitcher/localizationSwitcher';
 import TextField from '../../../components/generall/textField/textField';
@@ -10,7 +10,7 @@ import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
 import { AuthUserApi } from '../../../services/authService/authService';
 import { emailRegex, passwordRegex } from '../../../static/regex';
 import { type userSignInData } from '../../../static/types/userTypes/types';
-import { familyLogoUrl } from '../../../static/urls';
+import FamilyEmblem from '../../../static/familyEmblem';
 import useUserStore from '../../../store/user/store';
 import { styles } from './signIn.style';
 
@@ -53,12 +53,7 @@ const SignIn = () => {
   return (
     <EmptyLayout additionalControl={<LocalizationSwitcher />}>
       <View style={styles.imageContainer}>
-        <Image
-          source={{
-            uri: familyLogoUrl,
-          }}
-          style={styles.imageSize}
-        />
+        <FamilyEmblem width={226} height={231} />
       </View>
       <View style={styles.emailContainer}>
         <TextField

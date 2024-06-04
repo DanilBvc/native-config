@@ -29,6 +29,10 @@ const TextArea: FC<Props> = ({
   const [errorValidation, setErrorValidation] = useState(false);
 
   const handleInput = (name: string, value: string) => {
+    if (!validation) {
+      onChange(name, value);
+      return;
+    }
     if (validation?.test(value)) {
       setErrorValidation(false);
     } else {

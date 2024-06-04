@@ -2,11 +2,6 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../static/colors';
 
 export const styles = StyleSheet.create({
-  imageSize: {
-    height: 140,
-    width: 140,
-    opacity: 0.1,
-  },
   container: {
     display: 'flex',
     alignItems: 'center',

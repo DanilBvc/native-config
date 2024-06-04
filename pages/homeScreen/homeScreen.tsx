@@ -6,7 +6,6 @@ import BottomNavigation from '../../components/generall/bottomNavigation/bottomN
 import { styles } from './homeScreen.style';
 import VideoPlayer from 'expo-video-player';
 import { ResizeMode } from 'expo-av';
-import { familyLogoUrl } from '../../static/urls';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import BurgerList from '../../components/burgerList/burgerList';
 
@@ -30,7 +29,9 @@ const HomeScreen = () => {
           </View>
         }
         footerControl={<BottomNavigation />}
-        burgerList={ <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
+        burgerList={
+          <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+        }
       >
         <></>
       </EmptyLayout>
@@ -62,15 +63,12 @@ const HomeScreen = () => {
           }}
         />
         <Image
-          source={{
-            uri: familyLogoUrl,
-          }}
-          style={{ zIndex: -1, position: 'absolute', opacity: 0.1 }}
+          source={require('../../assets/emblem.png')}
+          style={{ zIndex: -1, position: 'absolute' }}
           height={550}
           width={550}
         />
       </View>
-
     </>
   );
 };

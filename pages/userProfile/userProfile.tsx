@@ -6,7 +6,7 @@ import { ShareSvg } from '../../assets/icons/share';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import { colors } from '../../static/colors';
 import { styles } from './userProfile.style';
-import { familyLogoUrl } from '../../static/urls';
+import FamilyEmblem from '../../static/familyEmblem';
 import LineWithCircle from '../../components/lineWithCircle/lineWithCircle';
 import { useTypedNavigation, useTypedRoute } from '../../hooks/useTypedNavigation';
 import Button from '../../components/generall/button/button';
@@ -35,7 +35,9 @@ const UserProfile = () => {
           </View>
         }
         footerControl={<BottomNavigation />}
-        burgerList={ <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
+        burgerList={
+          <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+        }
       >
         <SafeAreaView>
           <ScrollView>
@@ -76,12 +78,7 @@ const UserProfile = () => {
       </EmptyLayout>
 
       <View style={styles.container}>
-        <Image
-          source={{
-            uri: familyLogoUrl,
-          }}
-          style={styles.image}
-        />
+        <FamilyEmblem height={400} width={400} />
       </View>
     </>
   );

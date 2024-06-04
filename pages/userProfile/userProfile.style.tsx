@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     bottom: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: -1,
   },
   image: {
     zIndex: -1,

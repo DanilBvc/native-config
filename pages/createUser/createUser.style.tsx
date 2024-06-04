@@ -19,7 +19,6 @@ export const styles = StyleSheet.create({
   },
   image: {
     zIndex: -1,
-    opacity: 0.1,
     height: 400,
     width: 400,
   },

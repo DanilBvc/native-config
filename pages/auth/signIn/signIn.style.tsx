@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  imageSize: { width: 226, height: 231, opacity: 0.1 },
   emailContainer: { paddingBottom: 31 },
   passwordContainer: { paddingBottom: 134 },
   text: {

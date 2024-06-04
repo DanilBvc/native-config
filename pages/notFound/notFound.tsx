@@ -1,7 +1,7 @@
 import React from 'react';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
-import { Image, Text, View } from 'react-native';
-import { familyLogoUrl } from '../../static/urls';
+import { Text, View } from 'react-native';
+import FamilyEmblem from '../../static/familyEmblem';
 import Button from '../../components/generall/button/button';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './notFound.style';
@@ -18,12 +18,7 @@ const NotFound = () => {
   return (
     <EmptyLayout>
       <View style={styles.container}>
-        <Image
-          source={{
-            uri: familyLogoUrl,
-          }}
-          style={styles.logo}
-        />
+        <FamilyEmblem height={231} width={226} />
       </View>
       <View style={styles.notFoundContainer}>
         <Text style={styles.title}>404</Text>

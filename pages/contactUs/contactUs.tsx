@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Dimensions,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { familyLogoUrl } from '../../static/urls';
+import { Dimensions, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import FamilyEmblem from '../../static/familyEmblem';
 import { styles } from './contactUs.style';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import { useTranslation } from 'react-i18next';
@@ -83,12 +75,7 @@ const ContactUs = () => {
       <SafeAreaView>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
-            <Image
-              source={{
-                uri: familyLogoUrl,
-              }}
-              style={styles.imageSize}
-            />
+            <FamilyEmblem height={140} width={140} />
           </View>
           <Text style={styles.title}>{t('contactUs.contact')}</Text>
           <Text style={styles.description}>{t('contactUs.firstText')}</Text>

@@ -1,8 +1,8 @@
 import React, { type FC, useEffect, useRef } from 'react';
-import { Animated, Text, View, TouchableOpacity, Image } from 'react-native';
+import { Animated, Text, View, TouchableOpacity } from 'react-native';
 import LineWithCircle from '../lineWithCircle/lineWithCircle';
 import { LogOutIcon } from '../../assets/icons/drop-down';
-import { familyLogoUrl } from '../../static/urls';
+import FamilyEmblem from '../../static/familyEmblem';
 import { useTranslation } from 'react-i18next';
 import { styles } from './burgerList.style';
 import { useNavigation } from '@react-navigation/native';
@@ -26,7 +26,8 @@ const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
   const handleLogOut = async () => {
     try {
       await AuthUserApi.logout();
-    } catch (error) {} finally {
+    } catch (error) {
+    } finally {
       setIsAuthenticated(false);
       await removeData('accessToken');
       await removeData('refreshToken');
@@ -99,14 +100,7 @@ const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
       </Animated.View>
 
       <View style={styles.imageWrapper}>
-        <Image
-          source={{
-            uri: familyLogoUrl,
-          }}
-          style={{ opacity: 0.2 }}
-          height={231}
-          width={226}
-        />
+        <FamilyEmblem height={231} width={226} />
       </View>
     </>
   );

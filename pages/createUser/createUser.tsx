@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { ShareSvg } from '../../assets/icons/share';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
-import { familyLogoUrl } from '../../static/urls';
+import FamilyEmblem from '../../static/familyEmblem';
 import { styles } from './createUser.style';
 import { colors } from '../../static/colors';
 import { PlusSvg } from '../../assets/icons/plus';
@@ -27,6 +27,7 @@ import { useTypedNavigation, useTypedRoute } from '../../hooks/useTypedNavigatio
 import { type Tree } from '../../static/types/userTypes/types';
 import { TreeService } from '../../services/treeService/treeService';
 import BurgerList from '../../components/burgerList/burgerList';
+import TextArea from '../../components/generall/textArea/textArea';
 
 const CreateUser = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
@@ -85,8 +86,7 @@ const CreateUser = () => {
     try {
       TreeService.updateUserTree(userData.id, userData);
       navigation.navigate('UserProfile', { user: userData });
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   return (
@@ -103,13 +103,14 @@ const CreateUser = () => {
             />
           </View>
         }
-        burgerList={<BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
+        burgerList={
+          <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+        }
       >
         <SafeAreaView>
           <ScrollView>
             <View style={styles.cardContainer}>
-              {userData.avatar
-                ? (
+              {userData.avatar ? (
                 <TouchableOpacity style={styles.imgContainer} onPress={removeImage}>
                   <Image source={{ uri: userData.avatar }} style={styles.placeholder} />
 
@@ -117,12 +118,11 @@ const CreateUser = () => {
                     <CloseIcon />
                   </View>
                 </TouchableOpacity>
-                  )
-                : (
+              ) : (
                 <TouchableOpacity style={styles.placeholder} onPress={selectImage}>
                   <PlusSvg />
                 </TouchableOpacity>
-                  )}
+              )}
 
               <TextField
                 additionalStyles={{
@@ -153,25 +153,14 @@ const CreateUser = () => {
                 <LineWithCircle lineWidth={width} rotate="180deg" />
                 <LineWithCircle lineWidth={width} />
               </View>
-              <TextField
-                additionalStyles={{
-                  width: '100%',
-                  height: 110,
-                  borderRadius: 12,
-                  flex: 1,
-                  marginTop: 22,
-                  alignSelf: 'center',
-                  fontFamily: 'Inter_500Medium',
-                  fontSize: 13,
-                  lineHeight: 22,
-                  textAlign: 'center',
-                }}
-                placeholder="Leave a few words about the person"
-                placeholderColor={colors.rusty_Copper_25_Opacity}
+
+              <TextArea
                 value={userData.description ?? ''}
-                name="description"
                 onChange={onChange}
-                validation={nameRegex}
+                name="description"
+                placeholder="Leave a few words about the person"
+                placeholderTextColor={colors.rusty_Copper_25_Opacity}
+                additionalStyles={{ marginTop: 22, width: '100%' }}
               />
               <Button text="Saved" additionalStyles={styles.buttonStyle} onPress={handleUpdate} />
             </View>
@@ -180,12 +169,7 @@ const CreateUser = () => {
       </EmptyLayout>
 
       <View style={styles.container}>
-        <Image
-          source={{
-            uri: familyLogoUrl,
-          }}
-          style={styles.image}
-        />
+        <FamilyEmblem additionalStyle={styles.image} />
       </View>
     </>
   );

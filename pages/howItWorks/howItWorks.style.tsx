@@ -2,7 +2,6 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { colors } from '../../static/colors';
 
 const width = Dimensions.get('window').width / 2 - 40;
-const fullWidth = Dimensions.get('window').width;
 
 export const styles = StyleSheet.create({
   container: {
@@ -52,10 +51,5 @@ export const styles = StyleSheet.create({
   alightRight: {
     textAlign: 'right',
     marginLeft: 40,
-  },
-  imageSize: {
-    width: fullWidth,
-    height: fullWidth,
-    opacity: 0.1,
   },
 });

@@ -19,9 +19,8 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     position: 'absolute',
     top: '100%',
-    height: 130,
-    width: 130,
-    opacity: 0.1,
+    height: 400,
+    width: 400,
   },
   spaceBetween: {
     maxWidth: '100%',

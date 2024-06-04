@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
-import { Image, SafeAreaView, ScrollView, View } from 'react-native';
+import { SafeAreaView, ScrollView, View } from 'react-native';
 import { ShareSvg } from '../../assets/icons/share';
 import { colors } from '../../static/colors';
 import { styles } from './customerSection.style';
 import BurgerList from '../../components/burgerList/burgerList';
-import { familyLogoUrl } from '../../static/urls';
 import CustomerCard from '../../components/customerCard/customerCard';
 import useUserStore from '../../store/user/store';
+import BackgroundEmblem from '../../static/backgroundEmblem';
 
 const CustomerSection = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
@@ -29,7 +29,9 @@ const CustomerSection = () => {
             />
           </View>
         }
-        burgerList={<BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />}
+        burgerList={
+          <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+        }
       >
         <SafeAreaView>
           <ScrollView>
@@ -42,14 +44,7 @@ const CustomerSection = () => {
         </SafeAreaView>
       </EmptyLayout>
 
-      <View style={styles.container}>
-        <Image
-          source={{
-            uri: familyLogoUrl,
-          }}
-          style={styles.image}
-        />
-      </View>
+      <BackgroundEmblem width={350} height={350} />
     </>
   );
 };

@@ -3,7 +3,6 @@ import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 import {
   Dimensions,
-  Image,
   SafeAreaView,
   ScrollView,
   Text,
@@ -18,13 +17,14 @@ import VideoPlayer from 'expo-video-player';
 import { ResizeMode } from 'expo-av';
 import { useTranslation } from 'react-i18next';
 import LineWithCircle from '../../components/lineWithCircle/lineWithCircle';
-import { familyLogoUrl } from '../../static/urls';
+import FamilyEmblem from '../../static/familyEmblem';
 import { SlideInView } from '../../components/slideInView/slideInView';
 
 const HowItWorks = () => {
   const width = Dimensions.get('window').width / 2;
   const navigate = useNavigation();
   const { t } = useTranslation();
+  const fullWidth = Dimensions.get('window').width;
 
   const Agreement = [
     {
@@ -98,12 +98,7 @@ const HowItWorks = () => {
         </View>
       </EmptyLayout>
       <View style={styles.imgContainer}>
-        <Image
-          source={{
-            uri: familyLogoUrl,
-          }}
-          style={styles.imageSize}
-        />
+        <FamilyEmblem height={fullWidth} width={fullWidth} />
       </View>
       <View style={styles.videoContainer}>
         <VideoPlayer

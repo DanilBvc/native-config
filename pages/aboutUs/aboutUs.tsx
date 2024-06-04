@@ -4,7 +4,7 @@ import BottomNavigation from '../../components/generall/bottomNavigation/bottomN
 import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import LocalizationSwitcher from '../../components/generall/localizationSwitcher/localizationSwitcher';
 import { styles } from './aboutUs.style';
-import { familyLogoUrl } from '../../static/urls';
+import FamilyEmblem from '../../static/familyEmblem';
 import { useTranslation } from 'react-i18next';
 import { ArrowBack } from '../../assets/icons/arrow-back';
 import { useNavigation } from '@react-navigation/native';
@@ -28,12 +28,7 @@ const AboutUs = () => {
       <SafeAreaView>
         <ScrollView>
           <View style={styles.container}>
-            <Image
-              source={{
-                uri: familyLogoUrl,
-              }}
-              style={styles.imageSize}
-            />
+            <FamilyEmblem height={140} width={140} />
           </View>
           <Text style={styles.title}>{t('landingPage.greetingsSection.helloFriend')}</Text>
 

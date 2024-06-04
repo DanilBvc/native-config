@@ -13,6 +13,7 @@ import { colors } from '../../../static/colors';
 import { nameRegex, passwordRegex } from '../../../static/regex';
 import { styles } from './buyPackage.style';
 import TextArea from '../../../components/generall/textArea/textArea';
+import BackgroundEmblem from '../../../static/backgroundEmblem';
 
 interface FormData {
   full_name: string;
@@ -101,108 +102,111 @@ const BuyPackageCard = ({ route }: { route: any }) => {
   };
 
   return (
-    <EmptyLayout
-      additionalControl={
-        <Link to={{ screen: 'Welcome' }}>
-          <HomeSvg />
-        </Link>
-      }
-      footerControl={
-        <View style={styles.footerBtnWrapper}>
-          <Button
-            additionalStyles={{ borderRadius: 12, marginTop: 20, width: '50%' }}
-            onPress={handleNext}
-            text={t('payload.next')}
-          />
-        </View>
-      }
-      contentMarginBottom={70}
-    >
-      <SafeAreaView>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.form}>
-            <View>
-              <Text style={styles.orderTitle}>{t('payload.userStep')}</Text>
-              <LineWithCircle lineWidth={'80%'} />
-              <Text style={styles.cardName}>{card}</Text>
-            </View>
-            <View>
-              <Text style={styles.inputTitle}>{t('payload.accountName')}</Text>
-              <TextField
-                name={'full_name'}
-                value={formData.full_name}
-                onChange={onChange}
-                placeholder={t('payload.PIB')}
-                errorMessage={'Invalid email'}
-                validation={nameRegex}
-                additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
-                placeholderColor={colors.amberwood_Brown}
-              />
-            </View>
-            <View style={styles.dateInputs}>
-              <View style={styles.dateInput}>
-                <Text style={{ ...styles.inputTitle, marginBottom: 10 }}>{t('Dob')}</Text>
-                <LineWithCircle lineWidth={'80%'} />
-                <DatePicker
-                  additionalStyles={{ marginTop: 30 }}
-                  date={formData.date_of_birth}
-                  setDate={(date: Date | null) => {
-                    setFormData({ ...formData, date_of_birth: date });
-                  }}
-                />
-              </View>
-              <View style={styles.dateInput}>
-                <Text style={{ ...styles.inputTitle, textAlign: 'right', marginBottom: 10 }}>
-                  {t('Dod')}
-                </Text>
-                <LineWithCircle rotate="180deg" lineWidth={'80%'} />
-                <DatePicker
-                  additionalStyles={{ marginTop: 30 }}
-                  date={formData.date_of_death}
-                  setDate={(date: Date | null) => {
-                    setFormData({ ...formData, date_of_death: date });
-                  }}
-                />
-              </View>
-            </View>
-            <View style={styles.optionList}>
-              {options.map((item, index) => {
-                const Component = item.component;
-                return (
-                  <View key={index}>
-                    <Checkbox
-                      label={item.label}
-                      checked={!!openOptions[index]}
-                      setChecked={() => {
-                        toggleOption(index);
-                      }}
-                    />
-                    {openOptions[index] && (
-                      <View style={styles.option}>
-                        <Component {...item.props} />
-                      </View>
-                    )}
-                  </View>
-                );
-              })}
-            </View>
-            <View>
-              <Text style={styles.inputTitle}>{t('payload.hearAbout')}</Text>
-              <TextField
-                name={'how_did_you_hear_about_us'}
-                value={formData.how_did_you_hear_about_us}
-                onChange={onChange}
-                placeholder={t('payload.hearAbout')}
-                errorMessage={'Not valid input'}
-                validation={/.{1,}/}
-                additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
-                placeholderColor={colors.amberwood_Brown}
-              />
-            </View>
+    <>
+      <EmptyLayout
+        additionalControl={
+          <Link to={{ screen: 'Welcome' }}>
+            <HomeSvg />
+          </Link>
+        }
+        footerControl={
+          <View style={styles.footerBtnWrapper}>
+            <Button
+              additionalStyles={{ borderRadius: 12, marginTop: 20, width: '50%' }}
+              onPress={handleNext}
+              text={t('payload.next')}
+            />
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </EmptyLayout>
+        }
+        contentMarginBottom={70}
+      >
+        <SafeAreaView>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.form}>
+              <View>
+                <Text style={styles.orderTitle}>{t('payload.userStep')}</Text>
+                <LineWithCircle lineWidth={'80%'} />
+                <Text style={styles.cardName}>{card}</Text>
+              </View>
+              <View>
+                <Text style={styles.inputTitle}>{t('payload.accountName')}</Text>
+                <TextField
+                  name={'full_name'}
+                  value={formData.full_name}
+                  onChange={onChange}
+                  placeholder={t('payload.PIB')}
+                  errorMessage={'Invalid email'}
+                  validation={nameRegex}
+                  additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
+                  placeholderColor={colors.amberwood_Brown}
+                />
+              </View>
+              <View style={styles.dateInputs}>
+                <View style={styles.dateInput}>
+                  <Text style={{ ...styles.inputTitle, marginBottom: 10 }}>{t('Dob')}</Text>
+                  <LineWithCircle lineWidth={'80%'} />
+                  <DatePicker
+                    additionalStyles={{ marginTop: 30 }}
+                    date={formData.date_of_birth}
+                    setDate={(date: Date | null) => {
+                      setFormData({ ...formData, date_of_birth: date });
+                    }}
+                  />
+                </View>
+                <View style={styles.dateInput}>
+                  <Text style={{ ...styles.inputTitle, textAlign: 'right', marginBottom: 10 }}>
+                    {t('Dod')}
+                  </Text>
+                  <LineWithCircle rotate="180deg" lineWidth={'80%'} />
+                  <DatePicker
+                    additionalStyles={{ marginTop: 30 }}
+                    date={formData.date_of_death}
+                    setDate={(date: Date | null) => {
+                      setFormData({ ...formData, date_of_death: date });
+                    }}
+                  />
+                </View>
+              </View>
+              <View style={styles.optionList}>
+                {options.map((item, index) => {
+                  const Component = item.component;
+                  return (
+                    <View key={index}>
+                      <Checkbox
+                        label={item.label}
+                        checked={!!openOptions[index]}
+                        setChecked={() => {
+                          toggleOption(index);
+                        }}
+                      />
+                      {openOptions[index] && (
+                        <View style={styles.option}>
+                          <Component {...item.props} />
+                        </View>
+                      )}
+                    </View>
+                  );
+                })}
+              </View>
+              <View>
+                <Text style={styles.inputTitle}>{t('payload.hearAbout')}</Text>
+                <TextField
+                  name={'how_did_you_hear_about_us'}
+                  value={formData.how_did_you_hear_about_us}
+                  onChange={onChange}
+                  placeholder={t('payload.hearAbout')}
+                  errorMessage={'Not valid input'}
+                  validation={/.{1,}/}
+                  additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
+                  placeholderColor={colors.amberwood_Brown}
+                />
+              </View>
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+      </EmptyLayout>
+      <BackgroundEmblem />
+    </>
   );
 };
 
