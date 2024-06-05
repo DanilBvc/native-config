@@ -1,6 +1,14 @@
 import React, { type FC, useState, useRef } from 'react';
 import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
-import { View, PanResponder, Dimensions, Text, Animated, ImageBackground } from 'react-native';
+import {
+  View,
+  PanResponder,
+  Dimensions,
+  Text,
+  Animated,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import BurgerMenu from '../../burgerMenu/burgerMenu';
 import ShareButton from '../../generall/shareButton/shareButton';
 import { type Cords, type SlotType, type TreeData } from '../../../static/types/tree/types';
@@ -14,6 +22,10 @@ import { CommentSvg } from '../../../assets/icons/comment';
 import BurgerList from '../../burgerList/burgerList';
 import glowingCircleBig from '../../../assets/glowingCircleBig.png';
 import { styles } from './previewTree.style';
+import BottomNavigation from '../../generall/bottomNavigation/bottomNavigation';
+import { useAuth } from '../../../hooks/useAuth';
+import { ArrowBack } from '../../../assets/icons/arrow-back';
+import { useNavigation } from '@react-navigation/native';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
@@ -32,6 +44,9 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
       useNativeDriver: true,
     }).start();
   };
+
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigation();
 
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
   const [activeSlot, setActiveSlot] = useState<null | (Partial<SlotType> & Cords)>(null);
@@ -124,16 +139,23 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
             style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
           >
             <ShareButton id={id} />
-            <BurgerMenu
-              isBurgerMenuVisible={isBurgerMenuVisible}
-              setBurgerMenuVisible={setBurgerMenuVisible}
-              style={{ marginLeft: 20 }}
-            />
+            {isAuthenticated ? (
+              <BurgerMenu
+                isBurgerMenuVisible={isBurgerMenuVisible}
+                setBurgerMenuVisible={setBurgerMenuVisible}
+                style={{ marginLeft: 20 }}
+              />
+            ) : (
+              <TouchableOpacity style={{ marginLeft: 20 }} onPress={navigate.goBack}>
+                <ArrowBack />
+              </TouchableOpacity>
+            )}
           </View>
         }
         burgerList={
           <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
         }
+        footerControl={isAuthenticated && <BottomNavigation theme="light" />}
       >
         {slots.map((slot, i) => (
           <PressableSlot onClick={selectSlot} key={i} item={slot} />
@@ -176,7 +198,7 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
             fontFamily: 'Inter_400Regular',
             fontSize: 15,
             position: 'absolute',
-            top: windowHeight / 1.25,
+            top: windowHeight / 1.35,
             left: windowWidth / 4,
           }}
         >

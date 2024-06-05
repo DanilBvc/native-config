@@ -18,4 +18,11 @@ export const styles = StyleSheet.create({
     marginTop: -50,
     borderRadius: 6,
   },
+
+  containerLight: {
+    backgroundColor: undefined,
+  },
+  qrCodeLight: {
+    backgroundColor: undefined,
+  },
 });
