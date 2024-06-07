@@ -11,8 +11,12 @@ import {
 } from 'react-native';
 import BurgerMenu from '../../burgerMenu/burgerMenu';
 import ShareButton from '../../generall/shareButton/shareButton';
-import { type Cords, type SlotType, type TreeData } from '../../../static/types/tree/types';
-import { colors } from '../../../static/colors';
+import {
+  FileEnum,
+  type Cords,
+  type SlotType,
+  type TreeData,
+} from '../../../static/types/tree/types';
 import PressableSlot from '../pressableSlot/pressableSlot';
 import ActiveSlot from '../activeSlot/activeSlot';
 import useAnimatedSlot from '../../../hooks/useAnimatedSlot';
@@ -20,12 +24,16 @@ import useSlots from '../../../hooks/useSlots';
 import useAngles from '../../../hooks/useAngles';
 import { CommentSvg } from '../../../assets/icons/comment';
 import BurgerList from '../../burgerList/burgerList';
-import glowingCircleBig from '../../../assets/glowingCircleBig.png';
 import { styles } from './previewTree.style';
 import BottomNavigation from '../../generall/bottomNavigation/bottomNavigation';
 import { useAuth } from '../../../hooks/useAuth';
 import { ArrowBack } from '../../../assets/icons/arrow-back';
 import { useNavigation } from '@react-navigation/native';
+import { colors } from '../../../static/colors';
+import { EditSvg } from '../../../assets/icons/EditSvg';
+import { CloseIcon } from '../../../assets/icons/drop-down';
+import UploadFile from '../uploadFile/uploadFile';
+import useUserStore from '../../../store/user/store';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
@@ -33,6 +41,10 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
   const { id } = treeData;
   const rotateValue = useRef(new Animated.Value(0)).current;
   const [isFlipped, setIsFlipped] = useState(false);
+  const userTrees = useUserStore((state) => state.user.trees);
+
+  const userTreesIds = userTrees.map((item) => item.id);
+  const isOwner = userTreesIds.includes(id);
 
   const rotate = () => {
     const toValue = isFlipped ? 0 : 1;
@@ -71,6 +83,23 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
   const deselectSlot = () => {
     animateOut(() => {
       setActiveSlot(null);
+    });
+  };
+
+  const handleOpenSlotWindow = () => {
+    animateIn();
+    setActiveSlot({
+      comment_text: '',
+      comment_title: '',
+      created_at: '',
+      id: 'test',
+      index: 0,
+      link: '',
+      slot_type: FileEnum.PHOTO,
+      width: 0,
+      height: 0,
+      x: 0,
+      y: 0,
     });
   };
 
@@ -139,16 +168,24 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
             style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
           >
             <ShareButton id={id} />
-            {isAuthenticated ? (
-              <BurgerMenu
-                isBurgerMenuVisible={isBurgerMenuVisible}
-                setBurgerMenuVisible={setBurgerMenuVisible}
-                style={{ marginLeft: 20 }}
-              />
-            ) : (
-              <TouchableOpacity style={{ marginLeft: 20 }} onPress={navigate.goBack}>
-                <ArrowBack />
+            {activeSlot ? (
+              <TouchableOpacity style={{ marginLeft: 20, zIndex: 10 }} onPress={deselectSlot}>
+                <CloseIcon stroke="#fff" />
               </TouchableOpacity>
+            ) : (
+              <>
+                {isAuthenticated ? (
+                  <BurgerMenu
+                    isBurgerMenuVisible={isBurgerMenuVisible}
+                    setBurgerMenuVisible={setBurgerMenuVisible}
+                    style={{ marginLeft: 20 }}
+                  />
+                ) : (
+                  <TouchableOpacity style={{ marginLeft: 20 }} onPress={navigate.goBack}>
+                    <ArrowBack />
+                  </TouchableOpacity>
+                )}
+              </>
             )}
           </View>
         }
@@ -158,9 +195,15 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
         footerControl={isAuthenticated && <BottomNavigation theme="light" />}
       >
         {slots.map((slot, i) => (
-          <PressableSlot onClick={selectSlot} key={i} item={slot} />
+          <PressableSlot
+            onClick={selectSlot}
+            key={i}
+            item={slot}
+            handleOpenSlotWindow={handleOpenSlotWindow}
+          />
         ))}
-        {activeSlot && (
+
+        {activeSlot && activeSlot.id !== 'test' && (
           <View style={{ width: 290, height: 290, position: 'relative' }}>
             <Animated.View style={[styles.card, frontAnimatedStyle]}>
               <ActiveSlot
@@ -171,11 +214,12 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
                 handleSlotChange={handleSlotChange}
               />
             </Animated.View>
+
             <Animated.View
               style={[styles.card, { width: isFlipped ? '100%' : '0%' }, backAnimatedStyle]}
             >
               <ImageBackground
-                source={glowingCircleBig}
+                source={require('../../../assets/glowingCircleBig.png')}
                 style={[styles.backSide, { top: activeSlot.y, left: activeSlot.x }]}
               >
                 <View style={styles.backContent}>
@@ -185,26 +229,49 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
             </Animated.View>
           </View>
         )}
-        {activeSlot && (
+
+        {activeSlot && activeSlot.id !== 'test' && (
           <PressableSlot
             onClick={rotate}
             item={{ x: 300, y: 300, height: 23, width: 23 }}
             component={CommentSvg()}
           />
         )}
-        <Text
+
+        <TouchableOpacity
           style={{
-            color: colors.fullWite,
-            fontFamily: 'Inter_400Regular',
-            fontSize: 15,
             position: 'absolute',
+            flexDirection: 'row',
             top: windowHeight / 1.35,
-            left: windowWidth / 4,
+            left: 0,
+            right: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          press the cross to collapse
-        </Text>
+          {isOwner ? (
+            <>
+              <EditSvg />
+              <Text
+                style={{
+                  color: colors.fullWite,
+                  fontFamily: 'Inter_400Regular',
+                  fontSize: 15,
+                  marginLeft: 10,
+                }}
+              >
+                Edit
+              </Text>
+            </>
+          ) : (
+            <Text>click on the circle</Text>
+          )}
+        </TouchableOpacity>
       </EmptyLayout>
+
+      {activeSlot && activeSlot?.id === 'test' && (
+        <UploadFile opacity={opacity} transform={transform} windowWidth={windowWidth} />
+      )}
     </View>
   );
 };

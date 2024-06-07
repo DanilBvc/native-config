@@ -1,6 +1,6 @@
 import { Path, Svg } from 'react-native-svg';
 
-export function DropDownIcon () {
+export function DropDownIcon() {
   return (
     <Svg width="23" height="15" viewBox="0 0 23 15" fill="none">
       <Path
@@ -19,12 +19,12 @@ export function DropDownIcon () {
   );
 }
 
-export function CloseIcon () {
+export function CloseIcon({ stroke = '#B37840' }: { stroke?: string }) {
   return (
     <Svg width="23" height="19" viewBox="0 0 18 19" fill="none">
       <Path
         d="M16.5494 2L2 17M2 2L16.5494 17"
-        stroke="#B37840"
+        stroke={stroke}
         strokeWidth="2.8125"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -33,7 +33,7 @@ export function CloseIcon () {
   );
 }
 
-export function LogOutIcon () {
+export function LogOutIcon() {
   return (
     <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
       <Path

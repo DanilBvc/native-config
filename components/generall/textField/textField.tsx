@@ -19,7 +19,10 @@ const TextField: FC<textFieldProps> = ({
   const shakeAnimation = useRef(new Animated.Value(0)).current;
 
   const handleInput = (name: string, value: string) => {
-    if (!validation) { onChange(name, value); return; }
+    if (!validation) {
+      onChange(name, value);
+      return;
+    }
 
     if (validation?.test(value)) {
       setErrorValidation(false);
@@ -69,6 +72,7 @@ const TextField: FC<textFieldProps> = ({
           placeholderTextColor={placeholderColor}
           placeholder={placeholder}
           value={value}
+          secureTextEntry={name === 'password'}
           onChangeText={(text) => {
             handleInput(name, text);
           }}

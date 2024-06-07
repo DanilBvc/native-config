@@ -10,15 +10,13 @@ export const styles = StyleSheet.create({
   },
 
   headerStyle: {
-
     position: 'relative',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     zIndex: 1000,
-
   },
-  imageSize: { height: '100%', width: '100%' },
+  imageSize: { height: 23, width: 140 },
   footer: {
     position: 'absolute',
     bottom: 40,

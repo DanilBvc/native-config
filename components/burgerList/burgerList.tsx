@@ -5,10 +5,10 @@ import { LogOutIcon } from '../../assets/icons/drop-down';
 import FamilyEmblem from '../../static/familyEmblem';
 import { useTranslation } from 'react-i18next';
 import { styles } from './burgerList.style';
-import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../hooks/useAuth';
 import { removeData } from '../../utils/localStorage';
 import { AuthUserApi } from '../../services/authService/authService';
+import { useTypedNavigation } from '../../hooks/useTypedNavigation';
 
 interface Props {
   isVisible: boolean;
@@ -19,7 +19,7 @@ const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
   const { setIsAuthenticated } = useAuth();
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const navigation = useNavigation();
+  const navigation = useTypedNavigation();
 
   const { t } = useTranslation();
 
@@ -32,6 +32,7 @@ const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
       await removeData('accessToken');
       await removeData('refreshToken');
       setBurgerMenuVisible(false);
+      navigation.navigate('/WelcomeScreen');
     }
   };
 
