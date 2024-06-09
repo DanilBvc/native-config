@@ -43,6 +43,7 @@
     "react-native-screens": "^3.31.1",
     "react-native-svg": "15.2.0",
     "react-native-video": "^6.1.2",
+    "react-native-webview": "^13.10.3",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

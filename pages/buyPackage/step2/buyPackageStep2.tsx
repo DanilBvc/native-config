@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Link } from '@react-navigation/native';
 import React, { Fragment, useMemo, useState } from 'react';
 import { Image, Pressable, ScrollView, Text, View } from 'react-native';
@@ -14,23 +15,20 @@ import { nameRegex } from '../../../static/regex';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../../../components/generall/button/button';
 import { useTypedNavigation } from '../../../hooks/useTypedNavigation';
-
-interface FormData {
-  orderEngraving: string;
-  additionalService: boolean;
-}
+import useOrderStore from '../../../store/order/store';
+import { TypeOfCasket, type Order } from '../../../static/types/orderTypes/types';
 
 interface OrderEngravingProps {
-  formData: FormData;
-  onChange: (name: string, value: string) => void;
+  order: Order;
+  onChange: (name: string, value: string | boolean) => void;
 }
 
-const OrderEngraving: React.FC<OrderEngravingProps> = ({ formData, onChange }) => {
+const OrderEngraving: React.FC<OrderEngravingProps> = ({ order, onChange }) => {
   const { t } = useTranslation();
   return (
     <TextField
-      name={'orderEngraving'}
-      value={formData.orderEngraving}
+      name={'engravingBoxes'}
+      value={order.engravingBoxes}
       onChange={onChange}
       placeholder={t('payload.engravingBoxes')}
       errorMessage={'Not valid input'}
@@ -42,35 +40,23 @@ const OrderEngraving: React.FC<OrderEngravingProps> = ({ formData, onChange }) =
 };
 
 interface OrderEngravingOption {
-  component: React.ComponentType<OrderEngravingProps>;
+  component: React.ComponentType<OrderEngravingProps> | typeof Fragment;
   props: OrderEngravingProps;
   label: string;
 }
 
-interface GeneralOption {
-  component: React.ExoticComponent<{ children?: React.ReactNode }>;
-  props: null;
-  label: string;
-}
-
-type Option = OrderEngravingOption | GeneralOption;
-
 const BuyPackageStep2: React.FC = () => {
+  const order = useOrderStore((state) => state.order);
+  const updateOrderData = useOrderStore((state) => state.updateOrderData);
+  const { typeOfCasket } = order;
   const { t } = useTranslation();
   const navigation = useTypedNavigation();
   const defaultCasket = t('payload.defaultCasket');
   const premiumCasket = t('payload.premiumCasket');
 
-  const [formData, setFormData] = useState<FormData>({
-    orderEngraving: '',
-    additionalService: false,
-  });
-
-  const onChange = (name: string, value: string) => {
-    setFormData({ ...formData, [name]: value });
+  const onChange = (name: string, value: string | boolean) => {
+    updateOrderData({ [name]: value });
   };
-
-  const [selectedOption, setSelectedOption] = useState(defaultCasket);
 
   const [openOptions, setOpenOptions] = useState<Record<number, boolean>>({});
 
@@ -81,23 +67,26 @@ const BuyPackageStep2: React.FC = () => {
     }));
   };
 
-  const options: Option[] = useMemo(
+  const options: OrderEngravingOption[] = useMemo(
     () => [
       {
         component: OrderEngraving,
         props: {
-          formData,
+          order,
           onChange,
         },
         label: t('payload.engravingBoxes'),
       },
       {
         component: Fragment,
-        props: null,
+        props: {
+          order,
+          onChange,
+        },
         label: t('payload.isCasketWithImage'),
       },
     ],
-    [formData, onChange]
+    [order, onChange]
   );
 
   const handleNext = () => {
@@ -133,7 +122,7 @@ const BuyPackageStep2: React.FC = () => {
             <View style={style.spaceBetween}>
               <Pressable
                 onPress={() => {
-                  setSelectedOption(defaultCasket);
+                  updateOrderData({ typeOfCasket: TypeOfCasket.default });
                 }}
                 style={style.spaceBetweenItem}
               >
@@ -141,9 +130,9 @@ const BuyPackageStep2: React.FC = () => {
                   style={{
                     ...style.title,
                     color:
-                      selectedOption !== defaultCasket
-                        ? colors.amberwood_Brown
-                        : colors.earthy_Brown,
+                    typeOfCasket !== TypeOfCasket.default
+                      ? colors.amberwood_Brown
+                      : colors.earthy_Brown,
                     marginRight: 10,
                   }}
                 >
@@ -151,14 +140,14 @@ const BuyPackageStep2: React.FC = () => {
                 </Text>
                 <LineWithCircle
                   backgroundColor={
-                    selectedOption !== defaultCasket ? colors.amberwood_Brown : colors.earthy_Brown
+                    typeOfCasket !== TypeOfCasket.default ? colors.amberwood_Brown : colors.earthy_Brown
                   }
                   lineWidth={'80%'}
                 />
               </Pressable>
               <Pressable
                 onPress={() => {
-                  setSelectedOption(premiumCasket);
+                  updateOrderData({ typeOfCasket: TypeOfCasket.premium });
                 }}
                 style={style.spaceBetweenItem}
               >
@@ -168,16 +157,16 @@ const BuyPackageStep2: React.FC = () => {
                     textAlign: 'right',
                     marginLeft: 10,
                     color:
-                      selectedOption !== premiumCasket
-                        ? colors.amberwood_Brown
-                        : colors.earthy_Brown,
+                    typeOfCasket !== TypeOfCasket.premium
+                      ? colors.amberwood_Brown
+                      : colors.earthy_Brown,
                   }}
                 >
                   {premiumCasket}
                 </Text>
                 <LineWithCircle
                   backgroundColor={
-                    selectedOption !== premiumCasket ? colors.amberwood_Brown : colors.earthy_Brown
+                    typeOfCasket !== TypeOfCasket.premium ? colors.amberwood_Brown : colors.earthy_Brown
                   }
                   rotate="180deg"
                   lineWidth={'80%'}
@@ -186,7 +175,7 @@ const BuyPackageStep2: React.FC = () => {
             </View>
             <Image
               source={
-                selectedOption === premiumCasket
+                typeOfCasket === TypeOfCasket.premium
                   ? require('../../../assets/icons/premiumBox.png')
                   : require('../../../assets/icons/defaultBox.png')
               }
@@ -195,13 +184,20 @@ const BuyPackageStep2: React.FC = () => {
             <View>
               {options.map((item, index) => {
                 const Component = item.component;
+                const props = item.props
                 return (
                   <View key={index} style={{ marginTop: 12 }}>
                     <Checkbox
                       label={item.label}
-                      checked={!!openOptions[index]}
+                      checked={item.label === t('payload.isCasketWithImage') ? props.order.isCasketWithImage : !!openOptions[index]}
                       setChecked={() => {
-                        toggleOption(index);
+                        if (item.label === t('payload.isCasketWithImage')) {
+                          if (props) {
+                            onChange('isCasketWithImage', !props.order.isCasketWithImage);
+                          }
+                        } else {
+                          toggleOption(index);
+                        }
                       }}
                     />
                     {openOptions[index] && item.props && (
