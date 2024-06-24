@@ -17,6 +17,7 @@ import { type Order, TypeOfMail } from '../../../static/types/orderTypes/types';
 import { PaymentService } from '../../../services/paymentService/paymentService';
 import { TreeService } from '../../../services/treeService/treeService';
 import i18next from '../../../services/i18nextjs';
+import CustomModal from '../../../components/generall/modal/modal';
 
 const Delivery: FC<{ order: Order, updateOrderData: (orderData: Partial<Order>) => void }> = ({ order, updateOrderData }) => {
   const options = {
@@ -54,8 +55,10 @@ const Delivery: FC<{ order: Order, updateOrderData: (orderData: Partial<Order>) 
 };
 
 const BuyPackageStep4 = () => {
+  const [isSuccess, setIsSuccess] = React.useState(false);
   const { t } = useTranslation();
-  const order = useOrderStore((state) => state.order);
+  const { order, clearOrderData } = useOrderStore((state) => state);
+
   const navigation = useNavigation();
   const handleNext = async () => {
     try {
@@ -63,11 +66,16 @@ const BuyPackageStep4 = () => {
       const typeId = trees.find((type) => type.name.toLowerCase() === order.selectedPackage.toLowerCase())?.id
       if (!typeId) throw new Error('Type not found')
       const response = await PaymentService.createPayload({ ...order, type_id: typeId, language: i18next.language });
-      const route = {
-        name: 'WebView',
-        params: { url: response.url }
+      if (!response) {
+        setIsSuccess(true)
+      } else {
+        const route = {
+          name: 'WebView',
+          params: { url: response.url }
+        }
+
+        navigation.navigate(route as never)
       }
-      navigation.navigate(route as never)
     } catch (Err) {
     }
   };
@@ -78,8 +86,22 @@ const BuyPackageStep4 = () => {
     updateOrderData({ [name]: value });
   };
 
+  const redirectToHome = () => {
+    clearOrderData()
+    navigation.navigate('Welcome' as never);
+  }
+
   return (
     <>
+    <CustomModal open={isSuccess} close={() => {}} >
+    <View style={styles.successMessageWrapper}>
+        <View style={styles.successMessageContainer}>
+          <Text style={styles.successMessage}>{t('successPayloadMessage')}</Text>
+          <Text style={styles.successMessage}>{t('payload.checkEmail')}</Text>
+          <Button text={t('payload.return')} onPress={redirectToHome} />
+        </View>
+      </View>
+    </CustomModal>
       <EmptyLayout
         additionalControl={
           <Link to={{ screen: 'Welcome' }}>

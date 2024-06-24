@@ -12,5 +12,14 @@ module.exports = function (baseConfig) {
       assetExts: assetExts.filter((ext) => ext !== 'svg'),
       sourceExts: [...sourceExts, 'svg', 'tsx', 'ts'],
     },
+    // transformer: {
+    //   assetPlugins: ['expo-asset/tools/hashAssetFiles'],
+    //   getTransformOptions: async () => ({
+    //     transform: {
+    //       experimentalImportSupport: false,
+    //       inlineRequires: false,
+    //     },
+    //   }),
+    // },
   });
 };

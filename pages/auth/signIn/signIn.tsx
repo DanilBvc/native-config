@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import Button from '../../../components/generall/button/button';
 import LocalizationSwitcher from '../../../components/generall/localizationSwitcher/localizationSwitcher';
 import TextField from '../../../components/generall/textField/textField';
@@ -22,8 +22,8 @@ const SignIn = () => {
   const { setIsAuthenticated } = useAuth();
   const navigation = useNavigation();
   const [signInData, setSignInData] = useState<userSignInData>({
-    email: 'dneys@gmail.com',
-    password: '1012002',
+    email: 'demouserua@gmail.com',
+    password: 'jSvcVlZbiQwlm7n',
   });
 
   const [error, setError] = useState<boolean>(false);
@@ -36,7 +36,6 @@ const SignIn = () => {
   const signIn = async () => {
     try {
       const response = await AuthUserApi.login(signInData);
-
       await storeData('accessToken', response.tokens.accessToken);
       await storeData('refreshToken', response.tokens.refreshToken);
 
@@ -51,6 +50,9 @@ const SignIn = () => {
   };
 
   return (
+    <ScrollView
+    showsVerticalScrollIndicator={false}
+  >
     <EmptyLayout additionalControl={<LocalizationSwitcher />}>
       <View style={styles.imageContainer}>
         <FamilyEmblem width={226} height={231} />
@@ -80,6 +82,7 @@ const SignIn = () => {
         Lorem ipsum dolor sit amet consectetur. Suspendisse massa dictum nisl sapien vulputate.
       </Text>
     </EmptyLayout>
+    </ScrollView>
   );
 };
 

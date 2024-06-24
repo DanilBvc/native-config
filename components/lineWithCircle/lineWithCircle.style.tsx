@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   line: {
-    height: 1,
+    height: 2,
   },
   circle: {
     width: 6,

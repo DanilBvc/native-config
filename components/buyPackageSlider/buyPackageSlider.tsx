@@ -1,6 +1,5 @@
 import React, { type FC } from 'react';
 import {
-  Dimensions,
   ScrollView,
   View,
   type NativeScrollEvent,
@@ -10,7 +9,7 @@ import { type packageCard } from '../../static/types/productTypes/types';
 import AnimatedLine from '../animateLine/animateLine';
 import BuyPackageCard from '../buyPackageCard/buyPackageCard';
 import { styles } from './buyPackageSlider.style';
-const width = Dimensions.get('window').width;
+import { wp } from '../../utils/percentageSizes';
 
 const Slider: FC<{
   features: packageCard[];
@@ -18,7 +17,7 @@ const Slider: FC<{
   setCurrentSlide: (index: number) => void;
 }> = ({ features, currentSlide, setCurrentSlide }) => {
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const slideWidth = width * 0.89;
+    const slideWidth = wp(80);
     const scrollPosition = event.nativeEvent.contentOffset.x;
     const index = Math.floor(scrollPosition / slideWidth);
     setCurrentSlide(index);

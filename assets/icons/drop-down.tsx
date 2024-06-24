@@ -19,12 +19,12 @@ export function DropDownIcon () {
   );
 }
 
-export function CloseIcon () {
+export function CloseIcon ({ stroke = '#B37840' }: { stroke?: string }) {
   return (
     <Svg width="23" height="19" viewBox="0 0 18 19" fill="none">
       <Path
         d="M16.5494 2L2 17M2 2L16.5494 17"
-        stroke="#B37840"
+        stroke={stroke}
         strokeWidth="2.8125"
         strokeLinecap="round"
         strokeLinejoin="round"
