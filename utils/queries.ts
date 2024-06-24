@@ -60,5 +60,6 @@ export const unauthorizedRequest = async <T>(
   body?: object
 ): Promise<T> => {
   const response = await makeRequest<T>(url, method, {}, body);
+
   return response;
 };

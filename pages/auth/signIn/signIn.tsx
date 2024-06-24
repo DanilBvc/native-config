@@ -22,8 +22,8 @@ const SignIn = () => {
   const { setIsAuthenticated } = useAuth();
   const navigation = useNavigation();
   const [signInData, setSignInData] = useState<userSignInData>({
-    email: 'dneys@gmail.com',
-    password: '1012002',
+    email: 'demouserua@gmail.com',
+    password: 'jSvcVlZbiQwlm7n',
   });
 
   const [error, setError] = useState(false);
@@ -36,7 +36,6 @@ const SignIn = () => {
   const signIn = async () => {
     try {
       const response = await AuthUserApi.login(signInData);
-
       await storeData('accessToken', response.tokens.accessToken);
       await storeData('refreshToken', response.tokens.refreshToken);
 
