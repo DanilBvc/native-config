@@ -22,3 +22,8 @@ export const oneTree = (treeId: string) => `${baseTreeUrl}/one/${treeId}`;
 export const allUserTreeUrl = (userId: string) => `${baseTreeUrl}/all/${userId}`;
 
 export const allTreeUrl = `${baseTreeUrl}/all`;
+
+// payment
+export const basePaymentUrl = `${baseUrl}/payment`;
+export const paymentCreateSlot = `${basePaymentUrl}/slots`;
+export const paymentValidateToken = (token: string) => `${basePaymentUrl}/validate?token=${token}`;

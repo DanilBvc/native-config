@@ -22,6 +22,7 @@ import { colors } from './static/colors';
 import ScanQrCode from './pages/scanQrCode/scanQrCode';
 import { AuthProvider } from './hooks/useAuth';
 import Tree from './pages/tree/tree';
+import WebViewScreen from './pages/webView/webView';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -66,6 +67,8 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="Tree" component={Tree} options={{ headerShown: false }} />
+            <Stack.Screen name="WebView" component={WebViewScreen} />
+
           </Stack.Navigator>
         </View>
       </AuthProvider>
