@@ -92,7 +92,7 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
       comment_text: '',
       comment_title: '',
       created_at: '',
-      id: 'test',
+      id: 'setNewImage',
       index: 0,
       link: '',
       slot_type: FileEnum.PHOTO,
@@ -203,7 +203,7 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
           />
         ))}
 
-        {activeSlot && activeSlot.id !== 'test' && (
+        {activeSlot && activeSlot.id !== 'setNewImage' && (
           <View style={{ width: 290, height: 290, position: 'relative' }}>
             <Animated.View style={[styles.card, frontAnimatedStyle]}>
               <ActiveSlot
@@ -230,7 +230,7 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
           </View>
         )}
 
-        {activeSlot && activeSlot.id !== 'test' && (
+        {activeSlot && activeSlot.id !== 'setNewImage' && (
           <PressableSlot
             onClick={rotate}
             item={{ x: 300, y: 300, height: 23, width: 23 }}
@@ -269,8 +269,14 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
         </TouchableOpacity>
       </EmptyLayout>
 
-      {activeSlot && activeSlot?.id === 'test' && (
-        <UploadFile opacity={opacity} transform={transform} windowWidth={windowWidth} />
+      {activeSlot && activeSlot?.id === 'setNewImage' && (
+        <UploadFile
+          opacity={opacity}
+          transform={transform}
+          windowWidth={windowWidth}
+          id={id}
+          deselectSlot={deselectSlot}
+        />
       )}
     </View>
   );

@@ -19,6 +19,7 @@ export const userTreeUrl = `${baseTreeUrl}/me`;
 export const oneTreeUrl = `${baseTreeUrl}/one`;
 export const slotUrl = (id: string) => `${baseTreeUrl}/slot/${id}`;
 export const oneTree = (treeId: string) => `${baseTreeUrl}/one/${treeId}`;
+export const addFile = (treeId: string) => `${baseTreeUrl}/slot/${treeId}`;
 export const allUserTreeUrl = (userId: string) => `${baseTreeUrl}/all/${userId}`;
 
 export const allTreeUrl = `${baseTreeUrl}/all`;
