@@ -26,7 +26,7 @@ const SignIn = () => {
     password: '1012002',
   });
 
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<boolean>(false);
 
   const onChange = (name: string, value: string) => {
     setError(false);
