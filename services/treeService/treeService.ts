@@ -17,4 +17,8 @@ export class TreeService {
   static async addFileSlot(treeId: string, data: FormData): Promise<TreeData> {
     return await authorizedRequest(addFile(treeId), 'POST', tokens.refresh_token, data);
   }
+
+  static async deleteFileSlot(treeId: string): Promise<TreeData> {
+    return await authorizedRequest(addFile(treeId), 'DELETE', tokens.refresh_token);
+  }
 }

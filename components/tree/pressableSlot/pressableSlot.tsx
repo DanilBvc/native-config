@@ -1,5 +1,5 @@
 import React, { type ReactNode, type FC } from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, type StyleProp, type ViewStyle } from 'react-native';
 import { type SlotType, type Cords } from '../../../static/types/tree/types';
 import GlowingSlot from '../glowingSlot/glowingSlot';
 
@@ -8,13 +8,16 @@ const PressableSlot: FC<{
   onClick?: (slot: Partial<SlotType> & Cords) => void;
   component?: ReactNode;
   handleOpenSlotWindow?: () => void;
-}> = ({ item, onClick, component, handleOpenSlotWindow }) => {
+  style?: StyleProp<ViewStyle>;
+}> = ({ item, onClick, component, handleOpenSlotWindow, style }) => {
   return (
     <Pressable
       onPress={() => {
         if (!item) return;
         onClick?.(item);
       }}
+      collapsable={false}
+      style={style}
     >
       <GlowingSlot
         url={item.link}

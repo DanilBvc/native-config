@@ -3,10 +3,14 @@ import { colors } from '../../../static/colors';
 
 export const styles = StyleSheet.create({
   card: {
-    backfaceVisibility: 'hidden',
     width: '100%',
     height: '100%',
     position: 'absolute',
+  },
+  container: {
+    position: 'absolute',
+    top: '50%',
+    zIndex: 1,
   },
   backSide: {
     justifyContent: 'center',
