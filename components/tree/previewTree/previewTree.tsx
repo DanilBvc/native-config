@@ -41,8 +41,9 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
   const { id } = treeData;
   const rotateValue = useRef(new Animated.Value(0)).current;
   const [isFlipped, setIsFlipped] = useState(false);
-  const userTrees = useUserStore((state) => state.user.trees);
+  const [newFileIndex, setNewFileIndex] = useState<null | number>(null);
 
+  const userTrees = useUserStore((state) => state.user.trees);
   const userTreesIds = userTrees.map((item) => item.id);
   const isOwner = userTreesIds.includes(id);
 
@@ -86,8 +87,10 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
     });
   };
 
-  const handleOpenSlotWindow = () => {
+  const handleOpenSlotWindow = (index: number) => {
     animateIn();
+
+    setNewFileIndex(index);
     setActiveSlot({
       comment_text: '',
       comment_title: '',
@@ -199,7 +202,9 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
             onClick={selectSlot}
             key={i}
             item={slot}
-            handleOpenSlotWindow={handleOpenSlotWindow}
+            handleOpenSlotWindow={() => {
+              handleOpenSlotWindow(i);
+            }}
           />
         ))}
 
@@ -275,6 +280,7 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
           transform={transform}
           windowWidth={windowWidth}
           id={id}
+          newFileIndex={newFileIndex}
           deselectSlot={deselectSlot}
         />
       )}

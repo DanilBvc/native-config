@@ -23,10 +23,6 @@ const makeRequest = async <T>(
 ): Promise<T> => {
   const isFormData = body instanceof FormData;
 
-  console.log(isFormData, 'isFormData');
-
-  console.log(body, 'body');
-
   const request: RequestInit = {
     method,
     headers: isFormData
@@ -36,8 +32,6 @@ const makeRequest = async <T>(
   };
 
   const response = await fetch(url, request);
-
-  console.log(response, 'response');
 
   return (await handleResponse<T>(response)) as T;
 };
@@ -55,13 +49,7 @@ export const authorizedRequest = async <T>(
   }
 
   const headers = { Authorization: `Bearer ${token}` };
-
-  console.log(body, 'body');
-
   const response = await makeRequest<T>(url, method, headers, body);
-
-  console.log(response, 'response');
-
   return response;
 };
 

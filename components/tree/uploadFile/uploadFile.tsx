@@ -15,16 +15,24 @@ interface UploadFileProps {
   windowWidth: number;
   deselectSlot: () => void;
   id: string;
+  newFileIndex: number | null;
 }
 
-const UploadFile: FC<UploadFileProps> = ({ opacity, transform, windowWidth, deselectSlot, id }) => {
+const UploadFile: FC<UploadFileProps> = ({
+  opacity,
+  transform,
+  windowWidth,
+  deselectSlot,
+  id,
+  newFileIndex,
+}) => {
   const [userData, setUserData] = useState<{
-    file: File | null;
-    index: number;
+    file: { uri: string; name: string; type: string } | null;
+    index: number | null;
     slot_type: string;
   }>({
     file: null,
-    index: 0,
+    index: newFileIndex,
     slot_type: 'PHOTO',
   });
 
@@ -56,10 +64,14 @@ const UploadFile: FC<UploadFileProps> = ({ opacity, transform, windowWidth, dese
 
     if (!pickerResult.canceled) {
       const { uri } = pickerResult.assets[0];
-      const response = await fetch(uri);
-      const blob = await response.blob();
-      const file = new File([blob], 'photo.jpg', { type: 'image/jpeg' });
-      setUserData({ ...userData, file });
+      setUserData({
+        ...userData,
+        file: {
+          uri,
+          name: 'photo.jpg',
+          type: 'image/jpeg',
+        },
+      });
       setUri(uri);
     }
   };
@@ -73,7 +85,11 @@ const UploadFile: FC<UploadFileProps> = ({ opacity, transform, windowWidth, dese
     if (userData.file === null) return;
     const formData = new FormData();
 
-    formData.append('file', userData.file);
+    formData.append('file', {
+      uri: userData.file.uri,
+      name: userData.file.name,
+      type: userData.file.type,
+    } as any); // TypeScript workaround
     formData.append('index', userData.index.toString());
     formData.append('slot_type', userData.slot_type);
 
