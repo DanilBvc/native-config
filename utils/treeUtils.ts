@@ -1,5 +1,6 @@
 import { generateUUID } from './utils';
 import { type Cords, type SlotType } from './../static/types/tree/types';
+
 export const generateCircularCoords = (
   angles: number[],
   baseRadius: number,
@@ -12,13 +13,16 @@ export const generateCircularCoords = (
   const circlesData = angles.map((angle, i) => {
     const radius = baseRadius + (i % 2 === 0 ? radiusVariation : -radiusVariation);
     const index = i % uniqueCount; // Repeat positions after uniqueCount
+    const slot = slots.find((slot) => slot.index === i);
+
     return {
       x: centerX + radius * Math.cos(angles[index]) - 36.5, // 36.5 is half of the width (73/2) to center the sphere
       y: centerY + radius * Math.sin(angles[index]) - 36.5,
       width: 73,
       height: 73,
-      id: slots[i] ? slots[i].id : generateUUID(),
-      link: slots[i]?.link,
+      id: slot ? slot.id : generateUUID(),
+      link: slot?.link,
+      index: i,
     };
   });
 

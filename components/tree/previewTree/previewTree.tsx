@@ -22,7 +22,7 @@ import ActiveSlot from '../activeSlot/activeSlot';
 import useAnimatedSlot from '../../../hooks/useAnimatedSlot';
 import useSlots from '../../../hooks/useSlots';
 import useAngles from '../../../hooks/useAngles';
-import { CommentSvg } from '../../../assets/icons/comment';
+import { CommentSvg, TrashSvg } from '../../../assets/icons/comment';
 import BurgerList from '../../burgerList/burgerList';
 import { styles } from './previewTree.style';
 import BottomNavigation from '../../generall/bottomNavigation/bottomNavigation';
@@ -32,17 +32,23 @@ import { useNavigation } from '@react-navigation/native';
 import { colors } from '../../../static/colors';
 import { EditSvg } from '../../../assets/icons/EditSvg';
 import { CloseIcon } from '../../../assets/icons/drop-down';
-import UploadFile from '../uploadFile/uploadFile';
 import useUserStore from '../../../store/user/store';
+import UploadFile from '../uploadFile/uploadFile';
+import { TreeService } from '../../../services/treeService/treeService';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
-const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
+const PreviewTree: FC<{
+  treeData: TreeData;
+  removeById: (id: string) => void;
+  addSlot: (obj: SlotType) => void;
+}> = ({ treeData, removeById, addSlot }) => {
   const { id } = treeData;
   const rotateValue = useRef(new Animated.Value(0)).current;
   const [isFlipped, setIsFlipped] = useState(false);
-  const userTrees = useUserStore((state) => state.user.trees);
+  const [newFileIndex, setNewFileIndex] = useState<null | number>(null);
 
+  const userTrees = useUserStore((state) => state.user.trees);
   const userTreesIds = userTrees.map((item) => item.id);
   const isOwner = userTreesIds.includes(id);
 
@@ -86,13 +92,15 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
     });
   };
 
-  const handleOpenSlotWindow = () => {
+  const handleOpenSlotWindow = (index: number) => {
     animateIn();
+
+    setNewFileIndex(index);
     setActiveSlot({
       comment_text: '',
       comment_title: '',
       created_at: '',
-      id: 'test',
+      id: 'setNewImage',
       index: 0,
       link: '',
       slot_type: FileEnum.PHOTO,
@@ -135,6 +143,19 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
       }
     },
   });
+
+  const handleDelete = async () => {
+    try {
+      const response = await TreeService.deleteFileSlot(activeSlot?.id ?? '');
+
+      if (response) {
+        deselectSlot();
+        removeById(activeSlot?.id ?? '');
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   const rotateInterpolation = rotateValue.interpolate({
     inputRange: [0, 1],
@@ -199,11 +220,14 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
             onClick={selectSlot}
             key={i}
             item={slot}
-            handleOpenSlotWindow={handleOpenSlotWindow}
+            style={activeSlot && { display: 'none' }}
+            handleOpenSlotWindow={() => {
+              handleOpenSlotWindow(i);
+            }}
           />
         ))}
 
-        {activeSlot && activeSlot.id !== 'test' && (
+        {activeSlot && activeSlot.id !== 'setNewImage' && (
           <View style={{ width: 290, height: 290, position: 'relative' }}>
             <Animated.View style={[styles.card, frontAnimatedStyle]}>
               <ActiveSlot
@@ -230,11 +254,29 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
           </View>
         )}
 
-        {activeSlot && activeSlot.id !== 'test' && (
+        {activeSlot && activeSlot?.id === 'setNewImage' && (
+          <UploadFile
+            opacity={opacity}
+            transform={transform}
+            windowWidth={windowWidth}
+            id={id}
+            newFileIndex={newFileIndex}
+            deselectSlot={deselectSlot}
+            addSlot={addSlot}
+          />
+        )}
+        {activeSlot && activeSlot.id !== 'setNewImage' && (
           <PressableSlot
             onClick={rotate}
             item={{ x: 300, y: 300, height: 23, width: 23 }}
             component={CommentSvg()}
+          />
+        )}
+        {activeSlot && activeSlot.id !== 'setNewImage' && (
+          <PressableSlot
+            onClick={handleDelete}
+            item={{ x: 40, y: 280, height: 23, width: 23 }}
+            component={TrashSvg()}
           />
         )}
 
@@ -268,10 +310,6 @@ const PreviewTree: FC<{ treeData: TreeData }> = ({ treeData }) => {
           )}
         </TouchableOpacity>
       </EmptyLayout>
-
-      {activeSlot && activeSlot?.id === 'test' && (
-        <UploadFile opacity={opacity} transform={transform} windowWidth={windowWidth} />
-      )}
     </View>
   );
 };

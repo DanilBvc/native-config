@@ -22,7 +22,11 @@ import { colors } from './static/colors';
 import ScanQrCode from './pages/scanQrCode/scanQrCode';
 import { AuthProvider } from './hooks/useAuth';
 import Tree from './pages/tree/tree';
+
+import { ClickOutsideProvider } from 'react-native-click-outside';
+
 import WebViewScreen from './pages/webView/webView';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -45,33 +49,36 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <AuthProvider>
-        <View style={{ backgroundColor: colors.white, flex: 1 }}>
-          <Stack.Navigator>
-            {routes.map((route, index) => {
-              const { name, component, isPrivate, options } = route;
-              return (
-                <Stack.Screen
-                  key={index}
-                  name={name}
-                  component={isPrivate ? () => <PrivateRoute component={component} /> : component}
-                  options={options}
-                />
-              );
-            })}
-            <Stack.Screen name="NotFound" component={NotFound} options={{ headerShown: false }} />
-            <Stack.Screen name="*" component={NotFound} options={{ headerShown: false }} />
-            <Stack.Screen
-              name="ScanQrCode"
-              component={ScanQrCode}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="Tree" component={Tree} options={{ headerShown: false }} />
-            <Stack.Screen name="WebView" component={WebViewScreen} />
 
-          </Stack.Navigator>
-        </View>
-      </AuthProvider>
+      <ClickOutsideProvider>
+        <AuthProvider>
+          <View style={{ backgroundColor: colors.white, flex: 1 }}>
+            <Stack.Navigator>
+              {routes.map((route, index) => {
+                const { name, component, isPrivate, options } = route;
+                return (
+                  <Stack.Screen
+                    key={index}
+                    name={name}
+                    component={isPrivate ? () => <PrivateRoute component={component} /> : component}
+                    options={options}
+                  />
+                );
+              })}
+              <Stack.Screen name="NotFound" component={NotFound} options={{ headerShown: false }} />
+              <Stack.Screen name="*" component={NotFound} options={{ headerShown: false }} />
+              <Stack.Screen
+                name="ScanQrCode"
+                component={ScanQrCode}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen name="Tree" component={Tree} options={{ headerShown: false }} />
+                <Stack.Screen name="WebView" component={WebViewScreen} />
+            </Stack.Navigator>
+          </View>
+        </AuthProvider>
+      </ClickOutsideProvider>
+
     </NavigationContainer>
   );
 };

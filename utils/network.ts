@@ -1,5 +1,9 @@
 // export const baseUrl = VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
-const baseUrl = 'https://remembering-time-be-6ea61afe1775.herokuapp.com';
+
+// export const baseUrl = 'http://192.168.88.34:4000';
+
+ const baseUrl = 'https://remembering-time-be-6ea61afe1775.herokuapp.com';
+
 
 // user
 export const baseUserUrl = `${baseUrl}/users`;
@@ -19,6 +23,7 @@ export const userTreeUrl = `${baseTreeUrl}/me`;
 export const oneTreeUrl = `${baseTreeUrl}/one`;
 export const slotUrl = (id: string) => `${baseTreeUrl}/slot/${id}`;
 export const oneTree = (treeId: string) => `${baseTreeUrl}/one/${treeId}`;
+export const addFile = (treeId: string) => `${baseTreeUrl}/slot/${treeId}`;
 export const allUserTreeUrl = (userId: string) => `${baseTreeUrl}/all/${userId}`;
 
 export const allTreeUrl = `${baseTreeUrl}/all`;

@@ -21,13 +21,14 @@ const makeRequest = async <T>(
   headers: Record<string, string>,
   body?: object
 ): Promise<T> => {
+  const isFormData = body instanceof FormData;
+
   const request: RequestInit = {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers,
-    },
-    body: body ? JSON.stringify(body) : undefined,
+    headers: isFormData
+      ? { 'Content-Type': 'multipart/form-data', ...headers }
+      : { 'Content-Type': 'application/json', ...headers },
+    body: body ? (isFormData ? body : JSON.stringify(body)) : undefined,
   };
 
   const response = await fetch(url, request);
@@ -48,9 +49,7 @@ export const authorizedRequest = async <T>(
   }
 
   const headers = { Authorization: `Bearer ${token}` };
-
   const response = await makeRequest<T>(url, method, headers, body);
-
   return response;
 };
 
