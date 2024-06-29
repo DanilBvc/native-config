@@ -1,14 +1,14 @@
 // export const baseUrl = VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
 
-// export const baseUrl = 'http://192.168.88.34:4000';
+// export const baseUrl = 'http://192.168.1.103:4000';
 
- const baseUrl = 'https://remembering-time-be-6ea61afe1775.herokuapp.com';
-
+const baseUrl = 'https://remembering-time-be-6ea61afe1775.herokuapp.com';
 
 // user
 export const baseUserUrl = `${baseUrl}/users`;
 export const currentUserUrl = `${baseUserUrl}/current`;
 export const userMeUrl = `${baseUserUrl}/me`;
+export const supportUrl = `${baseUserUrl}/support`;
 
 // auth
 export const baseAuthUrl = `${baseUrl}/auth`;

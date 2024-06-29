@@ -14,22 +14,18 @@ import BottomNavigation from '../../components/generall/bottomNavigation/bottomN
 import LocalizationSwitcher from '../../components/generall/localizationSwitcher/localizationSwitcher';
 import { ArrowBack } from '../../assets/icons/arrow-back';
 import { useNavigation } from '@react-navigation/native';
-import { send } from '@emailjs/react-native';
-interface TContactForm {
-  category: 'technical' | 'business';
-  email: string;
-  message: string;
+import { SupportService } from '../../services/supportService/supportService';
+import { type TContactForm } from '../../static/types/userTypes/types';
+const supportForm: TContactForm = {
+  category: 'technical',
+  email: '',
+  message: '',
 }
-
 const ContactUs = () => {
   const { t } = useTranslation();
   const navigate = useNavigation();
 
-  const [contactForm, setContactFrom] = useState<TContactForm>({
-    category: 'technical',
-    email: '',
-    message: '',
-  });
+  const [contactForm, setContactFrom] = useState<TContactForm>(supportForm);
 
   const [verify, setVerify] = useState<boolean>(false);
 
@@ -37,24 +33,17 @@ const ContactUs = () => {
     setContactFrom({ ...contactForm, [name]: value });
   };
 
-  const sendEmail = async () => {
-    const serviceId = 'service_dl2ql54';
-    const templateId = 'template_486l9u9';
-    const publicKey = 'KJZhgzb1gXkKCy5C_';
+  const clearForm = () => {
+    setContactFrom(supportForm);
+  }
 
+  const sendEmail = async () => {
     if (!contactForm.email || !contactForm.message || !verify) return;
 
     try {
-      await send(
-        serviceId,
-        templateId,
-        {
-          contactForm,
-        },
-        {
-          publicKey,
-        }
-      );
+      await SupportService.sendSupportLetter(contactForm);
+      clearForm()
+      setVerify(false)
     } catch (err) {}
   };
 

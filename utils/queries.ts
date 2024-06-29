@@ -30,7 +30,6 @@ const makeRequest = async <T>(
       : { 'Content-Type': 'application/json', ...headers },
     body: body ? (isFormData ? body : JSON.stringify(body)) : undefined,
   };
-
   const response = await fetch(url, request);
 
   return (await handleResponse<T>(response)) as T;

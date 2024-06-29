@@ -52,3 +52,9 @@ export interface User {
 export interface LoginResponse {
   data: User,
 }
+
+export interface TContactForm {
+  category: 'technical' | 'business';
+  email: string;
+  message: string;
+}
