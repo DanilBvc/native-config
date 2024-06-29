@@ -87,7 +87,8 @@
     "gift": "Zamówić dla kogoś innego",
     "giftName": "Imię obdarowanego",
     "giftLastName": "Nazwisko obdarowanego",
-    "giftAddress": "Adres obdarowanego"
+    "giftAddress": "Adres obdarowanego",
+    "checkEmail": "Sprawdź swoją skrzynkę e-mail"
   },
   "auth": {
     "lockAccount": "Twoje konto zostało zablokowane.",

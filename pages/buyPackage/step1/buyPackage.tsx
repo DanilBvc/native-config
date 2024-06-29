@@ -1,5 +1,5 @@
 import { Link, useNavigation } from '@react-navigation/native';
-import React, { useMemo, useState, type Dispatch, type SetStateAction } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { HomeSvg } from '../../../assets/icons/qr-code';
@@ -14,46 +14,30 @@ import { passwordRegex } from '../../../static/regex';
 import { styles } from './buyPackage.style';
 import TextArea from '../../../components/generall/textArea/textArea';
 import BackgroundEmblem from '../../../static/backgroundEmblem';
+import useOrderStore from '../../../store/order/store';
+import { type Order } from '../../../static/types/orderTypes/types';
 
-interface FormData {
-  full_name: string;
-  date_of_birth: Date | null;
-  date_of_death: Date | null;
-  qr_code_password: string;
-  special_wishes: string;
-  how_did_you_hear_about_us: string;
-
-  order_full_name: string;
-  order_date_of_birth: Date | null;
-  order_date_of_death: Date | null;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const BuyPackageCard = ({ route }: { route: any }) => {
+const BuyPackageCard = ({ route }: { route: { params: { card: string } } }) => {
   const navigation = useNavigation();
   const { t } = useTranslation();
   const { card } = route.params;
-  const [formData, setFormData] = useState<FormData>({
-    full_name: '',
-    date_of_birth: null,
-    date_of_death: null,
-    qr_code_password: '',
-    special_wishes: '',
-    how_did_you_hear_about_us: '',
 
-    order_date_of_birth: null,
-    order_date_of_death: null,
-    order_full_name: '',
-  });
-
+  const order = useOrderStore((state) => state.order)
+  const {
+    dob, dod, hearAbout, accountName
+  } = order
+  const updateOrderData = useOrderStore((state) => state.updateOrderData);
+  const onChange = (name: string, value: string) => {
+    updateOrderData({ [name]: value })
+  };
   const options = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const standardOptions: Array<{ component: any; props: Record<string, any>; label: string }> = [
+    const standardOptions: Array<{ component: any; props: { order: Order, updateOrderData?: (orderData: Partial<Order>) => void, onChange?: (name: string, value: string) => void }; label: string }> = [
       {
         component: OrderForSomeoneElse,
         props: {
-          formData,
-          setFormData,
+          order,
+          updateOrderData,
         },
         label: t('payload.gift'),
       },
@@ -63,7 +47,7 @@ const BuyPackageCard = ({ route }: { route: any }) => {
       standardOptions.unshift({
         component: SetQrCodePassword,
         props: {
-          formData,
+          order,
           onChange,
         },
         label: t('payload.passwordQR'),
@@ -74,7 +58,7 @@ const BuyPackageCard = ({ route }: { route: any }) => {
       standardOptions.push({
         component: SpecialWishes,
         props: {
-          formData,
+          order,
           onChange,
         },
         label: t('payload.specialWishes'),
@@ -82,13 +66,9 @@ const BuyPackageCard = ({ route }: { route: any }) => {
     }
 
     return standardOptions;
-  }, [formData]);
+  }, [order]);
 
   const [openOptions, setOpenOptions] = useState<Record<number, boolean>>({});
-
-  const onChange = (name: string, value: string) => {
-    setFormData({ ...formData, [name]: value });
-  };
 
   const handleNext = () => {
     navigation.navigate('BuyPackage2' as never);
@@ -100,6 +80,10 @@ const BuyPackageCard = ({ route }: { route: any }) => {
       [index]: !prev[index],
     }));
   };
+
+  useEffect(() => {
+    updateOrderData({ selectedPackage: card })
+  }, [card])
 
   return (
     <>
@@ -115,7 +99,7 @@ const BuyPackageCard = ({ route }: { route: any }) => {
               additionalStyles={{ borderRadius: 12, marginTop: 20, width: '50%' }}
               onPress={handleNext}
               text={t('payload.next')}
-              disabled={!formData.full_name}
+              disabled={!accountName}
             />
           </View>
         }
@@ -132,8 +116,8 @@ const BuyPackageCard = ({ route }: { route: any }) => {
               <View>
                 <Text style={styles.inputTitle}>{t('payload.accountName')}</Text>
                 <TextField
-                  name={'full_name'}
-                  value={formData.full_name}
+                  name={'accountName'}
+                  value={accountName}
                   onChange={onChange}
                   placeholder={t('payload.PIB')}
                   additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
@@ -146,9 +130,11 @@ const BuyPackageCard = ({ route }: { route: any }) => {
                   <LineWithCircle lineWidth={'80%'} />
                   <DatePicker
                     additionalStyles={{ marginTop: 30 }}
-                    date={formData.date_of_birth}
+                    date={dob}
                     setDate={(date: Date | null) => {
-                      setFormData({ ...formData, date_of_birth: date });
+                      if (date) {
+                        updateOrderData({ dob: date })
+                      }
                     }}
                   />
                 </View>
@@ -159,9 +145,11 @@ const BuyPackageCard = ({ route }: { route: any }) => {
                   <LineWithCircle rotate="180deg" lineWidth={'80%'} />
                   <DatePicker
                     additionalStyles={{ marginTop: 30 }}
-                    date={formData.date_of_death}
+                    date={dod}
                     setDate={(date: Date | null) => {
-                      setFormData({ ...formData, date_of_death: date });
+                      if (date) {
+                        updateOrderData({ dod: date })
+                      }
                     }}
                   />
                 </View>
@@ -190,8 +178,8 @@ const BuyPackageCard = ({ route }: { route: any }) => {
               <View>
                 <Text style={styles.inputTitle}>{t('payload.hearAbout')}</Text>
                 <TextField
-                  name={'how_did_you_hear_about_us'}
-                  value={formData.how_did_you_hear_about_us}
+                  name={'hearAbout'}
+                  value={hearAbout}
                   onChange={onChange}
                   placeholder={t('payload.hearAbout')}
                   errorMessage={'Not valid input'}
@@ -211,17 +199,17 @@ const BuyPackageCard = ({ route }: { route: any }) => {
 export default BuyPackageCard;
 
 const SetQrCodePassword = ({
-  formData,
+  order,
   onChange,
 }: {
-  formData: FormData;
+  order: Order;
   onChange: (name: string, value: string) => void;
 }) => {
   const { t } = useTranslation();
   return (
     <TextField
-      name={'qr_code_password'}
-      value={formData.qr_code_password}
+      name={'password'}
+      value={order.password}
       onChange={onChange}
       placeholder={t('payload.PlaceholderQR')}
       errorMessage={'Not valid input'}
@@ -233,11 +221,11 @@ const SetQrCodePassword = ({
 };
 
 const OrderForSomeoneElse = ({
-  formData,
-  setFormData,
+  order,
+  updateOrderData,
 }: {
-  formData: FormData;
-  setFormData: Dispatch<SetStateAction<FormData>>;
+  order: Order;
+  updateOrderData: (orderData: Partial<Order>) => void;
 }) => {
   const { t } = useTranslation();
   return (
@@ -248,14 +236,11 @@ const OrderForSomeoneElse = ({
           <LineWithCircle lineWidth={'80%'} />
           <DatePicker
             additionalStyles={{ marginTop: 30 }}
-            date={formData.order_date_of_birth}
+            date={order.dob}
             setDate={(date: Date | null) => {
-              setFormData((prev) => {
-                return {
-                  ...prev,
-                  order_date_of_birth: date,
-                };
-              });
+              if (date) {
+                updateOrderData({ dob: date })
+              }
             }}
           />
         </View>
@@ -266,14 +251,11 @@ const OrderForSomeoneElse = ({
           <LineWithCircle rotate="180deg" lineWidth={'80%'} />
           <DatePicker
             additionalStyles={{ marginTop: 30 }}
-            date={formData.order_date_of_death}
+            date={order.dod}
             setDate={(date: Date | null) => {
-              setFormData((prev) => {
-                return {
-                  ...prev,
-                  order_date_of_death: date,
-                };
-              });
+              if (date) {
+                updateOrderData({ dod: date });
+              }
             }}
           />
         </View>
@@ -283,17 +265,17 @@ const OrderForSomeoneElse = ({
 };
 
 const SpecialWishes = ({
-  formData,
+  order,
   onChange,
 }: {
-  formData: FormData;
+  order: Order;
   onChange: (name: string, value: string) => void;
 }) => {
   const { t } = useTranslation();
   return (
     <TextArea
-      name={'special_wishes'}
-      value={formData.special_wishes}
+      name={'specialWishes'}
+      value={order.specialWishes}
       onChange={onChange}
       placeholder={t('payload.specialWishes')}
     ></TextArea>

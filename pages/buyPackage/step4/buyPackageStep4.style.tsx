@@ -67,4 +67,18 @@ export const styles = StyleSheet.create({
     lineHeight: 22,
     color: colors.rusty_Copper,
   },
+  successMessage: { fontSize: 18, fontWeight: 'bold', marginBottom: 10, textAlign: 'center' },
+  successMessageContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+    alignItems: 'center',
+  },
+  successMessageWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
 });

@@ -90,7 +90,8 @@
     "gift": "Order for someone else",
     "giftName": "Recipient's First Name",
     "giftLastName": "Recipient's Last Name",
-    "giftAddress": "Recipient's Address"
+    "giftAddress": "Recipient's Address",
+    "checkEmail": "Check your email for further instructions"
   },
   "auth": {
     "lockAccount": "Your account has been blocked.",
