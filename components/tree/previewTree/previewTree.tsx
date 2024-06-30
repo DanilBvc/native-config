@@ -36,6 +36,9 @@ import { TreeService } from '../../../services/treeService/treeService';
 import TextArea from '../../generall/textArea/textArea';
 import GptNavigation from '../../generall/gptNavigation/gptNavigation';
 import BottomNavigation from '../../generall/bottomNavigation/bottomNavigation';
+import { OpenAIService } from '../../../services/openAIService/openAIService';
+import Loader from '../../generall/loader/loader';
+import { hp, wp } from '../../../utils/percentageSizes';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
@@ -71,7 +74,7 @@ const PreviewTree: FC<{
 
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
   const [activeSlot, setActiveSlot] = useState<null | (Partial<SlotType> & Cords)>(null);
-
+  const [isGenerationProgress, setIsGenerationProgress] = useState(false);
   const { angles, setAngles } = useAngles(id);
   const slots = useSlots(angles, treeData);
   const { opacity, transform, animateIn, animateOut } = useAnimatedSlot();
@@ -175,6 +178,22 @@ const PreviewTree: FC<{
       setEditTree(false);
     });
   };
+  const generateDescription = async () => {
+    try {
+      const imageLink = activeSlot?.link;
+      if (!imageLink) return;
+
+      setIsGenerationProgress(true);
+      const res = await OpenAIService.getDescriptionByImage(imageLink);
+
+      rotate();
+
+      setCommentText(res.choices[0].message.content);
+    } catch (err) {
+    } finally {
+      setIsGenerationProgress(false);
+    }
+  };
 
   const rotateInterpolation = rotateValue.interpolate({
     inputRange: [0, 1],
@@ -202,6 +221,11 @@ const PreviewTree: FC<{
 
   return (
     <View {...panResponder.panHandlers} style={{ flex: 1 }}>
+      {isGenerationProgress && (
+        <View style={{ position: 'absolute', bottom: hp(80), left: wp(50) - 30 }}>
+          <Loader />
+        </View>
+      )}
       <EmptyLayout
         additionalControl={
           <View
@@ -233,7 +257,11 @@ const PreviewTree: FC<{
           <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
         }
         footerControl={
-          isAuthenticated && !activeSlot ? <BottomNavigation theme="light" /> : <GptNavigation />
+          isAuthenticated && !activeSlot && !isOwner ? (
+            <BottomNavigation theme="light" />
+          ) : (
+            <GptNavigation onCommentPress={generateDescription} />
+          )
         }
       >
         {slots.map((slot, i) => (
@@ -300,7 +328,7 @@ const PreviewTree: FC<{
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && (
           <>
-            {commentText && editTree ? (
+            {commentText && editTree && isFlipped ? (
               <PressableSlot
                 onClick={sendComment}
                 item={{ x: 300, y: 300, height: 23, width: 23 }}
@@ -318,7 +346,7 @@ const PreviewTree: FC<{
         {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
           <PressableSlot
             onClick={handleDelete}
-            item={{ x: 40, y: 280, height: 23, width: 23 }}
+            item={{ x: 40, y: 300, height: 23, width: 23 }}
             component={TrashSvg()}
           />
         )}

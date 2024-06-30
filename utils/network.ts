@@ -1,8 +1,8 @@
 // export const baseUrl = VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
 
-// export const baseUrl = 'http://192.168.1.103:4000';
+// export const baseUrl = 'http://192.168.157.95:4000';
 
-const baseUrl = 'http://192.168.1.104:4000';
+const baseUrl = 'http://127.0.0.1:4000';
 
 // user
 export const baseUserUrl = `${baseUrl}/users`;
@@ -34,3 +34,7 @@ export const allTreeUrl = `${baseTreeUrl}/all`;
 export const basePaymentUrl = `${baseUrl}/payment`;
 export const paymentCreateSlot = `${basePaymentUrl}/slots`;
 export const paymentValidateToken = (token: string) => `${basePaymentUrl}/validate?token=${token}`;
+
+// openai
+export const openAiUrl = 'https://api.openai.com/v1';
+export const openAiChat = `${openAiUrl}/chat/completions`;

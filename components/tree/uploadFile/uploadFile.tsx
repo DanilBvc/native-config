@@ -89,7 +89,6 @@ const UploadFile: FC<UploadFileProps> = ({
       if (response) {
         deselectSlot();
         addSlot(response);
-        console.log(response, 'response');
       }
     } catch (error) {
       alert('Error uploading file');

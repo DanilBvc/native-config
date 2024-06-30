@@ -14,8 +14,6 @@ const Tree = () => {
   const { id } = route.params;
   useEffect(() => {
     TreeService.getUserTree(id).then((data) => {
-      console.log(data, 'data');
-
       setTreeData(data);
     });
   }, [id]);
