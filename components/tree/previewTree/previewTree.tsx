@@ -272,10 +272,10 @@ const PreviewTree: FC<{
             component={CommentSvg()}
           />
         )}
-        {activeSlot && activeSlot.id !== 'setNewImage' && (
+        {activeSlot && isOwner && activeSlot.id !== 'setNewImage' && (
           <PressableSlot
             onClick={handleDelete}
-            item={{ x: 40, y: 280, height: 23, width: 23 }}
+            item={{ x: 40, y: 300, height: 23, width: 23 }}
             component={TrashSvg()}
           />
         )}

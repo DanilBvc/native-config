@@ -39,15 +39,15 @@ export const authorizedRequest = async <T>(
   url: string,
   method: string,
   tokenType = tokens.access_token,
-  body?: object
+  body?: object,
+  token?: string
 ): Promise<T> => {
-  const token = await getData(tokenType);
-
-  if (!token) {
+  const headerToken = token ?? await getData(tokenType);
+  if (!headerToken) {
     throw new Error('Token is expired');
   }
 
-  const headers = { Authorization: `Bearer ${token}` };
+  const headers = { Authorization: `Bearer ${headerToken}` };
   const response = await makeRequest<T>(url, method, headers, body);
   return response;
 };
