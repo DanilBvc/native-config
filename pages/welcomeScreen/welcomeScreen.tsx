@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import {
   AiSvg,
   DeliverySvg,
@@ -82,7 +82,9 @@ const WelcomeScreen = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
 
   return (
-    <>
+    <ScrollView
+    showsVerticalScrollIndicator={false}
+  >
       <EmptyLayout
         additionalControl={
           <View
@@ -107,21 +109,31 @@ const WelcomeScreen = () => {
           <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
         }
       >
-        <View style={styles.container}>
-          <FamilyEmblem width={140} height={140} />
-        </View>
-        <Slider features={cards} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
-        <Button text={t('prices.buy')} onPress={goBuyPackage} />
-        {!isAuthenticated && (
-          <Pressable onPress={goScanQrCode}>
-            <View style={styles.qrCodeContainer}>
-              <QrCodeSvg />
-              <Text style={styles.qrCodeText}>Scan it QR code</Text>
+
+        <SafeAreaView>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.container}>
+              <FamilyEmblem width={140} height={140} />
             </View>
-          </Pressable>
-        )}
+            <Slider
+              features={cards}
+              currentSlide={currentSlide}
+              setCurrentSlide={setCurrentSlide}
+            />
+            <Button text={t('prices.buy')} onPress={goBuyPackage} />
+            {!isAuthenticated && (
+              <Pressable onPress={goScanQrCode}>
+                <View style={styles.qrCodeContainer}>
+                  <QrCodeSvg />
+                  <Text style={styles.qrCodeText}>Scan it QR code</Text>
+                </View>
+              </Pressable>
+            )}
+          </ScrollView>
+        </SafeAreaView>
+
       </EmptyLayout>
-    </>
+    </ScrollView>
   );
 };
 

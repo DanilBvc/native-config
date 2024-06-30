@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { type FC } from 'react';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
-import { Link } from '@react-navigation/native';
+import { Link, useNavigation } from '@react-navigation/native';
 import { HomeSvg } from '../../../assets/icons/qr-code';
 import { styles } from './buyPackageStep4.style';
 import Button from '../../../components/generall/button/button';
@@ -12,26 +12,96 @@ import TextField from '../../../components/generall/textField/textField';
 import { colors } from '../../../static/colors';
 import TextArea from '../../../components/generall/textArea/textArea';
 import BackgroundEmblem from '../../../static/backgroundEmblem';
+import useOrderStore from '../../../store/order/store';
+import { type Order, TypeOfMail } from '../../../static/types/orderTypes/types';
+import { PaymentService } from '../../../services/paymentService/paymentService';
+import { TreeService } from '../../../services/treeService/treeService';
+import i18next from '../../../services/i18nextjs';
+import CustomModal from '../../../components/generall/modal/modal';
 
-const BuyPackageStep4 = () => {
-  const { t } = useTranslation();
-  const handleNext = () => {};
-
-  const [formData, setFormData] = useState({
-    method: 'fedex',
-    address: '',
-    zip: '',
-    deliveryInstruction: false,
-    deliveryText: '',
-    acceptTermsStart: false,
-  });
-
-  const onChange = (name: string, value: string) => {
-    setFormData({ ...formData, [name]: value });
+const Delivery: FC<{ order: Order, updateOrderData: (orderData: Partial<Order>) => void }> = ({ order, updateOrderData }) => {
+  const options = {
+    en: [
+      { label: 'FedEx', type: TypeOfMail.FedEx },
+      { label: 'USPS', type: TypeOfMail.USPS }
+    ],
+    pl: [
+      { label: 'InPost', type: TypeOfMail.InPost },
+      { label: 'Poczta Polska', type: TypeOfMail['Poczta Polska'] }
+    ],
+    ua: [
+      { label: 'Nova Poshta', type: TypeOfMail['Nova Poshta'] },
+      { label: 'Ukr Poshta', type: TypeOfMail['Ukr Poshta'] }
+    ]
   };
+
+  const langOptions = options[i18next.language as keyof typeof options];
+  if (!langOptions) return null;
 
   return (
     <>
+      {langOptions.map(option => (
+        <View key={option.type} style={{ width: '46%' }}>
+          <Checkbox
+            label={option.label}
+            additionalStyles={{ width: '60%' }}
+            checked={order.typeOfMail === option.type}
+            setChecked={() => { updateOrderData({ typeOfMail: option.type }); }}
+          />
+        </View>
+      ))}
+    </>
+  );
+};
+
+const BuyPackageStep4 = () => {
+  const [isSuccess, setIsSuccess] = React.useState(false);
+  const { t } = useTranslation();
+  const { order, clearOrderData } = useOrderStore((state) => state);
+
+  const navigation = useNavigation();
+  const handleNext = async () => {
+    try {
+      const trees = await TreeService.getTypesTrees()
+      const typeId = trees.find((type) => type.name.toLowerCase() === order.selectedPackage.toLowerCase())?.id
+      if (!typeId) throw new Error('Type not found')
+      const response = await PaymentService.createPayload({ ...order, type_id: typeId, language: i18next.language });
+      if (!response) {
+        setIsSuccess(true)
+      } else {
+        const route = {
+          name: 'WebView',
+          params: { url: response.url }
+        }
+
+        navigation.navigate(route as never)
+      }
+    } catch (Err) {
+    }
+  };
+  const updateOrderData = useOrderStore((state) => state.updateOrderData);
+  const [acceptTerms, setAcceptTerms] = React.useState(false);
+  const [delivery, setDelivery] = React.useState(false);
+  const onChange = (name: string, value: string) => {
+    updateOrderData({ [name]: value });
+  };
+
+  const redirectToHome = () => {
+    clearOrderData()
+    navigation.navigate('Welcome' as never);
+  }
+
+  return (
+    <>
+    <CustomModal open={isSuccess} close={() => {}} >
+    <View style={styles.successMessageWrapper}>
+        <View style={styles.successMessageContainer}>
+          <Text style={styles.successMessage}>{t('successPayloadMessage')}</Text>
+          <Text style={styles.successMessage}>{t('payload.checkEmail')}</Text>
+          <Button text={t('payload.return')} onPress={redirectToHome} />
+        </View>
+      </View>
+    </CustomModal>
       <EmptyLayout
         additionalControl={
           <Link to={{ screen: 'Welcome' }}>
@@ -44,7 +114,7 @@ const BuyPackageStep4 = () => {
               additionalStyles={{ borderRadius: 12, marginTop: 20, width: '50%' }}
               onPress={handleNext}
               text={t('payload.buy')}
-              disabled={!formData.address || !formData.zip || !formData.acceptTermsStart}
+              disabled={!order.address || !order.addressIndex || !acceptTerms}
             />
           </View>
         }
@@ -58,37 +128,14 @@ const BuyPackageStep4 = () => {
                 <LineWithCircle lineWidth={'80%'} />
               </View>
               <View style={styles.spaceBetween}>
-                <View style={{ width: '46%' }}>
-                  <Checkbox
-                    label="FedEx"
-                    additionalStyles={{ width: '60%' }}
-                    checked={formData.method === 'fedex'}
-                    setChecked={() => {
-                      setFormData((prev) => {
-                        return { ...prev, method: 'fedex' };
-                      });
-                    }}
-                  />
-                </View>
-                <View style={{ width: '46%' }}>
-                  <Checkbox
-                    label="USPS"
-                    additionalStyles={{ width: '60%' }}
-                    checked={formData.method === 'usps'}
-                    setChecked={() => {
-                      setFormData((prev) => {
-                        return { ...prev, method: 'usps' };
-                      });
-                    }}
-                  />
-                </View>
+               <Delivery order={order} updateOrderData={updateOrderData } />
               </View>
               <View style={styles.spaceBetween}>
                 <View style={{ width: '46%' }}>
                   <Text style={styles.inputTitle}>{t('payload.address')}</Text>
                   <TextField
                     name={'address'}
-                    value={formData.address}
+                    value={order.address}
                     onChange={onChange}
                     placeholder={t('payload.addressPlaceholder')}
                     additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
@@ -98,8 +145,8 @@ const BuyPackageStep4 = () => {
                 <View style={{ width: '46%' }}>
                   <Text style={styles.inputTitle}>{t('payload.addressIndex')}</Text>
                   <TextField
-                    name={'zip'}
-                    value={formData.zip}
+                    name={'addressIndex'}
+                    value={order.addressIndex}
                     onChange={onChange}
                     placeholder={t('payload.addressIndex')}
                     additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
@@ -110,19 +157,17 @@ const BuyPackageStep4 = () => {
               <View>
                 <Checkbox
                   label={t('payload.instructionsDelivery')}
-                  checked={formData.deliveryInstruction}
+                  checked={delivery}
                   setChecked={() => {
-                    setFormData((prev) => {
-                      return { ...prev, deliveryInstruction: !prev.deliveryInstruction };
-                    });
+                    setDelivery(!delivery);
                   }}
                   additionalStyles={{ width: '58%' }}
                 />
-                {formData.deliveryInstruction && (
+                {delivery && (
                   <TextArea
                     additionalStyles={{ marginTop: 20 }}
-                    name="deliveryText"
-                    value={formData.deliveryText}
+                    name="instructionsDelivery"
+                    value={order.instructionsDelivery}
                     onChange={onChange}
                     placeholder={t('payload.instructionsDeliveryPlaceholder')}
                   />
@@ -130,11 +175,9 @@ const BuyPackageStep4 = () => {
               </View>
               <Checkbox
                 label={t('payload.acceptTermsStart')}
-                checked={formData.acceptTermsStart}
+                checked={acceptTerms}
                 setChecked={() => {
-                  setFormData((prev) => {
-                    return { ...prev, acceptTermsStart: !prev.acceptTermsStart };
-                  });
+                  setAcceptTerms(!acceptTerms);
                 }}
               />
               <Text style={styles.textTerms}>{t('payload.acceptTerms')}</Text>

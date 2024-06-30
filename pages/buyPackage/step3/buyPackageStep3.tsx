@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
 import { Link } from '@react-navigation/native';
 import { HomeSvg } from '../../../assets/icons/qr-code';
@@ -14,41 +14,25 @@ import PhoneInput from 'react-native-phone-number-input';
 import Checkbox from '../../../components/generall/checkbox/checkbox';
 import { useTypedNavigation } from '../../../hooks/useTypedNavigation';
 import BackgroundEmblem from '../../../static/backgroundEmblem';
-
-interface FormData {
-  fullName: string;
-  middleName: string;
-  phoneNumber: string;
-  email: string;
-  someoneElse: boolean;
-  secondFullName: string;
-  secondMiddleName: string;
-}
+import useOrderStore from '../../../store/order/store';
 
 const BuyPackageStep3 = () => {
+  const order = useOrderStore((state) => state.order);
+  const updateOrderData = useOrderStore((state) => state.updateOrderData);
   const phoneInput = useRef<PhoneInput>(null);
   const navigation = useTypedNavigation();
   const { t } = useTranslation();
-  const [formData, setFormData] = useState<FormData>({
-    fullName: '',
-    middleName: '',
-    phoneNumber: '',
-    email: '',
-    someoneElse: false,
-    secondFullName: '',
-    secondMiddleName: '',
-  });
 
   const onChange = (name: string, value: string) => {
-    setFormData({ ...formData, [name]: value });
+    updateOrderData({ [name]: value });
   };
 
   const setValue = (value: string) => {
-    setFormData({ ...formData, phoneNumber: value });
+    updateOrderData({ phoneNumber: value });
   };
 
   const setFormattedValue = (value: string) => {
-    setFormData({ ...formData, phoneNumber: value });
+    updateOrderData({ phoneNumber: value });
   };
 
   const handleNext = () => {
@@ -69,7 +53,7 @@ const BuyPackageStep3 = () => {
               additionalStyles={{ borderRadius: 12, marginTop: 20, width: '50%' }}
               onPress={handleNext}
               text={t('payload.next')}
-              disabled={!formData.fullName || !formData.phoneNumber || !formData.email || !formData.middleName}
+              disabled={!order.fullName || !order.phoneNumber || !order.email || !order.middleName}
             />
           </View>
         }
@@ -86,7 +70,7 @@ const BuyPackageStep3 = () => {
                 <Text style={styles.inputTitle}>{t('payload.fullName')}</Text>
                 <TextField
                   name={'fullName'}
-                  value={formData.fullName}
+                  value={order.fullName}
                   onChange={onChange}
                   placeholder={t('payload.PlaceholderAllName')}
                   additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
@@ -97,7 +81,7 @@ const BuyPackageStep3 = () => {
                 <Text style={styles.inputTitle}>{t('payload.middleName')}</Text>
                 <TextField
                   name={'middleName'}
-                  value={formData.middleName}
+                  value={order.middleName}
                   onChange={onChange}
                   placeholder={t('payload.PlaceholderMiddleName')}
                   additionalStyles={{ borderRadius: 12, paddingLeft: 10 }}
@@ -108,7 +92,7 @@ const BuyPackageStep3 = () => {
                 <Text style={styles.inputTitle}>{t('payload.phoneNumber')}</Text>
                 <PhoneInput
                   ref={phoneInput}
-                  defaultValue={formData.phoneNumber}
+                  defaultValue={order.phoneNumber}
                   defaultCode="UA"
                   layout="first"
                   onChangeText={(text) => {
@@ -150,7 +134,7 @@ const BuyPackageStep3 = () => {
                 <Text style={styles.inputTitle}>{t('auth.email')}</Text>
                 <TextField
                   name={'email'}
-                  value={formData.email}
+                  value={order.email}
                   onChange={onChange}
                   placeholder={t('payload.PlaceholderEmail')}
                   errorMessage={'Invalid email'}
@@ -162,20 +146,18 @@ const BuyPackageStep3 = () => {
               <View style={{ marginTop: 12 }}>
                 <Checkbox
                   label={t('payload.gift')}
-                  checked={formData.someoneElse}
+                  checked={order.gift}
                   setChecked={() => {
-                    setFormData((prev) => {
-                      return { ...prev, someoneElse: !formData.someoneElse };
-                    });
+                    updateOrderData({ gift: !order.gift })
                   }}
                 />
-                {formData.someoneElse && (
+                {order.gift && (
                   <>
                     <View style={{ marginTop: 20 }}>
                       <Text style={styles.inputTitle}>{t('payload.fullName')}</Text>
                       <TextField
-                        name={'secondFullName'}
-                        value={formData.secondFullName}
+                        name={'giftFullName'}
+                        value={order.giftFullName}
                         onChange={onChange}
                         placeholder={t('payload.PlaceholderAllName')}
                         errorMessage={'Invalid email'}
@@ -187,8 +169,8 @@ const BuyPackageStep3 = () => {
                     <View style={{ marginTop: 20 }}>
                       <Text style={styles.inputTitle}>{t('payload.middleName')}</Text>
                       <TextField
-                        name={'secondMiddleName'}
-                        value={formData.secondMiddleName}
+                        name={'giftMiddleName'}
+                        value={order.giftMiddleName}
                         onChange={onChange}
                         placeholder={t('payload.PlaceholderMiddleName')}
                         errorMessage={'Invalid email'}

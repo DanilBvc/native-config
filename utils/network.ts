@@ -1,5 +1,8 @@
 // export const baseUrl = VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
-export const baseUrl = 'http://192.168.0.104:4000';
+
+// export const baseUrl = 'http://192.168.88.34:4000';
+
+const baseUrl = 'https://remembering-time-be-6ea61afe1775.herokuapp.com';
 
 // user
 export const baseUserUrl = `${baseUrl}/users`;
@@ -23,3 +26,8 @@ export const addFile = (treeId: string) => `${baseTreeUrl}/slot/${treeId}`;
 export const allUserTreeUrl = (userId: string) => `${baseTreeUrl}/all/${userId}`;
 
 export const allTreeUrl = `${baseTreeUrl}/all`;
+
+// payment
+export const basePaymentUrl = `${baseUrl}/payment`;
+export const paymentCreateSlot = `${basePaymentUrl}/slots`;
+export const paymentValidateToken = (token: string) => `${basePaymentUrl}/validate?token=${token}`;
