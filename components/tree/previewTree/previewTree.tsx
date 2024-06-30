@@ -25,7 +25,6 @@ import useAngles from '../../../hooks/useAngles';
 import { CommentSvg, TrashSvg } from '../../../assets/icons/comment';
 import BurgerList from '../../burgerList/burgerList';
 import { styles } from './previewTree.style';
-import BottomNavigation from '../../generall/bottomNavigation/bottomNavigation';
 import { useAuth } from '../../../hooks/useAuth';
 import { ArrowBack } from '../../../assets/icons/arrow-back';
 import { useNavigation } from '@react-navigation/native';
@@ -35,6 +34,9 @@ import { CloseIcon } from '../../../assets/icons/drop-down';
 import useUserStore from '../../../store/user/store';
 import UploadFile from '../uploadFile/uploadFile';
 import { TreeService } from '../../../services/treeService/treeService';
+import TextArea from '../../generall/textArea/textArea';
+import GptNavigation from '../../generall/gptNavigation/gptNavigation';
+import BottomNavigation from '../../generall/bottomNavigation/bottomNavigation';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
@@ -47,6 +49,7 @@ const PreviewTree: FC<{
   const rotateValue = useRef(new Animated.Value(0)).current;
   const [isFlipped, setIsFlipped] = useState(false);
   const [newFileIndex, setNewFileIndex] = useState<null | number>(null);
+  const [commentText, setCommentText] = useState('');
 
   const userTrees = useUserStore((state) => state.user.trees);
   const userTreesIds = userTrees.map((item) => item.id);
@@ -72,6 +75,10 @@ const PreviewTree: FC<{
   const { angles, setAngles } = useAngles(id);
   const slots = useSlots(angles, treeData);
   const { opacity, transform, animateIn, animateOut } = useAnimatedSlot();
+
+  const onChange = (name: string, value: string) => {
+    setCommentText(value);
+  };
 
   const selectSlot = (slot: Partial<SlotType> & Cords) => {
     if (slot.link) {
@@ -213,7 +220,9 @@ const PreviewTree: FC<{
         burgerList={
           <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
         }
-        footerControl={isAuthenticated && <BottomNavigation theme="light" />}
+        footerControl={
+          isAuthenticated && !activeSlot ? <BottomNavigation theme="light" /> : <GptNavigation />
+        }
       >
         {slots.map((slot, i) => (
           <PressableSlot
@@ -239,15 +248,20 @@ const PreviewTree: FC<{
               />
             </Animated.View>
 
-            <Animated.View
-              style={[styles.card, { width: isFlipped ? '100%' : '0%' }, backAnimatedStyle]}
-            >
+            <Animated.View style={[styles.card, backAnimatedStyle]}>
               <ImageBackground
                 source={require('../../../assets/glowingCircleBig.png')}
                 style={[styles.backSide, { top: activeSlot.y, left: activeSlot.x }]}
               >
                 <View style={styles.backContent}>
                   <Text style={styles.backText}>{activeSlot.comment_text}</Text>
+                  <TextArea
+                    name="commentText"
+                    placeholder="Enter comment"
+                    value={commentText}
+                    onChange={onChange}
+                    additionalStyles={{ borderWidth: 0 }}
+                  />
                 </View>
               </ImageBackground>
             </Animated.View>
@@ -266,11 +280,17 @@ const PreviewTree: FC<{
           />
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && (
-          <PressableSlot
-            onClick={rotate}
-            item={{ x: 300, y: 300, height: 23, width: 23 }}
-            component={CommentSvg()}
-          />
+          <>
+            {commentText ? (
+              <PressableSlot
+                onClick={rotate}
+                item={{ x: 300, y: 300, height: 23, width: 23 }}
+                component={CommentSvg()}
+              />
+            ) : (
+              <></>
+            )}
+          </>
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && (
           <PressableSlot
