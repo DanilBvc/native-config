@@ -3,7 +3,7 @@ export interface ChatCompletion {
     finish_reason: string;
     index: number;
     logprobs: string;
-    message: string;
+    message: { content: string };
   }>;
   created: number;
   id: string;

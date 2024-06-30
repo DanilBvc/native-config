@@ -1,10 +1,10 @@
-import React from 'react';
-import { Image, View } from 'react-native';
+import React, { type FC } from 'react';
+import { Image, Pressable, View } from 'react-native';
 import { GptIcon, GptComment, GptMusic } from '../../../assets/icons/gptIcons';
 import { styles } from './gptNavigation.type';
 import { Link } from '@react-navigation/native';
 
-const GptNavigation = () => {
+const GptNavigation: FC<{ onCommentPress: () => void }> = ({ onCommentPress }) => {
   return (
     <>
       <Image
@@ -13,9 +13,9 @@ const GptNavigation = () => {
       />
 
       <View style={[styles.container]}>
-        <Link to="/">
+        <Pressable onPress={onCommentPress}>
           <GptComment />
-        </Link>
+        </Pressable>
         <Link to="/" style={[styles.qrCode]}>
           <GptIcon />
         </Link>
