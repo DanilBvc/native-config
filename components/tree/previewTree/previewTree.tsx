@@ -1,4 +1,4 @@
-import React, { type FC, useState, useRef } from 'react';
+import React, { type FC, useState, useRef, useEffect } from 'react';
 import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
 import {
   View,
@@ -22,13 +22,12 @@ import ActiveSlot from '../activeSlot/activeSlot';
 import useAnimatedSlot from '../../../hooks/useAnimatedSlot';
 import useSlots from '../../../hooks/useSlots';
 import useAngles from '../../../hooks/useAngles';
-import { CommentSvg, TrashSvg } from '../../../assets/icons/comment';
+import { AddCommentSvg, CommentSvg, TrashSvg } from '../../../assets/icons/comment';
 import BurgerList from '../../burgerList/burgerList';
 import { styles } from './previewTree.style';
 import { useAuth } from '../../../hooks/useAuth';
 import { ArrowBack } from '../../../assets/icons/arrow-back';
 import { useNavigation } from '@react-navigation/native';
-import { colors } from '../../../static/colors';
 import { EditSvg } from '../../../assets/icons/EditSvg';
 import { CloseIcon } from '../../../assets/icons/drop-down';
 import useUserStore from '../../../store/user/store';
@@ -50,6 +49,7 @@ const PreviewTree: FC<{
   const [isFlipped, setIsFlipped] = useState(false);
   const [newFileIndex, setNewFileIndex] = useState<null | number>(null);
   const [commentText, setCommentText] = useState('');
+  const [editTree, setEditTree] = useState(false);
 
   const userTrees = useUserStore((state) => state.user.trees);
   const userTreesIds = userTrees.map((item) => item.id);
@@ -118,6 +118,10 @@ const PreviewTree: FC<{
     });
   };
 
+  useEffect(() => {
+    setCommentText(activeSlot?.title);
+  }, [activeSlot?.title]);
+
   const findNextSlotWithLink = (currentSlot: Partial<SlotType> & Cords, direction: number) => {
     if (!currentSlot) return null;
     const currentIndex = slots.findIndex((slot) => slot.id === currentSlot.id);
@@ -162,6 +166,14 @@ const PreviewTree: FC<{
     } catch (error) {
       alert(error);
     }
+  };
+
+  const sendComment = async () => {
+    TreeService.updateComment(activeSlot?.id ?? '', {
+      comment_title: commentText,
+    }).then(() => {
+      setEditTree(false);
+    });
   };
 
   const rotateInterpolation = rotateValue.interpolate({
@@ -233,6 +245,7 @@ const PreviewTree: FC<{
             handleOpenSlotWindow={() => {
               handleOpenSlotWindow(i);
             }}
+            editTree={editTree}
           />
         ))}
 
@@ -257,10 +270,16 @@ const PreviewTree: FC<{
                   <Text style={styles.backText}>{activeSlot.comment_text}</Text>
                   <TextArea
                     name="commentText"
-                    placeholder="Enter comment"
+                    placeholder={editTree ? 'Enter comment' : 'Your comment can be here '}
                     value={commentText}
                     onChange={onChange}
-                    additionalStyles={{ borderWidth: 0 }}
+                    disabled={editTree}
+                    additionalStyles={{
+                      borderWidth: 0,
+                      maxWidth: 160,
+                      maxHeight: 160,
+                      textAlign: 'center',
+                    }}
                   />
                 </View>
               </ImageBackground>
@@ -281,18 +300,22 @@ const PreviewTree: FC<{
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && (
           <>
-            {commentText ? (
+            {commentText && editTree ? (
+              <PressableSlot
+                onClick={sendComment}
+                item={{ x: 300, y: 300, height: 23, width: 23 }}
+                component={AddCommentSvg()}
+              />
+            ) : (
               <PressableSlot
                 onClick={rotate}
                 item={{ x: 300, y: 300, height: 23, width: 23 }}
                 component={CommentSvg()}
               />
-            ) : (
-              <></>
             )}
           </>
         )}
-        {activeSlot && activeSlot.id !== 'setNewImage' && (
+        {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
           <PressableSlot
             onClick={handleDelete}
             item={{ x: 40, y: 280, height: 23, width: 23 }}
@@ -300,33 +323,25 @@ const PreviewTree: FC<{
           />
         )}
 
-        <TouchableOpacity
-          style={{
-            position: 'absolute',
-            flexDirection: 'row',
-            top: windowHeight / 1.35,
-            left: 0,
-            right: 0,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          {isOwner ? (
-            <>
+        <TouchableOpacity style={styles.editContainer}>
+          {isOwner && !editTree ? (
+            <TouchableOpacity
+              style={styles.editButton}
+              onPress={() => {
+                setEditTree(true);
+              }}
+            >
               <EditSvg />
-              <Text
-                style={{
-                  color: colors.fullWite,
-                  fontFamily: 'Inter_400Regular',
-                  fontSize: 15,
-                  marginLeft: 10,
-                }}
-              >
-                Edit
-              </Text>
-            </>
+              <Text style={styles.editText}>Edit</Text>
+            </TouchableOpacity>
           ) : (
-            <Text>click on the circle</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setEditTree(false);
+              }}
+            >
+              <Text style={styles.editText}>click on the circle</Text>
+            </TouchableOpacity>
           )}
         </TouchableOpacity>
       </EmptyLayout>

@@ -82,58 +82,48 @@ const WelcomeScreen = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
 
   return (
-    <ScrollView
-    showsVerticalScrollIndicator={false}
-  >
-      <EmptyLayout
-        additionalControl={
-          <View
-            style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
-          >
-            <LocalizationSwitcher />
-            {isAuthenticated ? (
-              <BurgerMenu
-                isBurgerMenuVisible={isBurgerMenuVisible}
-                setBurgerMenuVisible={setBurgerMenuVisible}
-                style={{ marginLeft: 20 }}
-              />
-            ) : (
-              <Link to={{ screen: 'SignIn' }} style={{ color: colors.apricot_Blaze }}>
-                LOG IN
-              </Link>
-            )}
-          </View>
-        }
-        footerControl={isAuthenticated && <BottomNavigation />}
-        burgerList={
-          <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
-        }
-      >
-
-        <SafeAreaView>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.container}>
-              <FamilyEmblem width={140} height={140} />
-            </View>
-            <Slider
-              features={cards}
-              currentSlide={currentSlide}
-              setCurrentSlide={setCurrentSlide}
+    <EmptyLayout
+      additionalControl={
+        <View
+          style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
+        >
+          <LocalizationSwitcher />
+          {isAuthenticated ? (
+            <BurgerMenu
+              isBurgerMenuVisible={isBurgerMenuVisible}
+              setBurgerMenuVisible={setBurgerMenuVisible}
+              style={{ marginLeft: 20 }}
             />
-            <Button text={t('prices.buy')} onPress={goBuyPackage} />
-            {!isAuthenticated && (
-              <Pressable onPress={goScanQrCode}>
-                <View style={styles.qrCodeContainer}>
-                  <QrCodeSvg />
-                  <Text style={styles.qrCodeText}>Scan it QR code</Text>
-                </View>
-              </Pressable>
-            )}
-          </ScrollView>
-        </SafeAreaView>
-
-      </EmptyLayout>
-    </ScrollView>
+          ) : (
+            <Link to={{ screen: 'SignIn' }} style={{ color: colors.apricot_Blaze }}>
+              LOG IN
+            </Link>
+          )}
+        </View>
+      }
+      footerControl={isAuthenticated && <BottomNavigation />}
+      burgerList={
+        <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+      }
+    >
+      <SafeAreaView>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.container}>
+            <FamilyEmblem width={140} height={140} />
+          </View>
+          <Slider features={cards} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
+          <Button text={t('prices.buy')} onPress={goBuyPackage} />
+          {!isAuthenticated && (
+            <Pressable onPress={goScanQrCode}>
+              <View style={styles.qrCodeContainer}>
+                <QrCodeSvg />
+                <Text style={styles.qrCodeText}>Scan it QR code</Text>
+              </View>
+            </Pressable>
+          )}
+        </ScrollView>
+      </SafeAreaView>
+    </EmptyLayout>
   );
 };
 

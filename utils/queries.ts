@@ -46,7 +46,6 @@ export const authorizedRequest = async <T>(
   if (!token) {
     throw new Error('Token is expired');
   }
-
   const headers = { Authorization: `Bearer ${token}` };
   const response = await makeRequest<T>(url, method, headers, body);
   return response;

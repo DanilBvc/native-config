@@ -13,7 +13,7 @@ import BackgroundEmblem from '../../static/backgroundEmblem';
 
 const CustomerSection = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
-  const treeData = useUserStore((state) => state.user.trees);
+  const treeData = useUserStore((state) => state.user?.trees);
 
   return (
     <>
@@ -36,9 +36,7 @@ const CustomerSection = () => {
         <SafeAreaView>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.cardContainer}>
-              {treeData.map((data, index) => (
-                <CustomerCard key={index} data={data} />
-              ))}
+              {treeData?.map((data, index) => <CustomerCard key={index} data={data} />)}
             </View>
           </ScrollView>
         </SafeAreaView>

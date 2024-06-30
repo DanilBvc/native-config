@@ -10,7 +10,8 @@ const GlowingSlot: FC<{
   cords: Cords;
   component?: ReactNode;
   handleOpenSlotWindow?: () => void;
-}> = ({ url, cords, component, handleOpenSlotWindow }) => {
+  editTree?: boolean;
+}> = ({ url, cords, component, handleOpenSlotWindow, editTree }) => {
   const { width, height, x, y } = cords;
   const imageSource = typeof url === 'string' ? { uri: url } : url;
   const glowImage = height > 100 && width > 100 ? glowingCircleBig : glowingCircle;
@@ -21,13 +22,15 @@ const GlowingSlot: FC<{
       {url ?? component ? (
         <Image source={imageSource} style={{ ...styles.photo, width, height }} />
       ) : (
-        <TouchableOpacity
-          onPress={() => {
-            handleOpenSlotWindow && handleOpenSlotWindow();
-          }}
-        >
-          <PlusWithCircle />
-        </TouchableOpacity>
+        editTree && (
+          <TouchableOpacity
+            onPress={() => {
+              handleOpenSlotWindow && handleOpenSlotWindow();
+            }}
+          >
+            <PlusWithCircle />
+          </TouchableOpacity>
+        )
       )}
     </View>
   );

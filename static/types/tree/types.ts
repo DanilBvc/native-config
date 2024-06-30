@@ -78,6 +78,7 @@ export interface SlotType {
   index: number;
   link: string;
   slot_type: FileEnum;
+  title?: string;
 }
 
 export enum FileEnum {

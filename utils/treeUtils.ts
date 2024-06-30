@@ -22,6 +22,7 @@ export const generateCircularCoords = (
       height: 73,
       id: slot ? slot.id : generateUUID(),
       link: slot?.link,
+      title: slot?.comment_title,
       index: i,
     };
   });

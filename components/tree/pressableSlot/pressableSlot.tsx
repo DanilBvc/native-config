@@ -9,7 +9,8 @@ const PressableSlot: FC<{
   component?: ReactNode;
   handleOpenSlotWindow?: () => void;
   style?: StyleProp<ViewStyle>;
-}> = ({ item, onClick, component, handleOpenSlotWindow, style }) => {
+  editTree?: boolean;
+}> = ({ item, onClick, component, handleOpenSlotWindow, style, editTree = false }) => {
   return (
     <Pressable
       onPress={() => {
@@ -25,6 +26,7 @@ const PressableSlot: FC<{
         cords={item}
         component={component}
         handleOpenSlotWindow={handleOpenSlotWindow}
+        editTree={editTree}
       />
     </Pressable>
   );

@@ -1,4 +1,4 @@
-import { Path, Svg } from 'react-native-svg';
+import { G, Path, Svg } from 'react-native-svg';
 
 export function CommentSvg() {
   return (
@@ -10,6 +10,22 @@ export function CommentSvg() {
         stroke-linecap="round"
         stroke-linejoin="round"
       />
+    </Svg>
+  );
+}
+
+export function AddCommentSvg() {
+  return (
+    <Svg width="35" height="35" viewBox="0 0 35 35" fill="none">
+      <G filter="url(#filter0_d_676_2600)">
+        <Path
+          d="M15.25 11.5013V19.0013M11.5 15.2513H19M15.25 26.5C17.475 26.5 19.6501 25.8402 21.5002 24.604C23.3502 23.3679 24.7922 21.6109 25.6436 19.5552C26.4951 17.4995 26.7179 15.2375 26.2838 13.0552C25.8498 10.873 24.7783 8.86839 23.205 7.29505C21.6316 5.72171 19.6271 4.65025 17.4448 4.21617C15.2625 3.78209 13.0005 4.00487 10.9448 4.85636C8.88914 5.70785 7.13213 7.14979 5.89597 8.99984C4.6598 10.8499 4 13.025 4 15.25C4 17.11 4.45 18.8625 5.25 20.4088L4 26.5L10.0913 25.25C11.6363 26.0488 13.3913 26.5 15.25 26.5Z"
+          stroke="#B37840"
+          strokeWidth="1.875"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
     </Svg>
   );
 }

@@ -22,8 +22,8 @@ const SignIn = () => {
   const { setIsAuthenticated } = useAuth();
   const navigation = useNavigation();
   const [signInData, setSignInData] = useState<userSignInData>({
-    email: 'demouserua@gmail.com',
-    password: 'jSvcVlZbiQwlm7n',
+    email: 'dneys@gmail.com',
+    password: '1012002',
   });
 
   const [error, setError] = useState<boolean>(false);
@@ -50,38 +50,36 @@ const SignIn = () => {
   };
 
   return (
-    <ScrollView
-    showsVerticalScrollIndicator={false}
-  >
-    <EmptyLayout additionalControl={<LocalizationSwitcher />}>
-      <View style={styles.imageContainer}>
-        <FamilyEmblem width={226} height={231} />
-      </View>
-      <View style={styles.emailContainer}>
-        <TextField
-          name={'email'}
-          value={signInData.email}
-          onChange={onChange}
-          placeholder={t('auth.email')}
-          validation={emailRegex}
-          error={error}
-        />
-      </View>
-      <View style={styles.passwordContainer}>
-        <TextField
-          name={'password'}
-          value={signInData.password}
-          onChange={onChange}
-          placeholder={t('auth.password')}
-          validation={passwordRegex}
-          error={error}
-        />
-      </View>
-      <Button onPress={signIn} text={t('auth.logIn')} />
-      <Text style={styles.text}>
-        Lorem ipsum dolor sit amet consectetur. Suspendisse massa dictum nisl sapien vulputate.
-      </Text>
-    </EmptyLayout>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <EmptyLayout additionalControl={<LocalizationSwitcher />}>
+        <View style={styles.imageContainer}>
+          <FamilyEmblem width={226} height={231} />
+        </View>
+        <View style={styles.emailContainer}>
+          <TextField
+            name={'email'}
+            value={signInData.email}
+            onChange={onChange}
+            placeholder={t('auth.email')}
+            validation={emailRegex}
+            error={error}
+          />
+        </View>
+        <View style={styles.passwordContainer}>
+          <TextField
+            name={'password'}
+            value={signInData.password}
+            onChange={onChange}
+            placeholder={t('auth.password')}
+            validation={passwordRegex}
+            error={error}
+          />
+        </View>
+        <Button onPress={signIn} text={t('auth.logIn')} />
+        <Text style={styles.text}>
+          Lorem ipsum dolor sit amet consectetur. Suspendisse massa dictum nisl sapien vulputate.
+        </Text>
+      </EmptyLayout>
     </ScrollView>
   );
 };

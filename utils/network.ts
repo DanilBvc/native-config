@@ -2,7 +2,7 @@
 
 // export const baseUrl = 'http://192.168.1.103:4000';
 
-const baseUrl = 'https://remembering-time-be-6ea61afe1775.herokuapp.com';
+const baseUrl = 'http://192.168.1.104:4000';
 
 // user
 export const baseUserUrl = `${baseUrl}/users`;
@@ -25,6 +25,8 @@ export const slotUrl = (id: string) => `${baseTreeUrl}/slot/${id}`;
 export const oneTree = (treeId: string) => `${baseTreeUrl}/one/${treeId}`;
 export const addFile = (treeId: string) => `${baseTreeUrl}/slot/${treeId}`;
 export const allUserTreeUrl = (userId: string) => `${baseTreeUrl}/all/${userId}`;
+export const updateComment = (id: string) => `${baseTreeUrl}/comment/${id}`;
+export const getComment = (id: string) => `${baseTreeUrl}/comment/${id}`;
 
 export const allTreeUrl = `${baseTreeUrl}/all`;
 
