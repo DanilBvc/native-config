@@ -257,7 +257,7 @@ const PreviewTree: FC<{
           <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
         }
         footerControl={
-          isAuthenticated && !activeSlot && !isOwner ? (
+          isAuthenticated && !activeSlot && isOwner ? (
             <BottomNavigation theme="light" />
           ) : (
             <GptNavigation onCommentPress={generateDescription} />
