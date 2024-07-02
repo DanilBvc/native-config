@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { HomeSvg, QrCodeFrame } from '../../assets/icons/qr-code';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import { Link, useNavigation } from '@react-navigation/native';
@@ -22,13 +22,6 @@ const ScanQrCode: React.FC = () => {
     navigation.navigate(route as never);
   };
 
-  useEffect(() => {
-    const route: { name: string; params: { id: string } } = {
-      name: 'Tree',
-      params: { id: '2de91b31-34c3-42fe-8045-95cd3e259e1a' },
-    };
-    navigation.navigate(route as never);
-  }, []);
   if (!permission) {
     return <View />;
   }

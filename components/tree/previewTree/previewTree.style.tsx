@@ -1,6 +1,6 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors } from '../../../static/colors';
-const windowHeight = Dimensions.get('window').height;
+import { hp } from '../../../utils/percentageSizes';
 
 export const styles = StyleSheet.create({
   card: {
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   editContainer: {
     position: 'absolute',
     flexDirection: 'row',
-    top: windowHeight / 1.4,
+    top: hp(75),
     left: 0,
     right: 0,
     justifyContent: 'center',
