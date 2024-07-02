@@ -1,6 +1,6 @@
 import React, { type FC } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import WelcomeScreen from '../pages/welcomeScreen/welcomeScreen';
+import FirstPage from '../pages/firstPage/firstPage';
 
 interface PrivateRouteProps {
   component: React.ComponentType;
@@ -9,7 +9,7 @@ interface PrivateRouteProps {
 const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component }) => {
   const { isAuthenticated } = useAuth();
 
-  return isAuthenticated ? <Component /> : <WelcomeScreen />;
+  return isAuthenticated ? <Component /> : <FirstPage />;
 };
 
 export default PrivateRoute;

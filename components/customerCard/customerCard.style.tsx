@@ -9,9 +9,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: widthCard,
-    height: 271,
+    height: 'auto',
     margin: 10,
     marginTop: 30,
+    paddingBottom: 4,
   },
   cardContent: {
     alignItems: 'center',
@@ -20,7 +21,7 @@ export const styles = StyleSheet.create({
     width: widthCard - 16,
     height: 214,
     borderRadius: 12,
-    marginTop: 8
+    marginTop: 8,
   },
   name: {
     marginTop: 2,

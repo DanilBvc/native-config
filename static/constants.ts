@@ -9,6 +9,7 @@ import BuyPackageStep4 from '../pages/buyPackage/step4/buyPackageStep4';
 import ContactUs from '../pages/contactUs/contactUs';
 import CreateUser from '../pages/createUser/createUser';
 import CustomerSection from '../pages/customerSection/customerSection';
+import FirstPage from '../pages/firstPage/firstPage';
 import HomeScreen from '../pages/homeScreen/homeScreen';
 import HowItWorks from '../pages/howItWorks/howItWorks';
 import UserProfile from '../pages/userProfile/userProfile';
@@ -20,6 +21,12 @@ export const tokens = {
 };
 
 export const routes = [
+  {
+    name: 'FirstPage',
+    component: FirstPage,
+    isPrivate: false,
+    options: { headerShown: false },
+  },
   {
     name: 'Welcome',
     component: WelcomeScreen,
