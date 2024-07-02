@@ -301,7 +301,7 @@ const PreviewTree: FC<{
                     placeholder={editTree ? 'Enter comment' : 'Your comment can be here '}
                     value={commentText}
                     onChange={onChange}
-                    disabled={editTree}
+                    editable={editTree}
                     additionalStyles={{
                       borderWidth: 0,
                       maxWidth: 160,

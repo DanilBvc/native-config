@@ -8,7 +8,7 @@ import TextField from '../../../components/generall/textField/textField';
 import { useAuth } from '../../../hooks/useAuth';
 import EmptyLayout from '../../../layouts/emptyLayout/emptyLayout';
 import { AuthUserApi } from '../../../services/authService/authService';
-import { emailRegex, passwordRegex } from '../../../static/regex';
+import { emailRegex } from '../../../static/regex';
 import { type userSignInData } from '../../../static/types/userTypes/types';
 import FamilyEmblem from '../../../static/familyEmblem';
 import useUserStore from '../../../store/user/store';
@@ -71,7 +71,6 @@ const SignIn = () => {
             value={signInData.password}
             onChange={onChange}
             placeholder={t('auth.password')}
-            validation={passwordRegex}
             error={error}
           />
         </View>

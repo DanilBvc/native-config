@@ -13,7 +13,7 @@ interface Props {
   name: string;
   error?: boolean;
   placeholderTextColor?: string;
-  disabled?: boolean;
+  editable?: boolean;
 }
 
 const TextArea: FC<Props> = ({
@@ -26,7 +26,7 @@ const TextArea: FC<Props> = ({
   name,
   error,
   placeholderTextColor = colors.rusty_Copper_25_Opacity,
-  disabled = false,
+  editable = false,
 }) => {
   const [errorValidation, setErrorValidation] = useState(false);
 
@@ -61,7 +61,7 @@ const TextArea: FC<Props> = ({
         handleInput(name, text);
       }}
       placeholderTextColor={placeholderTextColor}
-      editable={disabled}
+      editable={editable}
     ></TextInput>
   );
 };

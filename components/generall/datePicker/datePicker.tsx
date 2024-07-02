@@ -26,7 +26,7 @@ const DatePicker = ({ date, setDate, additionalStyles }: DataPickerProps) => {
         date={date ?? new Date()}
         onConfirm={(date) => {
           setOpen(false);
-          setDate(date);
+          setDate(FormatDate(date));
         }}
         onCancel={() => {
           setOpen(false);

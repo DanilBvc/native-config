@@ -11,7 +11,6 @@ import LineWithCircle from '../../components/lineWithCircle/lineWithCircle';
 import { useTypedNavigation, useTypedRoute } from '../../hooks/useTypedNavigation';
 import Button from '../../components/generall/button/button';
 import BurgerList from '../../components/burgerList/burgerList';
-import { FormatDate } from '../../utils/formatDate';
 
 const UserProfile = () => {
   const route = useTypedRoute();
@@ -39,6 +38,7 @@ const UserProfile = () => {
         burgerList={
           <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
         }
+        contentMarginBottom={170}
       >
         <SafeAreaView>
           <ScrollView showsVerticalScrollIndicator={false}>
@@ -47,9 +47,9 @@ const UserProfile = () => {
               <Text style={styles.username}>{user.full_name}</Text>
               <View style={styles.dateContainer}>
                 <View style={styles.dateWidth}>
-                  <Text style={styles.date}>{FormatDate(user.date_of_birth ? new Date(user.date_of_birth) : new Date())}</Text>
+                  <Text style={styles.date}>{user.date_of_birth}</Text>
                   <Text style={{ color: colors.rusty_Copper }}>-</Text>
-                  <Text style={styles.date}>{FormatDate(user.date_of_dead ? new Date(user.date_of_dead) : new Date())}</Text>
+                  <Text style={styles.date}>{user.date_of_dead}</Text>
                 </View>
               </View>
               <View style={styles.lines}>

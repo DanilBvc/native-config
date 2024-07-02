@@ -21,6 +21,7 @@ import BurgerList from '../../components/burgerList/burgerList';
 import TextArea from '../../components/generall/textArea/textArea';
 import AvatarImage from './AvatarImage';
 import DatePicker from '../../components/generall/datePicker/datePicker';
+import { parseCustomDate } from '../../utils/formatDate';
 
 const CreateUser = () => {
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
@@ -104,14 +105,13 @@ const CreateUser = () => {
         <SafeAreaView>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.cardContainer}>
-              {userData.avatar
-                ? (
+              {userData.avatar ? (
                 <AvatarImage avatar={userData.avatar} removeImage={removeImage} />
-                  ) : (
+              ) : (
                 <TouchableOpacity style={styles.placeholder} onPress={selectImage}>
                   <PlusSvg />
                 </TouchableOpacity>
-                  )}
+              )}
 
               <TextField
                 additionalStyles={{
@@ -136,15 +136,15 @@ const CreateUser = () => {
                 <View style={styles.dateWidth}>
                   <DatePicker
                     additionalStyles={{ width: 124, alignItems: 'center', paddingRight: 10 }}
-                    date={userData.date_of_birth ? new Date(userData.date_of_birth) : new Date()}
-                    setDate={(date: Date | null) => {
+                    date={parseCustomDate(userData.date_of_birth)}
+                    setDate={(date: string | null) => {
                       setUserData({ ...userData, date_of_birth: date });
                     }}
                   />
                   <DatePicker
                     additionalStyles={{ width: 124, alignItems: 'center', paddingRight: 10 }}
-                    date={userData.date_of_dead ? new Date(userData.date_of_dead) : new Date()}
-                    setDate={(date: Date | null) => {
+                    date={parseCustomDate(userData.date_of_dead)}
+                    setDate={(date: string | null) => {
                       setUserData({ ...userData, date_of_dead: date });
                     }}
                   />
@@ -162,6 +162,7 @@ const CreateUser = () => {
                 placeholder="Leave a few words about the person"
                 placeholderTextColor={colors.rusty_Copper_25_Opacity}
                 additionalStyles={{ marginTop: 22, width: '100%' }}
+                editable={true}
               />
               <Button text="Save" additionalStyles={styles.buttonStyle} onPress={handleUpdate} />
             </View>

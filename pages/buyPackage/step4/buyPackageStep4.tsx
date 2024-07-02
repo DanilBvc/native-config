@@ -19,20 +19,23 @@ import { TreeService } from '../../../services/treeService/treeService';
 import i18next from '../../../services/i18nextjs';
 import CustomModal from '../../../components/generall/modal/modal';
 
-const Delivery: FC<{ order: Order, updateOrderData: (orderData: Partial<Order>) => void }> = ({ order, updateOrderData }) => {
+const Delivery: FC<{ order: Order; updateOrderData: (orderData: Partial<Order>) => void }> = ({
+  order,
+  updateOrderData,
+}) => {
   const options = {
     en: [
       { label: 'FedEx', type: TypeOfMail.FedEx },
-      { label: 'USPS', type: TypeOfMail.USPS }
+      { label: 'USPS', type: TypeOfMail.USPS },
     ],
     pl: [
       { label: 'InPost', type: TypeOfMail.InPost },
-      { label: 'Poczta Polska', type: TypeOfMail['Poczta Polska'] }
+      { label: 'Poczta Polska', type: TypeOfMail['Poczta Polska'] },
     ],
     ua: [
       { label: 'Nova Poshta', type: TypeOfMail['Nova Poshta'] },
-      { label: 'Ukr Poshta', type: TypeOfMail['Ukr Poshta'] }
-    ]
+      { label: 'Ukr Poshta', type: TypeOfMail['Ukr Poshta'] },
+    ],
   };
 
   const langOptions = options[i18next.language as keyof typeof options];
@@ -40,13 +43,15 @@ const Delivery: FC<{ order: Order, updateOrderData: (orderData: Partial<Order>) 
 
   return (
     <>
-      {langOptions.map(option => (
+      {langOptions.map((option) => (
         <View key={option.type} style={{ width: '46%' }}>
           <Checkbox
             label={option.label}
             additionalStyles={{ width: '60%' }}
             checked={order.typeOfMail === option.type}
-            setChecked={() => { updateOrderData({ typeOfMail: option.type }); }}
+            setChecked={() => {
+              updateOrderData({ typeOfMail: option.type });
+            }}
           />
         </View>
       ))}
@@ -62,22 +67,27 @@ const BuyPackageStep4 = () => {
   const navigation = useNavigation();
   const handleNext = async () => {
     try {
-      const trees = await TreeService.getTypesTrees()
-      const typeId = trees.find((type) => type.name.toLowerCase() === order.selectedPackage.toLowerCase())?.id
-      if (!typeId) throw new Error('Type not found')
-      const response = await PaymentService.createPayload({ ...order, type_id: typeId, language: i18next.language });
+      const trees = await TreeService.getTypesTrees();
+      const typeId = trees.find(
+        (type) => type.name.toLowerCase() === order.selectedPackage.toLowerCase()
+      )?.id;
+      if (!typeId) throw new Error('Type not found');
+      const response = await PaymentService.createPayload({
+        ...order,
+        type_id: typeId,
+        language: i18next.language,
+      });
       if (!response) {
-        setIsSuccess(true)
+        setIsSuccess(true);
       } else {
         const route = {
           name: 'WebView',
-          params: { url: response.url }
-        }
+          params: { url: response.url },
+        };
 
-        navigation.navigate(route as never)
+        navigation.navigate(route as never);
       }
-    } catch (Err) {
-    }
+    } catch (Err) {}
   };
   const updateOrderData = useOrderStore((state) => state.updateOrderData);
   const [acceptTerms, setAcceptTerms] = React.useState(false);
@@ -87,21 +97,21 @@ const BuyPackageStep4 = () => {
   };
 
   const redirectToHome = () => {
-    clearOrderData()
+    clearOrderData();
     navigation.navigate('Welcome' as never);
-  }
+  };
 
   return (
     <>
-    <CustomModal open={isSuccess} close={() => {}} >
-    <View style={styles.successMessageWrapper}>
-        <View style={styles.successMessageContainer}>
-          <Text style={styles.successMessage}>{t('successPayloadMessage')}</Text>
-          <Text style={styles.successMessage}>{t('payload.checkEmail')}</Text>
-          <Button text={t('payload.return')} onPress={redirectToHome} />
+      <CustomModal open={isSuccess} close={() => {}}>
+        <View style={styles.successMessageWrapper}>
+          <View style={styles.successMessageContainer}>
+            <Text style={styles.successMessage}>{t('successPayloadMessage')}</Text>
+            <Text style={styles.successMessage}>{t('payload.checkEmail')}</Text>
+            <Button text={t('payload.return')} onPress={redirectToHome} />
+          </View>
         </View>
-      </View>
-    </CustomModal>
+      </CustomModal>
       <EmptyLayout
         additionalControl={
           <Link to={{ screen: 'Welcome' }}>
@@ -128,7 +138,7 @@ const BuyPackageStep4 = () => {
                 <LineWithCircle lineWidth={'80%'} />
               </View>
               <View style={styles.spaceBetween}>
-               <Delivery order={order} updateOrderData={updateOrderData } />
+                <Delivery order={order} updateOrderData={updateOrderData} />
               </View>
               <View style={styles.spaceBetween}>
                 <View style={{ width: '46%' }}>
@@ -170,6 +180,7 @@ const BuyPackageStep4 = () => {
                     value={order.instructionsDelivery}
                     onChange={onChange}
                     placeholder={t('payload.instructionsDeliveryPlaceholder')}
+                    editable={true}
                   />
                 )}
               </View>

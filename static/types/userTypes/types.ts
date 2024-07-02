@@ -6,7 +6,6 @@ export interface userSignInData {
 interface tokens {
   accessToken: string;
   refreshToken: string;
-
 }
 
 export interface userData {
@@ -25,8 +24,8 @@ export interface Tree {
   available_slot: number;
   avatar: string | null;
   created_at: string;
-  date_of_birth: Date | null;
-  date_of_dead: Date | null;
+  date_of_birth: string | null;
+  date_of_dead: string | null;
   description: string | null;
   first_name: string;
   full_name: string;
@@ -50,7 +49,7 @@ export interface User {
 }
 
 export interface LoginResponse {
-  data: User,
+  data: User;
 }
 
 export interface TContactForm {

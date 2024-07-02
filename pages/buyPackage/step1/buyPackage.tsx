@@ -22,17 +22,23 @@ const BuyPackageCard = ({ route }: { route: { params: { card: string } } }) => {
   const { t } = useTranslation();
   const { card } = route.params;
 
-  const order = useOrderStore((state) => state.order)
-  const {
-    dob, dod, hearAbout, accountName
-  } = order
+  const order = useOrderStore((state) => state.order);
+  const { dob, dod, hearAbout, accountName } = order;
   const updateOrderData = useOrderStore((state) => state.updateOrderData);
   const onChange = (name: string, value: string) => {
-    updateOrderData({ [name]: value })
+    updateOrderData({ [name]: value });
   };
   const options = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const standardOptions: Array<{ component: any; props: { order: Order, updateOrderData?: (orderData: Partial<Order>) => void, onChange?: (name: string, value: string) => void }; label: string }> = [
+    const standardOptions: Array<{
+      component: any;
+      props: {
+        order: Order;
+        updateOrderData?: (orderData: Partial<Order>) => void;
+        onChange?: (name: string, value: string) => void;
+      };
+      label: string;
+    }> = [
       {
         component: OrderForSomeoneElse,
         props: {
@@ -82,8 +88,8 @@ const BuyPackageCard = ({ route }: { route: { params: { card: string } } }) => {
   };
 
   useEffect(() => {
-    updateOrderData({ selectedPackage: card })
-  }, [card])
+    updateOrderData({ selectedPackage: card });
+  }, [card]);
 
   return (
     <>
@@ -133,7 +139,7 @@ const BuyPackageCard = ({ route }: { route: { params: { card: string } } }) => {
                     date={dob}
                     setDate={(date: Date | null) => {
                       if (date) {
-                        updateOrderData({ dob: date })
+                        updateOrderData({ dob: date });
                       }
                     }}
                   />
@@ -148,7 +154,7 @@ const BuyPackageCard = ({ route }: { route: { params: { card: string } } }) => {
                     date={dod}
                     setDate={(date: Date | null) => {
                       if (date) {
-                        updateOrderData({ dod: date })
+                        updateOrderData({ dod: date });
                       }
                     }}
                   />
@@ -239,7 +245,7 @@ const OrderForSomeoneElse = ({
             date={order.dob}
             setDate={(date: Date | null) => {
               if (date) {
-                updateOrderData({ dob: date })
+                updateOrderData({ dob: date });
               }
             }}
           />
@@ -278,6 +284,7 @@ const SpecialWishes = ({
       value={order.specialWishes}
       onChange={onChange}
       placeholder={t('payload.specialWishes')}
+      editable={true}
     ></TextArea>
   );
 };
