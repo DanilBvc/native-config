@@ -12,42 +12,43 @@ const ActiveSlot: FC<{
   transform: Animated.Value;
   deselectSlot: () => void;
   handleSlotChange: (direction: number) => void;
-}> = ({ activeSlot, opacity, transform, deselectSlot, handleSlotChange }) => (
-  <Animated.View
-    style={{
-      opacity,
-      transform: [{ scale: transform }],
-      position: 'absolute',
-      height: activeSlot.height,
-      width: activeSlot.width,
-    }}
-  >
-    <Pressable
+}> = ({ activeSlot, opacity, transform, deselectSlot, handleSlotChange }) => {
+  return (
+    <Animated.View
       style={{
-        transform: [{ rotate: '180deg' }],
+        opacity,
+        transform: [{ scale: transform }],
         position: 'absolute',
-        left: windowWidth / 2.3,
-        top: windowHeight / 6,
-        zIndex: 1,
-      }}
-      onPress={() => {
-        handleSlotChange(-1);
+        height: activeSlot.height,
+        width: activeSlot.width,
       }}
     >
-      <ArrowDownIcon color={colors.white} />
-    </Pressable>
+      <Pressable
+        style={{
+          transform: [{ rotate: '180deg' }],
+          position: 'absolute',
+          left: windowWidth / 2.3,
+          top: windowHeight / 6,
+          zIndex: 1,
+        }}
+        onPress={() => {
+          handleSlotChange(-1);
+        }}
+      >
+        <ArrowDownIcon color={colors.white} />
+      </Pressable>
 
-    <PressableSlot item={activeSlot} onClick={deselectSlot} />
+      <PressableSlot item={activeSlot} onClick={deselectSlot} />
 
-    <Pressable
-      style={{ position: 'absolute', left: windowWidth / 2.3, top: windowHeight / 1.8 }}
-      onPress={() => {
-        handleSlotChange(1);
-      }}
-    >
-      <ArrowDownIcon color={colors.white} />
-    </Pressable>
-  </Animated.View>
-);
-
+      <Pressable
+        style={{ position: 'absolute', left: windowWidth / 2.3, top: windowHeight / 1.8 }}
+        onPress={() => {
+          handleSlotChange(1);
+        }}
+      >
+        <ArrowDownIcon color={colors.white} />
+      </Pressable>
+    </Animated.View>
+  );
+};
 export default ActiveSlot;

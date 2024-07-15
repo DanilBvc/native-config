@@ -84,6 +84,7 @@ export interface SlotType {
 export enum FileEnum {
   PHOTO = 'PHOTO',
   VIDEO = 'VIDEO',
+  AUDIO = 'AUDIO',
 }
 
 export interface Cords {
@@ -91,4 +92,5 @@ export interface Cords {
   height: number;
   x: number;
   y: number;
+  slot_type: FileEnum;
 }

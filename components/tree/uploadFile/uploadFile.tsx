@@ -2,6 +2,8 @@ import React, { useState, type FC } from 'react';
 import { Animated, Image, ImageBackground, TouchableOpacity, View } from 'react-native';
 import { PlusIcon } from '../../../assets/icons/PlusIcon';
 import { styles } from './uploadFile.style';
+import Audio from '../../../assets/audio.png';
+import Video from '../../../assets/video.png';
 
 import * as ImagePicker from 'expo-image-picker';
 import PressableSlot from '../pressableSlot/pressableSlot';
@@ -32,7 +34,7 @@ const UploadFile: FC<UploadFileProps> = ({
   const [userData, setUserData] = useState<{
     file: { uri: string; name: string; type: string } | null;
     index: number | null;
-    slot_type: string;
+    slot_type: 'PHOTO' | 'VIDEO' | 'AUDIO';
   }>({
     file: null,
     index: newFileIndex,
@@ -41,34 +43,42 @@ const UploadFile: FC<UploadFileProps> = ({
 
   const [uri, setUri] = useState('');
 
-  const selectImage = async () => {
+  const selectMedia = async () => {
     const result = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!result.granted) {
-      alert('Permission to access camera roll is required!');
+      alert('Permission to access media library is required!');
       return;
     }
 
     const pickerResult = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
       quality: 1,
     });
 
     if (!pickerResult.canceled) {
-      const { uri } = pickerResult.assets[0];
-      setUserData({
-        ...userData,
+      const { uri, type } = pickerResult.assets[0];
+
+      const fileType = type?.startsWith('image')
+        ? 'PHOTO'
+        : type?.startsWith('video')
+          ? 'VIDEO'
+          : 'AUDIO';
+      setUserData((prevState) => ({
+        ...prevState,
         file: {
           uri,
-          name: 'photo.jpg',
-          type: 'image/jpeg',
+          name: 'file',
+          type:
+            fileType === 'PHOTO' ? 'image/jpeg' : fileType === 'VIDEO' ? 'video/mp4' : 'audio/mpeg',
         },
-      });
+        slot_type: fileType,
+      }));
       setUri(uri);
     }
   };
 
-  const removeImage = () => {
-    setUserData({ ...userData, file: null });
+  const removeMedia = () => {
+    setUserData((prevState) => ({ ...prevState, file: null }));
     setUri('');
   };
 
@@ -81,7 +91,7 @@ const UploadFile: FC<UploadFileProps> = ({
       name: userData.file.name,
       type: userData.file.type,
     } as any);
-    formData.append('index', userData.index.toString());
+    formData.append('index', userData.index?.toString() ?? '');
     formData.append('slot_type', userData.slot_type);
 
     try {
@@ -95,7 +105,19 @@ const UploadFile: FC<UploadFileProps> = ({
     }
   };
 
-  const imageSource = uri ? { uri } : null;
+  const mediaElement = () => {
+    if (!uri) return <PlusIcon />;
+    switch (userData.slot_type) {
+      case 'PHOTO':
+        return <Image source={{ uri }} style={{ ...styles.photo, width: 290, height: 290 }} />;
+      case 'VIDEO':
+        return <Image source={Video} style={{ ...styles.photo, width: 290, height: 290 }} />;
+      case 'AUDIO':
+        return <Image source={Audio} style={{ ...styles.photo, width: 290, height: 290 }} />;
+      default:
+        return <PlusIcon />;
+    }
+  };
 
   return (
     <View style={{ width: 290, height: 290, position: 'relative' }}>
@@ -111,7 +133,7 @@ const UploadFile: FC<UploadFileProps> = ({
         <View style={styles.container}>
           <TouchableOpacity
             onPress={() => {
-              selectImage();
+              selectMedia();
             }}
           >
             <ImageBackground
@@ -121,16 +143,7 @@ const UploadFile: FC<UploadFileProps> = ({
                 height: windowWidth - 52,
               }}
             >
-              <View style={styles.backContent}>
-                {uri ? (
-                  <Image
-                    source={imageSource}
-                    style={{ ...styles.photo, width: 290, height: 290 }}
-                  />
-                ) : (
-                  <PlusIcon />
-                )}
-              </View>
+              <View style={styles.backContent}>{mediaElement()}</View>
             </ImageBackground>
           </TouchableOpacity>
           <View>
@@ -142,10 +155,10 @@ const UploadFile: FC<UploadFileProps> = ({
               component={CheckSvg()}
             />
           </View>
-          {imageSource && (
+          {uri && (
             <View>
               <PressableSlot
-                onClick={removeImage}
+                onClick={removeMedia}
                 item={{ x: 40, y: 52, height: 23, width: 23 }}
                 component={TrashSvg()}
               />

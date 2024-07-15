@@ -23,6 +23,7 @@ export const generateCircularCoords = (
       id: slot ? slot.id : generateUUID(),
       link: slot?.link,
       title: slot?.comment_title,
+      slot_type: slot?.slot_type,
       index: i,
     };
   });

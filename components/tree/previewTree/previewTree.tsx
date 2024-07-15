@@ -264,18 +264,21 @@ const PreviewTree: FC<{
           )
         }
       >
-        {slots.map((slot, i) => (
-          <PressableSlot
-            onClick={selectSlot}
-            key={i}
-            item={slot}
-            style={activeSlot && { display: 'none' }}
-            handleOpenSlotWindow={() => {
-              handleOpenSlotWindow(i);
-            }}
-            editTree={editTree}
-          />
-        ))}
+        {slots.map((slot, i) => {
+          return (
+            <PressableSlot
+              onClick={selectSlot}
+              key={i}
+              activeSlot={activeSlot}
+              item={slot}
+              style={activeSlot && { display: 'none' }}
+              handleOpenSlotWindow={() => {
+                handleOpenSlotWindow(i);
+              }}
+              editTree={editTree}
+            />
+          );
+        })}
 
         {activeSlot && activeSlot.id !== 'setNewImage' && (
           <View style={{ width: 290, height: 290, position: 'relative' }}>

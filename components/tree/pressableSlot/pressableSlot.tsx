@@ -10,25 +10,27 @@ const PressableSlot: FC<{
   handleOpenSlotWindow?: () => void;
   style?: StyleProp<ViewStyle>;
   editTree?: boolean;
-}> = ({ item, onClick, component, handleOpenSlotWindow, style, editTree = false }) => {
+  activeSlot?: null | (Partial<SlotType> & Cords);
+}> = ({ item, onClick, component, handleOpenSlotWindow, style, editTree = false, activeSlot }) => {
+  const handlePress = () => {
+    if (!item) return;
+    onClick?.(item);
+  };
+
   return (
-    <Pressable
-      onPress={() => {
-        if (!item) return;
-        onClick?.(item);
-      }}
-      collapsable={false}
-      style={style}
-    >
-      <GlowingSlot
-        url={item.link}
-        key={item.id}
-        cords={item}
-        component={component}
-        handleOpenSlotWindow={handleOpenSlotWindow}
-        editTree={editTree}
-      />
-    </Pressable>
+    <>
+      <Pressable onPress={handlePress} collapsable={false} style={style}>
+        <GlowingSlot
+          url={item.link}
+          key={item.id}
+          cords={item}
+          component={component}
+          handleOpenSlotWindow={handleOpenSlotWindow}
+          editTree={editTree}
+          activeSlot={activeSlot}
+        />
+      </Pressable>
+    </>
   );
 };
 

@@ -21,7 +21,7 @@ const EmptyLayout: FC<{
   return (
     <View style={{ ...styles.containerStyle, backgroundColor }}>
       <View style={styles.headerStyle}>
-        <Link to={{ screen: 'FirstPage' }} style={{ height: 29 }}>
+        <Link to={{ screen: 'Welcome' }} style={{ height: 29 }}>
           <Image source={require('../../assets/logo.png')} style={styles.imageSize} />
         </Link>
         {additionalControl && <View>{additionalControl}</View>}

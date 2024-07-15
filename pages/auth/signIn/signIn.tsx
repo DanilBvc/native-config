@@ -22,8 +22,8 @@ const SignIn = () => {
   const { setIsAuthenticated } = useAuth();
   const navigation = useNavigation();
   const [signInData, setSignInData] = useState<userSignInData>({
-    email: '',
-    password: '',
+    email: 'dneys@gmail.com',
+    password: '1012002',
   });
 
   const [error, setError] = useState<boolean>(false);

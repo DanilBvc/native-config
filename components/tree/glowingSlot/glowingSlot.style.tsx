@@ -23,4 +23,20 @@ export const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 8,
   },
+  videoContainer: {
+    borderRadius: 150,
+    overflow: 'hidden',
+  },
+  video: {
+    width: '100%',
+    height: '100%',
+  },
+  audioControlContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  controlIcon: {
+    width: 50,
+    height: 50, // Set appropriate size for the control icon
+  },
 });
