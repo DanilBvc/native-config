@@ -122,7 +122,7 @@ const PreviewTree: FC<{
   };
 
   useEffect(() => {
-    setCommentText(activeSlot?.title);
+    setCommentText(activeSlot?.title as string);
   }, [activeSlot?.title]);
 
   const findNextSlotWithLink = (currentSlot: Partial<SlotType> & Cords, direction: number) => {
@@ -140,7 +140,7 @@ const PreviewTree: FC<{
   };
 
   const handleSlotChange = (direction: number) => {
-    const nextSlot = findNextSlotWithLink(activeSlot, direction);
+    const nextSlot = findNextSlotWithLink(activeSlot as Partial<SlotType> & Cords, direction);
     if (nextSlot) {
       animateOut(() => {
         selectSlot(nextSlot);
@@ -149,7 +149,6 @@ const PreviewTree: FC<{
   };
 
   const panResponder = PanResponder.create({
-    onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (evt, gestureState) => {
       const angleDelta = -gestureState.dx / 50;
       if (!activeSlot) {
@@ -220,7 +219,7 @@ const PreviewTree: FC<{
   };
 
   return (
-    <View {...panResponder.panHandlers} style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
       {isGenerationProgress && (
         <View style={{ position: 'absolute', bottom: hp(80), left: wp(50) - 30 }}>
           <Loader />
