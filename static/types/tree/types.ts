@@ -92,5 +92,5 @@ export interface Cords {
   height: number;
   x: number;
   y: number;
-  slot_type: FileEnum;
+  slot_type?: FileEnum;
 }

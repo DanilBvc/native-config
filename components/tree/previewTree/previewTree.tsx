@@ -340,7 +340,7 @@ const PreviewTree: FC<{
             ) : (
               <PressableSlot
                 onClick={rotate}
-                item={{ x: 300, y: 300, height: 23, width: 23 }}
+                item={{ x: wp(78), y: hp(25), height: 23, width: 23 }}
                 component={CommentSvg()}
               />
             )}
@@ -349,7 +349,7 @@ const PreviewTree: FC<{
         {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
           <PressableSlot
             onClick={handleDelete}
-            item={{ x: 40, y: 300, height: 23, width: 23 }}
+            item={{ x: wp(40), y: hp(25), height: 23, width: 23 }}
             component={TrashSvg()}
           />
         )}

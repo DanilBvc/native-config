@@ -10,7 +10,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release:android": "cd android && ./gradlew assembleRelease && cd .. "
   },
   "dependencies": {
     "@expo-google-fonts/great-vibes": "^0.2.3",
