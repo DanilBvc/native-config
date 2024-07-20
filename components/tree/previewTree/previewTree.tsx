@@ -149,6 +149,8 @@ const PreviewTree: FC<{
   };
 
   const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (evt, gestureState) => {
       const angleDelta = -gestureState.dx / 50;
       if (!activeSlot) {
@@ -219,163 +221,164 @@ const PreviewTree: FC<{
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      {isGenerationProgress && (
-        <View style={{ position: 'absolute', bottom: hp(80), left: wp(50) - 30 }}>
-          <Loader />
-        </View>
-      )}
-      <EmptyLayout
-        additionalControl={
-          <View
-            style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
-          >
-            <ShareButton id={id} />
-            {activeSlot ? (
-              <TouchableOpacity style={{ marginLeft: 20, zIndex: 10 }} onPress={deselectSlot}>
-                <CloseIcon stroke="#fff" />
-              </TouchableOpacity>
-            ) : (
-              <>
-                {isAuthenticated ? (
-                  <BurgerMenu
-                    isBurgerMenuVisible={isBurgerMenuVisible}
-                    setBurgerMenuVisible={setBurgerMenuVisible}
-                    style={{ marginLeft: 20 }}
-                  />
-                ) : (
-                  <TouchableOpacity style={{ marginLeft: 20 }} onPress={navigate.goBack}>
-                    <ArrowBack />
-                  </TouchableOpacity>
-                )}
-              </>
-            )}
-          </View>
-        }
-        burgerList={
-          <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
-        }
-        footerControl={
-          isAuthenticated && !activeSlot && isOwner ? (
-            <BottomNavigation theme="light" />
-          ) : (
-            <GptNavigation onCommentPress={generateDescription} />
-          )
-        }
-      >
-        {slots.map((slot, i) => {
-          return (
-            <PressableSlot
-              onClick={selectSlot}
-              key={i}
-              activeSlot={activeSlot}
-              item={slot}
-              style={activeSlot && { display: 'none' }}
-              handleOpenSlotWindow={() => {
-                handleOpenSlotWindow(i);
-              }}
-              editTree={editTree}
-            />
-          );
-        })}
-
-        {activeSlot && activeSlot.id !== 'setNewImage' && (
-          <View style={{ width: 290, height: 290, position: 'relative' }}>
-            <Animated.View style={[styles.card, frontAnimatedStyle]}>
-              <ActiveSlot
-                activeSlot={activeSlot}
-                opacity={opacity}
-                transform={transform}
-                deselectSlot={deselectSlot}
-                handleSlotChange={handleSlotChange}
-              />
-            </Animated.View>
-
-            <Animated.View style={[styles.card, backAnimatedStyle]}>
-              <ImageBackground
-                source={require('../../../assets/glowingCircleBig.png')}
-                style={[styles.backSide, { top: activeSlot.y, left: activeSlot.x }]}
-              >
-                <View style={styles.backContent}>
-                  <Text style={styles.backText}>{activeSlot.comment_text}</Text>
-                  <TextArea
-                    name="commentText"
-                    placeholder={editTree ? 'Enter comment' : 'Your comment can be here '}
-                    value={commentText}
-                    onChange={onChange}
-                    editable={editTree}
-                    additionalStyles={{
-                      borderWidth: 0,
-                      maxWidth: 160,
-                      maxHeight: 160,
-                      textAlign: 'center',
-                    }}
-                  />
+            <View style={{ flex: 1 }}>
+              {isGenerationProgress && (
+                <View style={{ position: 'absolute', bottom: hp(80), left: wp(50) - 30 }}>
+                  <Loader />
                 </View>
-              </ImageBackground>
-            </Animated.View>
-          </View>
-        )}
+              )}
+              <EmptyLayout
+                additionalControl={
+                  <View
+                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
+                  >
+                    <ShareButton id={id} />
+                    {activeSlot ? (
+                      <TouchableOpacity style={{ marginLeft: 20, zIndex: 10 }} onPress={deselectSlot}>
+                        <CloseIcon stroke="#fff" />
+                      </TouchableOpacity>
+                    ) : (
+                      <>
+                        {isAuthenticated ? (
+                          <BurgerMenu
+                            isBurgerMenuVisible={isBurgerMenuVisible}
+                            setBurgerMenuVisible={setBurgerMenuVisible}
+                            style={{ marginLeft: 20 }}
+                          />
+                        ) : (
+                          <TouchableOpacity style={{ marginLeft: 20 }} onPress={navigate.goBack}>
+                            <ArrowBack />
+                          </TouchableOpacity>
+                        )}
+                      </>
+                    )}
+                  </View>
+                }
+                burgerList={
+                  <BurgerList isVisible={isBurgerMenuVisible} setBurgerMenuVisible={setBurgerMenuVisible} />
+                }
+                footerControl={
+                  isAuthenticated && !activeSlot && isOwner ? (
+                    <BottomNavigation theme="light" />
+                  ) : (
+                    <GptNavigation onCommentPress={generateDescription} />
+                  )
+                }
+              >
+                <View {...panResponder.panHandlers }>
+                {slots.map((slot, i) => {
+                  return (
+                    <PressableSlot
+                      onClick={selectSlot}
+                      key={i}
+                      activeSlot={activeSlot}
+                      item={slot}
+                      style={activeSlot && { display: 'none' }}
+                      handleOpenSlotWindow={() => {
+                        handleOpenSlotWindow(i);
+                      }}
+                      editTree={editTree}
+                    />
+                  );
+                })}
+        </View>
+                {activeSlot && activeSlot.id !== 'setNewImage' && (
+                  <View style={{ width: 290, height: 290, position: 'relative' }}>
+                    <Animated.View style={[styles.card, frontAnimatedStyle]}>
+                      <ActiveSlot
+                        activeSlot={activeSlot}
+                        opacity={opacity}
+                        transform={transform}
+                        deselectSlot={deselectSlot}
+                        handleSlotChange={handleSlotChange}
+                      />
+                    </Animated.View>
 
-        {activeSlot && activeSlot?.id === 'setNewImage' && (
-          <UploadFile
-            opacity={opacity}
-            transform={transform}
-            windowWidth={windowWidth}
-            id={id}
-            newFileIndex={newFileIndex}
-            deselectSlot={deselectSlot}
-            addSlot={addSlot}
-          />
-        )}
-        {activeSlot && activeSlot.id !== 'setNewImage' && (
-          <>
-            {commentText && editTree && isFlipped ? (
-              <PressableSlot
-                onClick={sendComment}
-                item={{ x: 300, y: 300, height: 23, width: 23 }}
-                component={AddCommentSvg()}
-              />
-            ) : (
-              <PressableSlot
-                onClick={rotate}
-                item={{ x: wp(78), y: hp(25), height: 23, width: 23 }}
-                component={CommentSvg()}
-              />
-            )}
-          </>
-        )}
-        {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
-          <PressableSlot
-            onClick={handleDelete}
-            item={{ x: wp(40), y: hp(25), height: 23, width: 23 }}
-            component={TrashSvg()}
-          />
-        )}
+                    <Animated.View style={[styles.card, backAnimatedStyle]}>
+                      <ImageBackground
+                        source={require('../../../assets/glowingCircleBig.png')}
+                        style={[styles.backSide, { top: activeSlot.y, left: activeSlot.x }]}
+                      >
+                        <View style={styles.backContent}>
+                          <Text style={styles.backText}>{activeSlot.comment_text}</Text>
+                          <TextArea
+                            name="commentText"
+                            placeholder={editTree ? 'Enter comment' : 'Your comment can be here '}
+                            value={commentText}
+                            onChange={onChange}
+                            editable={editTree}
+                            additionalStyles={{
+                              borderWidth: 0,
+                              maxWidth: 160,
+                              maxHeight: 160,
+                              textAlign: 'center',
+                            }}
+                          />
+                        </View>
+                      </ImageBackground>
+                    </Animated.View>
+                  </View>
+                )}
 
-        <TouchableOpacity style={styles.editContainer}>
-          {isOwner && !editTree ? (
-            <TouchableOpacity
-              style={styles.editButton}
-              onPress={() => {
-                setEditTree(true);
-              }}
-            >
-              <EditSvg />
-              <Text style={styles.editText}>Edit</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => {
-                setEditTree(false);
-              }}
-            >
-              <Text style={styles.editText}>click on the circle</Text>
-            </TouchableOpacity>
-          )}
-        </TouchableOpacity>
-      </EmptyLayout>
-    </View>
+                {activeSlot && activeSlot?.id === 'setNewImage' && (
+                  <UploadFile
+                    opacity={opacity}
+                    transform={transform}
+                    windowWidth={windowWidth}
+                    id={id}
+                    newFileIndex={newFileIndex}
+                    deselectSlot={deselectSlot}
+                    addSlot={addSlot}
+                  />
+                )}
+                {activeSlot && activeSlot.id !== 'setNewImage' && (
+                  <>
+                    {commentText && editTree && isFlipped ? (
+                      <PressableSlot
+                        onClick={sendComment}
+                        item={{ x: 300, y: 300, height: 23, width: 23 }}
+                        component={AddCommentSvg()}
+                      />
+                    ) : (
+                      <PressableSlot
+                        onClick={rotate}
+                        item={{ x: wp(78), y: hp(25), height: 23, width: 23 }}
+                        component={CommentSvg()}
+                      />
+                    )}
+                  </>
+                )}
+                {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
+                  <PressableSlot
+                    onClick={handleDelete}
+                    item={{ x: wp(40), y: hp(25), height: 23, width: 23 }}
+                    component={TrashSvg()}
+                  />
+                )}
+
+                <TouchableOpacity style={styles.editContainer}>
+                  {isOwner && !editTree ? (
+                    <TouchableOpacity
+                      style={styles.editButton}
+                      onPress={() => {
+                        setEditTree(true);
+                      }}
+                    >
+                      <EditSvg />
+                      <Text style={styles.editText}>Edit</Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <TouchableOpacity
+                      onPress={() => {
+                        setEditTree(false);
+                      }}
+                    >
+                      <Text style={styles.editText}>click on the circle</Text>
+                    </TouchableOpacity>
+                  )}
+                </TouchableOpacity>
+              </EmptyLayout>
+            </View>
   );
 };
 
