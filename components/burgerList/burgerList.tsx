@@ -32,7 +32,7 @@ const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
       await removeData('accessToken');
       await removeData('refreshToken');
       setBurgerMenuVisible(false);
-      navigation.navigate('/WelcomeScreen');
+      navigation.navigate('/Welcome');
     }
   };
 
