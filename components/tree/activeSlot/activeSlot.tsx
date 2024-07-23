@@ -1,18 +1,15 @@
 import React, { type FC } from 'react';
-import { Animated, Dimensions, Pressable } from 'react-native';
-import { ArrowDownIcon } from '../../../assets/icons/faq';
-import { colors } from '../../../static/colors';
+import { Animated } from 'react-native';
 import { type SlotType, type Cords } from '../../../static/types/tree/types';
 import PressableSlot from '../pressableSlot/pressableSlot';
-import { hp } from '../../../utils/percentageSizes';
-const windowWidth = Dimensions.get('window').width;
 const ActiveSlot: FC<{
   activeSlot: Partial<SlotType> & Cords;
   opacity: Animated.Value;
+  edit: boolean;
   transform: Animated.Value;
   deselectSlot: () => void;
   handleSlotChange: (direction: number) => void;
-}> = ({ activeSlot, opacity, transform, deselectSlot, handleSlotChange }) => {
+}> = ({ activeSlot, opacity, transform, deselectSlot, handleSlotChange, edit }) => {
   return (
     <Animated.View
       style={{
@@ -23,30 +20,7 @@ const ActiveSlot: FC<{
         width: activeSlot.width,
       }}
     >
-      <Pressable
-        style={{
-          transform: [{ rotate: '180deg' }],
-          position: 'absolute',
-          left: windowWidth / 2.3,
-          top: hp(10),
-        }}
-        onPress={() => {
-          handleSlotChange(-1);
-        }}
-      >
-        <ArrowDownIcon color={colors.white} />
-      </Pressable>
-
       <PressableSlot item={activeSlot} onClick={deselectSlot} />
-
-      <Pressable
-        style={{ position: 'absolute', left: windowWidth / 2.3, top: hp(60), }}
-        onPress={() => {
-          handleSlotChange(1);
-        }}
-      >
-        <ArrowDownIcon color={colors.white} />
-      </Pressable>
     </Animated.View>
   );
 };
