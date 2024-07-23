@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   editContainer: {
     position: 'absolute',
     flexDirection: 'row',
-    top: hp(75),
+    top: hp(70),
     left: 0,
     right: 0,
     justifyContent: 'center',

@@ -4,7 +4,7 @@ import { ArrowDownIcon } from '../../../assets/icons/faq';
 import { colors } from '../../../static/colors';
 import { type SlotType, type Cords } from '../../../static/types/tree/types';
 import PressableSlot from '../pressableSlot/pressableSlot';
-const windowHeight = Dimensions.get('window').height;
+import { hp } from '../../../utils/percentageSizes';
 const windowWidth = Dimensions.get('window').width;
 const ActiveSlot: FC<{
   activeSlot: Partial<SlotType> & Cords;
@@ -28,8 +28,7 @@ const ActiveSlot: FC<{
           transform: [{ rotate: '180deg' }],
           position: 'absolute',
           left: windowWidth / 2.3,
-          top: windowHeight / 6,
-          zIndex: 1,
+          top: hp(10),
         }}
         onPress={() => {
           handleSlotChange(-1);
@@ -41,7 +40,7 @@ const ActiveSlot: FC<{
       <PressableSlot item={activeSlot} onClick={deselectSlot} />
 
       <Pressable
-        style={{ position: 'absolute', left: windowWidth / 2.3, top: windowHeight / 1.8 }}
+        style={{ position: 'absolute', left: windowWidth / 2.3, top: hp(60), }}
         onPress={() => {
           handleSlotChange(1);
         }}

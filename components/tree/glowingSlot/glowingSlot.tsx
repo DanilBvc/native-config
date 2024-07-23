@@ -47,7 +47,7 @@ const GlowingSlot: FC<{
       ) : (
         editTree && (
           <TouchableOpacity
-            onPress={() => {
+            onPressIn={() => {
               handleOpenSlotWindow && handleOpenSlotWindow();
             }}
           >

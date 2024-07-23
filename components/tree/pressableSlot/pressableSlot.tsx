@@ -19,7 +19,7 @@ const PressableSlot: FC<{
 
   return (
     <>
-      <Pressable onPress={handlePress} collapsable={false} style={style}>
+      <Pressable onPressIn={handlePress} collapsable={false} style={style}>
         <GlowingSlot
           url={item.link}
           key={item.id}

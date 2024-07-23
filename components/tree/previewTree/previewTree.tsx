@@ -87,8 +87,8 @@ const PreviewTree: FC<{
     if (slot.link) {
       setActiveSlot({
         ...slot,
-        x: windowWidth / 9,
-        y: windowHeight / 5,
+        x: wp(10),
+        y: hp(20),
         height: 290,
         width: 290,
       });
