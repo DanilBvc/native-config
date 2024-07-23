@@ -14,16 +14,17 @@ const GlowingSlot: FC<{
   cords: Cords;
   component?: ReactNode;
   handleOpenSlotWindow?: () => void;
+  onPress?: () => void;
   editTree?: boolean;
   previewTree?: boolean;
   activeSlot?: null | (Partial<SlotType> & Cords);
-}> = ({ url, cords, component, handleOpenSlotWindow, editTree, activeSlot }) => {
+}> = ({ url, cords, component, handleOpenSlotWindow, editTree, activeSlot, onPress }) => {
   const { width, height, x, y } = cords;
   const imageSource = typeof url === 'string' ? { uri: url } : url;
   const glowImage = height > 100 && width > 100 ? glowingCircleBig : glowingCircle;
 
   return (
-    <View style={[styles.container, { width, height, top: y, left: x }]}>
+    <TouchableOpacity onPress={onPress} style={[styles.container, { width, height, top: y, left: x }]}>
       <Image source={glowImage} style={styles.glow} height={height} width={width} />
       {component && <View style={{ ...styles.photo, width, height }}>{component}</View>}
       {cords.slot_type === 'VIDEO' ? (
@@ -55,7 +56,7 @@ const GlowingSlot: FC<{
           </TouchableOpacity>
         )
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 

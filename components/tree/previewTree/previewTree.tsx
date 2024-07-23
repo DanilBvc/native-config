@@ -39,7 +39,6 @@ import BottomNavigation from '../../generall/bottomNavigation/bottomNavigation';
 import { OpenAIService } from '../../../services/openAIService/openAIService';
 import Loader from '../../generall/loader/loader';
 import { hp, wp } from '../../../utils/percentageSizes';
-const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
 const PreviewTree: FC<{
@@ -133,8 +132,6 @@ const PreviewTree: FC<{
   const findNextSlotWithLink = (currentSlot: Partial<SlotType> & Cords, direction: number) => {
     if (!currentSlot) return null;
     const currentIndex = slots.findIndex((slot) => slot.id === currentSlot.id);
-    if (currentIndex === -1) return null;
-
     for (let i = 1; i < slots.length; i++) {
       const nextIndex = (currentIndex + i * direction + slots.length) % slots.length;
       if (slots[nextIndex].link) {
@@ -154,8 +151,13 @@ const PreviewTree: FC<{
   };
 
   const panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onMoveShouldSetPanResponder: () => true,
+    onStartShouldSetPanResponder: () => false,
+
+    onMoveShouldSetPanResponder: (e, gestureState) => {
+      const { dx, dy } = gestureState;
+
+      return (Math.abs(dx) > 50) || (Math.abs(dy) > 50);
+    },
     onPanResponderMove: (evt, gestureState) => {
       const angleDelta = -gestureState.dx / 50;
       if (!activeSlot) {
@@ -270,7 +272,7 @@ const PreviewTree: FC<{
                   )
                 }
               >
-                <View {...panResponder.panHandlers }>
+                <View {...(activeSlot ? {} : panResponder.panHandlers)}>
                 {slots.map((slot, i) => {
                   return (
                     <PressableSlot

@@ -1,5 +1,5 @@
 import React, { type ReactNode, type FC } from 'react';
-import { Pressable, type StyleProp, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type ViewStyle } from 'react-native';
 import { type SlotType, type Cords } from '../../../static/types/tree/types';
 import GlowingSlot from '../glowingSlot/glowingSlot';
 
@@ -19,17 +19,18 @@ const PressableSlot: FC<{
 
   return (
     <>
-      <Pressable onPressIn={handlePress} collapsable={false} style={style}>
+      <View style={style}>
         <GlowingSlot
           url={item.link}
           key={item.id}
+          onPress={handlePress}
           cords={item}
           component={component}
           handleOpenSlotWindow={handleOpenSlotWindow}
           editTree={editTree}
           activeSlot={activeSlot}
         />
-      </Pressable>
+      </View>
     </>
   );
 };
