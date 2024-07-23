@@ -85,12 +85,17 @@ const PreviewTree: FC<{
 
   const selectSlot = (slot: Partial<SlotType> & Cords) => {
     if (slot.link) {
+      const elementWidth = 290;
+      const elementHeight = 290;
+      const centeredX = (wp(90) - elementWidth) / 2;
+      const centeredY = (hp(70) - elementHeight) / 2;
+
       setActiveSlot({
         ...slot,
-        x: wp(10),
-        y: hp(20),
-        height: 290,
-        width: 290,
+        x: centeredX,
+        y: centeredY,
+        height: elementHeight,
+        width: elementWidth,
       });
       animateIn();
     }
