@@ -10,12 +10,13 @@ import PressableSlot from '../pressableSlot/pressableSlot';
 import { CheckSvg } from '../../../assets/icons/CheckSvg';
 import { TreeService } from '../../../services/treeService/treeService';
 import { TrashSvg } from '../../../assets/icons/comment';
-import { type SlotType } from '../../../static/types/tree/types';
+import { FileEnum, type SlotType } from '../../../static/types/tree/types';
 
 interface UploadFileProps {
   opacity: Animated.Value;
   transform: Animated.Value;
   windowWidth: number;
+  isDemo: boolean;
   deselectSlot: () => void;
   id: string;
   newFileIndex: number | null;
@@ -28,6 +29,7 @@ const UploadFile: FC<UploadFileProps> = ({
   windowWidth,
   deselectSlot,
   id,
+  isDemo,
   newFileIndex,
   addSlot,
 }) => {
@@ -95,6 +97,19 @@ const UploadFile: FC<UploadFileProps> = ({
     formData.append('slot_type', userData.slot_type);
 
     try {
+      if (isDemo) {
+        addSlot({
+          id,
+          index: userData.index ?? 1,
+          slot_type: (userData.slot_type as FileEnum) ?? FileEnum.PHOTO,
+          comment_text: 'Demo comment text',
+          comment_title: 'Demo comment title',
+          created_at: new Date().toISOString(),
+          link: uri,
+        });
+        deselectSlot();
+        return;
+      }
       const response = await TreeService.addFileSlot(id, formData);
       if (response) {
         deselectSlot();

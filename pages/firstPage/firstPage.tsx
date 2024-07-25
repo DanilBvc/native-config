@@ -15,7 +15,9 @@ const FirstPage = () => {
     navigation.navigate('SignIn');
   };
 
-  const tryIt = () => {};
+  const tryIt = () => {
+    navigation.navigate('Tree', { id: 'demo-tree' });
+  };
 
   const BuyPackage = () => {
     navigation.navigate('Welcome');

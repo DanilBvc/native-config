@@ -46,9 +46,10 @@ const windowWidth = Dimensions.get('window').width;
 
 const PreviewTree: FC<{
   treeData: TreeData;
+  isDemo: boolean;
   removeById: (id: string) => void;
   addSlot: (obj: SlotType) => void;
-}> = ({ treeData, removeById, addSlot }) => {
+}> = ({ treeData, removeById, addSlot, isDemo }) => {
   const { id } = treeData;
   const rotateValue = useRef(new Animated.Value(0)).current;
   const [isFlipped, setIsFlipped] = useState(false);
@@ -171,9 +172,14 @@ const PreviewTree: FC<{
 
   const handleDelete = async () => {
     try {
-      const response = await TreeService.deleteFileSlot(activeSlot?.id ?? '');
+      if (!isDemo) {
+        const response = await TreeService.deleteFileSlot(activeSlot?.id ?? '');
 
-      if (response) {
+        if (response) {
+          deselectSlot();
+          removeById(activeSlot?.id ?? '');
+        }
+      } else {
         deselectSlot();
         removeById(activeSlot?.id ?? '');
       }
@@ -183,11 +189,16 @@ const PreviewTree: FC<{
   };
 
   const sendComment = async () => {
-    TreeService.updateComment(activeSlot?.id ?? '', {
-      comment_title: commentText,
-    }).then(() => {
+    console.log(isDemo);
+    if (!isDemo) {
+      TreeService.updateComment(activeSlot?.id ?? '', {
+        comment_title: commentText,
+      }).then(() => {
+        setEditTree(false);
+      });
+    } else {
       setEditTree(false);
-    });
+    }
   };
   const generateDescription = async () => {
     try {
@@ -335,6 +346,7 @@ const PreviewTree: FC<{
           <UploadFile
             opacity={opacity}
             transform={transform}
+            isDemo={isDemo}
             windowWidth={windowWidth}
             id={id}
             newFileIndex={newFileIndex}
