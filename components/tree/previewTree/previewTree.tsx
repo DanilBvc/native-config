@@ -42,6 +42,7 @@ import Loader from '../../generall/loader/loader';
 import { hp, wp } from '../../../utils/percentageSizes';
 import { ArrowDownIcon } from '../../../assets/icons/faq';
 import { colors } from '../../../static/colors';
+import LeafDrops from '../../leafDrops/leafDrops';
 const windowWidth = Dimensions.get('window').width;
 
 const PreviewTree: FC<{
@@ -290,6 +291,7 @@ const PreviewTree: FC<{
           )
         }
       >
+        <LeafDrops />
         <View {...(activeSlot ? {} : panResponder.panHandlers)}>
           {slots.map((slot, i) => {
             return (

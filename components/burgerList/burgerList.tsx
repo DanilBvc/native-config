@@ -50,7 +50,8 @@ const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
     {
       text: t('header.prices'),
       width: 220,
-      link: 'Test',
+      link: 'Tree',
+      props: { id: 'demo-tree' },
     },
     {
       text: t('contactUs.contact'),
@@ -85,7 +86,7 @@ const BurgerList: FC<Props> = ({ isVisible, setBurgerMenuVisible }) => {
             <TouchableOpacity
               key={index}
               onPress={() => {
-                navigation.navigate(item.link as never);
+                navigation.navigate(item.link, { ...item.props });
                 setBurgerMenuVisible(false);
               }}
             >
