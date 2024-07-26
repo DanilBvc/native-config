@@ -46,6 +46,7 @@ const Tree = () => {
       return { ...prev, slots: [...prev.slots, slot] };
     });
   };
+
   return (
     <>
       <ImageBackground source={require('../../assets/tree-bg.png')} style={styles.image}>
@@ -55,6 +56,7 @@ const Tree = () => {
             isDemo={isDemo}
             removeById={removeById}
             addSlot={addSlot}
+            setTreeData={setTreeData}
           />
         )}
       </ImageBackground>

@@ -49,7 +49,8 @@ const PreviewTree: FC<{
   isDemo: boolean;
   removeById: (id: string) => void;
   addSlot: (obj: SlotType) => void;
-}> = ({ treeData, removeById, addSlot, isDemo }) => {
+  setTreeData: (obj: TreeData | null) => void;
+}> = ({ treeData, removeById, addSlot, isDemo, setTreeData }) => {
   const { id } = treeData;
   const rotateValue = useRef(new Animated.Value(0)).current;
   const [isFlipped, setIsFlipped] = useState(false);
@@ -189,11 +190,14 @@ const PreviewTree: FC<{
   };
 
   const sendComment = async () => {
-    console.log(isDemo);
     if (!isDemo) {
       TreeService.updateComment(activeSlot?.id ?? '', {
         comment_title: commentText,
-      }).then(() => {
+      }).then((res) => {
+        setTreeData((prev: TreeData) => ({
+          ...prev,
+          slots: prev.slots.map((item) => (item.id === res.id ? res : item)),
+        }));
         setEditTree(false);
       });
     } else {
@@ -359,7 +363,7 @@ const PreviewTree: FC<{
             {commentText && editTree && isFlipped ? (
               <PressableSlot
                 onClick={sendComment}
-                item={{ x: 300, y: 300, height: 23, width: 23 }}
+                item={{ x: wp(78), y: hp(25), height: 23, width: 23 }}
                 component={AddCommentSvg()}
               />
             ) : (
@@ -374,7 +378,7 @@ const PreviewTree: FC<{
         {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
           <PressableSlot
             onClick={handleDelete}
-            item={{ x: wp(40), y: hp(25), height: 23, width: 23 }}
+            item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
             component={TrashSvg()}
           />
         )}
