@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React, { useEffect, useState, type FC } from 'react';
 import { Image, View } from 'react-native';
 import {
   HomeSvg,
@@ -16,7 +16,7 @@ interface BottomNavigationProps {
 
 const BottomNavigation: FC<BottomNavigationProps> = ({ theme = 'dark' }) => {
   const route = useRoute();
-
+  const [currentRoute, setCurrentRoute] = useState<string>('');
   const getIconColor = (routeName: string) => {
     if (theme === 'dark') {
       return route.name === routeName ? '#56371A' : '#B37840';
@@ -24,6 +24,10 @@ const BottomNavigation: FC<BottomNavigationProps> = ({ theme = 'dark' }) => {
       return route.name === routeName ? '#56371A' : '#FFF7F0';
     }
   };
+
+  useEffect(() => {
+    setCurrentRoute(route.name);
+  }, [route.name]);
 
   return (
     <>
@@ -34,18 +38,23 @@ const BottomNavigation: FC<BottomNavigationProps> = ({ theme = 'dark' }) => {
         />
       )}
       <View style={[styles.container, theme === 'light' && styles.containerLight]}>
-        <Link to="/Home">
+        <Link to="/FirstPage">
           <HomeSvg stroke={getIconColor('Home')} />
         </Link>
-        <Link to="/CustomerSection">
-          <UserSvg fill={getIconColor('CustomerSection')} />
-        </Link>
+        {currentRoute !== 'Welcome' && (
+          <Link to="/CustomerSection">
+            <UserSvg fill={getIconColor('CustomerSection')} />
+          </Link>
+        )}
+
         <Link to="/ScanQrCode" style={[styles.qrCode, theme === 'light' && styles.qrCodeLight]}>
           <QrCodeSvg fill={theme === 'dark' ? '#56371A' : '#FFF7F0'} />
         </Link>
-        <Link to="/Welcome">
-          <CaseSvg stroke={getIconColor('Welcome')} />
-        </Link>
+        {currentRoute !== 'Welcome' && (
+          <Link to="/Welcome">
+            <CaseSvg stroke={getIconColor('Welcome')} />
+          </Link>
+        )}
         <Link to="/Faq">
           <QuestionSvg fill={getIconColor('Faq')} />
         </Link>

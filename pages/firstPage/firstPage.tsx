@@ -1,14 +1,16 @@
 import React from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Dimensions, Pressable, ScrollView, Text, View } from 'react-native';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import LocalizationSwitcher from '../../components/generall/localizationSwitcher/localizationSwitcher';
 import { styles } from './firstPage.style';
-import FamilyEmblem from '../../static/familyEmblem';
 import Button from '../../components/generall/button/button';
 import { useTypedNavigation } from '../../hooks/useTypedNavigation';
 import { QrCodeSvg } from '../../assets/icons/qr-code';
+import VideoPlayer from 'expo-video-player';
+import { ResizeMode } from 'expo-av';
 
 const FirstPage = () => {
+  const width = Dimensions.get('window').width;
   const navigation = useTypedNavigation();
 
   const SignIn = () => {
@@ -31,7 +33,32 @@ const FirstPage = () => {
     <EmptyLayout additionalControl={<LocalizationSwitcher />}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.imageContainer}>
-          <FamilyEmblem width={226} height={231} />
+          <VideoPlayer
+            style={{
+              videoBackgroundColor: '#F2F2F2',
+              height: 252,
+              width,
+            }}
+            videoProps={{
+              shouldPlay: true,
+              resizeMode: ResizeMode.CONTAIN,
+              isMuted: true,
+              source: {
+                uri: 'https://remember-time.s3.eu-central-1.amazonaws.com/trailer/rt_en.mp4',
+              },
+            }}
+            defaultControlsVisible={false}
+            timeVisible={false}
+            slider={{
+              visible: false,
+            }}
+            fullscreen={{
+              visible: false,
+            }}
+            mute={{
+              visible: false,
+            }}
+          />
         </View>
         <View style={{ gap: 20 }}>
           <Button onPress={tryIt} text={'Try it'} />
