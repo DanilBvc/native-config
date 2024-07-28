@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import BottomNavigation from '../../components/generall/bottomNavigation/bottomNavigation';
 import { Dimensions, Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
-import { ShareSvg } from '../../assets/icons/share';
 import BurgerMenu from '../../components/burgerMenu/burgerMenu';
 import { colors } from '../../static/colors';
 import { styles } from './userProfile.style';
@@ -11,6 +10,7 @@ import LineWithCircle from '../../components/lineWithCircle/lineWithCircle';
 import { useTypedNavigation, useTypedRoute } from '../../hooks/useTypedNavigation';
 import Button from '../../components/generall/button/button';
 import BurgerList from '../../components/burgerList/burgerList';
+import ShareButton from '../../components/generall/shareButton/shareButton';
 
 const UserProfile = () => {
   const route = useTypedRoute();
@@ -26,7 +26,7 @@ const UserProfile = () => {
       <EmptyLayout
         additionalControl={
           <View style={styles.headerContainer}>
-            <ShareSvg fill={colors.rusty_Copper} />
+           <ShareButton id={user.id} color={ colors.rusty_Copper}/>
             <BurgerMenu
               isBurgerMenuVisible={isBurgerMenuVisible}
               setBurgerMenuVisible={setBurgerMenuVisible}

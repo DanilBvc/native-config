@@ -42,6 +42,7 @@ import { hp, wp } from '../../../utils/percentageSizes';
 import { ArrowDownIcon } from '../../../assets/icons/faq';
 import { colors } from '../../../static/colors';
 import LeafDrops from '../../leafDrops/leafDrops';
+import useAlbums from '../../../hooks/useAlbums';
 const windowWidth = Dimensions.get('window').width;
 
 const PreviewTree: FC<{
@@ -51,6 +52,7 @@ const PreviewTree: FC<{
   addSlot: (obj: SlotType) => void;
   setTreeData: (obj: TreeData | null) => void;
 }> = ({ treeData, removeById, addSlot, isDemo, setTreeData }) => {
+  const albums = useAlbums(treeData);
   const { id } = treeData;
   const rotateValue = useRef(new Animated.Value(0)).current;
   const [isFlipped, setIsFlipped] = useState(false);
@@ -61,7 +63,6 @@ const PreviewTree: FC<{
   const userTrees = useUserStore((state) => state.user.trees);
   const userTreesIds = userTrees.map((item) => item.id);
   const isOwner = userTreesIds.includes(id);
-
   const rotate = () => {
     const toValue = isFlipped ? 0 : 1;
     setIsFlipped(!isFlipped);
@@ -78,6 +79,7 @@ const PreviewTree: FC<{
 
   const [isBurgerMenuVisible, setBurgerMenuVisible] = useState(false);
   const [activeSlot, setActiveSlot] = useState<null | (Partial<SlotType> & Cords)>(null);
+  const [activeSliderIndex, setActiveSliderIndex] = useState(0);
   const [isGenerationProgress, setIsGenerationProgress] = useState(false);
   const { angles, setAngles } = useAngles(id);
   const slots = useSlots(angles, treeData);
@@ -100,6 +102,7 @@ const PreviewTree: FC<{
         y: centeredY,
         height: elementHeight,
         width: elementWidth,
+        link: slot.link,
       });
       animateIn();
     }
@@ -107,6 +110,7 @@ const PreviewTree: FC<{
 
   const deselectSlot = () => {
     animateOut(() => {
+      setActiveSliderIndex(0);
       setActiveSlot(null);
     });
   };
@@ -134,16 +138,31 @@ const PreviewTree: FC<{
     setCommentText(activeSlot?.title as string);
   }, [activeSlot?.title]);
 
-  const findNextSlotWithLink = (currentSlot: Partial<SlotType> & Cords, direction: number) => {
-    if (!currentSlot) return null;
-    const currentIndex = slots.findIndex((slot) => slot.id === currentSlot.id);
-    for (let i = 1; i < slots.length; i++) {
-      const nextIndex = (currentIndex + i * direction + slots.length) % slots.length;
-      if (slots[nextIndex].link) {
-        return slots[nextIndex];
+  const findNextSlotWithLink = (
+    currentSlot: Partial<SlotType> & Cords,
+    direction: number
+  ): (Partial<SlotType> & Cords) | null => {
+    if (!currentSlot || currentSlot.index === undefined) return null;
+
+    const currentIndex = currentSlot.index;
+    const currentAlbum = albums.find((album) => album[0].index === currentIndex);
+
+    if (!currentAlbum) return null;
+
+    const currentAlbumLength = currentAlbum.length;
+
+    const getNextIndex = (direction: number, currentIndex: number, albumLength: number): number => {
+      if (direction === -1) {
+        return currentIndex === 0 ? albumLength - 1 : currentIndex - 1;
       }
-    }
-    return null;
+      return currentIndex + 1 >= albumLength ? 0 : currentIndex + 1;
+    };
+
+    const nextIndex = getNextIndex(direction, activeSliderIndex, currentAlbumLength);
+    const nextSlot = { ...currentAlbum[nextIndex], x: 0, y: 0, width: 0, height: 0 };
+
+    setActiveSliderIndex(nextIndex);
+    return nextSlot;
   };
 
   const handleSlotChange = (direction: number) => {
