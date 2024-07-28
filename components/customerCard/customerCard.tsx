@@ -8,7 +8,7 @@ import { type Tree } from '../../static/types/userTypes/types';
 import { useTypedNavigation } from '../../hooks/useTypedNavigation';
 
 interface Props {
-  data: Tree;
+  data: Tree | null;
 }
 
 const CustomerCard: FC<Props> = ({ data }) => {
@@ -33,7 +33,7 @@ const CustomerCard: FC<Props> = ({ data }) => {
         <TouchableOpacity
           style={styles.placeholder}
           onPress={() => {
-            navigation.navigate('CreateUser');
+            navigation.navigate('Welcome' as string);
           }}
         >
           <PlusSvg />

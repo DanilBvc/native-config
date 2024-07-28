@@ -24,13 +24,16 @@ const GlowingSlot: FC<{
   const glowImage = height > 100 && width > 100 ? glowingCircleBig : glowingCircle;
 
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.container, { width, height, top: y, left: x }]}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.container, { width, height, top: y, left: x }]}
+    >
       <Image source={glowImage} style={styles.glow} height={height} width={width} />
       {component && <View style={{ ...styles.photo, width, height }}>{component}</View>}
       {cords.slot_type === 'VIDEO' ? (
         <View style={[styles.videoContainer, { width, height }]}>
           {activeSlot !== null ? (
-            <Video source={imageSource} style={[styles.video]} resizeMode="cover" repeat />
+            <Video source={imageSource} style={[styles.video]} repeat resizeMode="contain" />
           ) : (
             <Image source={VideoIcon} style={{ ...styles.photo, width, height }} />
           )}

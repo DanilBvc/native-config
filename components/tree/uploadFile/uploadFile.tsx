@@ -5,7 +5,7 @@ import { styles } from './uploadFile.style';
 import Audio from '../../../assets/audio.png';
 import Video from '../../../assets/video.png';
 
-import * as ImagePicker from 'expo-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import PressableSlot from '../pressableSlot/pressableSlot';
 import { CheckSvg } from '../../../assets/icons/CheckSvg';
 import { TreeService } from '../../../services/treeService/treeService';
@@ -46,36 +46,55 @@ const UploadFile: FC<UploadFileProps> = ({
   const [uri, setUri] = useState('');
 
   const selectMedia = async () => {
-    const result = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!result.granted) {
-      alert('Permission to access media library is required!');
-      return;
-    }
+    try {
+      const result = await ImagePicker.openPicker({
+        mediaType: 'any',
+      });
 
-    const pickerResult = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      quality: 1,
-    });
+      if (result) {
+        const { path, mime } = result;
 
-    if (!pickerResult.canceled) {
-      const { uri, type } = pickerResult.assets[0];
+        const fileType = mime?.startsWith('image')
+          ? 'PHOTO'
+          : mime?.startsWith('video')
+            ? 'VIDEO'
+            : 'AUDIO';
 
-      const fileType = type?.startsWith('image')
-        ? 'PHOTO'
-        : type?.startsWith('video')
-          ? 'VIDEO'
-          : 'AUDIO';
-      setUserData((prevState) => ({
-        ...prevState,
-        file: {
-          uri,
-          name: 'file',
-          type:
-            fileType === 'PHOTO' ? 'image/jpeg' : fileType === 'VIDEO' ? 'video/mp4' : 'audio/mpeg',
-        },
-        slot_type: fileType,
-      }));
-      setUri(uri);
+        if (fileType === 'PHOTO') {
+          const croppedResult = await ImagePicker.openCropper({
+            path: result.path,
+            width: 290,
+            height: 290,
+            cropping: true,
+            cropperCircleOverlay: true,
+            mediaType: 'photo',
+          });
+
+          setUserData((prevState) => ({
+            ...prevState,
+            file: {
+              uri: croppedResult.path,
+              name: 'file',
+              type: 'image/jpeg',
+            },
+            slot_type: 'PHOTO',
+          }));
+          setUri(croppedResult.path);
+        } else {
+          setUserData((prevState) => ({
+            ...prevState,
+            file: {
+              uri: path,
+              name: 'file',
+              type: fileType === 'VIDEO' ? 'video/mp4' : 'audio/mpeg',
+            },
+            slot_type: fileType,
+          }));
+          setUri(path);
+        }
+      }
+    } catch (error) {
+      alert('Error selecting media');
     }
   };
 
@@ -124,11 +143,26 @@ const UploadFile: FC<UploadFileProps> = ({
     if (!uri) return <PlusIcon />;
     switch (userData.slot_type) {
       case 'PHOTO':
-        return <Image source={{ uri }} style={{ ...styles.photo, width: 290, height: 290 }} />;
+        return (
+          <Image
+            source={{ uri }}
+            style={{ ...styles.photo, width: 290, height: 290, borderRadius: 145 }}
+          />
+        );
       case 'VIDEO':
-        return <Image source={Video} style={{ ...styles.photo, width: 290, height: 290 }} />;
+        return (
+          <Image
+            source={Video}
+            style={{ ...styles.photo, width: 290, height: 290, borderRadius: 145 }}
+          />
+        );
       case 'AUDIO':
-        return <Image source={Audio} style={{ ...styles.photo, width: 290, height: 290 }} />;
+        return (
+          <Image
+            source={Audio}
+            style={{ ...styles.photo, width: 290, height: 290, borderRadius: 145 }}
+          />
+        );
       default:
         return <PlusIcon />;
     }

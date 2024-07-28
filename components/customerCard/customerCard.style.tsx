@@ -35,8 +35,8 @@ export const styles = StyleSheet.create({
     color: colors.rusty_Copper,
   },
   placeholder: {
-    width: '100%',
-    height: '90%',
+    width: widthCard,
+    height: 280,
     borderRadius: 12,
     backgroundColor: colors.whispering_Gray,
     justifyContent: 'center',

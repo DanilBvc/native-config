@@ -24,7 +24,6 @@ export const styles = StyleSheet.create({
     elevation: 8,
   },
   videoContainer: {
-    borderRadius: 150,
     overflow: 'hidden',
   },
   video: {
