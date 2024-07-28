@@ -11,7 +11,6 @@ import {
   Pressable,
 } from 'react-native';
 import BurgerMenu from '../../burgerMenu/burgerMenu';
-import ShareButton from '../../generall/shareButton/shareButton';
 import {
   FileEnum,
   type Cords,
@@ -258,7 +257,6 @@ const PreviewTree: FC<{
           <View
             style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}
           >
-            <ShareButton id={id} />
             {activeSlot ? (
               <TouchableOpacity style={{ marginLeft: 20, zIndex: 10 }} onPress={deselectSlot}>
                 <CloseIcon stroke="#fff" />
