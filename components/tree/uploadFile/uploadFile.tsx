@@ -10,7 +10,7 @@ import PressableSlot from '../pressableSlot/pressableSlot';
 import { CheckSvg } from '../../../assets/icons/CheckSvg';
 import { TreeService } from '../../../services/treeService/treeService';
 import { TrashSvg } from '../../../assets/icons/comment';
-import { FileEnum, type SlotType } from '../../../static/types/tree/types';
+import { type Cords, FileEnum, type SlotType } from '../../../static/types/tree/types';
 
 interface UploadFileProps {
   opacity: Animated.Value;
@@ -21,6 +21,7 @@ interface UploadFileProps {
   id: string;
   newFileIndex: number | null;
   addSlot: (obj: SlotType) => void;
+  activeSlot: Partial<SlotType> & Cords
 }
 
 const UploadFile: FC<UploadFileProps> = ({
@@ -32,6 +33,7 @@ const UploadFile: FC<UploadFileProps> = ({
   isDemo,
   newFileIndex,
   addSlot,
+  activeSlot
 }) => {
   const [userData, setUserData] = useState<{
     file: { uri: string; name: string; type: string } | null;
@@ -42,7 +44,6 @@ const UploadFile: FC<UploadFileProps> = ({
     index: newFileIndex,
     slot_type: 'PHOTO',
   });
-
   const [uri, setUri] = useState('');
 
   const selectMedia = async () => {
@@ -102,7 +103,6 @@ const UploadFile: FC<UploadFileProps> = ({
     setUserData((prevState) => ({ ...prevState, file: null }));
     setUri('');
   };
-
   const sendFile = async () => {
     if (userData.file === null) return;
     const formData = new FormData();
@@ -112,14 +112,14 @@ const UploadFile: FC<UploadFileProps> = ({
       name: userData.file.name,
       type: userData.file.type,
     } as any);
-    formData.append('index', userData.index?.toString() ?? '');
+    formData.append('index', activeSlot.index?.toString() ?? '');
     formData.append('slot_type', userData.slot_type);
 
     try {
       if (isDemo) {
         addSlot({
           id,
-          index: userData.index ?? 1,
+          index: activeSlot.index ?? 1,
           slot_type: (userData.slot_type as FileEnum) ?? FileEnum.PHOTO,
           comment_text: 'Demo comment text',
           comment_title: 'Demo comment title',

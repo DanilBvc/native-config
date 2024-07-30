@@ -43,6 +43,7 @@ import { ArrowDownIcon } from '../../../assets/icons/faq';
 import { colors } from '../../../static/colors';
 import LeafDrops from '../../leafDrops/leafDrops';
 import useAlbums from '../../../hooks/useAlbums';
+import { PlusIcon } from '../../../assets/icons/PlusIcon';
 const windowWidth = Dimensions.get('window').width;
 
 const PreviewTree: FC<{
@@ -263,7 +264,6 @@ const PreviewTree: FC<{
     bottom: 0,
     backfaceVisibility: 'hidden',
   };
-
   return (
     <View style={{ flex: 1 }}>
       {isGenerationProgress && (
@@ -302,7 +302,26 @@ const PreviewTree: FC<{
         }
         footerControl={
           isAuthenticated && !activeSlot && isOwner ? (
-            <BottomNavigation theme="light" />
+            <BottomNavigation centerComponent={ <TouchableOpacity style={styles.editContainer}>
+            {isOwner && !editTree ? (
+              <TouchableOpacity
+                style={styles.editButton}
+                onPress={() => {
+                  setEditTree(true);
+                }}
+              >
+                <EditSvg w={50} h={50}/>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                onPress={() => {
+                  setEditTree(false);
+                }}
+              >
+                 <EditSvg w={50} h={50}/>
+              </TouchableOpacity>
+            )}
+          </TouchableOpacity>} theme="light" />
           ) : (
             <GptNavigation onCommentPress={generateDescription} />
           )
@@ -367,6 +386,7 @@ const PreviewTree: FC<{
 
         {activeSlot && activeSlot?.id === 'setNewImage' && (
           <UploadFile
+          activeSlot={activeSlot}
             opacity={opacity}
             transform={transform}
             isDemo={isDemo}
@@ -395,11 +415,12 @@ const PreviewTree: FC<{
           </>
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
-          <PressableSlot
+          <><PressableSlot
             onClick={handleDelete}
             item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
-            component={TrashSvg()}
-          />
+            component={TrashSvg()} /><PressableSlot onClick={() => {
+              selectSlot({ ...activeSlot, id: 'setNewImage' })
+            }} item={{ x: wp(10), y: hp(-20), height: 23, width: 23 }} component={<PlusIcon />}/></>
         )}
         {!editTree && activeSlot && (
           <>
@@ -426,27 +447,7 @@ const PreviewTree: FC<{
             </Pressable>
           </>
         )}
-        <TouchableOpacity style={styles.editContainer}>
-          {isOwner && !editTree ? (
-            <TouchableOpacity
-              style={styles.editButton}
-              onPress={() => {
-                setEditTree(true);
-              }}
-            >
-              <EditSvg />
-              <Text style={styles.editText}>Edit</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => {
-                setEditTree(false);
-              }}
-            >
-              <Text style={styles.editText}>click on the circle</Text>
-            </TouchableOpacity>
-          )}
-        </TouchableOpacity>
+
       </EmptyLayout>
     </View>
   );
