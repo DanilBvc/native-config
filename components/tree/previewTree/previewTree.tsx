@@ -45,6 +45,8 @@ import LeafDrops from '../../leafDrops/leafDrops';
 import useAlbums from '../../../hooks/useAlbums';
 import { PlaySvg } from '../../../assets/icons/audioSvg';
 import Video from 'react-native-video';
+import { EditSvg } from '../../../assets/icons/EditSvg';
+import { PlusIcon } from '../../../assets/icons/PlusIcon';
 const windowWidth = Dimensions.get('window').width;
 
 const PreviewTree: FC<{
@@ -87,8 +89,6 @@ const PreviewTree: FC<{
   const { angles, setAngles } = useAngles(id);
   const slots = useSlots(angles, treeData);
   const { opacity, transform, animateIn, animateOut } = useAnimatedSlot();
-
-  console.log(activeSlot, 'activeSlot');
 
   const onChange = (name: string, value: string) => {
     setCommentText(value);
@@ -307,7 +307,26 @@ const PreviewTree: FC<{
         }
         footerControl={
           isAuthenticated && !activeSlot && isOwner ? (
-            <BottomNavigation theme="light" />
+            <BottomNavigation centerComponent={ <TouchableOpacity style={styles.editContainer}>
+            {isOwner && !editTree ? (
+              <TouchableOpacity
+                style={styles.editButton}
+                onPress={() => {
+                  setEditTree(true);
+                }}
+              >
+                <EditSvg w={50} h={50}/>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                onPress={() => {
+                  setEditTree(false);
+                }}
+              >
+                 <EditSvg w={50} h={50}/>
+              </TouchableOpacity>
+            )}
+          </TouchableOpacity>} theme="light" />
           ) : (
             <GptNavigation onCommentPress={generateDescription} />
           )
@@ -380,6 +399,7 @@ const PreviewTree: FC<{
             newFileIndex={newFileIndex}
             deselectSlot={deselectSlot}
             addSlot={addSlot}
+            activeSlot={activeSlot}
           />
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && (
@@ -400,11 +420,12 @@ const PreviewTree: FC<{
           </>
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
-          <PressableSlot
-            onClick={handleDelete}
-            item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
-            component={TrashSvg()}
-          />
+           <><PressableSlot
+           onClick={handleDelete}
+           item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
+           component={TrashSvg()} /><PressableSlot onClick={() => {
+             selectSlot({ ...activeSlot, id: 'setNewImage' })
+           }} item={{ x: wp(10), y: hp(-20), height: 23, width: 23 }} component={<PlusIcon />}/></>
         )}
         {!editTree && activeSlot && (
           <>
