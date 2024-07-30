@@ -8,7 +8,7 @@ import { authorizedRequest } from '../../utils/queries';
 export class OpenAIService {
   private static readonly API_KEY = OPEN_AI_API_KEY;
 
-  static async getDescriptionByImage (image: string): Promise<ChatCompletion> {
+  static async getDescriptionByImage(image: string): Promise<ChatCompletion> {
     const payload = {
       model: 'gpt-4o',
       messages: [
@@ -17,11 +17,9 @@ export class OpenAIService {
           content: [
             {
               type: 'text',
-              text: `1. Аналізуй фотографію, звертаючи увагу на емоції, вираз обличчя та оточення.
-
-            2. Визнач основні риси померлої людини, які можна відобразити у вірші.
+              text: `
             
-            3. Напиши вірш на 133 символи, що включає такі елементи:
+            3. Напиши вірш на 133 символи, як результат поверни лише текст вірша що включає такі елементи:
             
                - Опис емоцій чи дій людини на фото.
             
@@ -29,7 +27,7 @@ export class OpenAIService {
             
                - Висловлення шани та пам'яті.
             
-            4. Перевір кількість символів, щоб впевнитись, що вірш не перевищує 133 символи.`,
+            `,
             },
             {
               type: 'image_url',

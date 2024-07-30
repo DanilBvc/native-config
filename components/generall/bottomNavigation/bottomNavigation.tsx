@@ -12,7 +12,7 @@ import { Link, useRoute } from '@react-navigation/native';
 
 interface BottomNavigationProps {
   theme?: 'light' | 'dark';
-  centerComponent?: React.ReactNode
+  centerComponent?: React.ReactNode;
 }
 
 const BottomNavigation: FC<BottomNavigationProps> = ({ theme = 'dark', centerComponent }) => {
@@ -29,7 +29,6 @@ const BottomNavigation: FC<BottomNavigationProps> = ({ theme = 'dark', centerCom
   useEffect(() => {
     setCurrentRoute(route.name);
   }, [route.name]);
-
   return (
     <>
       {theme === 'light' && (
@@ -49,8 +48,7 @@ const BottomNavigation: FC<BottomNavigationProps> = ({ theme = 'dark', centerCom
         )}
 
         <Link to="/ScanQrCode" style={[styles.qrCode, theme === 'light' && styles.qrCodeLight]}>
-        {centerComponent ?? <QrCodeSvg fill={theme === 'dark' ? '#56371A' : '#FFF7F0'} />}
-
+          {centerComponent ?? <QrCodeSvg fill={theme === 'dark' ? '#56371A' : '#FFF7F0'} />}
         </Link>
         {currentRoute !== 'Welcome' && currentRoute !== 'Tree' && (
           <Link to="/Welcome">
@@ -58,16 +56,15 @@ const BottomNavigation: FC<BottomNavigationProps> = ({ theme = 'dark', centerCom
           </Link>
         )}
         {currentRoute === 'Tree' && (
-            <Link to="/CustomerSection">
+          <Link to="/CustomerSection">
             <UserSvg fill={getIconColor('CustomerSection')} />
           </Link>
         )}
         {currentRoute !== 'Tree' && (
           <Link to="/Faq">
-          <QuestionSvg fill={getIconColor('Faq')} />
-        </Link>
+            <QuestionSvg fill={getIconColor('Faq')} />
+          </Link>
         )}
-
       </View>
     </>
   );

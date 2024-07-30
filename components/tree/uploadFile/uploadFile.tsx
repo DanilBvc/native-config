@@ -11,6 +11,7 @@ import { CheckSvg } from '../../../assets/icons/CheckSvg';
 import { TreeService } from '../../../services/treeService/treeService';
 import { TrashSvg } from '../../../assets/icons/comment';
 import { type Cords, FileEnum, type SlotType } from '../../../static/types/tree/types';
+import { hp, wp } from '../../../utils/percentageSizes';
 
 interface UploadFileProps {
   opacity: Animated.Value;
@@ -21,7 +22,7 @@ interface UploadFileProps {
   id: string;
   newFileIndex: number | null;
   addSlot: (obj: SlotType) => void;
-  activeSlot: Partial<SlotType> & Cords
+  activeSlot: Partial<SlotType> & Cords;
 }
 
 const UploadFile: FC<UploadFileProps> = ({
@@ -33,7 +34,7 @@ const UploadFile: FC<UploadFileProps> = ({
   isDemo,
   newFileIndex,
   addSlot,
-  activeSlot
+  activeSlot,
 }) => {
   const [userData, setUserData] = useState<{
     file: { uri: string; name: string; type: string } | null;
@@ -200,15 +201,15 @@ const UploadFile: FC<UploadFileProps> = ({
               onClick={() => {
                 sendFile();
               }}
-              item={{ x: 300, y: 60, height: 23, width: 23 }}
-              component={CheckSvg()}
+              item={{ x: wp(70), y: hp(8), height: 23, width: 23 }}
+              component={CheckSvg({ w: 20, h: 15, fill: '#B37840' })}
             />
           </View>
           {uri && (
             <View>
               <PressableSlot
                 onClick={removeMedia}
-                item={{ x: 40, y: 52, height: 23, width: 23 }}
+                item={{ x: wp(10), y: hp(7), height: 23, width: 23 }}
                 component={TrashSvg()}
               />
             </View>

@@ -62,6 +62,7 @@ const TextArea: FC<Props> = ({
       }}
       placeholderTextColor={placeholderTextColor}
       editable={editable}
+      scrollEnabled={true}
     ></TextInput>
   );
 };

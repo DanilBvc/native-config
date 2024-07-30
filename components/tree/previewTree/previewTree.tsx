@@ -23,12 +23,12 @@ import ActiveSlot from '../activeSlot/activeSlot';
 import useAnimatedSlot from '../../../hooks/useAnimatedSlot';
 import useSlots from '../../../hooks/useSlots';
 import useAngles from '../../../hooks/useAngles';
-import { AddCommentSvg, CommentSvg, TrashSvg } from '../../../assets/icons/comment';
+import { CommentSvg, TrashSvg } from '../../../assets/icons/comment';
 import BurgerList from '../../burgerList/burgerList';
 import { styles } from './previewTree.style';
 import { useAuth } from '../../../hooks/useAuth';
 import { ArrowBack } from '../../../assets/icons/arrow-back';
-import { useNavigation } from '@react-navigation/native';
+import { Link, useNavigation } from '@react-navigation/native';
 import { CloseIcon } from '../../../assets/icons/drop-down';
 import useUserStore from '../../../store/user/store';
 import UploadFile from '../uploadFile/uploadFile';
@@ -47,6 +47,8 @@ import { PlaySvg } from '../../../assets/icons/audioSvg';
 import Video from 'react-native-video';
 import { EditSvg } from '../../../assets/icons/EditSvg';
 import { PlusIcon } from '../../../assets/icons/PlusIcon';
+import { CaseSvg, HomeSvg, UserSvg } from '../../../assets/icons/bottomNavigationIcon/icons';
+import { CheckSvg } from '../../../assets/icons/CheckSvg';
 const windowWidth = Dimensions.get('window').width;
 
 const PreviewTree: FC<{
@@ -117,6 +119,9 @@ const PreviewTree: FC<{
     animateOut(() => {
       setActiveSliderIndex(0);
       setActiveSlot(null);
+      if (isFlipped) {
+        rotate();
+      }
     });
   };
 
@@ -235,8 +240,9 @@ const PreviewTree: FC<{
 
       setIsGenerationProgress(true);
       const res = await OpenAIService.getDescriptionByImage(imageLink);
-
-      rotate();
+      if (!isFlipped) {
+        rotate();
+      }
 
       setCommentText(res.choices[0].message.content);
     } catch (err) {
@@ -269,6 +275,10 @@ const PreviewTree: FC<{
     backfaceVisibility: 'hidden',
   };
 
+  const addToAlbum = () => {
+    if (!activeSlot) return;
+    selectSlot({ ...activeSlot, id: 'setNewImage' });
+  };
   return (
     <View style={{ flex: 1 }}>
       {isGenerationProgress && (
@@ -307,28 +317,106 @@ const PreviewTree: FC<{
         }
         footerControl={
           isAuthenticated && !activeSlot && isOwner ? (
-            <BottomNavigation centerComponent={ <TouchableOpacity style={styles.editContainer}>
-            {isOwner && !editTree ? (
-              <TouchableOpacity
-                style={styles.editButton}
-                onPress={() => {
-                  setEditTree(true);
-                }}
-              >
-                <EditSvg w={50} h={50}/>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                onPress={() => {
-                  setEditTree(false);
-                }}
-              >
-                 <EditSvg w={50} h={50}/>
-              </TouchableOpacity>
-            )}
-          </TouchableOpacity>} theme="light" />
+            <BottomNavigation
+              centerComponent={
+                <TouchableOpacity style={styles.editContainer}>
+                  {isOwner && !editTree ? (
+                    <TouchableOpacity
+                      style={styles.editButton}
+                      onPress={() => {
+                        setEditTree(true);
+                      }}
+                    >
+                      <EditSvg w={50} h={50} />
+                    </TouchableOpacity>
+                  ) : (
+                    <TouchableOpacity
+                      onPress={() => {
+                        setEditTree(false);
+                      }}
+                    >
+                      <EditSvg w={50} h={50} />
+                    </TouchableOpacity>
+                  )}
+                </TouchableOpacity>
+              }
+              theme="light"
+            />
           ) : (
-            <GptNavigation onCommentPress={generateDescription} />
+            <GptNavigation
+              onCommentPress={generateDescription}
+              firstComponent={
+                !isOwner ? (
+                  <Link to="/CustomerSection">
+                    <UserSvg w={35} h={35} stroke={'FFF7F0'} fill="#FFF7F0" />
+                  </Link>
+                ) : null
+              }
+              centerComponent={
+                !isOwner ? (
+                  <Link
+                    to="/FirstPage"
+                    style={{
+                      padding: 5,
+                      marginTop: -60,
+                      borderRadius: 6,
+                    }}
+                  >
+                    <HomeSvg w={50} h={50} stroke="#FFF7F0" />
+                  </Link>
+                ) : commentText && editTree && isFlipped ? (
+                  <TouchableOpacity
+                    onPress={sendComment}
+                    style={{
+                      padding: 5,
+                      marginTop: -40,
+                      borderRadius: 6,
+                    }}
+                  >
+                    {CheckSvg({ w: 35, h: 35, fill: 'white' })}
+                  </TouchableOpacity>
+                ) : isOwner && !editTree ? (
+                  <TouchableOpacity
+                    style={[
+                      styles.editButton,
+                      {
+                        padding: 5,
+                        marginTop: -40,
+                        borderRadius: 6,
+                      },
+                    ]}
+                    onPress={() => {
+                      setEditTree(true);
+                    }}
+                  >
+                    <EditSvg w={50} h={50} />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    style={[
+                      styles.editButton,
+                      {
+                        padding: 5,
+                        marginTop: -40,
+                        borderRadius: 6,
+                      },
+                    ]}
+                    onPress={() => {
+                      setEditTree(false);
+                    }}
+                  >
+                    <EditSvg w={50} h={50} />
+                  </TouchableOpacity>
+                )
+              }
+              thirdComponent={
+                !isOwner ? (
+                  <Link to="/Welcome">
+                    <CaseSvg w={35} h={35} stroke={'#FFF7F0'} />
+                  </Link>
+                ) : null
+              }
+            />
           )
         }
       >
@@ -403,29 +491,25 @@ const PreviewTree: FC<{
           />
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && (
-          <>
-            {commentText && editTree && isFlipped ? (
-              <PressableSlot
-                onClick={sendComment}
-                item={{ x: wp(78), y: hp(25), height: 23, width: 23 }}
-                component={AddCommentSvg()}
-              />
-            ) : (
-              <PressableSlot
-                onClick={rotate}
-                item={{ x: wp(78), y: hp(25), height: 23, width: 23 }}
-                component={CommentSvg()}
-              />
-            )}
-          </>
+          <PressableSlot
+            onClick={rotate}
+            item={{ x: wp(78), y: hp(25), height: 23, width: 23 }}
+            component={CommentSvg()}
+          />
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
-           <><PressableSlot
-           onClick={handleDelete}
-           item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
-           component={TrashSvg()} /><PressableSlot onClick={() => {
-             selectSlot({ ...activeSlot, id: 'setNewImage' })
-           }} item={{ x: wp(10), y: hp(-20), height: 23, width: 23 }} component={<PlusIcon />}/></>
+          <>
+            <PressableSlot
+              onClick={handleDelete}
+              item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
+              component={TrashSvg()}
+            />
+            <PressableSlot
+              onClick={addToAlbum}
+              item={{ x: wp(10), y: hp(-25), height: 23, width: 23 }}
+              component={<PlusIcon />}
+            />
+          </>
         )}
         {!editTree && activeSlot && (
           <>
