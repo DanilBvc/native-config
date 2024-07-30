@@ -29,7 +29,6 @@ import { styles } from './previewTree.style';
 import { useAuth } from '../../../hooks/useAuth';
 import { ArrowBack } from '../../../assets/icons/arrow-back';
 import { useNavigation } from '@react-navigation/native';
-import { EditSvg } from '../../../assets/icons/EditSvg';
 import { CloseIcon } from '../../../assets/icons/drop-down';
 import useUserStore from '../../../store/user/store';
 import UploadFile from '../uploadFile/uploadFile';
@@ -452,35 +451,16 @@ const PreviewTree: FC<{
               <CloseIcon stroke="#fff" />
             </TouchableOpacity>
             <Video
+              automaticallyWaitsToMinimizeStalling={true}
+              fullscreenAutorotate={true}
+              fullscreenOrientation={'all'}
+              hideShutterView={true}
               source={{ uri: activeSlot?.link }}
               style={styles.video}
               controls={true}
-              fullscreen={true}
-              resizeMode="contain"
             />
           </View>
         </Modal>
-        <TouchableOpacity style={styles.editContainer}>
-          {isOwner && !editTree ? (
-            <TouchableOpacity
-              style={styles.editButton}
-              onPress={() => {
-                setEditTree(true);
-              }}
-            >
-              <EditSvg />
-              <Text style={styles.editText}>Edit</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => {
-                setEditTree(false);
-              }}
-            >
-              <Text style={styles.editText}>click on the circle</Text>
-            </TouchableOpacity>
-          )}
-        </TouchableOpacity>
       </EmptyLayout>
     </View>
   );
