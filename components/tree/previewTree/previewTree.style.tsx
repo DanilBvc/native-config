@@ -54,4 +54,26 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 1)',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    zIndex: 10,
+    padding: 10,
+
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    color: '#000',
+  },
+  video: {
+    width: '100%',
+    height: '100%',
+  },
 });

@@ -2,20 +2,14 @@ import { G, Path, Svg } from 'react-native-svg';
 
 export const PlaySvg = () => {
   return (
-    <Svg width="40px" height="40px" viewBox="-0.5 0 7 7">
-      <G id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-        <G
-          id="Dribbble-Light-Preview"
-          transform="translate(-347.000000, -3766.000000)"
-          fill="#000000"
-        >
-          <G id="icons" transform="translate(56.000000, 160.000000)">
-            <Path
-              d="M296.494737,3608.57322 L292.500752,3606.14219 C291.83208,3605.73542 291,3606.25002 291,3607.06891 L291,3611.93095 C291,3612.7509 291.83208,3613.26444 292.500752,3612.85767 L296.494737,3610.42771 C297.168421,3610.01774 297.168421,3608.98319 296.494737,3608.57322"
-              id="play-[#1003]"
-            ></Path>
-          </G>
-        </G>
+    <Svg width="27" height="30" viewBox="0 0 27 30" fill="none">
+      <G filter="url(#filter0_d_672_1303)">
+        <Path
+          d="M5 2.34783V19.34C5 20.3619 5.99609 21.0111 6.81641 20.5213L21.3418 11.8277C22.052 11.4029 22.052 10.2849 21.3418 9.86013L6.81641 1.16658C5.99609 0.676736 5 1.32596 5 2.34783Z"
+          stroke="#B37840"
+          strokeWidth="1.875"
+          strokeMiterlimit="10"
+        />
       </G>
     </Svg>
   );

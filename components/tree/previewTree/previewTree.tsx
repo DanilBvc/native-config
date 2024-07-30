@@ -9,6 +9,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Pressable,
+  Modal,
 } from 'react-native';
 import BurgerMenu from '../../burgerMenu/burgerMenu';
 import {
@@ -43,6 +44,8 @@ import { ArrowDownIcon } from '../../../assets/icons/faq';
 import { colors } from '../../../static/colors';
 import LeafDrops from '../../leafDrops/leafDrops';
 import useAlbums from '../../../hooks/useAlbums';
+import { PlaySvg } from '../../../assets/icons/audioSvg';
+import Video from 'react-native-video';
 const windowWidth = Dimensions.get('window').width;
 
 const PreviewTree: FC<{
@@ -59,6 +62,7 @@ const PreviewTree: FC<{
   const [newFileIndex, setNewFileIndex] = useState<null | number>(null);
   const [commentText, setCommentText] = useState('');
   const [editTree, setEditTree] = useState(false);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
 
   const userTrees = useUserStore((state) => state.user.trees);
   const userTreesIds = userTrees.map((item) => item.id);
@@ -84,6 +88,8 @@ const PreviewTree: FC<{
   const { angles, setAngles } = useAngles(id);
   const slots = useSlots(angles, treeData);
   const { opacity, transform, animateIn, animateOut } = useAnimatedSlot();
+
+  console.log(activeSlot, 'activeSlot');
 
   const onChange = (name: string, value: string) => {
     setCommentText(value);
@@ -426,6 +432,34 @@ const PreviewTree: FC<{
             </Pressable>
           </>
         )}
+        {activeSlot?.slot_type === FileEnum.VIDEO && (
+          <PressableSlot
+            onClick={() => {
+              setIsVideoVisible(true);
+            }}
+            item={{ x: wp(10), y: hp(-30), height: 23, width: 23 }}
+            component={PlaySvg()}
+          />
+        )}
+        <Modal visible={isVideoVisible} animationType="slide" transparent={true}>
+          <View style={styles.modalContainer}>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => {
+                setIsVideoVisible(false);
+              }}
+            >
+              <CloseIcon stroke="#fff" />
+            </TouchableOpacity>
+            <Video
+              source={{ uri: activeSlot?.link }}
+              style={styles.video}
+              controls={true}
+              fullscreen={true}
+              resizeMode="contain"
+            />
+          </View>
+        </Modal>
         <TouchableOpacity style={styles.editContainer}>
           {isOwner && !editTree ? (
             <TouchableOpacity

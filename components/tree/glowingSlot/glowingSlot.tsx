@@ -33,7 +33,7 @@ const GlowingSlot: FC<{
       {cords.slot_type === 'VIDEO' ? (
         <View style={[styles.videoContainer, { width, height }]}>
           {activeSlot !== null ? (
-            <Video source={imageSource} style={[styles.video]} repeat resizeMode="contain" />
+            <Video source={imageSource} style={[styles.video]} repeat resizeMode="cover" />
           ) : (
             <Image source={VideoIcon} style={{ ...styles.photo, width, height }} />
           )}

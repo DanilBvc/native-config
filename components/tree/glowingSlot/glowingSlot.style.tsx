@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
   },
   videoContainer: {
     overflow: 'hidden',
+    borderRadius: 150,
   },
   video: {
     width: '100%',
