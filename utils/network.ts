@@ -1,6 +1,6 @@
-// export const baseUrl = VERCEL_ENV === 'development' ? DEVELOP_BASE_URL : PROD_BASE_URL;
-export const baseUrl = 'http://192.168.88.34:4000';
-
+// import { VERCEL_ENV, DEVELOP_BASE_URL, PROD_BASE_URL, FRONT_BASE_URL } from '@env';
+export const baseUrl = 'https://remembering-time-be-6ea61afe1775.herokuapp.com';
+export const baseFrontUrl = 'https://remembering-time-front.vercel.app';
 // user
 export const baseUserUrl = `${baseUrl}/users`;
 export const currentUserUrl = `${baseUserUrl}/current`;
