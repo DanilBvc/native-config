@@ -43,12 +43,13 @@ import { ArrowDownIcon } from '../../../assets/icons/faq';
 import { colors } from '../../../static/colors';
 import LeafDrops from '../../leafDrops/leafDrops';
 import useAlbums from '../../../hooks/useAlbums';
-import { PlaySvg } from '../../../assets/icons/audioSvg';
 import Video from 'react-native-video';
 import { EditSvg } from '../../../assets/icons/EditSvg';
 import { PlusIcon } from '../../../assets/icons/PlusIcon';
 import { CaseSvg, HomeSvg, UserSvg } from '../../../assets/icons/bottomNavigationIcon/icons';
 import { CheckSvg } from '../../../assets/icons/CheckSvg';
+import { PlaySvg, PauseSvg } from '../../../assets/icons/audioSvg';
+
 const windowWidth = Dimensions.get('window').width;
 
 const PreviewTree: FC<{
@@ -91,6 +92,7 @@ const PreviewTree: FC<{
   const { angles, setAngles } = useAngles(id);
   const slots = useSlots(angles, treeData);
   const { opacity, transform, animateIn, animateOut } = useAnimatedSlot();
+  const [musicPlaying, setMusicPlaying] = useState(true);
 
   const onChange = (name: string, value: string) => {
     setCommentText(value);
@@ -426,6 +428,7 @@ const PreviewTree: FC<{
             return (
               <PressableSlot
                 onClick={selectSlot}
+                musicPlaying={musicPlaying}
                 key={i}
                 activeSlot={activeSlot}
                 item={slot}
@@ -497,6 +500,19 @@ const PreviewTree: FC<{
             component={CommentSvg()}
           />
         )}
+        {activeSlot &&
+          activeSlot.id !== 'setNewImage' &&
+          activeSlot.slot_type === 'AUDIO' &&
+          !editTree && (
+            <PressableSlot
+              onClick={() => {
+                setMusicPlaying(!musicPlaying);
+              }}
+              item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
+              component={musicPlaying ? PauseSvg() : PlaySvg()}
+            />
+          )}
+
         {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
           <>
             <PressableSlot

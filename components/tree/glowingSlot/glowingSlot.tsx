@@ -5,9 +5,9 @@ import { styles } from './glowingSlot.style';
 import glowingCircleBig from '../../../assets/glowingCircleBig.png';
 import glowingCircle from '../../../assets/glowingCircle.png';
 import { PlusWithCircle } from '../../../assets/icons/PlusIcon';
-import Video from 'react-native-video';
 import VideoIcon from '../../../assets/video.png';
 import AudioIcon from '../../../assets/audio.png';
+import Video from 'react-native-video';
 
 const GlowingSlot: FC<{
   url?: string;
@@ -17,8 +17,18 @@ const GlowingSlot: FC<{
   onPress?: () => void;
   editTree?: boolean;
   previewTree?: boolean;
+  musicPlaying?: boolean;
   activeSlot?: null | (Partial<SlotType> & Cords);
-}> = ({ url, cords, component, handleOpenSlotWindow, editTree, activeSlot, onPress }) => {
+}> = ({
+  url,
+  cords,
+  component,
+  handleOpenSlotWindow,
+  editTree,
+  activeSlot,
+  onPress,
+  musicPlaying,
+}) => {
   const { width, height, x, y } = cords;
   const imageSource = typeof url === 'string' ? { uri: url } : url;
   const glowImage = height > 100 && width > 100 ? glowingCircleBig : glowingCircle;
@@ -33,7 +43,7 @@ const GlowingSlot: FC<{
       {cords.slot_type === 'VIDEO' ? (
         <View style={[styles.videoContainer, { width, height }]}>
           {activeSlot !== null ? (
-            <Video source={imageSource} style={[styles.video]} repeat resizeMode="cover" />
+            <Video source={imageSource} style={[styles.video]} repeat resizeMode="cover" muted />
           ) : (
             <Image source={VideoIcon} style={{ ...styles.photo, width, height }} />
           )}
@@ -41,7 +51,13 @@ const GlowingSlot: FC<{
       ) : cords.slot_type === 'AUDIO' ? (
         <View style={[styles.videoContainer, { width, height }]}>
           {activeSlot !== null ? (
-            <View style={styles.audioControlContainer}></View>
+            <>
+              <Image source={AudioIcon} style={{ ...styles.photo, width, height }} />
+
+              {musicPlaying && (
+                <Video source={imageSource} controls style={{ width: 0, height: 0 }} />
+              )}
+            </>
           ) : (
             <Image source={AudioIcon} style={{ ...styles.photo, width, height }} />
           )}

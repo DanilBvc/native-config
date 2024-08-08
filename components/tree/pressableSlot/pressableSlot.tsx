@@ -10,8 +10,18 @@ const PressableSlot: FC<{
   handleOpenSlotWindow?: () => void;
   style?: StyleProp<ViewStyle>;
   editTree?: boolean;
+  musicPlaying?: boolean;
   activeSlot?: null | (Partial<SlotType> & Cords);
-}> = ({ item, onClick, component, handleOpenSlotWindow, style, editTree = false, activeSlot }) => {
+}> = ({
+  item,
+  onClick,
+  component,
+  handleOpenSlotWindow,
+  style,
+  editTree = false,
+  activeSlot,
+  musicPlaying,
+}) => {
   const handlePress = () => {
     if (!item) return;
     onClick?.(item);
@@ -25,6 +35,7 @@ const PressableSlot: FC<{
           key={item.id}
           onPress={handlePress}
           cords={item}
+          musicPlaying={musicPlaying}
           component={component}
           handleOpenSlotWindow={handleOpenSlotWindow}
           editTree={editTree}
