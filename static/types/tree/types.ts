@@ -94,3 +94,10 @@ export interface Cords {
   y: number;
   slot_type?: FileEnum;
 }
+
+export interface Album {
+  id: string;
+  treeid: string;
+  index: number;
+  album_title: string;
+}

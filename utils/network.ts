@@ -1,5 +1,5 @@
 // import { VERCEL_ENV, DEVELOP_BASE_URL, PROD_BASE_URL, FRONT_BASE_URL } from '@env';
-export const baseUrl = 'https://remembering-time-be-6ea61afe1775.herokuapp.com';
+export const baseUrl = 'https://remembering-time-be-6ea61afe1775.herokuapp.com'
 export const baseFrontUrl = 'https://remembering-time-front.vercel.app';
 // user
 export const baseUserUrl = `${baseUrl}/users`;
@@ -24,7 +24,7 @@ export const addFile = (treeId: string) => `${baseTreeUrl}/slot/${treeId}`;
 export const allUserTreeUrl = (userId: string) => `${baseTreeUrl}/all/${userId}`;
 export const updateComment = (id: string) => `${baseTreeUrl}/comment/${id}`;
 export const getComment = (id: string) => `${baseTreeUrl}/comment/${id}`;
-
+export const albumByTreeId = (id: string) => `${baseTreeUrl}/slot/album/${id}`;
 export const allTreeUrl = `${baseTreeUrl}/all`;
 
 // payment

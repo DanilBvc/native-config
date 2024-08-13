@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import BurgerMenu from '../../burgerMenu/burgerMenu';
 import {
+  type Album,
   FileEnum,
   type Cords,
   type SlotType,
@@ -43,7 +44,7 @@ import { ArrowDownIcon } from '../../../assets/icons/faq';
 import { colors } from '../../../static/colors';
 import LeafDrops from '../../leafDrops/leafDrops';
 import useAlbums from '../../../hooks/useAlbums';
-import { PlaySvg } from '../../../assets/icons/audioSvg';
+import { PlaySvg, PauseSvg } from '../../../assets/icons/audioSvg';
 import Video from 'react-native-video';
 import { EditSvg } from '../../../assets/icons/EditSvg';
 import { PlusIcon } from '../../../assets/icons/PlusIcon';
@@ -66,7 +67,7 @@ const PreviewTree: FC<{
   const [commentText, setCommentText] = useState('');
   const [editTree, setEditTree] = useState(false);
   const [isVideoVisible, setIsVideoVisible] = useState(false);
-
+  const [musicPlaying, setMusicPlaying] = useState(false);
   const userTrees = useUserStore((state) => state.user.trees);
   const userTreesIds = userTrees.map((item) => item.id);
   const isOwner = userTreesIds.includes(id);
@@ -91,9 +92,33 @@ const PreviewTree: FC<{
   const { angles, setAngles } = useAngles(id);
   const slots = useSlots(angles, treeData);
   const { opacity, transform, animateIn, animateOut } = useAnimatedSlot();
-
+  const [albumData, setAlbumData] = useState<Album[] | undefined>();
+  const [activeSlotAlbumTitle, setActiveSlotAlbumTitle] = useState<string | undefined>();
   const onChange = (name: string, value: string) => {
     setCommentText(value);
+  };
+
+  const onAlbumChange = (name: string, value: string) => {
+    setActiveSlotAlbumTitle(value);
+  };
+
+  const updateAlbum = async () => {
+    try {
+      if (!activeSlot || !activeSlotAlbumTitle) return;
+
+      await TreeService.updateAlbumByTreeId(treeData.id, {
+        title: activeSlotAlbumTitle,
+        index: activeSlot?.index as number,
+      });
+      setAlbumData((prev) =>
+        prev?.map((album) =>
+          album.index === activeSlot?.index
+            ? { ...album, album_title: activeSlotAlbumTitle }
+            : album
+        )
+      );
+      setActiveSlotAlbumTitle('');
+    } catch (err) {}
   };
 
   const selectSlot = (slot: Partial<SlotType> & Cords) => {
@@ -102,7 +127,6 @@ const PreviewTree: FC<{
       const elementHeight = 290;
       const centeredX = (wp(90) - elementWidth) / 2;
       const centeredY = (hp(70) - elementHeight) / 2;
-
       setActiveSlot({
         ...slot,
         x: centeredX,
@@ -111,6 +135,7 @@ const PreviewTree: FC<{
         width: elementWidth,
         link: slot.link,
       });
+      setActiveSlotAlbumTitle(albumData?.find((album) => album.index === slot.index)?.album_title);
       animateIn();
     }
   };
@@ -127,14 +152,13 @@ const PreviewTree: FC<{
 
   const handleOpenSlotWindow = (index: number) => {
     animateIn();
-
     setNewFileIndex(index);
     setActiveSlot({
       comment_text: '',
       comment_title: '',
       created_at: '',
       id: 'setNewImage',
-      index: 0,
+      index,
       link: '',
       slot_type: FileEnum.PHOTO,
       width: 0,
@@ -147,6 +171,12 @@ const PreviewTree: FC<{
   useEffect(() => {
     setCommentText(activeSlot?.title as string);
   }, [activeSlot?.title]);
+
+  useEffect(() => {
+    TreeService.getAlbumByTreeId(treeData.id).then((data) => {
+      setAlbumData(data);
+    });
+  }, [treeData.id]);
 
   const findNextSlotWithLink = (
     currentSlot: Partial<SlotType> & Cords,
@@ -332,10 +362,12 @@ const PreviewTree: FC<{
                   ) : (
                     <TouchableOpacity
                       onPress={() => {
-                        setEditTree(false);
+                        updateAlbum().then(() => {
+                          setEditTree(false);
+                        });
                       }}
                     >
-                      <EditSvg w={50} h={50} />
+                      {CheckSvg({ w: 50, h: 50, fill: 'white' })}
                     </TouchableOpacity>
                   )}
                 </TouchableOpacity>
@@ -373,7 +405,7 @@ const PreviewTree: FC<{
                       borderRadius: 6,
                     }}
                   >
-                    {CheckSvg({ w: 35, h: 35, fill: 'white' })}
+                    {CheckSvg({ w: 50, h: 50, fill: 'white' })}
                   </TouchableOpacity>
                 ) : isOwner && !editTree ? (
                   <TouchableOpacity
@@ -402,10 +434,12 @@ const PreviewTree: FC<{
                       },
                     ]}
                     onPress={() => {
-                      setEditTree(false);
+                      updateAlbum().then(() => {
+                        setEditTree(false);
+                      });
                     }}
                   >
-                    <EditSvg w={50} h={50} />
+                    {CheckSvg({ w: 50, h: 50, fill: 'white' })}
                   </TouchableOpacity>
                 )
               }
@@ -414,7 +448,11 @@ const PreviewTree: FC<{
                   <Link to="/Welcome">
                     <CaseSvg w={35} h={35} stroke={'#FFF7F0'} />
                   </Link>
-                ) : null
+                ) : (
+                  <TouchableOpacity onPress={handleDelete}>
+                    <TrashSvg w={34} h={34} fill="#FFF7F0" />
+                  </TouchableOpacity>
+                )
               }
             />
           )
@@ -427,8 +465,10 @@ const PreviewTree: FC<{
               <PressableSlot
                 onClick={selectSlot}
                 key={i}
+                musicPlaying={musicPlaying}
                 activeSlot={activeSlot}
                 item={slot}
+                albums={albumData}
                 style={activeSlot && { display: 'none' }}
                 handleOpenSlotWindow={() => {
                   handleOpenSlotWindow(i);
@@ -476,7 +516,19 @@ const PreviewTree: FC<{
             </Animated.View>
           </View>
         )}
-
+        {activeSlot &&
+          activeSlot.id !== 'setNewImage' &&
+          activeSlot.slot_type === 'AUDIO' &&
+          !editTree && (
+            <PressableSlot
+              musicPlaying={musicPlaying}
+              onClick={() => {
+                setMusicPlaying(!musicPlaying);
+              }}
+              item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
+              component={musicPlaying ? PauseSvg() : PlaySvg()}
+            />
+          )}
         {activeSlot && activeSlot?.id === 'setNewImage' && (
           <UploadFile
             opacity={opacity}
@@ -488,10 +540,12 @@ const PreviewTree: FC<{
             deselectSlot={deselectSlot}
             addSlot={addSlot}
             activeSlot={activeSlot}
+            setAlbumData={setAlbumData}
           />
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && (
           <PressableSlot
+            musicPlaying={musicPlaying}
             onClick={rotate}
             item={{ x: wp(78), y: hp(25), height: 23, width: 23 }}
             component={CommentSvg()}
@@ -500,14 +554,27 @@ const PreviewTree: FC<{
         {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
           <>
             <PressableSlot
-              onClick={handleDelete}
-              item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
-              component={TrashSvg()}
-            />
-            <PressableSlot
+              musicPlaying={musicPlaying}
               onClick={addToAlbum}
-              item={{ x: wp(10), y: hp(-25), height: 23, width: 23 }}
+              item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
               component={<PlusIcon />}
+            />
+            <TextArea
+              value={activeSlotAlbumTitle as string}
+              onChange={onAlbumChange}
+              additionalStyles={{
+                width: wp(70),
+                left: wp(10),
+                top: hp(-30),
+                height: 80,
+                backgroundColor: '#00000070',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'white',
+              }}
+              maxLength={9}
+              editable={true}
+              name={'albumTitle'}
             />
           </>
         )}
@@ -538,6 +605,7 @@ const PreviewTree: FC<{
         )}
         {activeSlot?.slot_type === FileEnum.VIDEO && (
           <PressableSlot
+            musicPlaying={musicPlaying}
             onClick={() => {
               setIsVideoVisible(true);
             }}

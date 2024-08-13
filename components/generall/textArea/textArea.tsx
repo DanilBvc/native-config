@@ -1,5 +1,5 @@
 import React, { useState, type FC } from 'react';
-import { type StyleProp, TextInput, type TextStyle } from 'react-native';
+import { type StyleProp, TextInput, type TextStyle, StyleSheet } from 'react-native';
 import { styles } from './textArea.style';
 import { colors } from '../../../static/colors';
 
@@ -14,6 +14,7 @@ interface Props {
   error?: boolean;
   placeholderTextColor?: string;
   editable?: boolean;
+  maxLength?: number;
 }
 
 const TextArea: FC<Props> = ({
@@ -27,6 +28,7 @@ const TextArea: FC<Props> = ({
   error,
   placeholderTextColor = colors.rusty_Copper_25_Opacity,
   editable = false,
+  maxLength,
 }) => {
   const [errorValidation, setErrorValidation] = useState(false);
 
@@ -47,12 +49,16 @@ const TextArea: FC<Props> = ({
     <TextInput
       multiline={true}
       numberOfLines={numberOfLines}
+      maxLength={maxLength ?? 200}
       style={[
         styles.input,
         additionalStyles,
         {
           borderColor: error ?? errorValidation ? 'red' : colors.earthy_Brown,
-          color: error ?? errorValidation ? 'red' : '#000',
+          color:
+            error ?? errorValidation
+              ? 'red'
+              : (StyleSheet.flatten(additionalStyles)?.color as string) ?? '#000',
         },
       ]}
       placeholder={placeholder}

@@ -1,6 +1,6 @@
 import React, { type ReactNode, type FC } from 'react';
 import { View, type StyleProp, type ViewStyle } from 'react-native';
-import { type SlotType, type Cords } from '../../../static/types/tree/types';
+import { type SlotType, type Cords, type Album } from '../../../static/types/tree/types';
 import GlowingSlot from '../glowingSlot/glowingSlot';
 
 const PressableSlot: FC<{
@@ -11,12 +11,23 @@ const PressableSlot: FC<{
   style?: StyleProp<ViewStyle>;
   editTree?: boolean;
   activeSlot?: null | (Partial<SlotType> & Cords);
-}> = ({ item, onClick, component, handleOpenSlotWindow, style, editTree = false, activeSlot }) => {
+  albums?: Album[];
+  musicPlaying: boolean
+}> = ({
+  item,
+  onClick,
+  component,
+  handleOpenSlotWindow,
+  style,
+  editTree = false,
+  activeSlot,
+  albums,
+  musicPlaying
+}) => {
   const handlePress = () => {
     if (!item) return;
     onClick?.(item);
   };
-
   return (
     <>
       <View style={style}>
@@ -24,11 +35,14 @@ const PressableSlot: FC<{
           url={item.link}
           key={item.id}
           onPress={handlePress}
+          musicPlaying={musicPlaying}
           cords={item}
           component={component}
           handleOpenSlotWindow={handleOpenSlotWindow}
           editTree={editTree}
           activeSlot={activeSlot}
+          albums={albums}
+          index={item.index}
         />
       </View>
     </>

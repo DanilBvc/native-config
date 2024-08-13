@@ -4,16 +4,14 @@
     "slug": "remembering-time-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/remember-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/remember-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "plugins": [
       [
         "expo-camera",
@@ -34,13 +32,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/remember-logo.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.belyashvcmetahe.rememberingtimemobile",
-      "permissions": [
-        "CAMERA"
-      ]
+      "permissions": ["CAMERA"]
     },
     "web": {
       "favicon": "./assets/favicon.png"

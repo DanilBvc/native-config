@@ -10,8 +10,10 @@ import PressableSlot from '../pressableSlot/pressableSlot';
 import { CheckSvg } from '../../../assets/icons/CheckSvg';
 import { TreeService } from '../../../services/treeService/treeService';
 import { TrashSvg } from '../../../assets/icons/comment';
-import { type Cords, FileEnum, type SlotType } from '../../../static/types/tree/types';
+import { type Cords, FileEnum, type SlotType, type Album } from '../../../static/types/tree/types';
 import { hp, wp } from '../../../utils/percentageSizes';
+import TextArea from '../../generall/textArea/textArea';
+import { generateUUID } from '../../../utils/utils';
 
 interface UploadFileProps {
   opacity: Animated.Value;
@@ -23,6 +25,7 @@ interface UploadFileProps {
   newFileIndex: number | null;
   addSlot: (obj: SlotType) => void;
   activeSlot: Partial<SlotType> & Cords;
+  setAlbumData: React.Dispatch<React.SetStateAction<Album[] | undefined>>
 }
 
 const UploadFile: FC<UploadFileProps> = ({
@@ -35,6 +38,7 @@ const UploadFile: FC<UploadFileProps> = ({
   newFileIndex,
   addSlot,
   activeSlot,
+  setAlbumData
 }) => {
   const [userData, setUserData] = useState<{
     file: { uri: string; name: string; type: string } | null;
@@ -46,6 +50,7 @@ const UploadFile: FC<UploadFileProps> = ({
     slot_type: 'PHOTO',
   });
   const [uri, setUri] = useState('');
+  const [ablumTitle, setAlbumTitle] = useState('');
 
   const selectMedia = async () => {
     try {
@@ -115,6 +120,7 @@ const UploadFile: FC<UploadFileProps> = ({
     } as any);
     formData.append('index', activeSlot.index?.toString() ?? '');
     formData.append('slot_type', userData.slot_type);
+    formData.append('albumTitle', ablumTitle);
 
     try {
       if (isDemo) {
@@ -134,10 +140,20 @@ const UploadFile: FC<UploadFileProps> = ({
       if (response) {
         deselectSlot();
         addSlot(response);
+        setAlbumData((prev) => {
+          if (prev) {
+            return [...prev, { id: generateUUID(), album_title: ablumTitle, index: activeSlot.index ?? 1, treeid: id }]
+          }
+          return [{ id: generateUUID(), album_title: ablumTitle, index: activeSlot.index ?? 1, treeid: id }]
+        });
       }
     } catch (error) {
       alert('Error uploading file');
     }
+  };
+
+  const onChange = (name: string, value: string) => {
+    setAlbumTitle(value);
   };
 
   const mediaElement = () => {
@@ -180,6 +196,24 @@ const UploadFile: FC<UploadFileProps> = ({
           position: 'absolute',
         }}
       >
+        {uri && (
+          <TextArea
+            value={ablumTitle}
+            maxLength={9}
+            additionalStyles={{
+              width: wp(70),
+              left: wp(10),
+              top: hp(5),
+              height: 80,
+              backgroundColor: 'white',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onChange={onChange}
+            name={'albumTitle'}
+            editable={true}
+          />
+        )}
         <View style={styles.container}>
           <TouchableOpacity
             onPress={() => {

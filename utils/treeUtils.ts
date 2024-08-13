@@ -24,7 +24,7 @@ export const generateCircularCoords = (
       link: slot?.link,
       title: slot?.comment_title,
       slot_type: slot?.slot_type,
-      index: i,
+      index: slot?.index,
     };
   });
 

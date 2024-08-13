@@ -2,7 +2,7 @@ import React from 'react';
 import { HomeSvg, QrCodeFrame } from '../../assets/icons/qr-code';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import { Link, useNavigation } from '@react-navigation/native';
-import { Button, Text, View, useWindowDimensions } from 'react-native';
+import { Button, SafeAreaView, ScrollView, Text, View, useWindowDimensions } from 'react-native';
 import { type BarcodeScanningResult, CameraView, useCameraPermissions } from 'expo-camera';
 import { styles } from './scanQrCode.style';
 
@@ -42,27 +42,30 @@ const ScanQrCode: React.FC = () => {
           <HomeSvg />
         </Link>
       }
-    >
-      <View style={styles.container}>
-        <CameraView
-          style={{ height, width: '100%' }}
-          barcodeScannerSettings={{
-            barcodeTypes: ['qr'],
-          }}
-          onBarcodeScanned={handleScanQrCode}
-        >
-          <View style={styles.frameContainer}>
-            <QrCodeFrame />
-          </View>
-        </CameraView>
-
+      footerControl={
         <View style={styles.textContainer}>
           <Text style={styles.title}>Scan QR code</Text>
-          <Text style={styles.subTitle}>
-            Lorem ipsum dolor sit amet consectetur. Nec tristique feugiat leo lorem ipsum nibh.
-          </Text>
+          <Text style={styles.subTitle}>Please scan the {"tree's"} QR code.</Text>
         </View>
-      </View>
+      }
+    >
+      <SafeAreaView>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.container}>
+            <CameraView
+              style={{ height, width: '100%' }}
+              barcodeScannerSettings={{
+                barcodeTypes: ['qr'],
+              }}
+              onBarcodeScanned={handleScanQrCode}
+            >
+              <View style={styles.frameContainer}>
+                <QrCodeFrame />
+              </View>
+            </CameraView>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </EmptyLayout>
   );
 };
