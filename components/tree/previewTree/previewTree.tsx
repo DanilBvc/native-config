@@ -94,6 +94,15 @@ const PreviewTree: FC<{
   const { opacity, transform, animateIn, animateOut } = useAnimatedSlot();
   const [albumData, setAlbumData] = useState<Album[] | undefined>();
   const [activeSlotAlbumTitle, setActiveSlotAlbumTitle] = useState<string | undefined>();
+
+  const sendFileHandler = useRef<() => void>();
+
+  const onSendFileClick = () => {
+    if (sendFileHandler.current) {
+      sendFileHandler.current();
+    }
+  };
+
   const onChange = (name: string, value: string) => {
     setCommentText(value);
   };
@@ -146,10 +155,6 @@ const PreviewTree: FC<{
       setActiveSlotAlbumTitle('');
     } catch (err) {}
   };
-
-  useEffect(() => {
-    console.log('albumData', albumData);
-  }, [albumData]);
 
   const selectSlot = (slot: Partial<SlotType> & Cords) => {
     if (slot.link) {
@@ -280,6 +285,7 @@ const PreviewTree: FC<{
 
   const sendComment = async () => {
     if (!isDemo) {
+      onSendFileClick()
       TreeService.updateComment(activeSlot?.id ?? '', {
         comment_title: commentText,
       }).then((res) => {
@@ -339,6 +345,7 @@ const PreviewTree: FC<{
     if (!activeSlot) return;
     selectSlot({ ...activeSlot, id: 'setNewImage' });
   };
+
   return (
     <View style={{ flex: 1 }}>
       {isGenerationProgress && (
@@ -392,6 +399,7 @@ const PreviewTree: FC<{
                   ) : (
                     <TouchableOpacity
                       onPress={() => {
+                        onSendFileClick()
                         updateAlbum().then(() => {
                           setEditTree(false);
                         });
@@ -464,6 +472,7 @@ const PreviewTree: FC<{
                       },
                     ]}
                     onPress={() => {
+                      onSendFileClick()
                       updateAlbum().then(() => {
                         setEditTree(false);
                       });
@@ -558,7 +567,7 @@ const PreviewTree: FC<{
               item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
               component={musicPlaying ? PauseSvg() : PlaySvg()}
             />
-          )}
+        )}
         {activeSlot && activeSlot?.id === 'setNewImage' && (
           <UploadFile
             opacity={opacity}
@@ -571,6 +580,9 @@ const PreviewTree: FC<{
             addSlot={addSlot}
             activeSlot={activeSlot}
             setAlbumData={setAlbumData}
+            sendFileRef={(sendFile) => {
+              sendFileHandler.current = sendFile;
+            }}
           />
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && (

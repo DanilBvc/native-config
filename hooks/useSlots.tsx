@@ -11,7 +11,7 @@ const useSlots = (angles: number[], treeData: TreeData) => {
     const baseRadius = 220;
     const radiusVariation = 50;
     const centerX = 0;
-    const centerY = windowHeight / 3.2;
+    const centerY = windowHeight / 2.8;
     setSlots(generateSlots(angles, baseRadius, radiusVariation, centerX, centerY, treeData.slots));
   }, [angles, treeData.slots]);
 

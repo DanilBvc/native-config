@@ -7,7 +7,6 @@ import Video from '../../../assets/video.png';
 
 import ImagePicker from 'react-native-image-crop-picker';
 import PressableSlot from '../pressableSlot/pressableSlot';
-import { CheckSvg } from '../../../assets/icons/CheckSvg';
 import { TreeService } from '../../../services/treeService/treeService';
 import { TrashSvg } from '../../../assets/icons/comment';
 import { type Cords, FileEnum, type SlotType, type Album } from '../../../static/types/tree/types';
@@ -25,7 +24,8 @@ interface UploadFileProps {
   newFileIndex: number | null;
   addSlot: (obj: SlotType) => void;
   activeSlot: Partial<SlotType> & Cords;
-  setAlbumData: React.Dispatch<React.SetStateAction<Album[] | undefined>>;
+  setAlbumData: React.Dispatch<React.SetStateAction<Album[] | undefined>>
+  sendFileRef?: (sendFile: () => void) => void;
 }
 
 const UploadFile: FC<UploadFileProps> = ({
@@ -39,6 +39,7 @@ const UploadFile: FC<UploadFileProps> = ({
   addSlot,
   activeSlot,
   setAlbumData,
+  sendFileRef
 }) => {
   const [userData, setUserData] = useState<{
     file: { uri: string; name: string; type: string } | null;
@@ -126,7 +127,7 @@ const UploadFile: FC<UploadFileProps> = ({
       if (isDemo) {
         addSlot({
           id,
-          index: activeSlot.index ?? 1,
+          index: activeSlot.index ?? Math.floor(Math.random() * (100000 - 1000 + 1) + 1000),
           slot_type: (userData.slot_type as FileEnum) ?? FileEnum.PHOTO,
           comment_text: 'Demo comment text',
           comment_title: 'Demo comment title',
@@ -142,24 +143,9 @@ const UploadFile: FC<UploadFileProps> = ({
         addSlot(response);
         setAlbumData((prev) => {
           if (prev) {
-            return [
-              ...prev,
-              {
-                id: generateUUID(),
-                album_title: ablumTitle,
-                index: activeSlot.index ?? 1,
-                treeid: id,
-              },
-            ];
+            return [...prev, { id: generateUUID(), album_title: ablumTitle, index: activeSlot.index ?? 1, treeid: id }]
           }
-          return [
-            {
-              id: generateUUID(),
-              album_title: ablumTitle,
-              index: activeSlot.index ?? 1,
-              treeid: id,
-            },
-          ];
+          return [{ id: generateUUID(), album_title: ablumTitle, index: activeSlot.index ?? 1, treeid: id }]
         });
       }
     } catch (error) {
@@ -199,6 +185,12 @@ const UploadFile: FC<UploadFileProps> = ({
         return <PlusIcon />;
     }
   };
+
+  React.useEffect(() => {
+    if (sendFileRef) {
+      sendFileRef(sendFile);
+    }
+  }, [sendFile, sendFileRef]);
 
   return (
     <View style={{ width: 290, height: 290, position: 'relative' }}>
@@ -245,16 +237,7 @@ const UploadFile: FC<UploadFileProps> = ({
               <View style={styles.backContent}>{mediaElement()}</View>
             </ImageBackground>
           </TouchableOpacity>
-          <View>
-            <PressableSlot
-              musicPlaying={false}
-              onClick={() => {
-                sendFile();
-              }}
-              item={{ x: wp(70), y: hp(8), height: 23, width: 23 }}
-              component={CheckSvg({ w: 20, h: 15, fill: '#B37840' })}
-            />
-          </View>
+
           {uri && (
             <View>
               <PressableSlot
