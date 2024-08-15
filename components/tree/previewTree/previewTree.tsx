@@ -24,7 +24,7 @@ import ActiveSlot from '../activeSlot/activeSlot';
 import useAnimatedSlot from '../../../hooks/useAnimatedSlot';
 import useSlots from '../../../hooks/useSlots';
 import useAngles from '../../../hooks/useAngles';
-import { CommentSvg, TrashSvg } from '../../../assets/icons/comment';
+import { TrashSvg } from '../../../assets/icons/comment';
 import BurgerList from '../../burgerList/burgerList';
 import { styles } from './previewTree.style';
 import { useAuth } from '../../../hooks/useAuth';
@@ -50,6 +50,7 @@ import { EditSvg } from '../../../assets/icons/EditSvg';
 import { PlusIcon } from '../../../assets/icons/PlusIcon';
 import { CaseSvg, HomeSvg, UserSvg } from '../../../assets/icons/bottomNavigationIcon/icons';
 import { CheckSvg } from '../../../assets/icons/CheckSvg';
+import { GptComment } from '../../../assets/icons/gptIcons';
 const windowWidth = Dimensions.get('window').width;
 
 const PreviewTree: FC<{
@@ -414,7 +415,7 @@ const PreviewTree: FC<{
             />
           ) : (
             <GptNavigation
-              onCommentPress={generateDescription}
+              onCommentPress={rotate}
               firstComponent={
                 !isOwner ? (
                   <Link to="/CustomerSection">
@@ -483,7 +484,7 @@ const PreviewTree: FC<{
                 )
               }
               thirdComponent={
-                !isOwner ? (
+                !isOwner && !isDemo ? (
                   <Link to="/Welcome">
                     <CaseSvg w={35} h={35} stroke={'#FFF7F0'} />
                   </Link>
@@ -545,8 +546,8 @@ const PreviewTree: FC<{
                     editable={editTree}
                     additionalStyles={{
                       borderWidth: 0,
-                      maxWidth: 160,
-                      maxHeight: 160,
+                      maxWidth: 175,
+                      maxHeight: 180,
                       textAlign: 'center',
                     }}
                   />
@@ -588,9 +589,9 @@ const PreviewTree: FC<{
         {activeSlot && activeSlot.id !== 'setNewImage' && (
           <PressableSlot
             musicPlaying={musicPlaying}
-            onClick={rotate}
+            onClick={generateDescription}
             item={{ x: wp(78), y: hp(25), height: 23, width: 23 }}
-            component={CommentSvg()}
+            component={<GptComment fill='#B37840'/>}
           />
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (

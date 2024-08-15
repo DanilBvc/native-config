@@ -49,9 +49,10 @@ const TextArea: FC<Props> = ({
     <TextInput
       multiline={true}
       numberOfLines={numberOfLines}
-      maxLength={maxLength ?? 200}
+      maxLength={maxLength ?? 133}
       style={[
         styles.input,
+        { overflow: 'scroll' },
         additionalStyles,
         {
           borderColor: error ?? errorValidation ? 'red' : colors.earthy_Brown,
@@ -69,6 +70,7 @@ const TextArea: FC<Props> = ({
       placeholderTextColor={placeholderTextColor}
       editable={editable}
       scrollEnabled={true}
+      pointerEvents={editable ? 'auto' : 'none'}
     ></TextInput>
   );
 };

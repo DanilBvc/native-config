@@ -56,7 +56,7 @@ const FirstPage = () => {
               visible: false,
             }}
             mute={{
-              visible: false,
+              isMute: true,
             }}
           />
         </View>

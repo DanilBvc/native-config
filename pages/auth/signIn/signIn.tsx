@@ -40,7 +40,7 @@ const SignIn = () => {
       await storeData('refreshToken', response.tokens.refreshToken);
 
       setIsAuthenticated(true);
-      navigation.navigate('Home' as never);
+      navigation.navigate('CustomerSection' as never);
       const user = await AuthUserApi.checkIsCurrentAccessToken();
 
       userStore.updateUserData(user.data);

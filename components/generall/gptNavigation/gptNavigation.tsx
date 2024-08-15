@@ -1,8 +1,9 @@
 import React, { type ReactNode, type FC } from 'react';
 import { Image, Pressable, TouchableOpacity, View } from 'react-native';
-import { GptIcon, GptComment, GptMusic } from '../../../assets/icons/gptIcons';
+import { GptIcon, GptMusic } from '../../../assets/icons/gptIcons';
 import { styles } from './gptNavigation.type';
 import { Link } from '@react-navigation/native';
+import { CommentSvg } from '../../../assets/icons/comment';
 
 const GptNavigation: FC<{
   onCommentPress: () => void;
@@ -20,7 +21,7 @@ const GptNavigation: FC<{
       <View style={[styles.container]}>
         {firstComponent ?? (
           <Pressable onPress={onCommentPress}>
-            <GptComment />
+            <CommentSvg fill='#FFF7F0'/>
           </Pressable>
         )}
         {centerComponent ?? (

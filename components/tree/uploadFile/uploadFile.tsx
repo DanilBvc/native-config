@@ -6,9 +6,7 @@ import Audio from '../../../assets/audio.png';
 import Video from '../../../assets/video.png';
 
 import ImagePicker from 'react-native-image-crop-picker';
-import PressableSlot from '../pressableSlot/pressableSlot';
 import { TreeService } from '../../../services/treeService/treeService';
-import { TrashSvg } from '../../../assets/icons/comment';
 import { type Cords, FileEnum, type SlotType, type Album } from '../../../static/types/tree/types';
 import { hp, wp } from '../../../utils/percentageSizes';
 import TextArea from '../../generall/textArea/textArea';
@@ -238,7 +236,7 @@ const UploadFile: FC<UploadFileProps> = ({
             </ImageBackground>
           </TouchableOpacity>
 
-          {uri && (
+          {/* {uri && (
             <View>
               <PressableSlot
                 musicPlaying={false}
@@ -247,7 +245,7 @@ const UploadFile: FC<UploadFileProps> = ({
                 component={<TrashSvg />}
               />
             </View>
-          )}
+          )} */}
         </View>
       </Animated.View>
     </View>

@@ -1,6 +1,6 @@
 import { Link } from '@react-navigation/native';
-import React, { type FC, type ReactNode } from 'react';
-import { Image, View } from 'react-native';
+import React, { useEffect, useState, type FC, type ReactNode } from 'react';
+import { Image, Keyboard, View } from 'react-native';
 import { styles } from './emptyLayout.style';
 
 const EmptyLayout: FC<{
@@ -18,6 +18,28 @@ const EmptyLayout: FC<{
   contentMarginBottom = 0,
   burgerList,
 }) => {
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardOpen(true);
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardOpen(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
   return (
     <View style={{ ...styles.containerStyle, backgroundColor }}>
       <View style={styles.headerStyle}>
@@ -27,7 +49,7 @@ const EmptyLayout: FC<{
         {additionalControl && <View>{additionalControl}</View>}
       </View>
       <View style={{ marginBottom: contentMarginBottom }}>{children}</View>
-      {footerControl && <View style={styles.footer}>{footerControl}</View>}
+      {footerControl && !keyboardOpen && <View style={styles.footer}>{footerControl}</View>}
       {burgerList}
     </View>
   );
