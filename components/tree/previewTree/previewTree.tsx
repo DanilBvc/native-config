@@ -106,20 +106,50 @@ const PreviewTree: FC<{
     try {
       if (!activeSlot || !activeSlotAlbumTitle) return;
 
-      await TreeService.updateAlbumByTreeId(treeData.id, {
-        title: activeSlotAlbumTitle,
-        index: activeSlot?.index as number,
+      if (!isDemo) {
+        await TreeService.updateAlbumByTreeId(treeData.id, {
+          title: activeSlotAlbumTitle,
+          index: activeSlot?.index as number,
+        });
+      }
+      setAlbumData((prev) => {
+        if (prev && prev.length > 0) {
+          const isAlbumExist = prev.find((album) => album.index === activeSlot?.index);
+          if (isAlbumExist) {
+            return prev?.map((album) =>
+              album.index === activeSlot?.index
+                ? { ...album, album_title: activeSlotAlbumTitle }
+                : album
+            );
+          } else {
+            return [
+              ...prev,
+              {
+                index: activeSlot?.index,
+                album_title: activeSlotAlbumTitle,
+                id: activeSlotAlbumTitle + activeSlot.index,
+                tree_id: treeData.id,
+              },
+            ] as unknown as Album[];
+          }
+        } else {
+          return [
+            {
+              index: activeSlot?.index,
+              album_title: activeSlotAlbumTitle,
+              id: activeSlotAlbumTitle + activeSlot.index,
+              tree_id: treeData.id,
+            },
+          ] as unknown as Album[];
+        }
       });
-      setAlbumData((prev) =>
-        prev?.map((album) =>
-          album.index === activeSlot?.index
-            ? { ...album, album_title: activeSlotAlbumTitle }
-            : album
-        )
-      );
       setActiveSlotAlbumTitle('');
     } catch (err) {}
   };
+
+  useEffect(() => {
+    console.log('albumData', albumData);
+  }, [albumData]);
 
   const selectSlot = (slot: Partial<SlotType> & Cords) => {
     if (slot.link) {
@@ -385,7 +415,7 @@ const PreviewTree: FC<{
                 ) : null
               }
               centerComponent={
-                !isOwner ? (
+                !isOwner && !isDemo ? (
                   <Link
                     to="/FirstPage"
                     style={{
@@ -407,7 +437,7 @@ const PreviewTree: FC<{
                   >
                     {CheckSvg({ w: 50, h: 50, fill: 'white' })}
                   </TouchableOpacity>
-                ) : isOwner && !editTree ? (
+                ) : (isOwner || isDemo) && !editTree ? (
                   <TouchableOpacity
                     style={[
                       styles.editButton,

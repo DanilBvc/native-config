@@ -25,7 +25,7 @@ interface UploadFileProps {
   newFileIndex: number | null;
   addSlot: (obj: SlotType) => void;
   activeSlot: Partial<SlotType> & Cords;
-  setAlbumData: React.Dispatch<React.SetStateAction<Album[] | undefined>>
+  setAlbumData: React.Dispatch<React.SetStateAction<Album[] | undefined>>;
 }
 
 const UploadFile: FC<UploadFileProps> = ({
@@ -38,7 +38,7 @@ const UploadFile: FC<UploadFileProps> = ({
   newFileIndex,
   addSlot,
   activeSlot,
-  setAlbumData
+  setAlbumData,
 }) => {
   const [userData, setUserData] = useState<{
     file: { uri: string; name: string; type: string } | null;
@@ -142,9 +142,24 @@ const UploadFile: FC<UploadFileProps> = ({
         addSlot(response);
         setAlbumData((prev) => {
           if (prev) {
-            return [...prev, { id: generateUUID(), album_title: ablumTitle, index: activeSlot.index ?? 1, treeid: id }]
+            return [
+              ...prev,
+              {
+                id: generateUUID(),
+                album_title: ablumTitle,
+                index: activeSlot.index ?? 1,
+                treeid: id,
+              },
+            ];
           }
-          return [{ id: generateUUID(), album_title: ablumTitle, index: activeSlot.index ?? 1, treeid: id }]
+          return [
+            {
+              id: generateUUID(),
+              album_title: ablumTitle,
+              index: activeSlot.index ?? 1,
+              treeid: id,
+            },
+          ];
         });
       }
     } catch (error) {
@@ -232,6 +247,7 @@ const UploadFile: FC<UploadFileProps> = ({
           </TouchableOpacity>
           <View>
             <PressableSlot
+              musicPlaying={false}
               onClick={() => {
                 sendFile();
               }}
@@ -242,9 +258,10 @@ const UploadFile: FC<UploadFileProps> = ({
           {uri && (
             <View>
               <PressableSlot
+                musicPlaying={false}
                 onClick={removeMedia}
                 item={{ x: wp(10), y: hp(7), height: 23, width: 23 }}
-                component={TrashSvg()}
+                component={<TrashSvg />}
               />
             </View>
           )}
