@@ -1,4 +1,4 @@
-import React, { type ReactNode, type FC } from 'react';
+import React, { type ReactNode, type FC, useState, useEffect } from 'react';
 import { View, Image, TouchableOpacity, Text } from 'react-native';
 import { type SlotType, type Cords, type Album } from '../../../static/types/tree/types';
 import { styles } from './glowingSlot.style';
@@ -6,8 +6,9 @@ import glowingCircleBig from '../../../assets/glowingCircleBig.png';
 import glowingCircle from '../../../assets/glowingCircle.png';
 import { PlusWithCircle } from '../../../assets/icons/PlusIcon';
 import Video from 'react-native-video';
-import VideoIcon from '../../../assets/video.png';
 import AudioIcon from '../../../assets/audio.png';
+import VideoIcom from '../../../assets/video.png';
+import { createThumbnail } from 'react-native-create-thumbnail';
 
 const GlowingSlot: FC<{
   url?: string;
@@ -31,7 +32,7 @@ const GlowingSlot: FC<{
   onPress,
   albums,
   index,
-  musicPlaying
+  musicPlaying,
 }) => {
   const { width, height, x, y } = cords;
   const imageSource = typeof url === 'string' ? { uri: url } : url;
@@ -41,6 +42,23 @@ const GlowingSlot: FC<{
     zIndex: 10,
     top: cords.slot_type === 'VIDEO' ? 0 : 50,
   };
+
+  const [thumbnailUri, setThumbnailUri] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (cords.slot_type === 'VIDEO' && url) {
+      const fetchThumbnail = async () => {
+        try {
+          const result = await createThumbnail({
+            url,
+            timeStamp: 2000,
+          });
+          setThumbnailUri(result.path);
+        } catch (error) {}
+      };
+      fetchThumbnail();
+    }
+  }, [url, cords.slot_type]);
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -51,9 +69,12 @@ const GlowingSlot: FC<{
       {cords.slot_type === 'VIDEO' ? (
         <View style={[styles.videoContainer, { width, height }]}>
           {activeSlot !== null ? (
-            <Video source={imageSource} style={[styles.video]} repeat resizeMode="cover" muted/>
+            <Video source={imageSource} style={[styles.video]} repeat resizeMode="cover" muted />
           ) : (
-            <Image source={VideoIcon} style={{ ...styles.photo, width, height }} />
+            <Image
+              source={thumbnailUri ? { uri: thumbnailUri } : VideoIcom}
+              style={{ ...styles.photo, width, height }}
+            />
           )}
         </View>
       ) : cords.slot_type === 'AUDIO' ? (
@@ -83,7 +104,7 @@ const GlowingSlot: FC<{
           </TouchableOpacity>
         )
       )}
-      {isSlotIncludeAlbum && <Text style={textStyle}>{isSlotIncludeAlbum}</Text>}
+      {isSlotIncludeAlbum && isSlotIncludeAlbum !== 'null' && <Text style={textStyle}>{isSlotIncludeAlbum}</Text>}
     </TouchableOpacity>
   );
 };

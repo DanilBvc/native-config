@@ -12,6 +12,7 @@ const handleResponse = async <T>(response: Response): Promise<T | null> => {
     return text ? JSON.parse(text) : null;
   }
   const errorResponse: ErrorResponse = await response.json();
+  console.log(errorResponse.error.details.message, 'errorResponse');
   throw new Error(errorResponse.message || 'Request failed');
 };
 

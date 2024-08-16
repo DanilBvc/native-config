@@ -417,7 +417,7 @@ const PreviewTree: FC<{
             <GptNavigation
               onCommentPress={rotate}
               firstComponent={
-                !isOwner ? (
+                ((isDemo && !activeSlot)) ? (
                   <Link to="/CustomerSection">
                     <UserSvg w={35} h={35} stroke={'FFF7F0'} fill="#FFF7F0" />
                   </Link>
@@ -484,16 +484,17 @@ const PreviewTree: FC<{
                 )
               }
               thirdComponent={
-                !isOwner && !isDemo ? (
+                 (activeSlot) && (isOwner || isDemo) ? (
+                  <TouchableOpacity onPress={handleDelete}>
+                    <TrashSvg w={35} h={35} fill="#FFF7F0" />
+                  </TouchableOpacity>
+                 ) : (
                   <Link to="/Welcome">
                     <CaseSvg w={35} h={35} stroke={'#FFF7F0'} />
                   </Link>
-                ) : (
-                  <TouchableOpacity onPress={handleDelete}>
-                    <TrashSvg w={34} h={34} fill="#FFF7F0" />
-                  </TouchableOpacity>
-                )
+                 )
               }
+
             />
           )
         }
@@ -627,7 +628,7 @@ const PreviewTree: FC<{
               style={{
                 transform: [{ rotate: '180deg' }],
                 position: 'absolute',
-                left: windowWidth / 2.3,
+                left: windowWidth / 2.5,
                 top: hp(5),
               }}
               onPress={() => {
@@ -637,7 +638,7 @@ const PreviewTree: FC<{
               <ArrowDownIcon color={colors.white} />
             </TouchableOpacity>
             <Pressable
-              style={{ position: 'absolute', left: windowWidth / 2.3, top: hp(60) }}
+              style={{ position: 'absolute', left: windowWidth / 2.5, top: hp(60) }}
               onPress={() => {
                 handleSlotChange(1);
               }}

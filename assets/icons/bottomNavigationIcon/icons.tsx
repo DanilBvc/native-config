@@ -8,7 +8,7 @@ interface SvgProps {
   h?: number;
 }
 
-export function HomeSvg({ stroke = '#B37840', w, h }: SvgProps) {
+export function HomeSvg ({ stroke = '#B37840', w, h }: SvgProps) {
   return (
     <Svg width={w ?? 26} height={h ?? 26} viewBox="0 0 26 26" fill="none">
       <Path
@@ -22,7 +22,7 @@ export function HomeSvg({ stroke = '#B37840', w, h }: SvgProps) {
   );
 }
 
-export function UserSvg({ fill = '#B37840', w, h }: SvgProps) {
+export function UserSvg ({ fill = '#B37840', w, h }: SvgProps) {
   return (
     <Svg width={w ?? 25} height={h ?? 29} viewBox="0 0 25 29" fill="none">
       <Path
@@ -33,7 +33,7 @@ export function UserSvg({ fill = '#B37840', w, h }: SvgProps) {
   );
 }
 
-export function QuestionSvg({ fill = '#B37840', w, h }: SvgProps) {
+export function QuestionSvg ({ fill = '#B37840', w, h }: SvgProps) {
   return (
     <Svg width={w ?? 25} height={h ?? 25} viewBox="0 0 25 25" fill="none">
       <Path
@@ -56,7 +56,7 @@ export function QuestionSvg({ fill = '#B37840', w, h }: SvgProps) {
   );
 }
 
-export function CaseSvg({ stroke = '#B37840', w, h }: SvgProps) {
+export function CaseSvg ({ stroke = '#B37840', w, h }: SvgProps) {
   return (
     <Svg width={w ?? 27} height={h ?? 27} viewBox="0 0 27 27" fill="none">
       <Path
@@ -74,7 +74,7 @@ export function CaseSvg({ stroke = '#B37840', w, h }: SvgProps) {
   );
 }
 
-export function QrCodeSvg({ fill = '#56371A' }: SvgProps) {
+export function QrCodeSvg ({ fill = '#56371A' }: SvgProps) {
   return (
     <Svg width="50" height="50" viewBox="0 0 50 50" fill="none">
       <Path

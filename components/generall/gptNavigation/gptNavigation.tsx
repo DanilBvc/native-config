@@ -21,7 +21,7 @@ const GptNavigation: FC<{
       <View style={[styles.container]}>
         {firstComponent ?? (
           <Pressable onPress={onCommentPress}>
-            <CommentSvg fill='#FFF7F0'/>
+            <CommentSvg fill='#FFF7F0'w={35} h={35}/>
           </Pressable>
         )}
         {centerComponent ?? (

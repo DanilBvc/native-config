@@ -117,9 +117,10 @@ const UploadFile: FC<UploadFileProps> = ({
       name: userData.file.name,
       type: userData.file.type,
     } as any);
+    console.log()
     formData.append('index', activeSlot.index?.toString() ?? '');
     formData.append('slot_type', userData.slot_type);
-    formData.append('albumTitle', ablumTitle);
+    formData.append('albumTitle', (ablumTitle.length > 0 ? ablumTitle : null) as any);
 
     try {
       if (isDemo) {
@@ -147,6 +148,7 @@ const UploadFile: FC<UploadFileProps> = ({
         });
       }
     } catch (error) {
+      console.log(error)
       alert('Error uploading file');
     }
   };
