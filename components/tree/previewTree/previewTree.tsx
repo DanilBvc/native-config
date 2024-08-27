@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Pressable,
   Modal,
+  ScrollView,
 } from 'react-native';
 import BurgerMenu from '../../burgerMenu/burgerMenu';
 import {
@@ -286,7 +287,7 @@ const PreviewTree: FC<{
 
   const sendComment = async () => {
     if (!isDemo) {
-      onSendFileClick()
+      onSendFileClick();
       TreeService.updateComment(activeSlot?.id ?? '', {
         comment_title: commentText,
       }).then((res) => {
@@ -400,7 +401,7 @@ const PreviewTree: FC<{
                   ) : (
                     <TouchableOpacity
                       onPress={() => {
-                        onSendFileClick()
+                        onSendFileClick();
                         updateAlbum().then(() => {
                           setEditTree(false);
                         });
@@ -417,7 +418,7 @@ const PreviewTree: FC<{
             <GptNavigation
               onCommentPress={rotate}
               firstComponent={
-                ((isDemo && !activeSlot)) ? (
+                isDemo && !activeSlot ? (
                   <Link to="/CustomerSection">
                     <UserSvg w={35} h={35} stroke={'FFF7F0'} fill="#FFF7F0" />
                   </Link>
@@ -473,7 +474,7 @@ const PreviewTree: FC<{
                       },
                     ]}
                     onPress={() => {
-                      onSendFileClick()
+                      onSendFileClick();
                       updateAlbum().then(() => {
                         setEditTree(false);
                       });
@@ -484,17 +485,16 @@ const PreviewTree: FC<{
                 )
               }
               thirdComponent={
-                 (activeSlot) && (isOwner || isDemo) ? (
+                activeSlot && (isOwner || isDemo) ? (
                   <TouchableOpacity onPress={handleDelete}>
                     <TrashSvg w={35} h={35} fill="#FFF7F0" />
                   </TouchableOpacity>
-                 ) : (
+                ) : (
                   <Link to="/Welcome">
                     <CaseSvg w={35} h={35} stroke={'#FFF7F0'} />
                   </Link>
-                 )
+                )
               }
-
             />
           )
         }
@@ -538,20 +538,31 @@ const PreviewTree: FC<{
                 style={[styles.backSide, { top: activeSlot.y, left: activeSlot.x }]}
               >
                 <View style={styles.backContent}>
-                  <Text style={styles.backText}>{activeSlot.comment_text}</Text>
-                  <TextArea
-                    name="commentText"
-                    placeholder={editTree ? 'Enter comment' : 'Your comment can be here '}
-                    value={commentText}
-                    onChange={onChange}
-                    editable={editTree}
-                    additionalStyles={{
-                      borderWidth: 0,
-                      maxWidth: 175,
-                      maxHeight: 180,
-                      textAlign: 'center',
-                    }}
-                  />
+                  {commentText && commentText.length > 0 && !editTree ? (
+                    <ScrollView
+                      style={{
+                        borderWidth: 0,
+                        maxWidth: 175,
+                        maxHeight: 130,
+                      }}
+                    >
+                      <Text style={{ textAlign: 'center' }}>{commentText}</Text>
+                    </ScrollView>
+                  ) : (
+                    <TextArea
+                      name="commentText"
+                      placeholder={editTree ? 'Enter comment' : 'Your comment can be here '}
+                      value={commentText}
+                      onChange={onChange}
+                      editable={editTree}
+                      additionalStyles={{
+                        borderWidth: 0,
+                        maxWidth: 175,
+                        maxHeight: 130,
+                        textAlign: 'center',
+                      }}
+                    />
+                  )}
                 </View>
               </ImageBackground>
             </Animated.View>
@@ -569,7 +580,7 @@ const PreviewTree: FC<{
               item={{ x: wp(10), y: hp(25), height: 23, width: 23 }}
               component={musicPlaying ? PauseSvg() : PlaySvg()}
             />
-        )}
+          )}
         {activeSlot && activeSlot?.id === 'setNewImage' && (
           <UploadFile
             opacity={opacity}
@@ -592,7 +603,7 @@ const PreviewTree: FC<{
             musicPlaying={musicPlaying}
             onClick={generateDescription}
             item={{ x: wp(78), y: hp(25), height: 23, width: 23 }}
-            component={<GptComment fill='#B37840'/>}
+            component={<GptComment fill="#B37840" />}
           />
         )}
         {activeSlot && activeSlot.id !== 'setNewImage' && editTree && (
