@@ -2,12 +2,14 @@ import React, { type FC, useEffect, useRef } from 'react';
 import { View, Animated } from 'react-native';
 import { styles } from './animateLine.style';
 
-const AnimatedLine: FC<{ activeIndex: number }> = ({ activeIndex }) => {
-  const lineWidths = [
-    useRef(new Animated.Value(10)).current,
-    useRef(new Animated.Value(10)).current,
-    useRef(new Animated.Value(10)).current,
-  ];
+const AnimatedLine: FC<{ activeIndex: number; slidesLength: number }> = ({
+  activeIndex,
+  slidesLength,
+}) => {
+  const lineWidths = Array.from(
+    { length: slidesLength },
+    () => useRef(new Animated.Value(10)).current
+  );
 
   useEffect(() => {
     lineWidths.forEach((lineWidth, index) => {

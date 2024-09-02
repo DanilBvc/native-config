@@ -25,10 +25,12 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
     color: colors.rusty_Copper,
+    flexWrap: 'wrap',
+    flexShrink: 1,
   },
   disabledFeature: {
     color: colors.rusty_Copper_25_Opacity,
     textDecorationLine: 'line-through',
   },
-  container: { gap: 30, paddingLeft: 30, paddingTop: 30 },
+  container: { gap: 30, paddingLeft: 30, paddingTop: 30, overflow: 'hidden' },
 });

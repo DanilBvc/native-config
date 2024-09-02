@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import {
   AiSvg,
   DeliverySvg,
@@ -9,9 +9,7 @@ import {
   MobilePhoneSvg,
   TechnicalSupportSvg,
 } from '../../assets/icons/packageIcons/icons';
-import { QrCodeSvg } from '../../assets/icons/qr-code';
 import Slider from '../../components/buyPackageSlider/buyPackageSlider';
-import Button from '../../components/generall/button/button';
 import LocalizationSwitcher from '../../components/generall/localizationSwitcher/localizationSwitcher';
 import EmptyLayout from '../../layouts/emptyLayout/emptyLayout';
 import { colors } from '../../static/colors';
@@ -25,6 +23,7 @@ import BottomNavigation from '../../components/generall/bottomNavigation/bottomN
 import { useTypedNavigation } from '../../hooks/useTypedNavigation';
 import BurgerList from '../../components/burgerList/burgerList';
 import FamilyEmblem from '../../static/familyEmblem';
+import Button from '../../components/generall/button/button';
 
 const WelcomeScreen = () => {
   const { isAuthenticated } = useAuth();
@@ -34,37 +33,56 @@ const WelcomeScreen = () => {
       name: 'STANDARD',
       price: t('prices.priceStandard'),
       features: [
-        { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
-        { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
-        { label: t('prices.thirdBenefit'), enabled: false, icon: <DeliverySvg /> },
-        { label: t('prices.AI'), enabled: false, icon: <AiSvg /> },
-        { label: t('prices.secondBenefit'), enabled: false, icon: <LockSvg /> },
+        { label: t('prices.package250.unlimitedContentStorage'), enabled: true },
+        {
+          label: t('prices.package250.technicalSupport'),
+          enabled: true,
+          icon: <TechnicalSupportSvg />,
+        },
+        { label: t('prices.package250.qrPassword'), enabled: true, icon: <LockSvg /> },
+        { label: t('prices.package250.freeDelivery'), enabled: true, icon: <DeliverySvg /> },
+        { label: t('prices.package250.mobileApp'), enabled: true, icon: <MobilePhoneSvg /> },
+        { label: t('prices.package250.shareLocation'), enabled: true },
+        { label: t('prices.package250.limitedAIUsage'), enabled: true, icon: <AiSvg /> },
+        { label: t('prices.package250.qrCodePlate'), enabled: true },
       ],
     },
-    {
-      name: 'MEDIUM',
-      price: t('prices.priceMedium'),
-      features: [
-        { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
-        { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
-        { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1} /> },
-        { label: t('prices.AI'), enabled: true, icon: <AiSvg opacity={1} /> },
-        { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1} /> },
-      ],
-    },
+    // {
+    //   name: 'MEDIUM',
+    //   price: t('prices.priceMedium'),
+    //   features: [
+    //     { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
+    //     { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
+    //     { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1} /> },
+    //     { label: t('prices.AI'), enabled: true, icon: <AiSvg opacity={1} /> },
+    //     { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1} /> },
+    //   ],
+    // },
     {
       name: 'MAX',
       price: t('prices.priceMax'),
       features: [
-        { label: t('prices.firstBenefit'), enabled: true, icon: <TechnicalSupportSvg /> },
-        { label: t('prices.mobile'), enabled: true, icon: <MobilePhoneSvg /> },
-        { label: t('prices.thirdBenefit'), enabled: true, icon: <DeliverySvg opacity={1} /> },
+        { label: t('prices.package350.unlimitedContentStorage'), enabled: true },
         {
-          label: t('prices.AI') + ' + ' + t('prices.personalization'),
+          label: t('prices.package350.technicalSupport'),
+          enabled: true,
+          icon: <TechnicalSupportSvg />,
+        },
+        { label: t('prices.package350.qrPassword'), enabled: true, icon: <LockSvg opacity={1} /> },
+        {
+          label: t('prices.package350.freeDelivery'),
+          enabled: true,
+          icon: <DeliverySvg opacity={1} />,
+        },
+        { label: t('prices.package350.mobileApp'), enabled: true, icon: <MobilePhoneSvg /> },
+        { label: t('prices.package350.shareLocation'), enabled: true },
+        {
+          label: t('prices.package350.limitedAIUsage') + ' + ' + t('prices.personalization'),
           enabled: true,
           icon: <AiSvg opacity={1} />,
         },
-        { label: t('prices.secondBenefit'), enabled: true, icon: <LockSvg opacity={1} /> },
+        { label: t('prices.package350.extraAccount'), enabled: true },
+        { label: t('prices.package350.qrCodePlateSVG'), enabled: true },
       ],
     },
   ];
@@ -108,19 +126,20 @@ const WelcomeScreen = () => {
       }
     >
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View>
+        <View style={{ marginTop: 40 }}>
           <View style={styles.container}>
             <FamilyEmblem width={140} height={140} />
           </View>
           <Slider features={cards} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
-          <Button text={t('prices.buy')} onPress={goBuyPackage} />
+          {/* <Button text={t('prices.buy')} onPress={goBuyPackage} /> */}
           {!isAuthenticated && (
-            <Pressable onPress={goScanQrCode}>
-              <View style={styles.qrCodeContainer}>
-                <QrCodeSvg />
-                <Text style={styles.qrCodeText}>Scan it QR code</Text>
-              </View>
-            </Pressable>
+            // <Pressable onPress={goScanQrCode}>
+            //   <View style={styles.qrCodeContainer}>
+            //     <QrCodeSvg />
+            //     <Text style={styles.qrCodeText}>Scan it QR code</Text>
+            //   </View>
+            // </Pressable>
+            <Button onPress={goScanQrCode} text={'Scan the QR-code'} />
           )}
         </View>
       </ScrollView>

@@ -147,9 +147,32 @@
     "AI": "AI description",
     "personalization": "Personalization",
     "unlimited content": "Unlimited content",
-    "priceStandard": "300$",
+    "priceStandard": "250$",
     "priceMedium": "500$",
-    "priceMax": "650$"
+    "priceMax": "350$",
+    "package250": {
+      "description": "Package for 250$:",
+      "unlimitedContentStorage": "Unlimited content storage",
+      "technicalSupport": "Technical support 24/7",
+      "qrPassword": "Setting a password for QR code",
+      "freeDelivery": "Free delivery",
+      "mobileApp": "Mobile app",
+      "shareLocation": "Share location",
+      "limitedAIUsage": "Limited AI usage up to 10 photos",
+      "qrCodePlate": "QR code plate"
+    },
+    "package350": {
+      "description": "Package for 350$:",
+      "unlimitedContentStorage": "Unlimited content storage",
+      "technicalSupport": "Technical support 24/7",
+      "qrPassword": "Setting a password for QR code",
+      "freeDelivery": "Free delivery",
+      "mobileApp": "Mobile app",
+      "shareLocation": "Share location",
+      "limitedAIUsage": "Limited AI usage up to 35 photos",
+      "extraAccount": "+1 additional account",
+      "qrCodePlateSVG": "QR code plate + SVG format"
+    }
   },
   "landingPage": {
     "general": {

@@ -1,28 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, FlatList, Text, TouchableOpacity } from 'react-native';
-import i18next, { languageResources } from '../../../services/i18nextjs';
+import { languageResources } from '../../../services/i18nextjs';
 import { getLocalizations } from '../../../utils/utils';
 import { colors } from '../../../static/colors';
 import { styles } from './localizationSwitcher.style';
+import useLocalization from '../../../hooks/useLocalization';
 
 const LocalizationSwitcher: React.FC = () => {
-  const [currentLng, setCurrentLng] = useState<string>(i18next.language);
+  const { currentLng, changeLng } = useLocalization();
   const [showAll, setShowAll] = useState<boolean>(false);
 
-  useEffect(() => {
-    const handleLanguageChange = (lng: string) => {
-      setCurrentLng(lng);
-    };
-
-    i18next.on('languageChanged', handleLanguageChange);
-
-    return () => {
-      i18next.off('languageChanged', handleLanguageChange);
-    };
-  }, []);
-
-  const changeLng = (lng: string) => {
-    i18next.changeLanguage(lng);
+  const changeLngHandler = (lng: string) => {
+    changeLng(lng);
     setTimeout(() => {
       setShowAll(false);
     }, 300);
@@ -40,7 +29,7 @@ const LocalizationSwitcher: React.FC = () => {
     <TouchableOpacity
       style={styles.languageButton}
       onPress={() => {
-        changeLng(item);
+        changeLngHandler(item);
       }}
     >
       <Text
@@ -72,12 +61,12 @@ const LocalizationSwitcher: React.FC = () => {
         </TouchableOpacity>
       )}
       {showAll && (
-          <FlatList
-            data={displayLanguages}
-            numColumns={Object.keys(getLocalizations()).length}
-            keyExtractor={(item) => item}
-            renderItem={({ item }) => renderLanguageButton(item)}
-          />
+        <FlatList
+          data={displayLanguages}
+          numColumns={Object.keys(getLocalizations()).length}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => renderLanguageButton(item)}
+        />
       )}
     </View>
   );

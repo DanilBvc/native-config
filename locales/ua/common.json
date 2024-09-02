@@ -145,9 +145,32 @@
     "AI": "AI опис",
     "personalization": "Персоналізація",
     "unlimited content": "Необмежене зберігання контенту",
-    "priceStandard": "1500грн",
+    "priceStandard": "250$",
     "priceMedium": "2500грн",
-    "priceMax": "3500грн"
+    "priceMax": "350$",
+    "package250": {
+      "description": "Пакет за 250$:",
+      "unlimitedContentStorage": "Необмежене зберігання контенту",
+      "technicalSupport": "Технічна підтримка 24/7",
+      "qrPassword": "Встановлення паролю для QR-коду",
+      "freeDelivery": "Безкоштовна доставка",
+      "mobileApp": "Мобільний додаток",
+      "shareLocation": "Поділитися місцезнаходженням",
+      "limitedAIUsage": "Обмежений ліміт користування AI до 10 фото",
+      "qrCodePlate": "Пластинка QR-код"
+    },
+    "package350": {
+      "description": "Пакет за 350$:",
+      "unlimitedContentStorage": "Необмежене зберігання контенту",
+      "technicalSupport": "Технічна підтримка 24/7",
+      "qrPassword": "Встановлення паролю для QR-коду",
+      "freeDelivery": "Безкоштовна доставка",
+      "mobileApp": "Мобільний додаток",
+      "shareLocation": "Поділитися місцезнаходженням",
+      "limitedAIUsage": "Обмежений ліміт користування AI до 35 фото",
+      "extraAccount": "+1 Додатковий аккаунт",
+      "qrCodePlateSVG": "Пластинка QR-код + SVG формат"
+    }
   },
   "landingPage": {
     "general": {

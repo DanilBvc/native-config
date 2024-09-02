@@ -12,14 +12,20 @@ const BuyPackageCard: FC<{ card: packageCard }> = ({ card }) => {
       <Text style={styles.price}>{price}</Text>
       <LineWithCircle lineWidth={'40%'} />
       <View style={styles.container}>
-        {features.map((feature, index) => (
-          <View key={index} style={styles.featureContainer}>
-            {feature.icon}
-            <Text style={[styles.feature, feature.enabled ? {} : styles.disabledFeature]}>
-              {feature.label}
-            </Text>
-          </View>
-        ))}
+        {features
+          .sort((a, b) => (a.icon && !b.icon ? -1 : !a.icon && b.icon ? 1 : 0))
+          .map((feature, index) => (
+            <View key={index} style={styles.featureContainer}>
+              {feature.icon}
+              <Text
+                numberOfLines={2}
+                ellipsizeMode="tail"
+                style={[styles.feature, feature.enabled ? {} : styles.disabledFeature]}
+              >
+                {feature.label}
+              </Text>
+            </View>
+          ))}
       </View>
     </View>
   );
